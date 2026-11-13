@@ -1,0 +1,7 @@
+/* Inside the native app: hide features that only work in a browser (print, file downloads, install button). */
+.native #print,
+.native #ldl,
+.native #dl,
+.native #iprint,
+.native #tres button,
+.native #install { display: none !important; }

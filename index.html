@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visa Travel Platform: how it works</title>
+<meta name="description" content="A guide to how travel platforms and visa document systems work, with a checklist, passport check, cost estimator and timeline planner. English and French.">
+<meta name="theme-color" content="#2f3e9e">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Visa Travel Platform: documents, checklists and tools">
+<meta property="og:description" content="Checklist, passport check, cost estimator and timeline planner for visa applications. English and French.">
+<meta property="og:locale" content="en_US">
+<meta property="og:locale:alternate" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<!-- After publishing, add this line with your real address (it must be a full URL, or WhatsApp will not show the picture):
+<meta property="og:image" content="https://YOUR-USERNAME.github.io/YOUR-REPO/og.png">
+-->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%88%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<style>
+:root{--paper:#f3f5f7;--ink:#14202b;--mute:#52606d;--line:#cfd6dd;--stamp:#2f3e9e;--ok:#1f7a5a;--card:#fff;--bad:#b3261e}
+@media (prefers-color-scheme:dark){:root{--paper:#10161c;--ink:#e8edf2;--mute:#9aa7b3;--line:#2b3641;--stamp:#8b9bff;--ok:#5fd1a4;--card:#18212a;--bad:#ff8a80}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+h1,h2,h3{font-family:"Iowan Old Style",Georgia,"Times New Roman",serif;line-height:1.2;margin:0 0 .5em}
+h1{font-size:clamp(2rem,5vw,3.2rem);letter-spacing:-.01em}
+h2{font-size:1.7rem;margin-top:0}
+h3{font-size:1.15rem;margin-top:1.6em}
+a{color:var(--stamp)}
+:focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
+.wrap{display:grid;grid-template-columns:220px minmax(0,1fr);gap:48px;max-width:1080px;margin:0 auto;padding:0 24px}
+nav{position:sticky;top:0;align-self:start;padding:32px 0;font-size:.95rem}
+nav{max-height:100vh;box-sizing:border-box;overflow-y:auto}
+nav summary{cursor:pointer;font-weight:600;margin-bottom:4px;color:var(--mute)}
+nav .grp{font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--mute);margin:16px 0 4px}
+nav b{display:block;font-family:Georgia,serif;font-size:1.05rem;margin-bottom:12px}
+nav a{display:block;padding:5px 0;color:var(--mute);text-decoration:none}
+nav a:hover{color:var(--stamp)}
+#install{display:block;margin-top:8px}
+#lang,#install{margin-top:14px;padding:7px 14px;font:inherit;font-size:.9rem;color:var(--ink);background:var(--card);border:1px solid var(--stamp);border-radius:6px;cursor:pointer}
+main{padding:40px 0 80px;max-width:720px}
+section{padding:36px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:0;padding-top:0}
+p,li{max-width:68ch}
+.lead{font-size:1.15rem;color:var(--mute)}
+dl{margin:1em 0}dt{font-weight:600;margin-top:1.1em}dd{margin:.15em 0 0;max-width:68ch}
+.steps{list-style:none;counter-reset:s;padding:0;margin:1.2em 0 0 14px}
+.steps li{counter-increment:s;position:relative;padding:0 0 20px 30px;border-left:2px solid var(--line);max-width:none}
+.steps li:last-child{border-left-color:transparent;padding-bottom:0}
+.steps li::before{content:counter(s);position:absolute;left:-15px;top:0;width:28px;height:28px;border-radius:50%;background:var(--stamp);color:var(--paper);display:flex;align-items:center;justify-content:center;font-size:.85rem;font-weight:600}
+.steps b{display:block}
+table{border-collapse:collapse;width:100%;font-size:.95rem;margin:1em 0}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:600}
+.scroll{overflow-x:auto}
+code{background:var(--card);border:1px solid var(--line);border-radius:4px;padding:1px 5px;font-size:.9em}
+pre{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:14px;overflow-x:auto;font-size:.88rem;line-height:1.5}
+/* checklist demo: the one memorable element */
+#demo{background:var(--card);border:2px solid var(--stamp);border-radius:10px;padding:24px;margin:28px 0 8px}
+#demo legend,#demo label.f{font-weight:600;font-size:.95rem}
+.ctrls{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:18px}
+.box{background:var(--card);border:2px solid var(--stamp);border-radius:10px;padding:24px;margin:20px 0 8px}
+input[type=date],input[type=number],input[type=text]{width:100%;padding:9px;font:inherit;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;margin-top:4px}
+#pcres{padding:12px 14px;border-left:4px solid var(--line);background:var(--paper);border-radius:0 6px 6px 0;min-height:48px}
+[hidden]{display:none!important}
+.arch{display:flex;flex-direction:column;margin:20px 0}
+.layer{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.layer.ext{border-style:dashed}
+.lt{font-size:.8rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--mute);margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:6px 12px;border:1px solid var(--stamp);border-radius:6px;font-size:.92rem;background:var(--paper)}
+.arrow{text-align:center;color:var(--stamp);font-size:1.3rem;line-height:1.5}
+.arrow::before{content:"\2193"}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tag{font-size:.72rem;font-weight:600;border:1px solid var(--stamp);color:var(--stamp);border-radius:10px;padding:1px 8px;margin-left:6px;vertical-align:middle;text-transform:uppercase;letter-spacing:.03em}
+.tag.done{border-color:var(--ok);color:var(--ok)}
+@media (max-width:640px){.row2{grid-template-columns:1fr}}
+details{border-bottom:1px solid var(--line);padding:10px 0}
+summary{cursor:pointer;font-weight:600}
+details p{margin:.6em 0 0}
+#clinks{display:flex;flex-wrap:wrap;gap:10px}
+#clinks a,#dl button,#tres button,#lbtns button,#mbtns button,#mbtns a{padding:8px 14px;font:inherit;font-size:.92rem;color:var(--ink);background:var(--paper);border:1px solid var(--stamp);border-radius:6px;cursor:pointer;text-decoration:none}
+#tres button{margin-top:12px}
+#clinks a:hover,#dl button:hover,#tres button:hover,#lbtns button:hover,#mbtns button:hover,#mbtns a:hover{background:var(--stamp);color:var(--paper)}
+#dl{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+#ltext,#mtext{white-space:pre-wrap;word-break:break-word;margin:16px 0}
+#mbtns{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#mbtns #mmsg{font-size:.9rem;color:var(--ok)}
+#lbtns{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+#lbtns #lmsg{font-size:.9rem;color:var(--ok)}
+#list small.vf{font-size:.8rem}
+#list .vf.ok{color:var(--ok)}
+#list .vf.late{color:var(--bad)}
+#search{margin-bottom:28px}
+#q{width:100%;padding:10px 12px;font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px}
+#sres{margin-top:8px}
+#sres ul{list-style:none;margin:0;padding:0}
+#sres li{padding:8px 0;border-bottom:1px solid var(--line);max-width:none}
+#sres a{font-weight:600}
+#sres .sn{display:block;color:var(--mute);font-size:.9rem}
+#ulist{list-style:none;margin:16px 0 0;padding:0}
+#ulist li{padding:14px 0;border-bottom:1px solid var(--line);max-width:none}
+#ulist .uh{font-size:.85rem;color:var(--mute);margin-bottom:4px}
+#ulist .uh b{color:var(--ink)}
+#ulist strong{display:block}
+#ulist p{margin:.3em 0}
+#warn{border-left:4px solid var(--bad);background:var(--paper);padding:10px 14px;margin:0 0 14px;border-radius:0 6px 6px 0;font-weight:600}
+.qi{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);cursor:pointer;align-items:flex-start}
+.qi input{width:20px;height:20px;margin-top:3px;accent-color:var(--ok);flex:none}
+#qres{margin-top:14px;padding:12px 14px;border-left:4px solid var(--stamp);background:var(--paper);border-radius:0 6px 6px 0;min-height:48px}
+#qres ul{margin:8px 0 0;padding-left:20px}
+.dayrow{display:grid;grid-template-columns:150px 1fr;gap:10px;margin:6px 0;align-items:center}
+.dayrow label{font-size:.9rem}
+.dayrow input{width:100%;padding:8px;font:inherit;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px}
+#ibtns{margin-top:14px}
+#ibtns button{padding:8px 14px;font:inherit;font-size:.92rem;color:var(--ink);background:var(--paper);border:1px solid var(--stamp);border-radius:6px;cursor:pointer}
+#ibtns button:hover{background:var(--stamp);color:var(--paper)}
+#ipreview{margin-top:20px;border-top:2px solid var(--line);padding-top:14px}
+#ipreview h3{margin-top:0}
+#ipreview p{margin:.2em 0}
+@media (max-width:560px){.dayrow{grid-template-columns:1fr}}
+#ready{font-weight:600;margin:-4px 0 14px}
+#ready.ok{color:var(--ok)}
+#cres{padding:12px 14px;border-left:4px solid var(--stamp);background:var(--paper);border-radius:0 6px 6px 0;min-height:48px}
+#cres b{display:block;font-size:1.25rem}
+#tres{padding:12px 14px;border-left:4px solid var(--stamp);background:var(--paper);border-radius:0 6px 6px 0;min-height:48px}
+#tres ul{list-style:none;margin:0;padding:0}
+#tres li{display:flex;gap:14px;padding:6px 0;border-bottom:1px solid var(--line);max-width:none}
+#tres li b{min-width:13ch;flex:none}
+#tres p{margin:10px 0 0;font-weight:600}
+#tres p.late{color:var(--bad)}
+#pcres.ok{border-left-color:var(--ok)}#pcres.no{border-left-color:var(--bad)}
+#pcres b{display:block}
+select{width:100%;padding:9px;font:inherit;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:6px;margin-top:4px}
+.bar{height:10px;background:var(--line);border-radius:5px;overflow:hidden;margin:6px 0 14px}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .25s}
+#list{list-style:none;margin:0;padding:0}
+#list li{border-bottom:1px solid var(--line);padding:10px 0}
+#list label{display:flex;gap:12px;cursor:pointer;align-items:flex-start}
+#list input{width:20px;height:20px;margin-top:3px;accent-color:var(--ok);flex:none}
+#list small{display:block;color:var(--mute)}
+#list input:checked + span b{text-decoration:line-through;color:var(--mute)}
+.note{font-size:.88rem;color:var(--mute);margin-top:12px}
+#tools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:18px}
+#tools button,#tools a{padding:8px 14px;font:inherit;font-size:.92rem;color:var(--ink);background:var(--paper);border:1px solid var(--stamp);border-radius:6px;cursor:pointer;text-decoration:none}
+#tools button:hover,#tools a:hover{background:var(--stamp);color:var(--paper)}
+#msg{font-size:.9rem;color:var(--ok)}
+@media (max-width:800px){.wrap{grid-template-columns:1fr;gap:0}nav{position:static;padding:20px 0 0;max-height:none;overflow:visible}nav a{display:inline-block;margin-right:14px}nav .grp{display:block}}
+@media (prefers-reduced-motion:reduce){.bar i{transition:none}html{scroll-behavior:auto}}
+@media print{
+:root{--paper:#fff;--ink:#000;--card:#fff;--line:#999;--mute:#333}
+nav,#tools,#search,.np{display:none!important}
+body:not(.pi) main section:not(#try){display:none!important}
+body.pi main section:not(#itinerary){display:none!important}
+body.pi #itinerary>h2,body.pi #itinerary>p{display:none}
+#itinerary .box{border:0;padding:0;margin:0}
+.wrap{display:block;padding:0}main{padding:0;max-width:none}
+#demo{border:1px solid #999;padding:12px}.bar{display:none}
+select{border:0;appearance:none;padding:0;font-weight:600}
+#list li{break-inside:avoid}
+}
+</style>
+<link rel="stylesheet" href="native.css">
+<script src="native.js"></script>
+</head>
+<body>
+<div class="wrap">
+<nav aria-label="Sections">
+<b>Visa Travel Platform</b>
+<details id="menu" open><summary>Menu</summary>
+<div class="grp">Try it</div>
+<a href="#try">Try the checklist</a>
+<a href="#passport">Passport check</a>
+<a href="#costs">Cost estimator</a>
+<a href="#timeline">Timeline planner</a>
+<a href="#quiz">Readiness quiz</a>
+<a href="#itinerary">Itinerary builder</a>
+<div class="grp">Guides</div>
+<a href="#travel">How travel platforms work</a>
+<a href="#visa">Visa support systems</a>
+<a href="#journey">Application journey</a>
+<a href="#refusals">Refusal reasons</a>
+<a href="#bankstatements">Bank statement guide</a>
+<a href="#insurance">Travel insurance guide</a>
+<a href="#interview">Interview preparation</a>
+<a href="#photos">Photo guide</a>
+<a href="#glossary">Glossary</a>
+<div class="grp">Routes from Cameroon</div>
+<a href="#cameroon">Applying from Cameroon</a>
+<a href="#students">Student visa guide</a>
+<a href="#usvisa">US visa guide</a>
+<a href="#canadavisa">Canada visa guide</a>
+<a href="#ukvisa">UK visa guide</a>
+<a href="#ausvisa">Australia visa guide</a>
+<a href="#updates">Updates</a>
+<div class="grp">Templates</div>
+<a href="#letters">Letter templates</a>
+<a href="#messages">Message templates</a>
+<div class="grp">Build your own system</div>
+<a href="#design">Checklist system design</a>
+<a href="#maintenance">Rule maintenance</a>
+<a href="#data">Sample data</a>
+<a href="#architecture">Architecture</a>
+<a href="#roadmap">Roadmap</a>
+<a href="#money">Business model</a>
+<a href="#publish">Publish on GitHub</a>
+<div class="grp">About us</div>
+<a href="#about">About</a>
+<a href="#services">Services</a>
+<a href="#faq">FAQ and contact</a>
+<a href="#privacy">Privacy</a>
+</details>
+<button id="lang" type="button">Français</button>
+<button id="install" type="button" hidden></button>
+</nav>
+<main>
+<div id="search"><input type="search" id="q" autocomplete="off"><div id="sres" aria-live="polite"></div></div>
+
+<section id="try">
+<h1>What does this visa application need?</h1>
+<p class="lead">Pick a destination, purpose and situation, and the checklist rebuilds itself from a rules file. This is the core idea of the whole system, running in your browser.</p>
+<div id="demo">
+<div class="ctrls">
+<div><label class="f" for="dest">Destination</label><select id="dest"><option value="schengen">Schengen area</option><option value="uk">United Kingdom</option><option value="usa">United States</option><option value="canada">Canada</option><option value="australia">Australia</option></select></div>
+<div><label class="f" for="type">Purpose</label><select id="type"><option value="tourist">Tourist</option><option value="business">Business</option><option value="student">Study</option><option value="family">Family visit</option><option value="transit">Transit</option></select></div>
+<div><label class="f" for="job">Applicant is</label><select id="job"><option value="employed">Employed</option><option value="self">Self-employed</option><option value="student">A student</option></select></div>
+<div><label class="f" for="funds">Trip paid by</label><select id="funds"><option value="self">The applicant</option><option value="sponsor">A sponsor</option></select></div>
+<div><label class="f" for="minor">Age</label><select id="minor"><option value="no">18 or older</option><option value="yes">Under 18</option></select></div>
+</div>
+<div id="count" aria-live="polite"></div>
+<div class="bar"><i id="fill"></i></div>
+<div id="ready" aria-live="polite"></div>
+<div id="warn" role="alert" hidden></div>
+<ul id="list"></ul>
+<div id="tools"><button id="print" type="button"></button><button id="copy" type="button"></button><a id="wa" href="#" target="_blank" rel="noopener"></a><button id="reset" type="button"></button><span id="msg" role="status"></span></div>
+<p class="note">Sample rules for learning only; real requirements vary by embassy and applicant. Always confirm requirements on the embassy or visa center website. Your choices are saved only in this browser.</p>
+</div>
+</section>
+
+<section id="passport">
+<h2>Is my passport valid enough?</h2>
+<p>Enter your passport expiry date and the date you plan to return. The checker tells you whether the passport lasts long enough.</p>
+<div id="pc" class="box">
+<div class="ctrls">
+<div><label class="f" for="pcexp">Passport expiry date</label><input type="date" id="pcexp"></div>
+<div><label class="f" for="pcret">Return date</label><input type="date" id="pcret"></div>
+<div><label class="f" for="pciss">Issue date (optional)</label><input type="date" id="pciss"></div>
+<div><label class="f" for="pcmin">Extra validity required</label><select id="pcmin"><option value="0">None, valid through the whole stay</option><option value="3" selected>3 months after leaving (Schengen)</option><option value="6">6 months after leaving (many other countries)</option></select></div>
+</div>
+<div id="pcres" aria-live="polite"></div>
+</div>
+<p class="note">Rules differ by country, so confirm the exact one on the embassy website. Schengen also asks that the passport was issued within the last 10 years.</p>
+</section>
+
+<section id="costs">
+<h2>Estimate the total cost</h2>
+<p>Enter each amount from the official fee pages and from your own price list. Nothing is pre-filled, because fees change.</p>
+<div class="box">
+<div class="ctrls">
+<div><label class="f" for="cecur">Currency</label><select id="cecur"><option value="XAF">CFA franc (XAF)</option><option value="EUR">Euro (EUR)</option><option value="USD">US dollar (USD)</option></select></div>
+<div><label class="f" for="cen">Number of applicants</label><input type="number" id="cen" min="1" step="1" value="1" inputmode="numeric"></div>
+<div><label class="f" for="ce0">Visa fee</label><input type="number" id="ce0" min="0" step="any" inputmode="decimal"></div>
+<div><label class="f" for="ce1">Visa center service fee</label><input type="number" id="ce1" min="0" step="any" inputmode="decimal"></div>
+<div><label class="f" for="ce2">Travel insurance</label><input type="number" id="ce2" min="0" step="any" inputmode="decimal"></div>
+<div><label class="f" for="ce3">Certified translation</label><input type="number" id="ce3" min="0" step="any" inputmode="decimal"></div>
+<div><label class="f" for="ce4">Legalization</label><input type="number" id="ce4" min="0" step="any" inputmode="decimal"></div>
+<div><label class="f" for="ce5">Photos</label><input type="number" id="ce5" min="0" step="any" inputmode="decimal"></div>
+<div><label class="f" for="ce6">Courier</label><input type="number" id="ce6" min="0" step="any" inputmode="decimal"></div>
+<div><label class="f" for="ce7">Our service fee</label><input type="number" id="ce7" min="0" step="any" inputmode="decimal"></div>
+<div><label class="f" for="ce8">Other costs</label><input type="number" id="ce8" min="0" step="any" inputmode="decimal"></div>
+</div>
+<div id="cres" aria-live="polite"></div>
+</div>
+<p class="note">Amounts are per applicant. The currency only changes how totals are shown, so enter every amount in the same currency. Visa fees are usually not refunded if the visa is refused.</p>
+</section>
+
+<section id="timeline">
+<h2>Plan your timeline</h2>
+<p>Enter your travel date and adjust the waiting times for your case. The planner counts backward and shows when to start.</p>
+<div class="box">
+<div class="ctrls">
+<div><label class="f" for="tdate">Travel date</label><input type="date" id="tdate"></div>
+<div><label class="f" for="tg">Gather documents (days)</label><input type="number" id="tg" min="0" step="1" value="21" inputmode="numeric"></div>
+<div><label class="f" for="tw">Wait for an appointment (days)</label><input type="number" id="tw" min="0" step="1" value="14" inputmode="numeric"></div>
+<div><label class="f" for="tp">Processing (days)</label><input type="number" id="tp" min="0" step="1" value="21" inputmode="numeric"></div>
+<div><label class="f" for="tr">Passport return (days)</label><input type="number" id="tr" min="0" step="1" value="5" inputmode="numeric"></div>
+<div><label class="f" for="tb">Safety buffer (days)</label><input type="number" id="tb" min="0" step="1" value="14" inputmode="numeric"></div>
+</div>
+<div id="tres" aria-live="polite"></div>
+</div>
+<p class="note">The waiting times are starting values for planning, not promises. Check the visa center for current appointment waits and the embassy for processing times. Some centers accept applications only up to a set time before travel, often 6 months.</p>
+</section>
+
+<section id="quiz">
+<h2>Am I ready to apply?</h2>
+<p>Tick what is true for you. The quiz shows what is still missing and where to find help. It is only a self-check: the embassy decides, and nothing here predicts the result.</p>
+<div class="box">
+<label class="qi"><input type="checkbox" id="q0" data-t="passport"> My passport is valid beyond my planned return date, for as long as the destination requires.</label>
+<label class="qi"><input type="checkbox" id="q1" data-t="try"> I know which destination and which visa type I am applying for.</label>
+<label class="qi"><input type="checkbox" id="q2" data-t="try"> I have all the documents on my checklist.</label>
+<label class="qi"><input type="checkbox" id="q3" data-t="bankstatements"> My bank statements cover enough months, and any large deposit is explained.</label>
+<label class="qi"><input type="checkbox" id="q4" data-t="refusals"> My name and dates are the same on my passport, form, bookings and letters.</label>
+<label class="qi"><input type="checkbox" id="q5" data-t="interview"> I can show my ties to Cameroon, such as a job, family, property or studies.</label>
+<label class="qi"><input type="checkbox" id="q6" data-t="insurance"> I have travel insurance, if my destination requires it.</label>
+<label class="qi"><input type="checkbox" id="q7" data-t="cameroon"> I know where and when I will submit, and I have checked the current fees and rules on the official site.</label>
+<label class="qi"><input type="checkbox" id="q8" data-t="updates"> I have not paid a school or an agent before checking that my route is open and the rules are current.</label>
+<div id="qres" aria-live="polite"></div>
+</div>
+</section>
+
+<section id="itinerary">
+<h2>Build your itinerary</h2>
+<p>Add your dates and your plan for each day, then print the itinerary to attach to your application. Plan only what you really intend to do, and match the dates to your application and your bookings.</p>
+<div class="box">
+<div class="np">
+<div class="ctrls">
+<div><label class="f" for="iname">Traveler name (as in the passport)</label><input type="text" id="iname" autocomplete="off"></div>
+<div><label class="f" for="idest">Destination</label><input type="text" id="idest" autocomplete="off"></div>
+<div><label class="f" for="iarr">Arrival date</label><input type="date" id="iarr"></div>
+<div><label class="f" for="idep">Departure date</label><input type="date" id="idep"></div>
+<div><label class="f" for="iacc">Accommodation (name and address)</label><input type="text" id="iacc" autocomplete="off"></div>
+</div>
+<div id="idays"></div>
+<div id="ibtns"><button id="iprint" type="button"></button></div>
+</div>
+<div id="ipreview"></div>
+</div>
+</section>
+
+<section id="travel">
+<h2>How travel platforms work</h2>
+<p>A travel platform rarely owns anything. It connects travelers to suppliers and handles search, booking, payment and support around them.</p>
+<div class="scroll"><table>
+<tr><th>Layer</th><th>What it does</th></tr>
+<tr><td>Supply</td><td>Flights from GDS systems (Amadeus, Sabre, Travelport) and airline APIs; hotels from channel managers and bedbanks; cars, buses and tours from their own APIs.</td></tr>
+<tr><td>Search</td><td>Calls many suppliers at once, normalizes the replies, removes duplicates, ranks results. Short-lived caching keeps it fast.</td></tr>
+<tr><td>Booking</td><td>Re-check price, hold inventory, collect traveler details, take payment, confirm with the supplier, issue the ticket or voucher.</td></tr>
+<tr><td>Payments</td><td>Multi-currency pricing, cards plus local methods such as mobile money, fraud checks, supplier settlement.</td></tr>
+<tr><td>After booking</td><td>Changes, cancellations, refunds, notifications, support.</td></tr>
+</table></div>
+<p>The hardest case is when payment succeeds but the supplier rejects the booking. The system must refund or rebook automatically.</p>
+</section>
+
+<section id="visa">
+<h2>Systems that support visa applications</h2>
+<ul>
+<li><b>Official portals:</b> e-visa and application sites that enforce required fields.</li>
+<li><b>Visa application centers:</b> companies such as VFS Global and TLScontact that collect files, biometrics and fees.</li>
+<li><b>Appointment systems:</b> slots, confirmations and reminders.</li>
+<li><b>Document management:</b> passports, statements and letters stored with status and expiry dates, like stock items in inventory software.</li>
+<li><b>Checklist engines:</b> a rules database that lists the documents needed for each case.</li>
+<li><b>Form and validation tools:</b> auto-fill from a stored profile and flag mismatches.</li>
+<li><b>Supporting documents:</b> flight reservations, hotel confirmations, travel insurance.</li>
+<li><b>Fees and case tracking:</b> payments with receipts, and a CRM that follows each file to the decision.</li>
+<li><b>Translation and legalization:</b> certified translation and notarization.</li>
+</ul>
+</section>
+
+<section id="journey">
+<h2>Application journey</h2>
+<p>Every application follows the same path, from the first question to the returned passport.</p>
+<ol class="steps">
+<li><b>Ask</b>The client says where they want to go and why. The system asks a few questions: purpose, dates, job, who pays.</li>
+<li><b>Get the checklist</b>The rules engine builds the personal list of documents, with the reason for each.</li>
+<li><b>Collect documents</b>The client uploads photos or scans, or an agent does it for them. Missing items stay flagged.</li>
+<li><b>Check</b>Automatic checks catch expired passports, wrong sizes and names that do not match. An agent approves or rejects each document with a reason.</li>
+<li><b>Fill the form</b>The application form is filled from the client’s profile and compared with the passport.</li>
+<li><b>Pay and book</b>The client pays the visa and service fees and books the appointment at the visa center or embassy.</li>
+<li><b>Submit</b>The client attends with the final package. Biometrics are taken if required.</li>
+<li><b>Track</b>The case is followed during processing, with updates by WhatsApp, SMS or email.</li>
+<li><b>Decision and passport returned</b>Granted or refused, the client collects the passport. After a refusal, the agent goes through the reasons with them.</li>
+</ol>
+</section>
+
+<section id="refusals">
+<h2>Refusal reasons</h2>
+<p>These are common reasons for a refusal or a delay. Each one can be prevented.</p>
+<div class="scroll"><table>
+<tr><th>Reason</th><th>Why it happens</th><th>What to do</th></tr>
+<tr><td><b>Unclear or insufficient funds</b></td><td>Bank statements show a low balance or sudden large deposits, or do not cover the trip.</td><td>Show steady income and savings over 6 months, explain large deposits with documents, and add a sponsor’s papers if someone else pays.</td></tr>
+<tr><td><b>Names or details that do not match</b></td><td>Spelling or dates differ between the passport, form, tickets and letters.</td><td>Copy the passport exactly everywhere and compare every document with it before submitting.</td></tr>
+<tr><td><b>Weak ties to the home country</b></td><td>The officer is not convinced that the applicant will return.</td><td>Include proof of a job, family, property or studies, and a clear plan for the return.</td></tr>
+<tr><td><b>Unclear purpose or itinerary</b></td><td>The reason for the trip or the plan seems inconsistent or contradicts other documents.</td><td>Give a short, consistent explanation of the trip and an itinerary that matches the bookings and dates.</td></tr>
+<tr><td><b>Missing or incomplete documents</b></td><td>A required paper is missing, expired, unreadable or in the wrong format.</td><td>Use the checklist, tick every item and have an agent review the file before the appointment.</td></tr>
+<tr><td><b>Problems with previous travel</b></td><td>Earlier overstays, refusals that were not declared, or unexplained gaps in travel history.</td><td>Declare past refusals honestly and explain them. Do not hide anything.</td></tr>
+<tr><td><b>Doubts about authenticity</b></td><td>A document looks altered or cannot be verified.</td><td>Submit only genuine documents. Get official copies, with certified translation or legalization when required.</td></tr>
+<tr><td><b>Insurance or booking problems</b></td><td>The insurance does not meet the minimum, or the reservations do not cover the travel dates.</td><td>Check the minimum cover and make the dates match across insurance, flight and hotel.</td></tr>
+</table></div>
+<p>Reasons vary by embassy. If a visa is refused, read the refusal letter, fix the reasons it gives and apply again with new evidence, rather than resubmitting the same file.</p>
+</section>
+
+<section id="bankstatements">
+<h2>Bank statement guide</h2>
+<p>Embassies use bank statements to check three things: that you can pay for the trip, that your money comes from a normal source, and that you have reasons to go home. This guide is general, because each embassy sets its own rules. It is based on public guides and was checked in November 2026.</p>
+<h3>What officers look for</h3>
+<ul>
+<li>Steady income: a salary or business income that arrives regularly.</li>
+<li>A balance that is stable over time, not a sudden jump just before you apply.</li>
+<li>Enough money for the whole trip, including tickets, accommodation and daily costs.</li>
+<li>Normal spending that matches your job and lifestyle.</li>
+<li>Your name and account details matching your passport and other documents.</li>
+</ul>
+<h3>How many months</h3>
+<p>Many guides say about 3 months for Schengen and about 6 months for the UK, Canada, Australia and the US, but the embassy’s own list always wins. The UK student route has its own rule: the money must stay in the account for at least 28 consecutive days.</p>
+<h3>Large deposits</h3>
+<p>A large deposit just before you apply can look like borrowed money. If the money is genuine, explain it with proof, for example a property sale contract, an employer’s bonus letter, a business invoice or a transfer from your own savings account. Add a short letter that explains the source.</p>
+<h3>Before you print your statements</h3>
+<ul>
+<li>Use the account where your income really goes.</li>
+<li>Include every page, readable, with the bank’s name and your account details.</li>
+<li>Ask the bank to stamp or sign the statements if the embassy requires it.</li>
+<li>Do not move money in just for the visa, and do not borrow funds to reach a target.</li>
+<li>Never submit altered or fake statements. This can lead to a refusal and a ban.</li>
+</ul>
+<h3>In Cameroon</h3>
+<p>Ask your bank how long it takes to produce stamped statements and plan for it in your timeline. Mobile money records can support your story, but check whether the centre accepts them as proof of funds.</p>
+<h3>Sources (bank statements)</h3>
+<ul>
+<li><a href="https://www.atlys.com/blog/bank-statements-for-visa" target="_blank" rel="noopener">Bank statements for visa: months by country (Atlys)</a></li>
+<li><a href="https://enterprise.atlys.com/blog/bank-statements-for-visa" target="_blank" rel="noopener">Downloading and stamping bank statements (Atlys)</a></li>
+<li><a href="https://visapathway-efi.pages.dev/guides/financial-documentation.html" target="_blank" rel="noopener">Financial documentation patterns (VisaPathway)</a></li>
+<li><a href="https://www.outboundvisa.com/ru/blog/large-cash-deposits-schengen-visa" target="_blank" rel="noopener">Sudden bank deposit before a Schengen visa (Outbound Visa)</a></li>
+<li><a href="https://www.outlookmoney.com/plan/visa-denied-your-bank-statement-could-be-a-major-reason" target="_blank" rel="noopener">Why a bank statement can lead to refusal (Outlook Money)</a></li>
+</ul>
+</section>
+
+<section id="insurance">
+<h2>Travel insurance guide</h2>
+<p>Travel medical insurance is a required document for a Schengen visa and a strong safeguard on other trips. This guide is based on consular pages and public guides, and was checked in November 2026.</p>
+<h3>Schengen visa: what the policy must cover</h3>
+<ul>
+<li>Valid in all Schengen states, not only the country you will visit first.</li>
+<li>Valid for the whole stay, with dates that match your application and your bookings.</li>
+<li>At least €30,000 of cover for medical costs.</li>
+<li>Includes repatriation for medical reasons or death.</li>
+<li>Includes urgent medical care and emergency hospital treatment.</li>
+</ul>
+<h3>Check the certificate before you submit</h3>
+<ul>
+<li>Your name matches the passport exactly.</li>
+<li>The start and end dates match your visa application and your flight and hotel bookings.</li>
+<li>The text mentions the Schengen area, the €30,000 amount, repatriation and emergency hospital treatment.</li>
+<li>It is a complete certificate with a policy number, not a screenshot. Some consulates want a specific language, so check.</li>
+<li>Ask whether the policy is refunded if the visa is refused.</li>
+</ul>
+<h3>Other destinations</h3>
+<p>For visitor visas to the UK, Canada, the US and Australia, insurance is not normally a visa requirement, but treatment abroad can be very expensive, so it is strongly recommended. Check each embassy’s current list. For an Australian student visa, Overseas Student Health Cover is compulsory.</p>
+<h3>In Cameroon</h3>
+<p>Some consulates ask for a letter from the insurer confirming that the policy meets the rules. Domestic plans rarely meet Schengen wording, so choose an international travel medical policy. Before you pay, ask the consulate or visa centre what it accepts, and keep the receipt.</p>
+<h3>Sources (travel insurance)</h3>
+<ul>
+<li><a href="https://www.exteriores.gob.es/Consulados/londres/en/ServiciosConsulares/Paginas/Consular/Visados-Schengen.aspx" target="_blank" rel="noopener">Schengen visa requirements, Spanish Consulate in London</a></li>
+<li><a href="https://kuala-lumpur.diplo.de/my-en/service/05-VisaEinreise/-/1677516" target="_blank" rel="noopener">Travel health insurance requirements, German Embassy Kuala Lumpur</a></li>
+<li><a href="https://www.uhc.com/news-articles/benefits-and-coverage/schengen-visa-travel-and-insurance-guide" target="_blank" rel="noopener">Schengen visa travel and insurance guide (UnitedHealthcare)</a></li>
+<li><a href="https://insurte.com/schengen-visa-travel-insurance-requirements" target="_blank" rel="noopener">Schengen insurance requirements (Insurte)</a></li>
+</ul>
+</section>
+
+<section id="interview">
+<h2>Interview preparation</h2>
+<p>Interviews matter most for the US visa, and they can happen for other visas too. They are short, so clear and honest answers count. This guide helps clients prepare, not memorize a script. It is based on public guides and was checked in November 2026.</p>
+<h3>What to expect</h3>
+<ul>
+<li>A short conversation, often only a few minutes.</li>
+<li>Your identity and the details of your DS-160 are checked.</li>
+<li>Questions about your trip, your job, how you pay and your ties to Cameroon.</li>
+<li>The officer usually decides at the end.</li>
+</ul>
+<h3>Topics to prepare</h3>
+<ul>
+<li>The purpose and length of your trip.</li>
+<li>Where you will stay and what you will do.</li>
+<li>Your job, your salary and how long you have worked there.</li>
+<li>Who pays for the trip.</li>
+<li>Relatives or friends in the destination country.</li>
+<li>Earlier travel and any previous refusal.</li>
+<li>What brings you back to Cameroon: job, home, family or studies.</li>
+</ul>
+<h3>How to answer</h3>
+<ul>
+<li>Answer the question you are asked, in a few clear sentences.</li>
+<li>Be honest and consistent with your documents. Never invent a reason, a job or a sponsor.</li>
+<li>Know your own file: dates, amounts, names and addresses.</li>
+<li>Bring your documents, even if the officer does not ask for them.</li>
+<li>If you do not understand a question, ask the officer to repeat it.</li>
+</ul>
+<h3>Why refusals happen</h3>
+<p>The most common reason for a US refusal is Section 214(b): the officer was not convinced that the trip is temporary or that you will return. Ties are the parts of your life that bind you to your home country, such as a job, a home and your family.</p>
+<h3>If you are refused</h3>
+<p>Ask for the reason, read any paper you are given, and fix the real problem before you apply again. A new application with the same file may lead to the same answer.</p>
+<h3>Sources (interview)</h3>
+<ul>
+<li><a href="https://www.visamind.com/en/united-states/guides/b1-b2-visa-interview-questions" target="_blank" rel="noopener">B-1/B-2 interview questions and 214(b) red flags (VisaMind)</a></li>
+<li><a href="https://www.outboundvisa.com/blog/us-visa-interview-tips-successful-guide" target="_blank" rel="noopener">US visa interview tips (Outbound Visa)</a></li>
+<li><a href="https://visa-applications.vercel.app/news/u-s-visa-interview-tips-2025" target="_blank" rel="noopener">US visa interview tips 2025 (Visa Applications)</a></li>
+<li><a href="https://www.nolo.com/legal-encyclopedia/how-to-increase-your-chances-of-getting-a-u-s-visitor-visa.html" target="_blank" rel="noopener">How to improve your chances of a US visitor visa (Nolo)</a></li>
+</ul>
+</section>
+
+<section id="photos">
+<h2>Photo requirements</h2>
+<p>A photo that does not follow the rules can delay an application. Use this list before the studio visit.</p>
+<h3>Usually accepted</h3>
+<ul>
+<li>Taken in the last 6 months</li>
+<li>Plain white or light background, no shadows</li>
+<li>Face fully visible, looking straight at the camera</li>
+<li>Neutral expression with the mouth closed</li>
+<li>Sharp, well lit and in good print or file quality</li>
+</ul>
+<h3>Often rejected</h3>
+<ul>
+<li>An old photo, or one that no longer looks like you</li>
+<li>Filters, retouching or a photo of a photo</li>
+<li>Shadows, glare on glasses or a patterned background</li>
+<li>Head or face covered, except for religious or medical reasons with the face still visible</li>
+<li>Wrong size, or cropped too close or too far</li>
+</ul>
+<h3>Usual sizes</h3>
+<div class="scroll"><table>
+<tr><th>Destination</th><th>Usual size</th></tr>
+<tr><td><b>Schengen area</b></td><td>35 × 45 mm</td></tr>
+<tr><td><b>United States</b></td><td>2 × 2 inches (51 × 51 mm), usually uploaded as a digital file</td></tr>
+</table></div>
+<p class="note">Sizes are typical. Check the embassy or visa center for the exact size, file format and file size for your application.</p>
+</section>
+
+<section id="glossary">
+<h2>Glossary</h2>
+<p>Plain-language meanings of the terms used in this guide.</p>
+<dl>
+<dt>GDS</dt><dd>Global distribution system. A network that gathers airline, hotel and car inventory so agents can search and book it. Examples: Amadeus, Sabre, Travelport.</dd>
+<dt>NDC</dt><dd>New Distribution Capability. A standard that lets airlines sell fares and extras directly to agents and platforms.</dd>
+<dt>Bedbank</dt><dd>A wholesaler that buys hotel rooms in bulk and resells them to travel platforms at net rates.</dd>
+<dt>Channel manager</dt><dd>Software that lets a hotel update prices and availability on many booking sites at once.</dd>
+<dt>Aggregator</dt><dd>A service that connects many suppliers through a single API.</dd>
+<dt>Commission</dt><dd>A percentage a supplier pays the platform for each booking it sells.</dd>
+<dt>Markup</dt><dd>An amount a platform adds on top of the supplier’s price.</dd>
+<dt>Biometrics</dt><dd>Fingerprints and a photo taken at a visa center to identify the applicant.</dd>
+<dt>Visa application center</dt><dd>A company authorized by an embassy to receive applications, check documents and take biometrics. It does not decide whether the visa is granted.</dd>
+<dt>E-visa</dt><dd>A visa applied for and issued online.</dd>
+<dt>Legalization</dt><dd>Official confirmation that a document is genuine so another country accepts it. Depending on the country, it may be called an apostille or authentication.</dd>
+<dt>Notarization</dt><dd>A notary certifies that a copy or a signature is genuine.</dd>
+<dt>Certified translation</dt><dd>A translation signed by an approved translator who states that it is accurate.</dd>
+<dt>Proof of ties</dt><dd>Evidence that you will return home, such as a job, family, property or studies.</dd>
+<dt>Sponsor</dt><dd>A person or organization that pays for the trip or vouches for the applicant.</dd>
+<dt>Rules engine</dt><dd>The part of the system that picks the documents required for each case.</dd>
+<dt>Audit trail</dt><dd>A record of who changed what, and when.</dd>
+</dl>
+</section>
+
+<section id="cameroon">
+<h2>Applying from Cameroon</h2>
+<p>Checked in November 2026 from public pages. Centers, fees and rules change, so confirm each one on the official site before advising a client.</p>
+<div class="scroll"><table>
+<tr><th>Destination</th><th>Where to submit</th><th>Good to know</th></tr>
+<tr><td><b>France</b></td><td>TLScontact centers in Yaoundé and Douala, plus a satellite in Garoua open on limited days</td><td>Since October 2023 the embassy no longer receives applications, but it still decides. Students go through Campus France first.</td></tr>
+<tr><td><b>Belgium and Luxembourg</b></td><td>TLScontact center in Yaoundé</td><td>Book an appointment on the TLScontact website.</td></tr>
+<tr><td><b>Germany</b></td><td>VFS Global center in Yaoundé</td><td>Opened in December 2025, according to press reports.</td></tr>
+<tr><td><b>United Kingdom</b></td><td>VFS Global center in Yaoundé</td><td>VFS Global replaced TLScontact as the UK’s provider in December 2024.</td></tr>
+<tr><td><b>United States</b></td><td>US Embassy in Yaoundé, after the DS-160 form and fee payment, with an in-person interview</td><td>In July 2025 the embassy said all visa applicants in Cameroon must attend an in-person interview, and that most visas are now issued as single-entry for 3 months. From August 2026 Yaoundé is also one of the regional US visa hubs.</td></tr>
+<tr><td><b>Canada</b></td><td>Canada Visa Application Centre in Yaoundé, run by VFS Global with the IOM</td><td>Most applications are made online with IRCC. Biometrics are given at the centre by prior appointment, and government fees are paid online to IRCC. VFS Global only helps with administration and does not decide.</td></tr>
+<tr><td><b>Australia</b></td><td>Online, through the Australian government’s ImmiAccount</td><td>If biometrics are requested, they are taken at an Australian Biometric Collection Centre run by VFS Global. We could not confirm a centre in Cameroon, so check the VFS Global pages for Australia.</td></tr>
+</table></div>
+<h3>United States: points to check before paying</h3>
+<p>Media reports say Cameroon is on the list of countries where immigrant visa issuance has been paused since 21 January 2026. The same reports say the pause does not cover tourist or business visas. The US also applies visa suspensions and, for some applicants, visa bonds of several thousand dollars. Check the State Department website for the current lists before a client pays any fee.</p>
+<h3>Booking safely</h3>
+<p>Book appointments only on the official center website. Anyone who sells appointments, or asks for payment by phone, may be committing fraud.</p>
+<h3>Paying fees</h3>
+<p>MTN Mobile Money and Orange Money cover most everyday payments in Cameroon, and the state treasury accepts them for public fees. Visa centers are different. Each center sets its own payment methods, and the French centers take fees on site, usually by bank card or other locally accepted methods. Do not promise a client that mobile money works at a visa center. Check the center’s payment page first. A platform can still offer mobile money for its own service fees.</p>
+<h3>Legalization and translation</h3>
+<p>According to the guides we found, Cameroon has not joined the Apostille Convention. Cameroonian documents therefore normally need authentication by the Ministry of External Relations (MINREX), then legalization by the destination country’s embassy. For Belgium, the MINREX authentication must not be older than 3 months. Documents in another language usually need a sworn translation. MINREX also runs an online platform called LEGALIS for authenticating official documents.</p>
+<p>Only the routes above were checked, and some details come from news reports. Rules change often, so confirm each one on the official site before advising a client.</p>
+<h3>Sources</h3>
+<ul>
+<li><a href="https://newswatchcameroon.com/uk-visa-services-in-cameroon-now-accessible-via-vfs-global/" target="_blank" rel="noopener">UK visa services move to VFS Global (Newswatch Cameroon)</a></li>
+<li><a href="https://lesafriques.com/en/2026/09/visa-france-from-cameroon-procedures-timelines-and-costs-2026/" target="_blank" rel="noopener">France visa from Cameroon (Les Afriques)</a></li>
+<li><a href="https://newswatchcameroon.com/?p=2916" target="_blank" rel="noopener">Germany visa center in Yaoundé (Newswatch Cameroon)</a></li>
+<li><a href="https://visas-be.tlscontact.com/visa/cm/cmYAO2be/home" target="_blank" rel="noopener">Belgium visa center in Yaoundé (TLScontact)</a></li>
+<li><a href="https://legalization-be.tlscontact.com/en-us/country/cm/vac/cmYAO2be/application-process" target="_blank" rel="noopener">Belgian document legalization (TLScontact)</a></li>
+<li><a href="https://tresorpublic.cm/en/paymentmodes" target="_blank" rel="noopener">Payment methods (Cameroon Public Treasury)</a></li>
+<li><a href="https://itweb.africa/content/nWJadMbNOOrMbjO1" target="_blank" rel="noopener">LEGALIS platform (ITWeb Africa)</a></li>
+<li><a href="https://futuremedianews.com.na/2025/07/09/cameroon-united-states-u-s-embassy-in-yaounde-announces-changes-to-visa-procedures-and-fees/" target="_blank" rel="noopener">US Embassy Yaoundé visa changes, July 2025 (APO Group press release)</a></li>
+<li><a href="https://www.mondaq.com/unitedstates/work-visas/1822758/major-visa-shift-us-realigns-visa-services-in-africa-to-regional-hubs" target="_blank" rel="noopener">US visa services moved to regional hubs (Mondaq)</a></li>
+<li><a href="https://m.investiraucameroun.com/stopblabla/i/15619/us-halts-immigration-visas-cameroonians-75-country-freeze" target="_blank" rel="noopener">US immigrant visa pause and Cameroon (Investir au Cameroun, in French)</a></li>
+<li><a href="https://visa.vfsglobal.com/cmr/en/can" target="_blank" rel="noopener">Canada Visa Application Centre in Cameroon (VFS Global)</a></li>
+<li><a href="https://african.business/2024/10/apo-newsfeed/vfs-global-appointed-to-roll-out-australian-biometric-collection-centres-in-sub-saharan-africa" target="_blank" rel="noopener">Australian biometric collection centres in Sub-Saharan Africa (African Business)</a></li>
+</ul>
+</section>
+
+<section id="students">
+<h2>Study in France from Cameroon</h2>
+<p>Students from Cameroon must complete the Campus France procedure before they can apply for a French student visa. Checked in November 2026 from public pages, so confirm every step on the official sites.</p>
+<ol class="steps">
+<li><b>Create your file</b>Register on the Études en France platform run by Campus France, fill in your file and choose your programs. Start about a year before the start of your studies.</li>
+<li><b>Pay the file fee</b>If it is requested, pay the Campus France file fee. Reported amounts differ between websites, so check the current amount with Campus France Cameroon.</li>
+<li><b>Attend the interview</b>Campus France Cameroon holds the interview, where an adviser checks that your study plan is clear and consistent. It has offices in Yaoundé and Douala.</li>
+<li><b>Get your Campus France certificate</b>Once the procedure is complete, you receive the Campus France certificate that you need for the visa file. Keep your admission or pre-enrolment letter with it.</li>
+<li><b>Book at TLScontact</b>Since 2 May 2024, students must finish the Campus France procedure before booking their visa appointment at TLScontact.</li>
+<li><b>File the long-stay visa application</b>Apply for the long-stay student visa (VLS-TS) with the application form, your passport and photos, the admission letter, the Campus France certificate and proof that you can pay for your stay.</li>
+<li><b>Validate your visa in France</b>On arrival, validate the visa with the French immigration services (ANEF, formerly OFII).</li>
+</ol>
+<h3>A reported rule for private schools</h3>
+<p>A Cameroonian news site reports that since 9 July 2026, Campus France Cameroon asks candidates admitted to private higher-education schools in France to show full payment of one year’s tuition, or proof that the amount is available in a blocked account, when they file at TLScontact. Public universities were reported as not affected. This comes from a news site, not an official page, so confirm it with Campus France Cameroon before you pay any school.</p>
+<h3>Before you pay a school</h3>
+<p>Ask the school in writing what happens to your payment if the visa is refused. Refunds depend on the school, and Campus France says refunds are not its responsibility.</p>
+<p>Other study destinations have their own procedures. Check the embassy page of the country you are applying to.</p>
+<h3>Sources (student visa)</h3>
+<ul>
+<li><a href="https://visaconnectafrica.com/etudier-en-france/depuis-le-cameroun" target="_blank" rel="noopener">France student visa guide for Cameroon (VisaConnect Africa, in French)</a></li>
+<li><a href="https://lesafriques.com/2026/09/visa-france-cameroun-demarches-delais-couts-2026/" target="_blank" rel="noopener">Visa France from Cameroon, 2026 (Les Afriques, in French)</a></li>
+<li><a href="https://www.cameroondesks.com/2026/08/visa-etudiant-france-paiement-integral-camerounais-blo.html" target="_blank" rel="noopener">Full-payment rule for private schools (Cameroon Desk, in French)</a></li>
+</ul>
+</section>
+
+<section id="usvisa">
+<h2>US visitor visa from Cameroon</h2>
+<p>A short guide to applying for a US visitor visa (B-1/B-2) from Cameroon. Checked in November 2026 from public pages. US rules change often, so confirm every step on the embassy and State Department sites.</p>
+<ol class="steps">
+<li><b>Complete the DS-160</b>Fill in the DS-160 online application on the State Department’s CEAC site. The form itself is free. Print the confirmation page with the barcode.</li>
+<li><b>Create your account and pay</b>Create a profile on the US visa appointment website for Cameroon and pay the application fee. Check the State Department website for the current amount.</li>
+<li><b>Book your interview in Yaoundé</b>Schedule the interview at the US Embassy in Yaoundé. Since July 2025 every nonimmigrant visa applicant in Cameroon must attend in person, and the interview waiver is suspended. Book early, because waiting times vary.</li>
+<li><b>Prepare your documents</b>Bring your passport, the DS-160 confirmation page, the appointment letter, the fee receipt and a photo. Add evidence of your trip purpose, your funds and your ties to Cameroon, such as a job, family, property or studies.</li>
+<li><b>Attend the interview</b>Answer honestly and briefly. The consular officer usually decides at the interview. If the visa is approved, an issuance fee is paid; the embassy announced $35 in July 2025.</li>
+<li><b>After approval</b>In July 2025 the embassy said most visas for Cameroonians are issued as single-entry and valid for 3 months. A visa lets you travel to the US, but border officers decide how long you may stay.</li>
+</ol>
+<h3>Good to know</h3>
+<p>Passport holders from Cameroon generally need a transit visa even to change planes in the US, and Cameroon is not part of the visa waiver program or ESTA.</p>
+<p>Before a client pays any fee, read the United States notes in the Applying from Cameroon section: the reported immigrant visa pause, visa suspensions and visa bonds.</p>
+<h3>Sources (US visa)</h3>
+<ul>
+<li><a href="https://futuremedianews.com.na/2025/07/09/cameroon-united-states-u-s-embassy-in-yaounde-announces-changes-to-visa-procedures-and-fees/" target="_blank" rel="noopener">US Embassy Yaoundé announcement, July 2025 (APO Group)</a></li>
+<li><a href="https://www.nnuimmigration.com/?p=22499" target="_blank" rel="noopener">DS-160 explained (NNU Immigration)</a></li>
+<li><a href="https://entrybrief.com/cm-passport/us/" target="_blank" rel="noopener">US entry requirements for Cameroon passport holders (EntryBrief)</a></li>
+</ul>
+</section>
+
+<section id="canadavisa">
+<h2>Canada visa from Cameroon</h2>
+<p>A short guide to applying for a Canadian visitor visa or study permit from Cameroon. Checked in November 2026 from public pages. Canadian rules changed a lot between 2024 and 2026, so confirm every step on the IRCC website.</p>
+<h3>Visitor visa</h3>
+<ol class="steps">
+<li><b>Gather your documents</b>Prepare a valid passport, proof of funds, proof of ties to Cameroon (a job, family, property or studies), a clear purpose for the trip, and an invitation letter if you are visiting family or friends.</li>
+<li><b>Apply online</b>Create an IRCC secure account, fill in the form, upload your documents and pay the fees. Each traveler, including children, files a separate application.</li>
+<li><b>Receive your biometrics letter</b>After you pay, IRCC sends a biometrics instruction letter in your account. You normally have 30 days to give your biometrics.</li>
+<li><b>Give biometrics in Yaoundé</b>Book an appointment at the Canada Visa Application Centre in Yaoundé and bring the instruction letter and your passport.</li>
+<li><b>Wait for the decision</b>Follow your IRCC account and answer any request for more information quickly. Apply early, because processing times vary, and avoid non-refundable bookings until you have your visa.</li>
+</ol>
+<h3>Study permit</h3>
+<ol class="steps">
+<li><b>Get a letter of acceptance</b>Apply to a designated learning institution (DLI) and get its letter of acceptance. Check that the school is on IRCC’s DLI list.</li>
+<li><b>Get your attestation letter</b>Most applicants need a provincial or territorial attestation letter (PAL/TAL), usually obtained through the school. Students going to Quebec need a Quebec Acceptance Certificate (CAQ) from the Quebec government first.</li>
+<li><b>Prove your funds</b>Show that you can pay your first-year tuition plus the living costs that IRCC requires. The required amount has increased, so check the current figure on the IRCC website.</li>
+<li><b>Apply online</b>Apply through your IRCC secure account with the acceptance letter, the attestation letter or CAQ, proof of funds, your passport, photos and a study plan. Paper applications are only accepted in special cases.</li>
+<li><b>Give biometrics</b>If IRCC asks for biometrics, give them at the visa application centre within the time shown in your instruction letter.</li>
+<li><b>Medical exam and police certificate</b>Do these only if IRCC asks for them for your country or program, and follow your account for updates.</li>
+</ol>
+<h3>Good to know</h3>
+<p>Canada does not issue visitor visas on arrival, so you must have the visa before you travel.</p>
+<p>Study permit rules changed several times between 2024 and 2026, with national caps, attestation letters and higher funds. Use only current guides.</p>
+<p>For the Yaoundé centre, see the Applying from Cameroon section.</p>
+<h3>Sources (Canada visa)</h3>
+<ul>
+<li><a href="https://www.educanada.ca/blog-blogue/2026/study-permit-2026-demande-permis-etudes.aspx?lang=eng" target="_blank" rel="noopener">Study permit 2026 (EduCanada, Government of Canada)</a></li>
+<li><a href="https://silaws.com/2026/07/02/study-permit-canada-2026-en/" target="_blank" rel="noopener">Study permit Canada 2026 guide (SiLaws)</a></li>
+<li><a href="https://welcomeaide.com/pa/blog/guide-to-imm5708-document-checklist-visitor-visa" target="_blank" rel="noopener">Visitor visa document checklist (WelcomeAide)</a></li>
+<li><a href="https://ulaval.ca/en/international/immigration/study-or-exchange-programs-lasting-6-months-or-less" target="_blank" rel="noopener">Biometrics steps for visa applicants (Université Laval)</a></li>
+<li><a href="https://visa.vfsglobal.com/cmr/en/can" target="_blank" rel="noopener">Canada Visa Application Centre in Cameroon (VFS Global)</a></li>
+</ul>
+</section>
+
+<section id="ukvisa">
+<h2>UK visa from Cameroon</h2>
+<p>A short guide to the UK Standard Visitor visa for applicants from Cameroon, with an important warning about UK student visas. Checked in November 2026 from public pages, so confirm every step on GOV.UK.</p>
+<h3>Important: student visas</h3>
+<p>Since 26 March 2026, the UK refuses new Student visa applications made from outside the UK by nationals of Cameroon, Afghanistan, Myanmar and Sudan. This is called the visa brake. It does not cancel visas already granted or affect people already in the UK. The High Court dismissed legal challenges to it in 2026, and one report says it will last at least 18 months. Do not pay a UK school deposit or a Student visa fee before checking GOV.UK.</p>
+<p>The Home Office says the brake will be reviewed regularly and may be extended, changed or lifted. It covers Student visas, not Standard Visitor visas.</p>
+<h3>Standard Visitor visa</h3>
+<ol class="steps">
+<li><b>Gather your documents</b>Prepare a passport valid beyond your trip, bank statements or payslips covering 6 months, accommodation and travel details, and proof of ties to Cameroon. Add an invitation letter if you will stay with someone.</li>
+<li><b>Apply online on GOV.UK</b>Fill in the Standard Visitor visa application on GOV.UK and pay the fee. You can apply up to 3 months before your trip.</li>
+<li><b>Book your biometrics appointment</b>Book an appointment at the UK Visa Application Centre in Yaoundé, run by VFS Global, to give your fingerprints and photo.</li>
+<li><b>Attend and submit</b>Bring your passport, the appointment confirmation and your documents, and arrive early.</li>
+<li><b>Wait for the decision</b>Do not pay for flights until you have the visa. Check the visa details when you get your passport back.</li>
+</ol>
+<h3>Good to know</h3>
+<p>Sources disagree on whether the UK visa centre in Douala is open, so check VFS Global for the current centres.</p>
+<p>For the Yaoundé centre, see the Applying from Cameroon section.</p>
+<h3>Sources (UK visa)</h3>
+<ul>
+<li><a href="https://www.gov.uk/government/news/visa-brake-imposed-on-4-countries-after-widespread-visa-abuse" target="_blank" rel="noopener">Visa brake announcement (GOV.UK)</a></li>
+<li><a href="https://www.judiciary.uk/wp-content/uploads/2026/08/Sadat-Farah-ors-v-SSHD-Press-Summary.pdf" target="_blank" rel="noopener">High Court judgment summary, August 2026 (judiciary.uk)</a></li>
+<li><a href="https://freemovement.org.uk/high-court-upholds-student-visa-brake/" target="_blank" rel="noopener">High Court upholds the visa brake (Free Movement)</a></li>
+<li><a href="https://alumn.hud.ac.uk/media/Factsheet-Invitingfriendsorfamilymembersforavisit.pdf" target="_blank" rel="noopener">Visiting the UK: documents and steps (University of Huddersfield factsheet)</a></li>
+<li><a href="https://newswatchcameroon.com/uk-visa-services-in-cameroon-now-accessible-via-vfs-global/" target="_blank" rel="noopener">UK visa services move to VFS Global (Newswatch Cameroon)</a></li>
+</ul>
+</section>
+
+<section id="ausvisa">
+<h2>Australia visa from Cameroon</h2>
+<p>A short guide to the Australian Visitor visa (subclass 600) and Student visa (subclass 500) for applicants from Cameroon. Checked in November 2026 from public pages, so confirm every step on the Home Affairs website. No Cameroon-specific ban was found, but student visas face very high scrutiny.</p>
+<h3>Visitor visa (subclass 600)</h3>
+<ol class="steps">
+<li><b>Choose your stream</b>Pick the stream that fits your trip: tourist, sponsored family, business visitor or frequent traveller. Apply online from outside Australia.</li>
+<li><b>Gather your documents</b>Prepare a valid passport, a photo, proof of funds, proof that your stay is temporary (a job, family, property or studies) and your travel plan. Add your host’s details if a relative in Australia invites you.</li>
+<li><b>Apply through ImmiAccount</b>Create an ImmiAccount, complete the application, upload your documents and pay. Upload everything when you apply, because missing documents can delay or sink the application.</li>
+<li><b>Health exam and biometrics if asked</b>Home Affairs may ask for a health examination or biometrics, usually with a short deadline. We could not confirm a biometrics centre in Cameroon, so check the VFS Global pages for Australia.</li>
+<li><b>Wait before booking</b>Do not buy non-refundable tickets until you have the visa. Processing times vary by stream, from a few days to several weeks.</li>
+</ol>
+<h3>Student visa (subclass 500)</h3>
+<ol class="steps">
+<li><b>Get your Confirmation of Enrolment (CoE)</b>Accept an offer from a registered Australian provider and get your CoE.</li>
+<li><b>Buy Overseas Student Health Cover (OSHC)</b>OSHC is compulsory for the whole length of the visa. You need the policy confirmation before you apply.</li>
+<li><b>Prepare your financial evidence</b>Show funds for tuition, living costs and travel with bank statements, a loan, a scholarship letter or a sponsor’s letter. The required amounts change, so check Home Affairs.</li>
+<li><b>Prepare your Genuine Student answers</b>Explain why you want this course, why in Australia and how it fits your plans at home. Officers also consider whether similar courses are available near you.</li>
+<li><b>English test, police clearance and translations</b>Add your English test result and a police clearance. Documents not in English need a translation by a NAATI-authorised translator.</li>
+<li><b>Apply, then follow up</b>Apply through ImmiAccount. If Home Affairs asks for biometrics or a health examination, do it quickly.</li>
+</ol>
+<h3>Good to know</h3>
+<p>Student visa refusals are at a ten-year high: the refusal rate reached 24.2 per cent in June 2026. Reports describe the application charge as high and non-refundable. Check the current fee on the Home Affairs website.</p>
+<p>In November 2026 the Australian government opened a consultation on reforms to the Genuine Student test and the financial requirements, so these rules may change soon.</p>
+<p>People with a Visitor visa generally cannot apply for a Student visa from inside Australia, so do not plan to switch visas after arriving.</p>
+<h3>Sources (Australia visa)</h3>
+<ul>
+<li><a href="https://www.abc.net.au/news/2026-09-09/australian-student-visa-refusal-rate-hits-10-year-high/107112426" target="_blank" rel="noopener">Student visa refusal rate hits 10-year high (ABC News)</a></li>
+<li><a href="https://monitor.icef.com/2026/11/amidst-high-visa-refusal-rates-and-falling-commencements-australian-government-opens-consultation-on-reforms-to-genuine-student-test-and-financial-requirements/" target="_blank" rel="noopener">Consultation on Genuine Student test and financial rules (ICEF Monitor)</a></li>
+<li><a href="https://thinkhigher.com.au/visitor-visa-subclass-600-application-guide/" target="_blank" rel="noopener">Visitor visa streams (Think Higher)</a></li>
+<li><a href="https://thinkhigher.com.au/?p=8512" target="_blank" rel="noopener">Student visa rules for onshore applicants (Think Higher)</a></li>
+<li><a href="https://asiapacificgroup.com/cambodia/australia-student-visa-requirements-for-cambodian-students/" target="_blank" rel="noopener">Student visa requirements guide (Asia Pacific Group)</a></li>
+<li><a href="https://african.business/2024/10/apo-newsfeed/vfs-global-appointed-to-roll-out-australian-biometric-collection-centres-in-sub-saharan-africa" target="_blank" rel="noopener">Australian biometric collection centres in Sub-Saharan Africa (African Business)</a></li>
+</ul>
+</section>
+
+<section id="updates">
+<h2>Updates</h2>
+<p>Dated changes that affect visa applications from Cameroon, newest first. Each entry links to its source. Always confirm on the official site.</p>
+<div class="ctrls"><div><label class="f" for="ufilter">Show updates for</label><select id="ufilter"><option value="all">All destinations</option><option value="schengen">Schengen area</option><option value="uk">United Kingdom</option><option value="usa">United States</option><option value="canada">Canada</option><option value="australia">Australia</option></select></div></div>
+<ul id="ulist"></ul>
+</section>
+
+<section id="letters">
+<h2>Letter templates</h2>
+<p>Choose a template, copy or download it, then replace everything in square brackets with your own details. Check what your embassy asks for before you send it.</p>
+<div class="box">
+<div class="ctrls"><div><label class="f" for="ltype">Template</label><select id="ltype"><option value="sponsor">Sponsor’s letter</option><option value="invitation">Invitation letter</option><option value="leave">Leave request</option><option value="cover">Cover letter</option></select></div></div>
+<pre id="ltext"></pre>
+<div id="lbtns"><button id="lcopy" type="button"></button><button id="ldl" type="button"></button><span id="lmsg" role="status"></span></div>
+</div>
+<p class="note">These are general templates. Embassies may ask for a specific format, and every statement in your letter must be true.</p>
+</section>
+
+<section id="messages">
+<h2>Message templates</h2>
+<p>Ready-to-send messages for your clients. Pick one, replace the words in square brackets, then copy it or open it in WhatsApp.</p>
+<div class="box">
+<div class="ctrls"><div><label class="f" for="mtype">Message</label><select id="mtype"><option value="missing">Document missing</option><option value="received">Document received</option><option value="fix">Document needs correction</option><option value="appt">Appointment details</option><option value="paid">Payment received</option><option value="sent">Application submitted</option><option value="ready">Passport ready</option><option value="refused">Visa refused</option></select></div></div>
+<pre id="mtext"></pre>
+<div id="mbtns"><button id="mcopy" type="button"></button><a id="mwa" target="_blank" rel="noopener"></a><span id="mmsg" role="status"></span></div>
+</div>
+<p class="note">Keep messages short and clear. Never ask a client for a password, a card number or a PIN.</p>
+</section>
+
+<section id="design">
+<h2>Checklist system design</h2>
+<h3>Data model</h3>
+<div class="scroll"><table>
+<tr><th>Table</th><th>Holds</th></tr>
+<tr><td><code>clients</code></td><td>Name as in passport, nationality, birth date, passport number and expiry, occupation, contacts</td></tr>
+<tr><td><code>applications</code></td><td>One client, one destination, visa type, travel dates, purpose, status</td></tr>
+<tr><td><code>requirements</code></td><td>One document an embassy asks for, with conditions, format rules and source link</td></tr>
+<tr><td><code>documents</code></td><td>The stored file: type, issue and expiry dates, copies needed, original or copy</td></tr>
+<tr><td><code>application_documents</code></td><td>Links a requirement to the document that satisfies it, with a status</td></tr>
+</table></div>
+<h3>Rules as data</h3>
+<p>Requirements change often, so keep them in a data file rather than in code. Each rule records its source and when it was last checked.</p>
+<pre>{
+  "id": "emp-letter",
+  "name": "Employment letter and last 3 payslips",
+  "when": { "job": "employed" },
+  "source": "embassy page URL",
+  "verified": "2026-11-01"
+}</pre>
+<h3>Validation</h3>
+<ul>
+<li>Automatic: passport validity against travel dates, file type and size, photo dimensions, expired documents, name spelling across documents.</li>
+<li>Cross-checks: hotel and flight dates match the application.</li>
+<li>Human review: an agent approves or rejects each document with a reason.</li>
+</ul>
+<h3>Workflow</h3>
+<p>Each requirement moves through: not started, uploaded, under review, approved or rejected, submitted. The application moves through: collecting documents, ready for submission, appointment booked, submitted, decision, passport returned.</p>
+<h3>Practical notes</h3>
+<ul>
+<li>Encrypt stored files, because passports are sensitive.</li>
+<li>Allow phone-camera uploads and agent uploads on a client’s behalf.</li>
+<li>Send reminders by WhatsApp and SMS as well as email.</li>
+<li>Build a final package in the embassy’s required order, with an audit trail of who changed what.</li>
+</ul>
+</section>
+
+<section id="maintenance">
+<h2>Keeping rules up to date</h2>
+<p>Embassy requirements change without notice. A rule is only useful while someone keeps it current.</p>
+<ol class="steps">
+<li><b>Record the source</b>Every rule stores the embassy or visa center page it came from, and the date it was last checked.</li>
+<li><b>Review on a schedule</b>Check the most requested destinations every week and the others every month. Check again before a busy season.</li>
+<li><b>Watch for changes</b>Subscribe to embassy notices, follow the official pages and note changes that clients report after an appointment.</li>
+<li><b>Update and test</b>Edit the rule in the data file, try a few typical cases (for example employed, self-employed, minor) and have a second person check it.</li>
+<li><b>Date and announce</b>Change the verified date, note what changed and tell the agents so open applications can be corrected.</li>
+</ol>
+<h3>What each rule stores</h3>
+<div class="scroll"><table>
+<tr><th>Field</th><th>Example</th></tr>
+<tr><td><code>id</code></td><td>emp-letter</td></tr>
+<tr><td><code>name</code></td><td>Employment letter and last 3 payslips</td></tr>
+<tr><td><code>when</code></td><td>The conditions that make the rule apply, such as job = employed</td></tr>
+<tr><td><code>source</code></td><td>A link to the embassy or visa center page</td></tr>
+<tr><td><code>verified</code></td><td>The date someone last checked the rule</td></tr>
+<tr><td><code>owner</code></td><td>The team member responsible for keeping it current</td></tr>
+</table></div>
+<h3>Handling old rules</h3>
+<p>A rule that has not been checked for more than 60 days should show as “needs checking” to agents, and clients should see a reminder to confirm with the embassy.</p>
+</section>
+
+<section id="data">
+<h2>Sample data files</h2>
+<p>These files use the same structure as the checklist rules, so a future system can reuse them. Everything inside is made-up sample data.</p>
+<h3>Rules</h3>
+<p>One entry per requirement, with its conditions, source and last-checked date.</p>
+<pre id="prules"></pre>
+<h3>Clients</h3>
+<p>One entry per traveler. Use made-up values only.</p>
+<pre id="pclients"></pre>
+<h3>Applications</h3>
+<p>One entry per application, with the status of each requirement.</p>
+<pre id="papps"></pre>
+<div id="dl"><button id="dlr" type="button"></button><button id="dlc" type="button"></button><button id="dla" type="button"></button></div>
+</section>
+
+<section id="architecture">
+<h2>System architecture</h2>
+<p>Read from top to bottom. Each service can be built, tested and scaled on its own.</p>
+<div class="arch">
+<div class="layer"><div class="lt">People</div><div class="chips"><span class="chip">Client</span><span class="chip">Agent</span><span class="chip">Admin</span></div></div>
+<div class="arrow" aria-hidden="true"></div>
+<div class="layer"><div class="lt">Front end</div><div class="chips"><span class="chip">Web and mobile app, English and French</span><span class="chip">Agent dashboard</span><span class="chip">Rules editor</span></div></div>
+<div class="arrow" aria-hidden="true"></div>
+<div class="layer"><div class="lt">API gateway</div><div class="chips"><span class="chip">Sign-in, roles and request limits</span></div></div>
+<div class="arrow" aria-hidden="true"></div>
+<div class="layer"><div class="lt">Services</div><div class="chips"><span class="chip">Checklist and rules</span><span class="chip">Documents and validation</span><span class="chip">Applications and status</span><span class="chip">Payments</span><span class="chip">Notifications</span></div></div>
+<div class="arrow" aria-hidden="true"></div>
+<div class="row2">
+<div class="layer"><div class="lt">Data</div><div class="chips"><span class="chip">Database: clients, applications, rules</span><span class="chip">Encrypted file storage: passports and scans</span><span class="chip">Audit log</span></div></div>
+<div class="layer ext"><div class="lt">Connected partners</div><div class="chips"><span class="chip">Visa centers and embassies</span><span class="chip">Mobile money and card gateways</span><span class="chip">WhatsApp, SMS and email providers</span><span class="chip">Flight, hotel and insurance suppliers</span></div></div>
+</div>
+</div>
+<p>In the first version, build only the checklist, documents and applications services, and add the rest later.</p>
+</section>
+
+<section id="roadmap">
+<h2>Roadmap</h2>
+<p>A step-by-step plan from this guide to a working system. The order can change as you learn what clients need.</p>
+<ol class="steps">
+<li><b>Now: this knowledge site <span class="tag done">Done</span></b>This guide with the checklist demo, calculators and sample data. It is static, free to host and holds no client data.</li>
+<li><b>Next: real checklist data <span class="tag next">Next</span></b>Add more destinations, have your team check and date every rule, and record the official source for each one.</li>
+<li><b>Pilot: one visa route <span class="tag ">Planned</span></b>Build the backend for one route, for example France from Cameroon, with accounts, encrypted uploads and agent review.</li>
+<li><b>Grow: payments and updates <span class="tag ">Planned</span></b>Add mobile money and card payments, WhatsApp and SMS updates, and appointment tracking.</li>
+<li><b>Scale: more routes and partners <span class="tag ">Planned</span></b>Add more destinations, partner connections, reports for your team, and sales of flights, hotels and insurance.</li>
+</ol>
+<p>Each step ends with a review: what worked, what clients struggled with, and what to change before moving on.</p>
+</section>
+
+<section id="money">
+<h2>Business model</h2>
+<p>Supplier commissions, service fees, markups, advertising and loyalty programs. The checklist also sells: when a flight reservation or insurance is missing, the system offers it. That turns document preparation into revenue and makes the process smoother for clients.</p>
+</section>
+
+<section id="publish">
+<h2>Publish this on GitHub</h2>
+<ol>
+<li>Create a repository and upload this file as <code>index.html</code> in the root.</li>
+<li>Open <b>Settings</b>, then <b>Pages</b>.</li>
+<li>Under <b>Build and deployment</b>, choose <b>Deploy from a branch</b>, select <code>main</code> and <code>/ (root)</code>, then save.</li>
+<li>After a minute the site is live at <code>https://your-username.github.io/your-repo/</code>.</li>
+</ol>
+<p>GitHub Pages hosts static files only. Never use this site to collect real passports or client data. That needs a secure backend later.</p>
+</section>
+
+<section id="about">
+<h2>About</h2>
+<p>We are based in Yaoundé, Cameroon, with 16 years of experience in IT. We use that experience to build tools that make visa document preparation clearer and more organized.</p>
+<dl>
+<dt>Location</dt><dd>Yaoundé, Cameroon</dd>
+<dt>Experience</dt><dd>16 years in IT</dd>
+</dl>
+<p>We are an independent service. We are not an embassy, a visa center or a government office, and we do not decide whether a visa is granted.</p>
+</section>
+
+<section id="services">
+<h2>Services</h2>
+<p>What we can do for you. Prices are given on request, because they depend on the destination and the case.</p>
+<div class="scroll"><table>
+<tr><th>Service</th><th>What it covers</th><th>Price</th></tr>
+<tr><td><b>Checklist review</b></td><td>We check your documents against the checklist before the appointment.</td><td>On request</td></tr>
+<tr><td><b>Form filling</b></td><td>We fill in the application form from your profile and compare it with your passport.</td><td>On request</td></tr>
+<tr><td><b>Appointment booking</b></td><td>We book your slot at the visa center or embassy through the official website.</td><td>On request</td></tr>
+<tr><td><b>Travel insurance</b></td><td>Cover that meets the destination’s minimum requirements.</td><td>On request</td></tr>
+<tr><td><b>Flight and hotel reservations</b></td><td>Reservations with dates that match your application and the embassy’s requirements.</td><td>On request</td></tr>
+<tr><td><b>Translation and legalization</b></td><td>We coordinate certified translation and document legalization.</td><td>On request</td></tr>
+<tr><td><b>Application tracking</b></td><td>Updates by WhatsApp, SMS or email until your passport is back.</td><td>On request</td></tr>
+</table></div>
+<p class="note">We prepare and check your file. Only the embassy decides whether a visa is granted, and no agency can promise approval.</p>
+</section>
+
+<section id="faq">
+<h2>FAQ and contact</h2>
+<details><summary>Do you guarantee that my visa will be approved?</summary><p>No. Only the embassy decides whether a visa is granted. We help you prepare a complete, correct file.</p></details>
+<details><summary>How long does a visa take?</summary><p>It depends on the destination, the season and your case. Use the timeline planner and adjust the waiting times for your center.</p></details>
+<details><summary>Can I upload my documents here?</summary><p>No. This site is a guide and a demo. It does not collect or store passports or other documents.</p></details>
+<details><summary>Is the checklist official?</summary><p>No. It uses sample rules for learning. Always confirm requirements with the embassy or visa center.</p></details>
+<details><summary>Can I pay visa fees with mobile money?</summary><p>It depends on the center. Each one sets its own payment methods, so check its payment page before you plan.</p></details>
+<details><summary>What if my visa is refused?</summary><p>Read the refusal letter, fix the reasons it gives and apply again with new evidence. See the refusal reasons section.</p></details>
+<details><summary>Do I need to translate my documents?</summary><p>Often yes, with a certified or sworn translation, when a document is not in a language the embassy accepts. Ask the embassy which languages it takes.</p></details>
+<details><summary>Do I need travel insurance?</summary><p>For a Schengen visa, yes. Other destinations differ, so check the checklist and the embassy page.</p></details>
+<div id="contact">
+<h3>Still have a question?</h3>
+<p>Send it to us on WhatsApp.</p>
+<div id="clinks"><a id="cwa" target="_blank" rel="noopener"></a><a id="cmail"></a></div>
+</div>
+</section>
+
+<section id="privacy">
+<h2>Privacy and data</h2>
+<p>This site is a guide and a demo. Here is what it does with your information.</p>
+<ul>
+<li>It does not collect your information. There are no accounts, no forms that send data, and no tracking scripts. Like any website, its host may keep ordinary visit logs.</li>
+<li>Your checklist choices are saved only in your own browser, on your device. Press “Start over” or clear your browser data to remove them.</li>
+<li>The passport check, cost estimator and timeline planner do not store what you type.</li>
+<li>The copy and WhatsApp buttons share only the checklist text you see, never your documents.</li>
+<li>Links to other sites open pages that we do not control.</li>
+</ul>
+<h3>For the future system</h3>
+<p>When real client documents are handled, they will need encrypted storage, a clear retention period, access limited by role, and the client’s consent. This demo has none of that, so never use it for real client files.</p>
+</section>
+
+</main>
+</div>
+<script>
+// Rules live in data, not logic. Edit this object to add destinations or conditions.
+var RULES=[
+// Optional on any rule: v:"YYYY-MM-DD" (date last checked) and u:"https://..." (official source).
+// all destinations
+{n:"Passport valid 3+ months beyond return date",w:"Two blank pages. Some countries ask for 6 months, so check."},
+{n:"Completed and signed application form",w:"Names must match the passport exactly.",x:["usa"]},
+{n:"Recent passport photos",w:"Plain light background, correct size for the destination."},
+{n:"Visa fee receipt",w:"Attach the payment receipt."},
+// money and people
+{n:"Bank statements, last 6 months",w:"Shows funds for the whole stay.",f:{funds:"self"}},
+{n:"Employment letter and last 3 payslips",w:"States position, salary and approved leave dates.",f:{job:"employed"}},
+{n:"Business registration and tax documents",w:"Proves the business is active.",f:{job:"self"}},
+{n:"School enrollment letter",w:"Shows the student is enrolled and on break during travel.",f:{job:"student"},nt:["student"]},
+{n:"Sponsor’s letter, ID copy and bank statements",w:"Shows who pays and their relationship to you.",f:{funds:"sponsor"}},
+{n:"Birth certificate and both parents’ consent",w:"Certified copies; consent letters signed.",f:{minor:"yes"}},
+// destination specific
+{n:"Online form confirmation page (DS-160)",w:"Print the page with the barcode.",d:["usa"]},
+{n:"Interview appointment confirmation",w:"Bring it with your passport.",d:["usa"]},
+{n:"Online application reference",w:"Submitted on the official UK government site.",d:["uk"]},
+{n:"Biometrics appointment confirmation",w:"Fingerprints and photo at the visa center.",d:["uk","canada"]},
+{n:"Travel insurance for the Schengen area",w:"Minimum medical cover of €30,000.",d:["schengen"]},
+{n:"Online application reference (ImmiAccount)",w:"Submitted online through the Australian government’s ImmiAccount.",d:["australia"]},
+// itinerary
+{n:"Round-trip flight reservation",w:"Dates must match the application.",d:["schengen","uk","canada","australia"],nt:["transit"]},
+{n:"Proof of accommodation",w:"Hotel booking or host address for every night.",d:["schengen","uk","australia"],nt:["transit","family"]},
+{n:"Travel itinerary",w:"Day-by-day plan of where you will go.",f:{type:"tourist"},d:["schengen","uk","canada","australia"]},
+// purpose specific
+{n:"Invitation letter from the host company",w:"Purpose, dates and who covers costs.",f:{type:"business"}},
+{n:"Proof of business purpose",w:"Meeting agenda or conference registration.",f:{type:"business"}},
+{n:"Admission or acceptance letter",w:"From the school or university.",f:{type:"student"}},
+{n:"Proof of tuition payment",w:"Receipt or school statement.",f:{type:"student"}},
+{n:"Academic transcripts and diplomas",w:"Certified copies; translated if not in English or French.",f:{type:"student"}},
+{n:"Form I-20 and SEVIS fee receipt",w:"Issued by the US school.",f:{type:"student"},d:["usa"]},
+{n:"Invitation letter from your relative",w:"Their address, status and relationship to you.",f:{type:"family"}},
+{n:"Host’s ID or residence permit copy",w:"Shows the host’s legal status.",f:{type:"family"}},
+{n:"Proof of relationship",w:"Birth or marriage certificate.",f:{type:"family"}},
+{n:"Onward ticket to your final destination",w:"Shows you leave within the transit period.",f:{type:"transit"}},
+{n:"Visa for the final destination",w:"If that country requires one.",f:{type:"transit"}},
+{n:"Proof of ties to Cameroon",w:"Job, family, property or studies that show you will return.",nt:["student","transit"]},
+{n:"Confirmation of Enrolment (CoE)",w:"Issued by an Australian institution registered to teach international students.",f:{type:"student"},d:["australia"]},
+{n:"Overseas Student Health Cover (OSHC)",w:"Health cover for the whole stay, usually arranged before you apply.",f:{type:"student"},d:["australia"]},
+{n:"Genuine Student statement",w:"Explain why you want to study this course in Australia.",f:{type:"student"},d:["australia"]}
+];
+var ids=["dest","type","job","funds","minor"],list=document.getElementById("list"),fill=document.getElementById("fill"),count=document.getElementById("count");
+function state(){var s={};ids.forEach(function(i){s[i]=document.getElementById(i).value});return s}
+// Add your contact details here. WhatsApp: digits with country code, for example 2376XXXXXXXX. Leave both empty to hide the contact block.
+var CONTACT={whatsapp:"237651279347",email:""};
+var L="en",ticks={};
+function plain(){
+  var fr=L==="fr",out=[fr?"Liste de contrôle visa":"Visa document checklist",""];
+  ids.forEach(function(id){
+    var sel=document.getElementById(id);
+    out.push(document.querySelector('label[for="'+id+'"]').textContent+" : "+sel.options[sel.selectedIndex].text);
+  });
+  out.push("",count.textContent,readyText()[0],"");
+  list.querySelectorAll("li").forEach(function(li){
+    out.push((li.querySelector("input").checked?"✅ ":"⬜ ")+li.querySelector("b").textContent);
+  });
+  out.push("",fr?"Liste d’exemple. Confirmez les exigences auprès de l’ambassade.":"Sample checklist. Confirm requirements with the embassy.");
+  return out.join("\n");
+}
+function labels(){
+  var fr=L==="fr";
+  document.getElementById("print").textContent=fr?"Imprimer la liste":"Print checklist";
+  document.getElementById("install").textContent=fr?"Installer l’application":"Install app";
+  document.getElementById("copy").textContent=fr?"Copier en texte":"Copy as text";
+  var wa=document.getElementById("wa");
+  document.getElementById("reset").textContent=fr?"Recommencer":"Start over";
+  wa.textContent=fr?"Envoyer sur WhatsApp":"Send on WhatsApp";
+  wa.href="https://wa.me/?text="+encodeURIComponent(plain());
+  pc();
+  ce();
+  tl();
+  cl();
+  dlab();
+  wn();
+  itn();
+  rd();
+  lt();
+  mt();
+  ul();
+  sq();
+}
+function save(){
+  try{localStorage.setItem("visa-progress",JSON.stringify({s:state(),t:ticks}))}catch(e){}
+}
+function pdate(v){var a=v.split("-");return new Date(+a[0],a[1]-1,+a[2])}
+function addm(d,n){
+  var r=new Date(d.getFullYear(),d.getMonth(),1);
+  r.setMonth(r.getMonth()+n);
+  var last=new Date(r.getFullYear(),r.getMonth()+1,0).getDate();
+  r.setDate(Math.min(d.getDate(),last));
+  return r;
+}
+function pc(){
+  var fr=L==="fr",box=document.getElementById("pcres"),e=document.getElementById("pcexp").value,
+  r=document.getElementById("pcret").value,i=document.getElementById("pciss").value,
+  n=+document.getElementById("pcmin").value;
+  box.className="";
+  if(!e||!r){box.textContent=fr?"Entrez les deux dates pour voir le résultat.":"Enter both dates to see the result.";return}
+  var fmt=function(d){return d.toLocaleDateString(fr?"fr-FR":"en-GB",{day:"numeric",month:"long",year:"numeric"})},
+  exp=pdate(e),ret=pdate(r),need=addm(ret,n),today=new Date();today.setHours(0,0,0,0);
+  var head,body,ok=true;
+  if(exp<today){ok=false;head=fr?"Ce passeport est déjà expiré.":"This passport has already expired.";body=fr?"Renouvelez-le avant de déposer une demande.":"Renew it before you apply."}
+  else if(exp<need){ok=false;head=fr?"Votre passeport n’est pas valide assez longtemps.":"Your passport is not valid long enough.";
+    body=fr?"Il expire le "+fmt(exp)+", mais il doit être valide jusqu’au "+fmt(need)+". Renouvelez-le avant de déposer une demande.":"It expires on "+fmt(exp)+", but it must be valid until "+fmt(need)+". Renew it before you apply."}
+  else{var d=Math.round((exp-need)/864e5);
+    head=fr?"Votre passeport est valide assez longtemps.":"Your passport is long enough.";
+    body=fr?"Il expire le "+fmt(exp)+" et doit être valide jusqu’au "+fmt(need)+" ("+d+" jours de marge).":"It expires on "+fmt(exp)+" and must be valid until "+fmt(need)+" ("+d+" days to spare)."}
+  var extra="";
+  if(i&&n===3&&addm(pdate(i),120)<ret){ok=false;extra=fr?" Il a été délivré plus de 10 ans avant votre retour, ce que Schengen n’accepte pas.":" It was issued more than 10 years before your return date, which Schengen does not accept."}
+  box.className=ok?"ok":"no";
+  box.innerHTML="<b></b><span></span>";
+  box.firstChild.textContent=ok?head:(head===(fr?"Votre passeport est valide assez longtemps.":"Your passport is long enough.")?(fr?"Un point bloque.":"One problem found."):head);
+  box.lastChild.textContent=body+extra;
+}
+["pcexp","pcret","pciss","pcmin"].forEach(function(x){var el=document.getElementById(x);el.addEventListener("input",pc);el.addEventListener("change",pc)});
+function ce(){
+  var fr=L==="fr",box=document.getElementById("cres"),cur=document.getElementById("cecur").value,
+  n=Math.max(1,Math.floor(+document.getElementById("cen").value||1)),sum=0;
+  for(var i=0;i<9;i++)sum+=Math.max(0,parseFloat(document.getElementById("ce"+i).value)||0);
+  var f=new Intl.NumberFormat(fr?"fr-FR":"en-GB",{style:"currency",currency:cur,maximumFractionDigits:cur==="XAF"?0:2});
+  box.innerHTML="<b></b><span></span>";
+  if(!sum){box.firstChild.textContent="";box.lastChild.textContent=fr?"Saisissez au moins un montant pour voir le total.":"Enter at least one amount to see the total.";return}
+  box.firstChild.textContent=(fr?"Total : ":"Total: ")+f.format(sum*n);
+  box.lastChild.textContent=(fr?"Par demandeur : ":"Per applicant: ")+f.format(sum)+(n>1?(fr?" × "+n+" demandeurs":" × "+n+" applicants"):"");
+}
+for(var q=0;q<9;q++)document.getElementById("ce"+q).addEventListener("input",ce);
+document.getElementById("cen").addEventListener("input",ce);
+document.getElementById("cecur").addEventListener("change",ce);
+function tl(){
+  var fr=L==="fr",box=document.getElementById("tres"),v=document.getElementById("tdate").value;
+  box.innerHTML="";
+  if(!v){box.textContent=fr?"Choisissez une date de voyage pour voir le calendrier.":"Choose a travel date to see the schedule.";return}
+  function num(id){return Math.max(0,Math.floor(+document.getElementById(id).value||0))}
+  function sub(d,n){var r=new Date(d.getFullYear(),d.getMonth(),d.getDate()-n);return r}
+  var fmt=function(d){return d.toLocaleDateString(fr?"fr-FR":"en-GB",{day:"numeric",month:"short",year:"numeric"})},
+  T=pdate(v),today=new Date();today.setHours(0,0,0,0);
+  if(T<=today){box.textContent=fr?"Choisissez une date de voyage dans le futur.":"Choose a travel date in the future.";return}
+  var hand=sub(T,num("tb")),dec=sub(hand,num("tr")),A=sub(dec,num("tp")),book=sub(A,num("tw")),start=sub(A,num("tg"));
+  var names=fr?["Commencer à réunir les documents","Prendre le rendez-vous","Déposer le dossier","Décision attendue","Passeport en main","Date de voyage"]:["Start gathering documents","Book the appointment","Submit the application","Decision expected","Passport back in hand","Travel date"];
+  var rows=[[start,names[0]],[book,names[1]],[A,names[2]],[dec,names[3]],[hand,names[4]],[T,names[5]]];
+  rows.sort(function(a,b){return a[0]-b[0]});
+  var ul=document.createElement("ul");
+  rows.forEach(function(r){var li=document.createElement("li"),b=document.createElement("b"),sp=document.createElement("span");b.textContent=fmt(r[0]);sp.textContent=r[1];li.appendChild(b);li.appendChild(sp);ul.appendChild(li)});
+  box.appendChild(ul);
+  var first=start<book?start:book,p=document.createElement("p"),days=Math.round((first-today)/864e5);
+  if(days<0){
+    var short=-days,e=new Date(T.getFullYear(),T.getMonth(),T.getDate()+short);
+    p.className="late";
+    p.textContent=fr?"Il manque "+short+" jours. Avec ces délais, la première date de voyage réaliste est le "+fmt(e)+".":"You are "+short+" days short. With these waiting times, the earliest realistic travel date is "+fmt(e)+"."
+  }else{
+    p.textContent=fr?"Vous avez "+days+" jours avant de devoir commencer.":"You have "+days+" days before you need to start."
+  }
+  box.appendChild(p);
+  if(days>=0){
+    var bt=document.createElement("button");
+    bt.type="button";
+    bt.textContent=fr?"Ajouter au calendrier (.ics)":"Add to calendar (.ics)";
+    bt.addEventListener("click",function(){ics(rows)});
+    box.appendChild(bt);
+  }
+}
+["tdate","tg","tw","tp","tr","tb"].forEach(function(x){var el=document.getElementById(x);el.addEventListener("input",tl);el.addEventListener("change",tl)});
+function flash(t){var m=document.getElementById("msg");m.textContent=t;setTimeout(function(){m.textContent=""},2500)}
+document.getElementById("reset").addEventListener("click",function(){
+  ticks={};
+  ids.forEach(function(i){document.getElementById(i).selectedIndex=0});
+  build();
+});
+document.getElementById("print").addEventListener("click",function(){document.body.classList.remove("pi");window.print()});
+document.getElementById("copy").addEventListener("click",function(){
+  var t=plain(),ok=L==="fr"?"Copié":"Copied",no=L==="fr"?"Copie impossible":"Could not copy";
+  function old(){
+    var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();
+    try{document.execCommand("copy");flash(ok)}catch(e){flash(no)}
+    document.body.removeChild(a);
+  }
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){flash(ok)},old)}else old();
+});
+function vstat(r){
+  var fr=L==="fr";
+  if(!r.v)return[fr?"Pas encore vérifiée":"Not yet verified","none",""];
+  var d=pdate(r.v),t=new Date();t.setHours(0,0,0,0);
+  var age=Math.round((t-d)/864e5),f=d.toLocaleDateString(fr?"fr-FR":"en-GB",{day:"numeric",month:"short",year:"numeric"});
+  var txt=age>60?(fr?"À vérifier, dernière vérification le ":"Needs checking, last checked ")+f:(fr?"Vérifiée le ":"Checked on ")+f;
+  var link=r.u?' · <a href="'+r.u+'" target="_blank" rel="noopener">Source</a>':"";
+  return[txt,age>60?"late":"ok",link];
+}
+function build(keep){
+  var s=state(),on=ticks;
+  var items=RULES.filter(function(r){
+    if(r.d&&r.d.indexOf(s.dest)<0)return false;
+    if(r.x&&r.x.indexOf(s.dest)>=0)return false;
+    if(r.nt&&r.nt.indexOf(s.type)>=0)return false;
+    if(!r.f)return true;
+    return Object.keys(r.f).every(function(k){return s[k]===r.f[k]});
+  });
+  list.innerHTML="";
+  items.forEach(function(r,n){
+    var i=RULES.indexOf(r),t=L==="fr"?FRR[i]:[r.n,r.w],v=vstat(r),li=document.createElement("li"),id="c"+n;
+    li.innerHTML='<label for="'+id+'"><input type="checkbox" id="'+id+'" data-i="'+i+'"'+(on[i]?" checked":"")+'><span><b>'+t[0]+'</b><small>'+t[1]+'</small><small class="vf '+v[1]+'">'+v[0]+v[2]+'</small></span></label>';
+    list.appendChild(li);
+  });
+  update();
+}
+function readyText(){
+  var fr=L==="fr",all=list.querySelectorAll("input").length,done=list.querySelectorAll("input:checked").length,left=all-done;
+  if(!all)return["",false];
+  if(!left)return[fr?"Prêt : vous pouvez prendre votre rendez-vous.":"Ready: you can book your appointment.",true];
+  var d=fr?(left===1?"il reste 1 document.":"il reste "+left+" documents."):(left===1?"1 document left.":left+" documents left.");
+  return[(done/all>=0.7?(fr?"Presque prêt : ":"Almost ready: "):(fr?"Pas encore prêt : ":"Not ready yet: "))+d,false];
+}
+function update(){
+  var all=list.querySelectorAll("input"),done=list.querySelectorAll("input:checked").length;
+  var rd=readyText(),re=document.getElementById("ready");re.textContent=rd[0];re.className=rd[1]?"ok":"";
+  count.textContent=L==="fr"?done+" sur "+all.length+" documents prêts":done+" of "+all.length+" documents ready";
+  fill.style.width=(all.length?done/all.length*100:0)+"%";
+  save();
+  labels();
+}
+ids.forEach(function(i){document.getElementById(i).addEventListener("change",function(){build(false)})});
+list.addEventListener("change",function(e){
+  var c=e.target;
+  if(c.dataset&&c.dataset.i!==undefined)ticks[c.dataset.i]=c.checked?1:0;
+  update();
+});
+try{
+  var sv=JSON.parse(localStorage.getItem("visa-progress")||"null");
+  if(sv){
+    ids.forEach(function(i){
+      var e=document.getElementById(i);
+      if(sv.s&&sv.s[i]&&e.querySelector('option[value="'+sv.s[i]+'"]'))e.value=sv.s[i];
+    });
+    ticks=sv.t||{};
+  }
+}catch(e){}
+build();
+var FR=["Plateforme visa et voyage", "Menu", "Essayer", "Essayer la liste de contrôle", "Vérifier le passeport", "Estimateur de coûts", "Planificateur de calendrier", "Test de préparation", "Créateur d’itinéraire", "Guides", "Comment fonctionnent les plateformes de voyage", "Systèmes d’aide aux demandes de visa", "Parcours de la demande", "Motifs de refus", "Guide des relevés bancaires", "Guide de l’assurance voyage", "Préparer l’entretien", "Guide des photos", "Glossaire", "Procédures depuis le Cameroun", "Faire sa demande depuis le Cameroun", "Guide du visa étudiant", "Guide du visa américain", "Guide du visa canadien", "Guide du visa britannique", "Guide du visa australien", "Mises à jour", "Modèles", "Modèles de lettres", "Modèles de messages", "Construire votre système", "Conception de la liste de contrôle", "Maintenance des règles", "Données d’exemple", "Architecture", "Feuille de route", "Modèle économique", "Publier sur GitHub", "À propos de nous", "À propos", "Services", "FAQ et contact", "Confidentialité", "De quels documents ma demande de visa a-t-elle besoin ?", "Choisissez une destination, un motif et une situation : la liste se reconstruit à partir d’un fichier de règles. C’est l’idée centrale de tout le système, exécutée dans votre navigateur.", "Destination", "Espace Schengen", "Royaume-Uni", "États-Unis", "Canada", "Australie", "Motif", "Tourisme", "Affaires", "Études", "Visite familiale", "Transit", "Le demandeur est", "Salarié(e)", "Travailleur indépendant", "Étudiant(e)", "Voyage payé par", "Le demandeur", "Un garant", "Âge", "18 ans ou plus", "Moins de 18 ans", "Règles données à titre d’exemple pour apprendre ; les exigences réelles varient selon l’ambassade et le demandeur. Vérifiez toujours sur le site de l’ambassade ou du centre de visas. Vos choix sont enregistrés uniquement dans ce navigateur.", "Mon passeport est-il assez valide ?", "Entrez la date d’expiration de votre passeport et la date de votre retour. L’outil indique si le passeport reste valide assez longtemps.", "Date d’expiration du passeport", "Date de retour", "Date de délivrance (facultatif)", "Validité supplémentaire exigée", "Aucune, valide pendant tout le séjour", "3 mois après le départ (Schengen)", "6 mois après le départ (beaucoup d’autres pays)", "Les règles varient selon les pays : confirmez la règle exacte sur le site de l’ambassade. L’espace Schengen exige aussi que le passeport ait été délivré il y a moins de 10 ans.", "Estimer le coût total", "Saisissez chaque montant d’après les pages officielles de frais et votre propre grille de prix. Rien n’est prérempli, car les frais changent.", "Devise", "Franc CFA (XAF)", "Euro (EUR)", "Dollar américain (USD)", "Nombre de demandeurs", "Frais de visa", "Frais de service du centre de visas", "Assurance voyage", "Traduction certifiée", "Légalisation", "Photos", "Courrier express", "Nos frais de service", "Autres frais", "Les montants s’entendent par demandeur. La devise ne change que l’affichage des totaux : saisissez tous les montants dans la même devise. Les frais de visa ne sont généralement pas remboursés en cas de refus.", "Planifier votre calendrier", "Entrez votre date de voyage et ajustez les délais d’attente selon votre cas. L’outil compte à rebours et indique quand commencer.", "Date de voyage", "Réunir les documents (jours)", "Attente d’un rendez-vous (jours)", "Traitement (jours)", "Retour du passeport (jours)", "Marge de sécurité (jours)", "Les délais sont des valeurs de départ pour planifier, pas des promesses. Vérifiez auprès du centre de visas les délais actuels de rendez-vous et auprès de l’ambassade les délais de traitement. Certains centres n’acceptent les dossiers que dans un délai fixé avant le voyage, souvent 6 mois.", "Suis-je prêt à déposer ma demande ?", "Cochez ce qui est vrai pour vous. Le test montre ce qui manque encore et où trouver de l’aide. Ce n’est qu’un autotest : c’est l’ambassade qui décide, et rien ici ne prédit le résultat.", "Mon passeport est valide au-delà de ma date de retour prévue, aussi longtemps que la destination l’exige.", "Je sais pour quelle destination et quel type de visa je fais ma demande.", "J’ai tous les documents de ma liste de contrôle.", "Mes relevés bancaires couvrent assez de mois et tout gros dépôt est expliqué.", "Mon nom et mes dates sont identiques sur mon passeport, mon formulaire, mes réservations et mes lettres.", "Je peux montrer mes attaches au Cameroun, comme un emploi, la famille, des biens ou des études.", "J’ai une assurance voyage, si ma destination l’exige.", "Je sais où et quand je déposerai mon dossier, et j’ai vérifié les frais et les règles actuels sur le site officiel.", "Je n’ai payé ni école ni agent avant d’avoir vérifié que ma procédure est ouverte et que les règles sont à jour.", "Créer votre itinéraire", "Ajoutez vos dates et votre programme pour chaque jour, puis imprimez l’itinéraire pour le joindre à votre dossier. Ne prévoyez que ce que vous avez réellement l’intention de faire, et faites correspondre les dates à votre demande et à vos réservations.", "Nom du voyageur (comme sur le passeport)", "Destination", "Date d’arrivée", "Date de départ", "Hébergement (nom et adresse)", "Comment fonctionnent les plateformes de voyage", "Une plateforme de voyage possède rarement quoi que ce soit. Elle relie les voyageurs aux fournisseurs et gère la recherche, la réservation, le paiement et l’assistance autour.", "Couche", "Ce qu’elle fait", "Offre", "Vols via les systèmes GDS (Amadeus, Sabre, Travelport) et les API des compagnies ; hôtels via les gestionnaires de canaux et les grossistes ; voitures, bus et excursions via leurs propres API.", "Recherche", "Interroge plusieurs fournisseurs à la fois, uniformise les réponses, supprime les doublons et classe les résultats. Un cache de courte durée la garde rapide.", "Réservation", "Revérifier le prix, bloquer l’inventaire, recueillir les informations du voyageur, encaisser le paiement, confirmer auprès du fournisseur, émettre le billet ou le bon.", "Paiements", "Prix en plusieurs devises, cartes et moyens locaux comme le mobile money, contrôles antifraude, règlement des fournisseurs.", "Après la réservation", "Modifications, annulations, remboursements, notifications, assistance.", "Le cas le plus difficile : le paiement réussit mais le fournisseur refuse la réservation. Le système doit alors rembourser ou réserver à nouveau automatiquement.", "Systèmes qui soutiennent les demandes de visa", "Portails officiels :", "sites d’e-visa et de demande qui imposent les champs obligatoires.", "Centres de dépôt de visas :", "sociétés comme VFS Global et TLScontact qui collectent les dossiers, les données biométriques et les frais.", "Systèmes de rendez-vous :", "créneaux, confirmations et rappels.", "Gestion des documents :", "passeports, relevés et lettres conservés avec leur statut et leur date d’expiration, comme les articles d’un logiciel de stock.", "Moteurs de listes de contrôle :", "une base de règles qui indique les documents nécessaires pour chaque cas.", "Outils de formulaire et de validation :", "remplissage automatique à partir d’un profil enregistré et signalement des incohérences.", "Documents justificatifs :", "réservations de vol, confirmations d’hôtel, assurance voyage.", "Frais et suivi des dossiers :", "paiements avec reçus, et un CRM qui suit chaque dossier jusqu’à la décision.", "Traduction et légalisation :", "traduction certifiée et authentification notariale.", "Parcours de la demande", "Chaque demande suit le même parcours, de la première question au retour du passeport.", "Poser la question", "Le client indique où il veut aller et pourquoi. Le système pose quelques questions : motif, dates, emploi, qui paie.", "Obtenir la liste de contrôle", "Le moteur de règles construit la liste personnelle des documents, avec la raison de chacun.", "Réunir les documents", "Le client téléverse des photos ou des scans, ou un agent le fait pour lui. Les pièces manquantes restent signalées.", "Vérifier", "Des contrôles automatiques repèrent les passeports expirés, les mauvais formats et les noms qui ne correspondent pas. Un agent approuve ou rejette chaque document en indiquant la raison.", "Remplir le formulaire", "Le formulaire est rempli à partir du profil du client et comparé au passeport.", "Payer et réserver", "Le client règle les frais de visa et de service et réserve le rendez-vous au centre de visas ou à l’ambassade.", "Déposer le dossier", "Le client se présente avec le dossier final ; les données biométriques sont prises si elles sont exigées.", "Suivre", "Le dossier est suivi pendant le traitement, avec des mises à jour par WhatsApp, SMS ou e-mail.", "Décision et retour du passeport", "Visa accordé ou refusé : le client récupère son passeport. En cas de refus, l’agent examine les motifs avec lui.", "Motifs de refus", "Voici des motifs fréquents de refus ou de retard. Chacun peut être évité.", "Motif", "Pourquoi cela arrive", "Que faire", "Fonds peu clairs ou insuffisants", "Les relevés montrent un faible solde ou des dépôts importants soudains, ou ne couvrent pas le voyage.", "Montrez des revenus et une épargne réguliers sur 6 mois, justifiez les gros dépôts par des documents et ajoutez les pièces d’un garant si quelqu’un d’autre paie.", "Noms ou informations qui ne correspondent pas", "L’orthographe ou les dates diffèrent entre le passeport, le formulaire, les billets et les lettres.", "Reprenez exactement le passeport partout et comparez chaque document avec lui avant le dépôt.", "Attaches insuffisantes avec le pays d’origine", "L’agent n’est pas convaincu que le demandeur reviendra.", "Joignez les preuves d’emploi, de famille, de biens ou d’études, et un plan de retour clair.", "Motif ou itinéraire peu clair", "La raison du voyage ou le programme semble incohérent ou contredit d’autres documents.", "Donnez une explication courte et cohérente du voyage et un itinéraire conforme aux réservations et aux dates.", "Documents manquants ou incomplets", "Une pièce exigée manque, est expirée, illisible ou dans un mauvais format.", "Utilisez la liste de contrôle, cochez chaque élément et faites vérifier le dossier par un agent avant le rendez-vous.", "Problèmes liés à des voyages antérieurs", "Dépassements de séjour passés, refus non déclarés ou lacunes inexpliquées dans l’historique de voyage.", "Déclarez honnêtement les refus passés et expliquez-les. Ne cachez rien.", "Doutes sur l’authenticité", "Un document semble modifié ou ne peut pas être vérifié.", "Ne présentez que des documents authentiques. Obtenez des copies officielles, avec traduction certifiée ou légalisation si nécessaire.", "Problèmes d’assurance ou de réservation", "L’assurance ne respecte pas le minimum, ou les réservations ne couvrent pas les dates de voyage.", "Vérifiez la couverture minimale et faites correspondre les dates de l’assurance, du vol et de l’hôtel.", "Les motifs varient selon l’ambassade. En cas de refus, lisez la lettre de refus, corrigez les raisons indiquées et déposez une nouvelle demande avec de nouveaux justificatifs, plutôt que de présenter le même dossier.", "Guide des relevés bancaires", "Les ambassades utilisent les relevés bancaires pour vérifier trois choses : que vous pouvez payer le voyage, que votre argent vient d’une source normale et que vous avez des raisons de rentrer chez vous. Ce guide est général, car chaque ambassade fixe ses propres règles. Il s’appuie sur des guides publics et a été vérifié en novembre 2026.", "Ce que regardent les agents", "Des revenus réguliers : un salaire ou des revenus d’activité qui arrivent régulièrement.", "Un solde stable dans le temps, pas un saut soudain juste avant la demande.", "Assez d’argent pour tout le voyage, billets, hébergement et dépenses quotidiennes compris.", "Des dépenses normales, cohérentes avec votre emploi et votre mode de vie.", "Votre nom et les détails du compte en accord avec votre passeport et vos autres documents.", "Combien de mois", "Beaucoup de guides indiquent environ 3 mois pour Schengen et environ 6 mois pour le Royaume-Uni, le Canada, l’Australie et les États-Unis, mais la liste de l’ambassade prévaut toujours. La procédure étudiante du Royaume-Uni a sa propre règle : l’argent doit rester sur le compte au moins 28 jours consécutifs.", "Gros dépôts", "Un gros dépôt juste avant votre demande peut ressembler à de l’argent emprunté. Si l’argent est réel, expliquez-le avec des preuves, par exemple un contrat de vente d’un bien, une lettre de prime de votre employeur, une facture d’activité ou un virement depuis votre propre compte d’épargne. Ajoutez une courte lettre qui explique la provenance.", "Avant d’imprimer vos relevés", "Utilisez le compte où arrivent réellement vos revenus.", "Incluez toutes les pages, lisibles, avec le nom de la banque et les détails de votre compte.", "Demandez à la banque de tamponner ou de signer les relevés si l’ambassade l’exige.", "Ne déposez pas d’argent uniquement pour le visa et n’empruntez pas pour atteindre un montant cible.", "Ne présentez jamais de relevés modifiés ou faux. Cela peut entraîner un refus et une interdiction.", "Au Cameroun", "Demandez à votre banque combien de temps elle met pour fournir des relevés tamponnés et prévoyez-le dans votre calendrier. L’historique de mobile money peut appuyer votre dossier, mais vérifiez si le centre l’accepte comme preuve de fonds.", "Sources (relevés bancaires)", "Bank statements for visa: months by country (Atlys)", "Downloading and stamping bank statements (Atlys)", "Financial documentation patterns (VisaPathway)", "Sudden bank deposit before a Schengen visa (Outbound Visa)", "Why a bank statement can lead to refusal (Outlook Money)", "Guide de l’assurance voyage", "L’assurance voyage médicale est un document obligatoire pour un visa Schengen et une protection solide pour les autres voyages. Ce guide s’appuie sur des pages consulaires et des guides publics, et a été vérifié en novembre 2026.", "Visa Schengen : ce que la police doit couvrir", "Valable dans tous les États Schengen, pas seulement dans le premier pays visité.", "Valable pour tout le séjour, avec des dates qui correspondent à votre demande et à vos réservations.", "Au moins 30 000 € de couverture pour les frais médicaux.", "Inclut le rapatriement pour raison médicale ou en cas de décès.", "Inclut les soins urgents et l’hospitalisation d’urgence.", "Vérifier l’attestation avant de déposer", "Votre nom correspond exactement au passeport.", "Les dates de début et de fin correspondent à votre demande de visa et à vos réservations de vol et d’hôtel.", "Le texte mentionne l’espace Schengen, le montant de 30 000 €, le rapatriement et l’hospitalisation d’urgence.", "C’est une attestation complète avec un numéro de police, pas une capture d’écran. Certains consulats exigent une langue précise : vérifiez.", "Demandez si la police est remboursée en cas de refus de visa.", "Autres destinations", "Pour les visas de visiteur du Royaume-Uni, du Canada, des États-Unis et de l’Australie, l’assurance n’est normalement pas exigée pour le visa, mais les soins à l’étranger peuvent coûter très cher : elle est donc fortement recommandée. Consultez la liste actuelle de chaque ambassade. Pour un visa étudiant australien, l’assurance santé OSHC est obligatoire.", "Au Cameroun", "Certains consulats demandent une lettre de l’assureur confirmant que la police respecte les règles. Les contrats locaux respectent rarement le libellé exigé par Schengen : choisissez une assurance médicale de voyage internationale. Avant de payer, demandez au consulat ou au centre de visas ce qu’il accepte, et gardez le reçu.", "Sources (assurance voyage)", "Schengen visa requirements, Spanish Consulate in London", "Travel health insurance requirements, German Embassy Kuala Lumpur", "Schengen visa travel and insurance guide (UnitedHealthcare)", "Schengen insurance requirements (Insurte)", "Préparer l’entretien", "Les entretiens comptent surtout pour le visa américain, mais ils peuvent aussi avoir lieu pour d’autres visas. Ils sont courts : des réponses claires et honnêtes comptent beaucoup. Ce guide aide les clients à se préparer, pas à apprendre un texte par cœur. Il s’appuie sur des guides publics et a été vérifié en novembre 2026.", "À quoi s’attendre", "Une courte conversation, souvent de quelques minutes seulement.", "Votre identité et les informations de votre DS-160 sont vérifiées.", "Des questions sur votre voyage, votre emploi, le financement et vos attaches au Cameroun.", "L’agent décide en général à la fin.", "Sujets à préparer", "Le motif et la durée de votre voyage.", "Où vous logerez et ce que vous ferez.", "Votre emploi, votre salaire et votre ancienneté.", "Qui paie le voyage.", "Les proches ou amis dans le pays de destination.", "Vos voyages précédents et tout refus antérieur.", "Ce qui vous ramène au Cameroun : emploi, logement, famille ou études.", "Comment répondre", "Répondez à la question posée, en quelques phrases claires.", "Soyez honnête et cohérent avec vos documents. N’inventez jamais un motif, un emploi ou un garant.", "Connaissez votre dossier : dates, montants, noms et adresses.", "Apportez vos documents, même si l’agent ne les demande pas.", "Si vous ne comprenez pas une question, demandez à l’agent de la répéter.", "Pourquoi les refus arrivent", "Le motif de refus américain le plus courant est la section 214(b) : l’agent n’a pas été convaincu que le voyage est temporaire ni que vous rentrerez. Les attaches sont les éléments de votre vie qui vous lient à votre pays, comme un emploi, un logement et votre famille.", "En cas de refus", "Demandez le motif, lisez tout document remis et corrigez le vrai problème avant de redéposer une demande. Une nouvelle demande avec le même dossier peut mener à la même réponse.", "Sources (entretien)", "B-1/B-2 interview questions and 214(b) red flags (VisaMind)", "US visa interview tips (Outbound Visa)", "US visa interview tips 2025 (Visa Applications)", "How to improve your chances of a US visitor visa (Nolo)", "Exigences pour les photos", "Une photo qui ne respecte pas les règles peut retarder un dossier. Servez-vous de cette liste avant d’aller au studio.", "Généralement acceptée", "Prise il y a moins de 6 mois", "Fond uni blanc ou clair, sans ombres", "Visage entièrement visible, regard droit vers l’appareil", "Expression neutre, bouche fermée", "Nette, bien éclairée, en bonne qualité d’impression ou de fichier", "Souvent refusée", "Une photo ancienne ou qui ne vous ressemble plus", "Filtres, retouches ou photo d’une photo", "Ombres, reflets sur les lunettes ou fond à motifs", "Tête ou visage couverts, sauf pour raisons religieuses ou médicales si le visage reste visible", "Mauvaise taille, cadrage trop serré ou trop large", "Formats habituels", "Destination", "Format habituel", "Espace Schengen", "35 × 45 mm", "États-Unis", "51 × 51 mm (2 × 2 pouces), généralement téléversée en fichier numérique", "Les formats indiqués sont courants. Vérifiez auprès de l’ambassade ou du centre de visas la taille, le format et le poids exacts du fichier pour votre dossier.", "Glossaire", "Le sens simple des termes utilisés dans ce guide.", "GDS", "Système mondial de distribution. Réseau qui regroupe l’offre des compagnies aériennes, des hôtels et des loueurs de voitures pour que les agents puissent la rechercher et la réserver. Exemples : Amadeus, Sabre, Travelport.", "NDC", "New Distribution Capability. Norme qui permet aux compagnies aériennes de vendre directement leurs tarifs et services additionnels aux agents et aux plateformes.", "Grossiste hôtelier", "Grossiste qui achète des chambres d’hôtel en gros et les revend aux plateformes de voyage à des tarifs nets.", "Gestionnaire de canaux", "Logiciel qui permet à un hôtel de mettre à jour ses prix et ses disponibilités sur plusieurs sites de réservation en une seule fois.", "Agrégateur", "Service qui relie de nombreux fournisseurs à travers une seule API.", "Commission", "Pourcentage qu’un fournisseur verse à la plateforme pour chaque réservation vendue.", "Marge", "Montant qu’une plateforme ajoute au prix du fournisseur.", "Données biométriques", "Empreintes digitales et photo prises dans un centre de visas pour identifier le demandeur.", "Centre de dépôt de visas", "Société autorisée par une ambassade à recevoir les demandes, à vérifier les documents et à prendre les données biométriques. Elle ne décide pas de l’octroi du visa.", "E-visa", "Visa demandé et délivré en ligne.", "Légalisation", "Confirmation officielle qu’un document est authentique, pour qu’un autre pays l’accepte. Selon le pays, on parle aussi d’apostille ou d’authentification.", "Authentification notariale", "Un notaire certifie qu’une copie ou une signature est authentique.", "Traduction certifiée", "Traduction signée par un traducteur agréé qui atteste qu’elle est fidèle.", "Preuves d’attaches", "Éléments montrant que vous reviendrez dans votre pays : emploi, famille, biens ou études.", "Garant", "Personne ou organisation qui paie le voyage ou se porte garante du demandeur.", "Moteur de règles", "Partie du système qui choisit les documents exigés pour chaque cas.", "Historique des modifications", "Registre de qui a modifié quoi, et quand.", "Faire sa demande depuis le Cameroun", "Vérifié en novembre 2026 à partir de pages publiques. Les centres, les frais et les règles changent : confirmez chaque point sur le site officiel avant de conseiller un client.", "Destination", "Où déposer", "À savoir", "France", "Centres TLScontact à Yaoundé et à Douala, plus une antenne à Garoua ouverte quelques jours par mois", "Depuis octobre 2023, l’ambassade ne reçoit plus les dossiers, mais elle décide toujours. Les étudiants passent d’abord par Campus France.", "Belgique et Luxembourg", "Centre TLScontact à Yaoundé", "Prenez rendez-vous sur le site de TLScontact.", "Allemagne", "Centre VFS Global à Yaoundé", "Ouvert en décembre 2025, selon la presse.", "Royaume-Uni", "Centre VFS Global à Yaoundé", "VFS Global a remplacé TLScontact comme prestataire du Royaume-Uni en décembre 2024.", "États-Unis", "Ambassade des États-Unis à Yaoundé, après le formulaire DS-160 et le paiement des frais, avec un entretien en personne", "En juillet 2025, l’ambassade a indiqué que tous les demandeurs de visa au Cameroun doivent se présenter à un entretien en personne, et que la plupart des visas sont désormais délivrés pour une seule entrée et 3 mois. Depuis août 2026, Yaoundé est aussi l’un des pôles régionaux de visas américains.", "Canada", "Centre de réception des demandes de visa du Canada à Yaoundé, géré par VFS Global avec l’OIM", "La plupart des demandes se font en ligne auprès d’IRCC. Les données biométriques sont prises au centre sur rendez-vous préalable, et les frais du gouvernement se paient en ligne à IRCC. VFS Global n’assure que l’aide administrative et ne décide pas.", "Australie", "En ligne, via ImmiAccount, le compte du gouvernement australien", "Si des données biométriques sont demandées, elles sont prises dans un centre australien de collecte biométrique géré par VFS Global. Nous n’avons pas pu confirmer l’existence d’un centre au Cameroun : consultez les pages de VFS Global pour l’Australie.", "États-Unis : points à vérifier avant de payer", "Selon la presse, le Cameroun figure sur la liste des pays dont la délivrance de visas d’immigration est suspendue depuis le 21 janvier 2026. Les mêmes articles précisent que la suspension ne concerne pas les visas de tourisme ni d’affaires. Les États-Unis appliquent aussi des suspensions de visas et, pour certains demandeurs, des cautions de plusieurs milliers de dollars. Consultez le site du Département d’État pour les listes à jour avant qu’un client ne paie des frais.", "Réserver en sécurité", "Prenez rendez-vous uniquement sur le site officiel du centre. Quiconque vend des rendez-vous ou demande un paiement par téléphone peut commettre une fraude.", "Payer les frais", "MTN Mobile Money et Orange Money couvrent la plupart des paiements courants au Cameroun, et le Trésor public les accepte pour les frais publics. Les centres de visas sont différents. Chaque centre fixe ses moyens de paiement, et les centres français encaissent les frais sur place, en général par carte bancaire ou par d’autres moyens acceptés localement. Ne promettez pas à un client que le mobile money marche dans un centre de visas. Vérifiez d’abord la page de paiement du centre. Une plateforme peut en revanche proposer le mobile money pour ses propres frais de service.", "Légalisation et traduction", "D’après les guides consultés, le Cameroun n’a pas adhéré à la Convention de l’Apostille. Les documents camerounais doivent donc normalement être authentifiés par le Ministère des Relations extérieures (MINREX), puis légalisés par l’ambassade du pays de destination. Pour la Belgique, l’authentification du MINREX ne doit pas dater de plus de 3 mois. Les documents rédigés dans une autre langue demandent en général une traduction assermentée. Le MINREX gère aussi une plateforme en ligne, LEGALIS, pour authentifier les documents officiels.", "Seules les procédures ci-dessus ont été vérifiées, et certains détails viennent d’articles de presse. Les règles changent souvent : confirmez chaque point sur le site officiel avant de conseiller un client.", "Sources", "UK visa services move to VFS Global (Newswatch Cameroon)", "France visa from Cameroon (Les Afriques)", "Germany visa center in Yaoundé (Newswatch Cameroon)", "Belgium visa center in Yaoundé (TLScontact)", "Belgian document legalization (TLScontact)", "Payment methods (Cameroon Public Treasury)", "LEGALIS platform (ITWeb Africa)", "US Embassy Yaoundé visa changes, July 2025 (APO Group press release)", "US visa services moved to regional hubs (Mondaq)", "US immigrant visa pause and Cameroon (Investir au Cameroun, in French)", "Canada Visa Application Centre in Cameroon (VFS Global)", "Australian biometric collection centres in Sub-Saharan Africa (African Business)", "Étudier en France depuis le Cameroun", "Les étudiants camerounais doivent suivre la procédure Campus France avant de pouvoir demander un visa étudiant pour la France. Vérifié en novembre 2026 à partir de pages publiques : confirmez chaque étape sur les sites officiels.", "Créer votre dossier", "Inscrivez-vous sur la plateforme Études en France de Campus France, remplissez votre dossier et choisissez vos formations. Commencez environ un an avant la rentrée.", "Payer les frais de dossier", "Si elle est demandée, réglez la redevance de dossier Campus France. Les montants rapportés varient selon les sites : vérifiez le montant actuel auprès de Campus France Cameroun.", "Passer l’entretien", "Campus France Cameroun organise l’entretien, où un conseiller vérifie que votre projet d’études est clair et cohérent. Il a des espaces à Yaoundé et à Douala.", "Obtenir votre attestation Campus France", "Une fois la procédure terminée, vous recevez l’attestation Campus France nécessaire au dossier de visa. Conservez avec elle votre lettre d’admission ou de préinscription.", "Prendre rendez-vous chez TLScontact", "Depuis le 2 mai 2024, les étudiants doivent terminer la procédure Campus France avant de prendre leur rendez-vous de visa chez TLScontact.", "Déposer la demande de visa long séjour", "Demandez le visa long séjour étudiant (VLS-TS) avec le formulaire, votre passeport et vos photos, la lettre d’admission, l’attestation Campus France et la preuve que vous pouvez financer votre séjour.", "Valider votre visa en France", "À votre arrivée, validez le visa auprès des services français de l’immigration (ANEF, ex-OFII).", "Une règle signalée pour les écoles privées", "Un site d’actualité camerounais rapporte que, depuis le 9 juillet 2026, Campus France Cameroun demande aux candidats admis dans des établissements privés d’enseignement supérieur en France de prouver le paiement intégral d’une année de scolarité, ou la disponibilité de la somme sur un compte bloqué, au moment du dépôt chez TLScontact. Les universités publiques ne seraient pas concernées. Cette information vient d’un site d’actualité et non d’une page officielle : confirmez-la auprès de Campus France Cameroun avant de payer une école.", "Avant de payer une école", "Demandez par écrit à l’école ce qu’il advient de votre paiement en cas de refus de visa. Les remboursements dépendent de l’école, et Campus France indique qu’ils ne relèvent pas de sa responsabilité.", "Les autres destinations d’études ont leurs propres procédures. Consultez la page de l’ambassade du pays visé.", "Sources (visa étudiant)", "France student visa guide for Cameroon (VisaConnect Africa, in French)", "Visa France from Cameroon, 2026 (Les Afriques, in French)", "Full-payment rule for private schools (Cameroon Desk, in French)", "Visa de visiteur américain depuis le Cameroun", "Un guide court pour demander un visa de visiteur américain (B-1/B-2) depuis le Cameroun. Vérifié en novembre 2026 à partir de pages publiques. Les règles américaines changent souvent : confirmez chaque étape sur les sites de l’ambassade et du Département d’État.", "Remplir le formulaire DS-160", "Remplissez la demande en ligne DS-160 sur le site CEAC du Département d’État. Le formulaire lui-même est gratuit. Imprimez la page de confirmation avec le code-barres.", "Créer votre compte et payer", "Créez un profil sur le site américain de rendez-vous de visa pour le Cameroun et payez les frais de demande. Vérifiez le montant actuel sur le site du Département d’État.", "Prendre votre entretien à Yaoundé", "Prenez rendez-vous à l’ambassade des États-Unis à Yaoundé. Depuis juillet 2025, tout demandeur de visa de non-immigrant au Cameroun doit se présenter en personne, et la dispense d’entretien est suspendue. Réservez tôt, car les délais d’attente varient.", "Préparer vos documents", "Apportez votre passeport, la page de confirmation DS-160, la lettre de rendez-vous, le reçu de paiement et une photo. Ajoutez des preuves du motif de votre voyage, de vos moyens financiers et de vos attaches au Cameroun, comme un emploi, la famille, des biens ou des études.", "Passer l’entretien", "Répondez honnêtement et brièvement. L’agent consulaire décide en général pendant l’entretien. Si le visa est accordé, des frais de délivrance sont à payer ; l’ambassade a annoncé 35 $ en juillet 2025.", "Après l’accord", "En juillet 2025, l’ambassade a indiqué que la plupart des visas pour les Camerounais sont délivrés pour une seule entrée et valables 3 mois. Un visa permet de voyager vers les États-Unis, mais ce sont les agents à la frontière qui décident de la durée du séjour.", "À savoir", "Les titulaires d’un passeport camerounais ont en général besoin d’un visa de transit, même pour changer d’avion aux États-Unis, et le Cameroun ne fait pas partie du programme d’exemption de visa ni de l’ESTA.", "Avant qu’un client ne paie des frais, lisez les notes sur les États-Unis dans la section « Faire sa demande depuis le Cameroun » : la suspension signalée des visas d’immigration, les suspensions de visas et les cautions de visa.", "Sources (visa américain)", "US Embassy Yaoundé announcement, July 2025 (APO Group)", "DS-160 explained (NNU Immigration)", "US entry requirements for Cameroon passport holders (EntryBrief)", "Visa canadien depuis le Cameroun", "Un guide court pour demander un visa de visiteur ou un permis d’études pour le Canada depuis le Cameroun. Vérifié en novembre 2026 à partir de pages publiques. Les règles canadiennes ont beaucoup changé entre 2024 et 2026 : confirmez chaque étape sur le site d’IRCC.", "Visa de visiteur", "Réunir vos documents", "Préparez un passeport valide, des preuves de fonds, des preuves d’attaches au Cameroun (emploi, famille, biens ou études), un motif de voyage clair et une lettre d’invitation si vous rendez visite à votre famille ou à des amis.", "Faire la demande en ligne", "Créez un compte sécurisé IRCC, remplissez le formulaire, téléversez vos documents et payez les frais. Chaque voyageur, y compris les enfants, dépose une demande distincte.", "Recevoir votre lettre de biométrie", "Après le paiement, IRCC envoie une lettre d’instructions pour la biométrie dans votre compte. Vous avez normalement 30 jours pour donner vos données biométriques.", "Donner vos données biométriques à Yaoundé", "Prenez rendez-vous au centre de réception des demandes de visa du Canada à Yaoundé et apportez la lettre d’instructions et votre passeport.", "Attendre la décision", "Suivez votre compte IRCC et répondez vite à toute demande d’informations supplémentaires. Faites votre demande tôt, car les délais de traitement varient, et évitez les réservations non remboursables avant d’avoir votre visa.", "Permis d’études", "Obtenir une lettre d’acceptation", "Candidatez auprès d’un établissement d’enseignement désigné (EED) et obtenez sa lettre d’acceptation. Vérifiez que l’école figure sur la liste d’IRCC.", "Obtenir votre lettre d’attestation", "La plupart des demandeurs ont besoin d’une lettre d’attestation provinciale ou territoriale (LAP/LAT), en général obtenue par l’intermédiaire de l’école. Les étudiants qui vont au Québec doivent d’abord obtenir un Certificat d’acceptation du Québec (CAQ) auprès du gouvernement du Québec.", "Prouver vos moyens financiers", "Montrez que vous pouvez payer les frais de scolarité de la première année plus les frais de subsistance exigés par IRCC. Le montant exigé a augmenté : vérifiez le chiffre actuel sur le site d’IRCC.", "Faire la demande en ligne", "Faites la demande via votre compte sécurisé IRCC avec la lettre d’acceptation, la lettre d’attestation ou le CAQ, les preuves de fonds, votre passeport, des photos et un plan d’études. Les demandes sur papier ne sont acceptées que dans des cas particuliers.", "Donner vos données biométriques", "Si IRCC demande vos données biométriques, donnez-les au centre de réception des demandes de visa dans le délai indiqué dans votre lettre d’instructions.", "Examen médical et certificat de police", "Faites-les seulement si IRCC les demande pour votre pays ou votre programme, et suivez les mises à jour dans votre compte.", "À savoir", "Le Canada ne délivre pas de visas de visiteur à l’arrivée : vous devez avoir le visa avant de voyager.", "Les règles du permis d’études ont changé plusieurs fois entre 2024 et 2026, avec des plafonds nationaux, des lettres d’attestation et des fonds plus élevés. N’utilisez que des guides à jour.", "Pour le centre de Yaoundé, consultez la section « Faire sa demande depuis le Cameroun ».", "Sources (visa canadien)", "Study permit 2026 (EduCanada, Government of Canada)", "Study permit Canada 2026 guide (SiLaws)", "Visitor visa document checklist (WelcomeAide)", "Biometrics steps for visa applicants (Université Laval)", "Canada Visa Application Centre in Cameroon (VFS Global)", "Visa britannique depuis le Cameroun", "Un guide court sur le visa de visiteur standard du Royaume-Uni pour les demandeurs du Cameroun, avec un avertissement important sur les visas étudiants britanniques. Vérifié en novembre 2026 à partir de pages publiques : confirmez chaque étape sur GOV.UK.", "Important : visas étudiants", "Depuis le 26 mars 2026, le Royaume-Uni refuse les nouvelles demandes de visa étudiant déposées depuis l’étranger par les ressortissants du Cameroun, de l’Afghanistan, du Myanmar et du Soudan. C’est ce qu’on appelle le « visa brake » (frein aux visas). Il n’annule pas les visas déjà accordés et ne touche pas les personnes déjà au Royaume-Uni. La Haute Cour a rejeté les recours contre cette mesure en 2026, et un article indique qu’elle durera au moins 18 mois. Ne versez pas d’acompte à une école britannique et ne payez pas de frais de visa étudiant avant d’avoir consulté GOV.UK.", "Le ministère de l’Intérieur indique que la mesure sera réexaminée régulièrement et pourra être prolongée, modifiée ou levée. Elle concerne les visas étudiants, pas les visas de visiteur standard.", "Visa de visiteur standard", "Réunir vos documents", "Préparez un passeport valide au-delà de votre voyage, des relevés bancaires ou fiches de paie couvrant 6 mois, les détails d’hébergement et de voyage, et des preuves d’attaches au Cameroun. Ajoutez une lettre d’invitation si vous logez chez quelqu’un.", "Faire la demande en ligne sur GOV.UK", "Remplissez la demande de visa de visiteur standard sur GOV.UK et payez les frais. Vous pouvez faire la demande jusqu’à 3 mois avant votre voyage.", "Réserver votre rendez-vous biométrique", "Prenez rendez-vous au centre de réception des demandes de visa du Royaume-Uni à Yaoundé, géré par VFS Global, pour donner vos empreintes et votre photo.", "Vous présenter et déposer", "Apportez votre passeport, la confirmation de rendez-vous et vos documents, et arrivez en avance.", "Attendre la décision", "Ne payez pas de billets d’avion avant d’avoir le visa. Vérifiez les informations du visa quand vous récupérez votre passeport.", "À savoir", "Les sources ne s’accordent pas sur l’ouverture d’un centre de visas britannique à Douala : consultez VFS Global pour connaître les centres en service.", "Pour le centre de Yaoundé, consultez la section « Faire sa demande depuis le Cameroun ».", "Sources (visa britannique)", "Visa brake announcement (GOV.UK)", "High Court judgment summary, August 2026 (judiciary.uk)", "High Court upholds the visa brake (Free Movement)", "Visiting the UK: documents and steps (University of Huddersfield factsheet)", "UK visa services move to VFS Global (Newswatch Cameroon)", "Visa australien depuis le Cameroun", "Un guide court sur le visa de visiteur (sous-classe 600) et le visa étudiant (sous-classe 500) de l’Australie pour les demandeurs du Cameroun. Vérifié en novembre 2026 à partir de pages publiques : confirmez chaque étape sur le site du ministère de l’Intérieur australien (Home Affairs). Aucune interdiction visant spécialement le Cameroun n’a été trouvée, mais les visas étudiants font l’objet d’un contrôle très strict.", "Visa de visiteur (sous-classe 600)", "Choisir votre catégorie", "Choisissez la catégorie qui correspond à votre voyage : tourisme, famille avec garant, visiteur d’affaires ou voyageur fréquent. Faites la demande en ligne depuis l’extérieur de l’Australie.", "Réunir vos documents", "Préparez un passeport valide, une photo, des preuves de fonds, la preuve que votre séjour est temporaire (emploi, famille, biens ou études) et votre programme de voyage. Ajoutez les coordonnées de votre hôte si un proche en Australie vous invite.", "Faire la demande via ImmiAccount", "Créez un compte ImmiAccount, remplissez la demande, téléversez vos documents et payez. Téléversez tout dès le dépôt, car des documents manquants peuvent retarder ou faire échouer la demande.", "Examen médical et biométrie si demandés", "Le ministère peut demander un examen médical ou des données biométriques, en général avec un délai court. Nous n’avons pas pu confirmer l’existence d’un centre biométrique au Cameroun : consultez les pages de VFS Global pour l’Australie.", "Attendre avant de réserver", "N’achetez pas de billets non remboursables avant d’avoir le visa. Les délais de traitement varient selon la catégorie, de quelques jours à plusieurs semaines.", "Visa étudiant (sous-classe 500)", "Obtenir votre confirmation d’inscription (CoE)", "Acceptez une offre d’un établissement australien agréé et obtenez votre CoE.", "Souscrire l’assurance santé OSHC", "L’OSHC est obligatoire pendant toute la durée du visa. Vous avez besoin de la confirmation de la police avant de faire la demande.", "Préparer vos preuves financières", "Montrez que vous avez de quoi payer la scolarité, les frais de vie et le voyage avec des relevés bancaires, un prêt, une lettre de bourse ou une lettre d’un garant. Les montants exigés changent : vérifiez auprès de Home Affairs.", "Préparer vos réponses « Genuine Student »", "Expliquez pourquoi vous voulez suivre cette formation, pourquoi en Australie et comment elle s’intègre à vos projets dans votre pays. Les agents examinent aussi si des formations similaires existent près de chez vous.", "Test d’anglais, casier judiciaire et traductions", "Ajoutez votre résultat de test d’anglais et un certificat de police. Les documents qui ne sont pas en anglais doivent être traduits par un traducteur agréé NAATI.", "Faire la demande, puis suivre le dossier", "Faites la demande via ImmiAccount. Si Home Affairs demande des données biométriques ou un examen médical, faites-les rapidement.", "À savoir", "Les refus de visas étudiants sont à leur plus haut niveau en dix ans : le taux de refus a atteint 24,2 % en juin 2026. Selon la presse, les frais de demande sont élevés et non remboursables. Vérifiez le montant actuel sur le site de Home Affairs.", "En novembre 2026, le gouvernement australien a ouvert une consultation sur des réformes du critère « Genuine Student » et des exigences financières : ces règles pourraient donc changer bientôt.", "Les titulaires d’un visa de visiteur ne peuvent généralement pas demander un visa étudiant depuis l’Australie : ne prévoyez donc pas de changer de visa après votre arrivée.", "Sources (visa australien)", "Student visa refusal rate hits 10-year high (ABC News)", "Consultation on Genuine Student test and financial rules (ICEF Monitor)", "Visitor visa streams (Think Higher)", "Student visa rules for onshore applicants (Think Higher)", "Student visa requirements guide (Asia Pacific Group)", "Australian biometric collection centres in Sub-Saharan Africa (African Business)", "Mises à jour", "Changements datés qui touchent les demandes de visa depuis le Cameroun, du plus récent au plus ancien. Chaque entrée renvoie à sa source. Confirmez toujours sur le site officiel.", "Afficher les mises à jour pour", "Toutes les destinations", "Espace Schengen", "Royaume-Uni", "États-Unis", "Canada", "Australie", "Modèles de lettres", "Choisissez un modèle, copiez-le ou téléchargez-le, puis remplacez tout ce qui est entre crochets par vos propres informations. Vérifiez ce que demande votre ambassade avant de l’envoyer.", "Modèle", "Lettre de prise en charge", "Lettre d’invitation", "Demande de congé", "Lettre explicative", "Ces modèles sont généraux. Les ambassades peuvent exiger un format précis, et chaque affirmation de votre lettre doit être vraie.", "Modèles de messages", "Des messages prêts à envoyer à vos clients. Choisissez-en un, remplacez les mots entre crochets, puis copiez-le ou ouvrez-le dans WhatsApp.", "Message", "Document manquant", "Document reçu", "Document à corriger", "Détails du rendez-vous", "Paiement reçu", "Dossier déposé", "Passeport prêt", "Visa refusé", "Gardez des messages courts et clairs. Ne demandez jamais à un client un mot de passe, un numéro de carte ou un code PIN.", "Conception de la liste de contrôle", "Modèle de données", "Table", "Contenu", "clients", "Nom comme sur le passeport, nationalité, date de naissance, numéro et expiration du passeport, profession, contacts", "applications", "Un client, une destination, un type de visa, des dates de voyage, un motif, un statut", "requirements", "Un document demandé par une ambassade, avec ses conditions, ses règles de format et un lien vers la source", "documents", "Le fichier conservé : type, dates de délivrance et d’expiration, nombre de copies, original ou copie", "application_documents", "Relie une exigence au document qui la satisfait, avec un statut", "Les règles comme données", "Les exigences changent souvent : gardez-les dans un fichier de données plutôt que dans le code. Chaque règle enregistre sa source et la date de sa dernière vérification.", "Validation", "Automatique : validité du passeport par rapport aux dates de voyage, type et taille des fichiers, dimensions des photos, documents expirés, orthographe des noms d’un document à l’autre.", "Recoupements : les dates de l’hôtel et du vol correspondent à la demande.", "Contrôle humain : un agent approuve ou rejette chaque document en indiquant la raison.", "Flux de travail", "Chaque exigence passe par : non commencée, téléversée, en cours de vérification, approuvée ou rejetée, déposée. La demande passe par : collecte des documents, prête à déposer, rendez-vous pris, déposée, décision, passeport rendu.", "Notes pratiques", "Chiffrez les fichiers stockés, car les passeports sont sensibles.", "Autorisez le téléversement par appareil photo du téléphone et par un agent au nom du client.", "Envoyez des rappels par WhatsApp et SMS, ainsi que par e-mail.", "Préparez un dossier final dans l’ordre exigé par l’ambassade, avec un historique de qui a modifié quoi.", "Maintenance des règles", "Les exigences des ambassades changent sans préavis. Une règle n’est utile que si quelqu’un la tient à jour.", "Noter la source", "Chaque règle conserve la page de l’ambassade ou du centre de visas d’où elle vient, et la date de sa dernière vérification.", "Vérifier selon un calendrier", "Contrôlez les destinations les plus demandées chaque semaine, et les autres chaque mois. Revérifiez avant la haute saison.", "Guetter les changements", "Abonnez-vous aux avis des ambassades, suivez les pages officielles et notez les changements signalés par les clients après un rendez-vous.", "Mettre à jour et tester", "Modifiez la règle dans le fichier de données, essayez quelques cas types (par exemple salarié, indépendant, mineur) et faites vérifier par une deuxième personne.", "Dater et informer", "Changez la date de vérification, notez ce qui a changé et prévenez les agents pour corriger les dossiers en cours.", "Ce que contient chaque règle", "Champ", "Exemple", "id", "emp-letter", "name", "Attestation de travail et 3 derniers bulletins de paie", "when", "Les conditions d’application de la règle, par exemple emploi = salarié", "source", "Un lien vers la page de l’ambassade ou du centre de visas", "verified", "La date de la dernière vérification de la règle", "owner", "Le membre de l’équipe chargé de la tenir à jour", "Règles anciennes", "Une règle non vérifiée depuis plus de 60 jours devrait s’afficher comme « à vérifier » pour les agents, et les clients devraient voir un rappel de confirmer auprès de l’ambassade.", "Fichiers de données d’exemple", "Ces fichiers reprennent la structure des règles de la liste de contrôle, afin qu’un futur système puisse les réutiliser. Tout ce qu’ils contiennent est inventé.", "Règles", "Une entrée par exigence, avec ses conditions, sa source et sa date de dernière vérification.", "Clients", "Une entrée par voyageur. N’utilisez que des valeurs inventées.", "Dossiers", "Une entrée par dossier, avec le statut de chaque exigence.", "Architecture du système", "Lisez de haut en bas. Chaque service peut être construit, testé et mis à l’échelle séparément.", "Utilisateurs", "Client", "Agent", "Administrateur", "Interface", "Application web et mobile, en anglais et en français", "Tableau de bord des agents", "Éditeur de règles", "Passerelle d’API", "Connexion, rôles et limites de requêtes", "Services", "Liste de contrôle et règles", "Documents et validation", "Dossiers et statuts", "Paiements", "Notifications", "Données", "Base de données : clients, dossiers, règles", "Stockage de fichiers chiffré : passeports et scans", "Journal d’audit", "Partenaires connectés", "Centres de visas et ambassades", "Passerelles de mobile money et de cartes", "Fournisseurs WhatsApp, SMS et e-mail", "Fournisseurs de vols, d’hôtels et d’assurances", "Dans la première version, ne construisez que les services de liste de contrôle, de documents et de dossiers, et ajoutez le reste plus tard.", "Feuille de route", "Un plan par étapes, de ce guide jusqu’à un système opérationnel. L’ordre peut changer à mesure que vous découvrez les besoins des clients.", "Maintenant : ce site de connaissances", "Terminé", "Ce guide avec la démonstration de liste de contrôle, les calculateurs et les données d’exemple. Il est statique, gratuit à héberger et ne contient aucune donnée client.", "Ensuite : des données de liste réelles", "Prochaine étape", "Ajoutez des destinations, faites vérifier et dater chaque règle par votre équipe et notez la source officielle de chacune.", "Pilote : une seule procédure de visa", "Prévu", "Construisez le serveur pour une seule procédure, par exemple la France depuis le Cameroun, avec comptes, téléversements chiffrés et vérification par un agent.", "Croissance : paiements et suivi", "Prévu", "Ajoutez les paiements par mobile money et carte, les mises à jour WhatsApp et SMS et le suivi des rendez-vous.", "Expansion : plus de procédures et de partenaires", "Prévu", "Ajoutez des destinations, des connexions avec des partenaires, des rapports pour votre équipe et la vente de vols, d’hôtels et d’assurances.", "Chaque étape se termine par un bilan : ce qui a fonctionné, ce qui a posé problème aux clients et ce qu’il faut changer avant de continuer.", "Modèle économique", "Commissions des fournisseurs, frais de service, marges, publicité et programmes de fidélité. La liste de contrôle vend aussi : quand une réservation de vol ou une assurance manque, le système la propose. La préparation des documents devient ainsi une source de revenus et le parcours est plus fluide pour les clients.", "Publier ceci sur GitHub", "Créez un dépôt et téléversez ce fichier sous le nom", "index.html", "à la racine.", "Ouvrez", "Settings", ", puis", "Pages", ".", "Sous", "Build and deployment", ", choisissez", "Deploy from a branch", ", sélectionnez", "main", "et", "/ (root)", ", puis enregistrez.", "Après une minute, le site est en ligne à l’adresse", "https://your-username.github.io/your-repo/", ".", "GitHub Pages n’héberge que des fichiers statiques. N’utilisez jamais ce site pour collecter de vrais passeports ou des données clients. Cela demandera plus tard un serveur sécurisé.", "À propos", "Nous sommes basés à Yaoundé, au Cameroun, avec 16 ans d’expérience dans l’informatique. Nous mettons cette expérience au service d’outils qui rendent la préparation des documents de visa plus claire et mieux organisée.", "Lieu", "Yaoundé, Cameroun", "Expérience", "16 ans dans l’informatique", "Nous sommes un service indépendant. Nous ne sommes ni une ambassade, ni un centre de visas, ni un service de l’État, et nous ne décidons pas de l’octroi d’un visa.", "Services", "Ce que nous pouvons faire pour vous. Les prix sont donnés sur demande, car ils dépendent de la destination et du dossier.", "Service", "Ce que cela couvre", "Prix", "Revue de la liste de contrôle", "Nous vérifions vos documents avec la liste de contrôle avant le rendez-vous.", "Sur demande", "Remplissage du formulaire", "Nous remplissons le formulaire à partir de votre profil et le comparons avec votre passeport.", "Sur demande", "Prise de rendez-vous", "Nous réservons votre créneau au centre de visas ou à l’ambassade via le site officiel.", "Sur demande", "Assurance voyage", "Une couverture conforme aux exigences minimales de la destination.", "Sur demande", "Réservations de vol et d’hôtel", "Des réservations dont les dates correspondent à votre dossier et aux exigences de l’ambassade.", "Sur demande", "Traduction et légalisation", "Nous coordonnons la traduction certifiée et la légalisation des documents.", "Sur demande", "Suivi du dossier", "Des mises à jour par WhatsApp, SMS ou e-mail jusqu’au retour de votre passeport.", "Sur demande", "Nous préparons et vérifions votre dossier. Seule l’ambassade décide d’accorder le visa, et aucune agence ne peut promettre l’obtention.", "FAQ et contact", "Garantissez-vous l’obtention de mon visa ?", "Non. Seule l’ambassade décide d’accorder le visa. Nous vous aidons à préparer un dossier complet et correct.", "Combien de temps faut-il pour obtenir un visa ?", "Cela dépend de la destination, de la saison et de votre dossier. Utilisez le planificateur de calendrier et ajustez les délais pour votre centre.", "Puis-je téléverser mes documents ici ?", "Non. Ce site est un guide et une démonstration. Il ne collecte ni ne conserve de passeports ou d’autres documents.", "La liste de contrôle est-elle officielle ?", "Non. Elle utilise des règles d’exemple pour apprendre. Confirmez toujours les exigences auprès de l’ambassade ou du centre de visas.", "Puis-je payer les frais de visa par mobile money ?", "Cela dépend du centre. Chacun fixe ses moyens de paiement : consultez sa page de paiement avant de vous organiser.", "Que faire si mon visa est refusé ?", "Lisez la lettre de refus, corrigez les motifs indiqués et déposez une nouvelle demande avec de nouveaux justificatifs. Consultez la section sur les motifs de refus.", "Dois-je faire traduire mes documents ?", "Souvent oui, par une traduction certifiée ou assermentée, quand un document n’est pas rédigé dans une langue acceptée par l’ambassade. Demandez-lui quelles langues elle accepte.", "Ai-je besoin d’une assurance voyage ?", "Pour un visa Schengen, oui. Les autres destinations varient : consultez la liste de contrôle et la page de l’ambassade.", "Une autre question ?", "Envoyez-la nous sur WhatsApp.", "Confidentialité et données", "Ce site est un guide et une démonstration. Voici ce qu’il fait de vos informations.", "Il ne collecte pas vos informations. Il n’y a ni compte, ni formulaire qui envoie des données, ni script de suivi. Comme tout site, son hébergeur peut conserver des journaux de visite ordinaires.", "Vos choix de liste sont enregistrés uniquement dans votre navigateur, sur votre appareil. Appuyez sur « Recommencer » ou effacez les données de votre navigateur pour les supprimer.", "La vérification du passeport, l’estimateur de coûts et le planificateur de calendrier ne conservent pas ce que vous saisissez.", "Les boutons de copie et WhatsApp ne partagent que le texte de la liste affichée, jamais vos documents.", "Les liens vers d’autres sites ouvrent des pages que nous ne contrôlons pas.", "Pour le futur système", "Quand de vrais documents de clients seront traités, il faudra un stockage chiffré, une durée de conservation claire, des accès limités par rôle et le consentement du client. Cette démonstration n’a rien de tout cela : ne l’utilisez jamais pour de vrais dossiers de clients."],
+FRR=[["Passeport valide au moins 3 mois après la date de retour", "Deux pages vierges. Certains pays exigent 6 mois : vérifiez."], ["Formulaire de demande rempli et signé", "Les noms doivent correspondre exactement au passeport."], ["Photos d’identité récentes", "Fond clair uni, format adapté à la destination."], ["Reçu de paiement des frais de visa", "Joignez le reçu de paiement."], ["Relevés bancaires des 6 derniers mois", "Montrent les fonds disponibles pour tout le séjour."], ["Attestation de travail et 3 derniers bulletins de paie", "Indique le poste, le salaire et les dates de congé accordées."], ["Registre de commerce et documents fiscaux", "Prouvent que l’activité est en cours."], ["Attestation de scolarité", "Montre que l’étudiant est inscrit et en congé pendant le voyage."], ["Lettre du garant, copie de sa pièce d’identité et ses relevés bancaires", "Indique qui paie et son lien avec vous."], ["Acte de naissance et autorisation des deux parents", "Copies certifiées ; lettres d’autorisation signées."], ["Page de confirmation du formulaire en ligne (DS-160)", "Imprimez la page avec le code-barres."], ["Confirmation du rendez-vous d’entretien", "À apporter avec votre passeport."], ["Référence de la demande en ligne", "Soumise sur le site officiel du gouvernement britannique."], ["Confirmation du rendez-vous biométrique", "Empreintes digitales et photo au centre de visas."], ["Assurance voyage pour l’espace Schengen", "Couverture médicale minimale de 30 000 €."], ["Référence de la demande en ligne (ImmiAccount)", "Déposée en ligne via le compte ImmiAccount du gouvernement australien."], ["Réservation de vol aller-retour", "Les dates doivent correspondre à la demande."], ["Justificatif d’hébergement", "Réservation d’hôtel ou adresse de l’hôte pour chaque nuit."], ["Itinéraire de voyage", "Programme jour par jour des lieux visités."], ["Lettre d’invitation de l’entreprise hôte", "Objet, dates et qui prend en charge les frais."], ["Justificatif de l’objet professionnel", "Ordre du jour de la réunion ou inscription à la conférence."], ["Lettre d’admission ou d’acceptation", "Délivrée par l’école ou l’université."], ["Preuve de paiement des frais de scolarité", "Reçu ou relevé de l’établissement."], ["Relevés de notes et diplômes", "Copies certifiées ; traduites si elles ne sont pas en anglais ou en français."], ["Formulaire I-20 et reçu des frais SEVIS", "Délivrés par l’établissement américain."], ["Lettre d’invitation de votre proche", "Son adresse, son statut et son lien avec vous."], ["Copie de la pièce d’identité ou du titre de séjour de l’hôte", "Montre le statut légal de l’hôte."], ["Preuve du lien de parenté", "Acte de naissance ou de mariage."], ["Billet de poursuite vers votre destination finale", "Montre que vous partez pendant la période de transit."], ["Visa pour la destination finale", "Si ce pays en exige un."], ["Preuves d’attaches au Cameroun", "Emploi, famille, biens ou études qui montrent que vous reviendrez."], ["Confirmation d’inscription (CoE)", "Délivrée par un établissement australien habilité à accueillir des étudiants étrangers."], ["Assurance santé pour étudiants étrangers (OSHC)", "Couverture santé pour tout le séjour, en général souscrite avant la demande."], ["Déclaration d’étudiant sincère (Genuine Student)", "Expliquez pourquoi vous voulez suivre cette formation en Australie."]];
+var nodes=[],EN=[],btn=document.getElementById("lang");
+(function(){
+  var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
+    if(!n.nodeValue.trim()||n.parentNode.closest("script,style,pre,#list,#count,#lang,#tools,#pcres,#cres,#tres,#ready,#dl,#clinks,#lbtns,#search,#ulist,#mbtns,#warn,#qres,#idays,#ibtns,#ipreview,#install"))return NodeFilter.FILTER_REJECT;
+    return NodeFilter.FILTER_ACCEPT}});
+  while(w.nextNode()){nodes.push(w.currentNode);EN.push(w.currentNode.nodeValue)}
+})();
+function setLang(l){
+  L=l;
+  nodes.forEach(function(n,i){
+    if(l==="fr"&&FR.length===nodes.length){var m=EN[i].match(/^(\s*)([\s\S]*?)(\s*)$/);n.nodeValue=m[1]+FR[i]+m[3]}
+    else n.nodeValue=EN[i];
+  });
+  document.documentElement.lang=l;
+  document.title=l==="fr"?"Plateforme visa et voyage : comment ça marche":"Visa Travel Platform: how it works";
+  btn.textContent=l==="fr"?"English":"Français";
+  btn.lang=l==="fr"?"en":"fr";
+  try{localStorage.setItem("lang",l)}catch(e){}
+  build(true);
+}
+btn.addEventListener("click",function(){setLang(L==="fr"?"en":"fr")});
+var saved=null;try{saved=localStorage.getItem("lang")}catch(e){}
+var start=saved||((navigator.language||"").slice(0,2)==="fr"?"fr":"en");
+if(start==="fr")setLang("fr");
+
+function ics(rows){
+  var fr=L==="fr",pad=function(n){return(n<10?"0":"")+n},
+  ds=function(d){return d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())},
+  now=new Date(),
+  stamp=now.getUTCFullYear()+pad(now.getUTCMonth()+1)+pad(now.getUTCDate())+"T"+pad(now.getUTCHours())+pad(now.getUTCMinutes())+pad(now.getUTCSeconds())+"Z",
+  esc=function(t){return t.replace(/[\\;,]/g,"\\$&")},
+  out=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Visa Travel Platform//EN","CALSCALE:GREGORIAN"];
+  rows.forEach(function(r,i){
+    var end=new Date(r[0].getFullYear(),r[0].getMonth(),r[0].getDate()+1);
+    out.push("BEGIN:VEVENT","UID:"+stamp+"-"+i+"@visa-guide","DTSTAMP:"+stamp,
+      "DTSTART;VALUE=DATE:"+ds(r[0]),"DTEND;VALUE=DATE:"+ds(end),
+      "SUMMARY:"+esc((fr?"Visa : ":"Visa: ")+r[1]),
+      "BEGIN:VALARM","ACTION:DISPLAY","DESCRIPTION:"+esc(r[1]),"TRIGGER:-P1D","END:VALARM","END:VEVENT");
+  });
+  out.push("END:VCALENDAR");
+  var b=new Blob([out.join("\r\n")+"\r\n"],{type:"text/calendar;charset=utf-8"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(b);a.download="visa-timeline.ics";document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
+}
+function cl(){
+  var fr=L==="fr",w=CONTACT.whatsapp.replace(/\D/g,""),m=CONTACT.email,a=document.getElementById("cwa"),b=document.getElementById("cmail");
+  a.hidden=!w;b.hidden=!m;document.getElementById("contact").hidden=!(w||m);
+  if(w){a.href="https://wa.me/"+w;a.textContent="WhatsApp"}
+  if(m){b.href="mailto:"+m;b.textContent=fr?"E-mail":"Email"}
+}
+function dlab(){
+  var fr=L==="fr",t=fr?"Télécharger ":"Download ";
+  document.getElementById("dlr").textContent=t+"rules.json";
+  document.getElementById("dlc").textContent=t+"clients.json";
+  document.getElementById("dla").textContent=t+"applications.json";
+}
+function rulesExport(){
+  var used={};
+  return RULES.map(function(r,i){
+    var id=r.n.toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40),base=id,c=2;
+    while(used[id])id=base+"-"+c++;
+    used[id]=1;
+    var o={id:id,name:{en:r.n,fr:FRR[i][0]},why:{en:r.w,fr:FRR[i][1]},destinations:r.d||"all"};
+    if(r.x)o.exceptDestinations=r.x;
+    if(r.nt)o.exceptPurposes=r.nt;
+    if(r.f)o.when=r.f;
+    o.source=r.u||"";o.verified=r.v||"";o.owner="";
+    return o;
+  });
+}
+var SAMPLE_CLIENTS=[{id:"c001",fullNameAsInPassport:"SAMPLE NAME",nationality:"Cameroon",birthDate:"1990-01-01",passportExpiry:"2031-05-20",occupation:"employed",contacts:{whatsapp:"+237000000000",email:"sample@example.com"}}];
+var SAMPLE_APPS=[{id:"a001",clientId:"c001",destination:"schengen",purpose:"tourist",travelDate:"2027-03-15",status:"collecting_documents",requirements:[{requirementId:"passport-valid",status:"approved"},{requirementId:"bank-statements",status:"uploaded"},{requirementId:"travel-insurance",status:"not_started"}]}];
+function dl(name,obj){
+  var b=new Blob([JSON.stringify(obj,null,2)],{type:"application/json"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
+}
+document.getElementById("dlr").addEventListener("click",function(){dl("rules.json",rulesExport())});
+document.getElementById("dlc").addEventListener("click",function(){dl("clients.json",SAMPLE_CLIENTS)});
+document.getElementById("dla").addEventListener("click",function(){dl("applications.json",SAMPLE_APPS)});
+document.getElementById("prules").textContent=JSON.stringify(rulesExport().slice(0,2),null,2);
+document.getElementById("pclients").textContent=JSON.stringify(SAMPLE_CLIENTS,null,2);
+document.getElementById("papps").textContent=JSON.stringify(SAMPLE_APPS,null,2);
+cl();dlab();
+
+var LET={"sponsor": {"en": ["[Date]", "", "To the Consular Section of the Embassy of [Country]", "[City]", "", "Subject: Sponsorship letter for [applicant full name]", "", "Dear Sir or Madam,", "", "I, [sponsor full name], born on [date of birth], holder of [type and number of ID or passport], living at [address], confirm that I will cover the costs of [applicant full name]’s trip to [country] from [start date] to [end date]. These costs include [travel, accommodation, insurance and living expenses].", "", "I am [relationship to the applicant]. I work as [occupation] at [employer] and earn [monthly income]. I attach my recent bank statements, my proof of employment and a copy of my identity document.", "", "I can be reached at [phone] or [email].", "", "Yours faithfully,", "[Signature]", "[Sponsor full name]"], "fr": ["[Date]", "", "À l’attention de la section consulaire de l’ambassade de [pays]", "[Ville]", "", "Objet : Lettre de prise en charge pour [nom complet du demandeur]", "", "Madame, Monsieur,", "", "Je soussigné(e) [nom complet du garant], né(e) le [date de naissance], titulaire de [type et numéro de la pièce d’identité ou du passeport], demeurant à [adresse], atteste prendre en charge les frais du voyage de [nom complet du demandeur] en [pays], du [date de début] au [date de fin]. Ces frais comprennent [transport, hébergement, assurance et dépenses courantes].", "", "Je suis [lien avec le demandeur]. Je travaille comme [profession] chez [employeur] et je perçois [revenu mensuel]. Je joins mes relevés bancaires récents, mon attestation de travail et une copie de ma pièce d’identité.", "", "Je reste joignable au [téléphone] ou à [e-mail].", "", "Veuillez agréer, Madame, Monsieur, l’expression de mes salutations distinguées.", "[Signature]", "[Nom complet du garant]"]}, "invitation": {"en": ["[Date]", "", "To the Consular Section of the Embassy of [Country]", "[City]", "", "Subject: Invitation for [guest full name]", "", "Dear Sir or Madam,", "", "I, [host full name], born on [date of birth], living at [address in the destination country], invite [guest full name], born on [date of birth], passport number [number], to visit me from [start date] to [end date]. The purpose of the visit is [family visit / tourism / business meeting].", "", "[Guest] is my [relationship]. During the stay, they will stay at [address or hotel]. [I will / The guest will] cover the costs of the trip.", "", "I attach a copy of my [residence permit / ID] and proof of my address. [Guest] will return to [home country] on [return date], where they [work / study].", "", "You can reach me at [phone] or [email].", "", "Yours faithfully,", "[Signature]", "[Host full name]"], "fr": ["[Date]", "", "À l’attention de la section consulaire de l’ambassade de [pays]", "[Ville]", "", "Objet : Invitation de [nom complet de l’invité]", "", "Madame, Monsieur,", "", "Je soussigné(e) [nom complet de l’hôte], né(e) le [date de naissance], demeurant à [adresse dans le pays de destination], invite [nom complet de l’invité], né(e) le [date de naissance], titulaire du passeport n° [numéro], à me rendre visite du [date de début] au [date de fin]. Le motif de la visite est [visite familiale / tourisme / réunion d’affaires].", "", "[L’invité] est mon/ma [lien de parenté]. Pendant son séjour, il/elle logera à [adresse ou hôtel]. [Je prendrai / L’invité prendra] en charge les frais du voyage.", "", "Je joins une copie de mon [titre de séjour / pièce d’identité] et un justificatif de domicile. [L’invité] retournera à [pays d’origine] le [date de retour], où il/elle [travaille / étudie].", "", "Vous pouvez me joindre au [téléphone] ou à [e-mail].", "", "Veuillez agréer, Madame, Monsieur, l’expression de mes salutations distinguées.", "[Signature]", "[Nom complet de l’hôte]"]}, "leave": {"en": ["[Date]", "", "[Manager’s name]", "[Company]", "", "Subject: Leave request from [start date] to [end date]", "", "Dear [manager’s name],", "", "I, [full name], [position], would like to request leave from [start date] to [end date], a total of [number] working days, to travel to [country] for [tourism / a family visit / business]. I will return to work on [date of return].", "", "I need an employment and leave letter to support my visa application. I would be grateful if the letter could state my position, my salary, the date I joined the company and the approved leave dates.", "", "Thank you for your consideration.", "", "Yours sincerely,", "[Full name]"], "fr": ["[Date]", "", "[Nom du responsable]", "[Entreprise]", "", "Objet : Demande de congé du [date de début] au [date de fin]", "", "Madame, Monsieur [nom du responsable],", "", "Je soussigné(e) [nom complet], [poste], sollicite un congé du [date de début] au [date de fin], soit [nombre] jours ouvrés, afin de me rendre en [pays] pour [tourisme / visite familiale / affaires]. Je reprendrai mon travail le [date de reprise].", "", "J’ai besoin d’une attestation de travail et de congé pour appuyer ma demande de visa. Je vous serais reconnaissant(e) d’y indiquer mon poste, mon salaire, ma date d’entrée dans l’entreprise et les dates de congé accordées.", "", "Je vous remercie de votre attention.", "", "Cordialement,", "[Nom complet]"]}, "cover": {"en": ["[Date]", "", "To the Consular Section of the Embassy of [Country]", "[City]", "", "Subject: Visa application, [visa type], [applicant full name]", "", "Dear Sir or Madam,", "", "I, [full name], born on [date] in [place], passport number [number], am applying for a [tourist / business / family visit] visa to [country] for the period from [start date] to [end date].", "", "Purpose of my trip: [short explanation]. I will stay at [accommodation]. My trip is paid for by [myself / a sponsor].", "", "Ties to Cameroon: I work as [occupation] at [employer] since [year], and I [family, property or studies]. I will return on [return date] to resume my work.", "", "Enclosed documents: [list of documents].", "", "Please contact me at [phone] or [email] if you need more information.", "", "Yours faithfully,", "[Signature]", "[Full name]"], "fr": ["[Date]", "", "À l’attention de la section consulaire de l’ambassade de [pays]", "[Ville]", "", "Objet : Demande de visa [type de visa], [nom complet du demandeur]", "", "Madame, Monsieur,", "", "Je soussigné(e) [nom complet], né(e) le [date] à [lieu], titulaire du passeport n° [numéro], sollicite un visa [touristique / d’affaires / de visite familiale] pour [pays], pour la période du [date de début] au [date de fin].", "", "Objet du voyage : [explication courte]. Je logerai à [hébergement]. Mon voyage est financé par [moi-même / un garant].", "", "Attaches au Cameroun : je travaille comme [profession] chez [employeur] depuis [année], et [famille, biens ou études]. Je rentrerai le [date de retour] pour reprendre mon travail.", "", "Pièces jointes : [liste des documents].", "", "Je reste à votre disposition au [téléphone] ou à [e-mail] pour toute information complémentaire.", "", "Veuillez agréer, Madame, Monsieur, l’expression de mes salutations distinguées.", "[Signature]", "[Nom complet]"]}};
+function lt(){
+  if(typeof LET==="undefined")return;
+  var fr=L==="fr",sel=document.getElementById("ltype");
+  document.getElementById("ltext").textContent=LET[sel.value][fr?"fr":"en"].join("\n");
+  document.getElementById("lcopy").textContent=fr?"Copier le texte":"Copy text";
+  document.getElementById("ldl").textContent=fr?"Télécharger (.txt)":"Download (.txt)";
+}
+document.getElementById("ltype").addEventListener("change",lt);
+document.getElementById("lcopy").addEventListener("click",function(){
+  var t=document.getElementById("ltext").textContent,m=document.getElementById("lmsg"),ok=L==="fr"?"Copié":"Copied";
+  function done(){m.textContent=ok;setTimeout(function(){m.textContent=""},2500)}
+  function old(){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");done()}catch(e){}document.body.removeChild(a)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,old)}else old();
+});
+document.getElementById("ldl").addEventListener("click",function(){
+  var sel=document.getElementById("ltype"),b=new Blob([document.getElementById("ltext").textContent+"\n"],{type:"text/plain;charset=utf-8"}),a=document.createElement("a");
+  a.href=URL.createObjectURL(b);a.download=sel.value+"-"+(L==="fr"?"fr":"en")+".txt";document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(function(){URL.revokeObjectURL(a.href)},1000);
+});
+lt();
+
+function fold(t){return t.split("").map(function(c){return c.normalize("NFD").replace(/[\u0300-\u036f]/g,"")}).join("").toLowerCase()}
+function sq(){
+  var q=document.getElementById("q"),box=document.getElementById("sres"),fr=L==="fr";
+  q.placeholder=fr?"Rechercher dans le guide":"Search the guide";
+  q.setAttribute("aria-label",q.placeholder);
+  box.innerHTML="";
+  var v=fold(q.value.trim());
+  if(v.length<2)return;
+  var out=[];
+  document.querySelectorAll("main section").forEach(function(sec,n){
+    var h=sec.querySelector("h2"),title=h?h.textContent:"",raw=sec.textContent.replace(/\s+/g," ").trim(),
+    i=fold(raw).indexOf(v),ti=fold(title).indexOf(v);
+    if(i<0&&ti<0)return;
+    var st=Math.max(0,i-40),end=i+v.length+60,
+    sn=i<0?raw.slice(0,100):(st>0?"… ":"")+raw.slice(st,end)+(end<raw.length?" …":"");
+    out.push({id:sec.id,title:title,sn:sn,rank:ti>=0?0:1,n:n});
+  });
+  if(!out.length){box.textContent=fr?"Aucun résultat.":"No results.";return}
+  out.sort(function(a,b){return a.rank-b.rank||a.n-b.n});
+  var ul=document.createElement("ul");
+  out.slice(0,8).forEach(function(r){
+    var li=document.createElement("li"),a=document.createElement("a"),sp=document.createElement("span");
+    a.href="#"+r.id;a.textContent=r.title;sp.className="sn";sp.textContent=r.sn;
+    li.appendChild(a);li.appendChild(sp);ul.appendChild(li);
+  });
+  box.appendChild(ul);
+}
+document.getElementById("q").addEventListener("input",sq);
+sq();
+
+// Updates list. To add one, put a new line at the top: d (date), dest, t ("news" or "official"), s (source name), u (source link), and en/fr as [title, text].
+var UPD=[
+ {
+  "d": "2026-11-05",
+  "dest": "australia",
+  "t": "news",
+  "s": "Consultation on Genuine Student test and financial rules (ICEF Monitor)",
+  "u": "https://monitor.icef.com/2026/11/amidst-high-visa-refusal-rates-and-falling-commencements-australian-government-opens-consultation-on-reforms-to-genuine-student-test-and-financial-requirements/",
+  "en": [
+   "Australia consults on changes to the Genuine Student test",
+   "The Australian government opened a consultation on reforms to the Genuine Student test and the financial requirements for student visas, after high refusal rates. The rules may change."
+  ],
+  "fr": [
+   "L’Australie consulte sur des changements du critère « Genuine Student »",
+   "Le gouvernement australien a ouvert une consultation sur des réformes du critère « Genuine Student » et des exigences financières pour les visas étudiants, après des taux de refus élevés. Les règles pourraient changer."
+  ]
+ },
+ {
+  "d": "2026-09-09",
+  "dest": "australia",
+  "t": "news",
+  "s": "Student visa refusal rate hits 10-year high (ABC News)",
+  "u": "https://www.abc.net.au/news/2026-09-09/australian-student-visa-refusal-rate-hits-10-year-high/107112426",
+  "en": [
+   "Australian student visa refusals reach a ten-year high",
+   "Home Affairs data reported by ABC News shows the student visa refusal rate rose from 7.9 per cent in June 2016 to 24.2 per cent in June 2026."
+  ],
+  "fr": [
+   "Les refus de visas étudiants australiens atteignent un sommet en dix ans",
+   "Selon les données de Home Affairs rapportées par ABC News, le taux de refus des visas étudiants est passé de 7,9 % en juin 2016 à 24,2 % en juin 2026."
+  ]
+ },
+ {
+  "d": "2026-08-12",
+  "dest": "uk",
+  "t": "official",
+  "s": "High Court judgment summary, August 2026 (judiciary.uk)",
+  "u": "https://www.judiciary.uk/wp-content/uploads/2026/08/Sadat-Farah-ors-v-SSHD-Press-Summary.pdf",
+  "en": [
+   "UK High Court dismisses challenges to the student visa brake",
+   "The High Court dismissed two legal challenges to the Student Visa Brake, which makes nationals of Cameroon, Afghanistan, Myanmar and Sudan ineligible for student entry clearance. The brake stays in force."
+  ],
+  "fr": [
+   "La Haute Cour britannique rejette les recours contre le frein aux visas étudiants",
+   "La Haute Cour a rejeté deux recours contre le « Student Visa Brake », qui rend les ressortissants du Cameroun, de l’Afghanistan, du Myanmar et du Soudan inéligibles à un visa d’entrée comme étudiant. La mesure reste en vigueur."
+  ]
+ },
+ {
+  "d": "2026-08-01",
+  "dest": "usa",
+  "t": "news",
+  "s": "US visa services moved to regional hubs (Mondaq)",
+  "u": "https://www.mondaq.com/unitedstates/work-visas/1822758/major-visa-shift-us-realigns-visa-services-in-africa-to-regional-hubs",
+  "en": [
+   "Yaoundé becomes a regional US visa hub",
+   "From 1 August 2026 the US moved routine visa services in Africa to regional hubs. Yaoundé is one of the hubs, so applicants in Cameroon still apply there."
+  ],
+  "fr": [
+   "Yaoundé devient un pôle régional de visas américains",
+   "Depuis le 1er août 2026, les États-Unis ont regroupé les services de visas courants en Afrique dans des pôles régionaux. Yaoundé en fait partie : les demandeurs au Cameroun y déposent donc toujours leur demande."
+  ]
+ },
+ {
+  "d": "2026-07-09",
+  "dest": "schengen",
+  "t": "news",
+  "s": "Full-payment rule for private schools (Cameroon Desk, in French)",
+  "u": "https://www.cameroondesks.com/2026/08/visa-etudiant-france-paiement-integral-camerounais-blo.html",
+  "en": [
+   "Campus France Cameroon: full payment for private schools (reported)",
+   "A Cameroonian news site reports that students admitted to private higher-education schools in France must show full payment of one year’s tuition, or the amount in a blocked account, when they file at TLScontact. Public universities were reported as not affected. Confirm with Campus France Cameroon."
+  ],
+  "fr": [
+   "Campus France Cameroun : paiement intégral pour les écoles privées (signalé)",
+   "Un site d’actualité camerounais rapporte que les étudiants admis dans des établissements privés d’enseignement supérieur en France doivent prouver le paiement intégral d’une année de scolarité, ou la somme sur un compte bloqué, lors du dépôt chez TLScontact. Les universités publiques ne seraient pas concernées. Confirmez auprès de Campus France Cameroun."
+  ]
+ },
+ {
+  "d": "2026-05-01",
+  "dest": "canada",
+  "t": "official",
+  "s": "Service charges, Canada Visa Application Centre in Cameroon (VFS Global)",
+  "u": "https://visa.vfsglobal.com/cmr/en/can/service-charges",
+  "en": [
+   "New service charges at the Canada visa centre",
+   "The service charges of the Canada Visa Application Centre in Cameroon changed on 1 May 2026. Check the current charges before quoting a client."
+  ],
+  "fr": [
+   "Nouveaux frais de service au centre de visas du Canada",
+   "Les frais de service du centre de réception des demandes de visa du Canada au Cameroun ont changé le 1er mai 2026. Vérifiez les frais en vigueur avant de donner un prix à un client."
+  ]
+ },
+ {
+  "d": "2026-03-26",
+  "dest": "uk",
+  "t": "official",
+  "s": "Visa brake announcement (GOV.UK)",
+  "u": "https://www.gov.uk/government/news/visa-brake-imposed-on-4-countries-after-widespread-visa-abuse",
+  "en": [
+   "UK stops new student visas for Cameroonians",
+   "From 26 March 2026 the UK refuses Student visa applications made from outside the UK by nationals of Cameroon, Afghanistan, Myanmar and Sudan. It does not cancel existing visas. Visitor visas are not covered."
+  ],
+  "fr": [
+   "Le Royaume-Uni stoppe les nouveaux visas étudiants pour les Camerounais",
+   "Depuis le 26 mars 2026, le Royaume-Uni refuse les demandes de visa étudiant déposées depuis l’étranger par les ressortissants du Cameroun, de l’Afghanistan, du Myanmar et du Soudan. Les visas existants ne sont pas annulés. Les visas de visiteur ne sont pas concernés."
+  ]
+ },
+ {
+  "d": "2026-01-21",
+  "dest": "usa",
+  "t": "news",
+  "s": "US immigrant visa pause and Cameroon (Investir au Cameroun, in French)",
+  "u": "https://m.investiraucameroun.com/stopblabla/i/15619/us-halts-immigration-visas-cameroonians-75-country-freeze",
+  "en": [
+   "US immigrant visa pause reported to include Cameroon",
+   "Media reports say Cameroon is on the list of countries where immigrant visa issuance has been paused since 21 January 2026. The same reports say tourist and business visas are not covered."
+  ],
+  "fr": [
+   "Suspension des visas d’immigration américains : le Cameroun signalé",
+   "Selon la presse, le Cameroun figure sur la liste des pays dont la délivrance de visas d’immigration est suspendue depuis le 21 janvier 2026. Les mêmes articles disent que les visas de tourisme et d’affaires ne sont pas concernés."
+  ]
+ },
+ {
+  "d": "2025-12-01",
+  "dest": "schengen",
+  "t": "news",
+  "s": "Germany visa center in Yaoundé (Newswatch Cameroon)",
+  "u": "https://newswatchcameroon.com/?p=2916",
+  "en": [
+   "Germany opens a VFS Global center in Yaoundé",
+   "Press reports say Germany’s new VFS Global application center in Yaoundé opened on 1 December 2025."
+  ],
+  "fr": [
+   "L’Allemagne ouvre un centre VFS Global à Yaoundé",
+   "Selon la presse, le nouveau centre de dépôt VFS Global de l’Allemagne à Yaoundé a ouvert le 1er décembre 2025."
+  ]
+ },
+ {
+  "d": "2025-07-09",
+  "dest": "usa",
+  "t": "news",
+  "s": "US Embassy Yaoundé visa changes (APO Group press release)",
+  "u": "https://futuremedianews.com.na/2025/07/09/cameroon-united-states-u-s-embassy-in-yaounde-announces-changes-to-visa-procedures-and-fees/",
+  "en": [
+   "US Embassy in Yaoundé changes its visa procedures",
+   "The embassy announced in-person interviews for all nonimmigrant visa applicants, and single-entry visas valid for 3 months for most categories."
+  ],
+  "fr": [
+   "L’ambassade des États-Unis à Yaoundé modifie ses procédures de visa",
+   "L’ambassade a annoncé des entretiens en personne pour tous les demandeurs de visas de non-immigrant, et des visas à entrée unique valables 3 mois pour la plupart des catégories."
+  ]
+ },
+ {
+  "d": "2024-12-09",
+  "dest": "uk",
+  "t": "news",
+  "s": "UK visa services move to VFS Global (Newswatch Cameroon)",
+  "u": "https://newswatchcameroon.com/uk-visa-services-in-cameroon-now-accessible-via-vfs-global/",
+  "en": [
+   "UK visa services move to VFS Global in Cameroon",
+   "VFS Global replaced TLScontact as the UK’s provider in Cameroon in December 2024."
+  ],
+  "fr": [
+   "Les visas britanniques passent à VFS Global au Cameroun",
+   "VFS Global a remplacé TLScontact comme prestataire du Royaume-Uni au Cameroun en décembre 2024."
+  ]
+ },
+ {
+  "d": "2024-05-02",
+  "dest": "schengen",
+  "t": "news",
+  "s": "Visa France from Cameroon, 2026 (Les Afriques, in French)",
+  "u": "https://lesafriques.com/2026/09/visa-france-cameroun-demarches-delais-couts-2026/",
+  "en": [
+   "Campus France required before booking a student visa appointment",
+   "Since 2 May 2024, students applying for France from Cameroon must complete the Campus France procedure before booking at TLScontact."
+  ],
+  "fr": [
+   "Campus France exigé avant de prendre rendez-vous pour un visa étudiant",
+   "Depuis le 2 mai 2024, les étudiants qui demandent la France depuis le Cameroun doivent terminer la procédure Campus France avant de prendre rendez-vous chez TLScontact."
+  ]
+ },
+ {
+  "d": "2024-03-23",
+  "dest": "australia",
+  "t": "news",
+  "s": "Australia student visa guide (Immerse Education)",
+  "u": "https://www.immerse.education/study-abroad/how-to-apply-for-study-visa-in-australia",
+  "en": [
+   "Australia: Genuine Student requirement replaces GTE",
+   "Student visa applications lodged on or after 23 March 2024 must meet the Genuine Student requirement, which replaced the Genuine Temporary Entrant test."
+  ],
+  "fr": [
+   "Australie : le critère d’étudiant sincère remplace le GTE",
+   "Les demandes de visa étudiant déposées à partir du 23 mars 2024 doivent satisfaire au critère d’étudiant sincère (Genuine Student), qui a remplacé le test du séjour temporaire sincère (GTE)."
+  ]
+ }
+];
+var UDEST={"schengen": ["Schengen area", "Espace Schengen"], "uk": ["United Kingdom", "Royaume-Uni"], "usa": ["United States", "États-Unis"], "canada": ["Canada", "Canada"], "australia": ["Australia", "Australie"]};
+function ul(){
+  if(typeof UPD==="undefined")return;
+  var fr=L==="fr",box=document.getElementById("ulist"),f=document.getElementById("ufilter").value;
+  box.innerHTML="";
+  UPD.filter(function(x){return f==="all"||x.dest===f}).forEach(function(x){
+    var li=document.createElement("li"),h=document.createElement("div"),b=document.createElement("b"),
+    t1=document.createElement("span"),t2=document.createElement("span"),ti=document.createElement("strong"),p=document.createElement("p"),a=document.createElement("a");
+    var d=pdate(x.d.length===7?x.d+"-01":x.d);
+    b.textContent=d.toLocaleDateString(fr?"fr-FR":"en-GB",x.d.length===7?{month:"long",year:"numeric"}:{day:"numeric",month:"long",year:"numeric"});
+    h.className="uh";t1.className="tag";t1.textContent=UDEST[x.dest][fr?1:0];
+    t2.className="tag"+(x.t==="official"?" done":"");t2.textContent=x.t==="official"?(fr?"Page officielle":"Official page"):(fr?"Presse":"News report");
+    h.appendChild(b);h.appendChild(t1);h.appendChild(t2);
+    var c=fr?x.fr:x.en;ti.textContent=c[0];p.textContent=c[1];
+    a.href=x.u;a.target="_blank";a.rel="noopener";a.textContent=x.s;
+    li.appendChild(h);li.appendChild(ti);li.appendChild(p);li.appendChild(a);box.appendChild(li);
+  });
+}
+document.getElementById("ufilter").addEventListener("change",ul);
+ul();
+
+var MSG={"missing": {"en": ["Hello [first name], this is [your name] from [business].", "To continue your [destination] visa file, we still need: [list of documents].", "Please send clear photos or scans (all four corners visible) before [date]. Thank you!"], "fr": ["Bonjour [prénom], ici [votre nom] de [entreprise].", "Pour continuer votre dossier de visa [destination], il nous manque encore : [liste des documents].", "Merci d’envoyer des photos ou des scans nets (les quatre coins visibles) avant le [date]. Merci !"]}, "received": {"en": ["Hello [first name], we have received your [document].", "We are checking it and will tell you if anything needs to be corrected."], "fr": ["Bonjour [prénom], nous avons bien reçu votre [document].", "Nous le vérifions et vous dirons si quelque chose doit être corrigé."]}, "fix": {"en": ["Hello [first name], we checked your [document].", "Please send it again: [reason, for example photo too dark or name different from the passport].", "Thank you!"], "fr": ["Bonjour [prénom], nous avons vérifié votre [document].", "Merci de le renvoyer : [raison, par exemple photo trop sombre ou nom différent de celui du passeport].", "Merci !"]}, "appt": {"en": ["Hello [first name], your visa appointment is on [date] at [time] at [center].", "Please bring: your passport, [documents]. Arrive 15 minutes early.", "Please reply to confirm that you received this message."], "fr": ["Bonjour [prénom], votre rendez-vous de visa est le [date] à [heure] au [centre].", "Apportez : votre passeport, [documents]. Arrivez 15 minutes en avance.", "Merci de répondre pour confirmer la réception de ce message."]}, "paid": {"en": ["Hello [first name], we have received your payment of [amount] for [service].", "Thank you! Your receipt is attached."], "fr": ["Bonjour [prénom], nous avons bien reçu votre paiement de [montant] pour [service].", "Merci ! Votre reçu est joint."]}, "sent": {"en": ["Hello [first name], your application was submitted on [date].", "The embassy decides, and processing times can change. We will tell you as soon as there is news.", "Please do not book non-refundable travel until you have your passport back."], "fr": ["Bonjour [prénom], votre dossier a été déposé le [date].", "C’est l’ambassade qui décide et les délais peuvent changer. Nous vous informerons dès qu’il y a du nouveau.", "Merci de ne pas réserver de voyage non remboursable avant d’avoir récupéré votre passeport."]}, "ready": {"en": ["Hello [first name], your passport is ready to collect at [place] from [date].", "Please bring [ID / receipt]."], "fr": ["Bonjour [prénom], votre passeport est prêt à être retiré à [lieu] à partir du [date].", "Merci d’apporter [pièce d’identité / reçu]."]}, "refused": {"en": ["Hello [first name], we are sorry: the decision on your application is a refusal.", "Please send us the refusal letter so that we can read the reasons together and discuss the next steps.", "Please do not apply again before we have talked."], "fr": ["Bonjour [prénom], nous sommes désolés : la décision concernant votre dossier est un refus.", "Merci de nous envoyer la lettre de refus afin que nous lisions ensemble les motifs et discutions de la suite.", "Merci de ne pas redéposer de demande avant que nous en ayons parlé."]}};
+function mt(){
+  if(typeof MSG==="undefined")return;
+  var fr=L==="fr",t=MSG[document.getElementById("mtype").value][fr?"fr":"en"].join("\n\n");
+  document.getElementById("mtext").textContent=t;
+  document.getElementById("mcopy").textContent=fr?"Copier le message":"Copy message";
+  var w=document.getElementById("mwa");
+  w.textContent=fr?"Ouvrir dans WhatsApp":"Open in WhatsApp";
+  w.href="https://wa.me/?text="+encodeURIComponent(t);
+}
+document.getElementById("mtype").addEventListener("change",mt);
+document.getElementById("mcopy").addEventListener("click",function(){
+  var t=document.getElementById("mtext").textContent,m=document.getElementById("mmsg"),ok=L==="fr"?"Copié":"Copied";
+  function done(){m.textContent=ok;setTimeout(function(){m.textContent=""},2500)}
+  function old(){var a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();try{document.execCommand("copy");done()}catch(e){}document.body.removeChild(a)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(done,old)}else old();
+});
+mt();
+
+function wn(){
+  var fr=L==="fr",st=state(),w=document.getElementById("warn");
+  if(st.dest==="uk"&&st.type==="student"){
+    w.hidden=false;
+    w.textContent=fr?"Important : depuis le 26 mars 2026, le Royaume-Uni refuse les nouvelles demandes de visa étudiant déposées depuis l’étranger par les ressortissants du Cameroun. Consultez GOV.UK avant de payer des frais ou un acompte à une école.":"Important: since 26 March 2026 the UK refuses new Student visa applications made from outside the UK by nationals of Cameroon. Check GOV.UK before you pay any fee or school deposit.";
+  }else{w.hidden=true;w.textContent=""}
+}
+
+(function(){
+  var d=document.getElementById("menu");
+  if(window.matchMedia&&window.matchMedia("(max-width:800px)").matches)d.open=false;
+  d.addEventListener("click",function(e){
+    if(e.target.tagName==="A"&&window.matchMedia&&window.matchMedia("(max-width:800px)").matches)d.open=false;
+  });
+})();
+
+function rd(){
+  var fr=L==="fr",box=document.getElementById("qres"),qs=document.querySelectorAll("#quiz .qi input"),miss=[];
+  qs.forEach(function(c){if(!c.checked)miss.push(c)});
+  box.innerHTML="";
+  var p=document.createElement("p");p.style.margin="0";p.style.fontWeight="600";
+  if(!miss.length){
+    p.textContent=fr?"Vous semblez prêt à prendre votre rendez-vous. Ce n’est qu’un autotest : c’est l’ambassade qui décide.":"You look ready to book your appointment. This is only a self-check: the embassy decides.";
+    box.appendChild(p);return;
+  }
+  var n=miss.length;
+  p.textContent=fr?n+(n===1?" point à régler avant de déposer votre demande :":" points à régler avant de déposer votre demande :"):n+(n===1?" point to work on before you apply:":" points to work on before you apply:");
+  box.appendChild(p);
+  var ul=document.createElement("ul");
+  miss.forEach(function(c){
+    var li=document.createElement("li"),a=document.createElement("a");
+    a.href="#"+c.getAttribute("data-t");a.textContent=c.parentNode.textContent.trim();
+    li.appendChild(a);ul.appendChild(li);
+  });
+  box.appendChild(ul);
+}
+document.querySelectorAll("#quiz .qi input").forEach(function(c){c.addEventListener("change",rd)});
+rd();
+
+var PLAN={};
+function p2(n){return(n<10?"0":"")+n}
+function dkey(d){return d.getFullYear()+"-"+p2(d.getMonth()+1)+"-"+p2(d.getDate())}
+function itn(){
+  var fr=L==="fr",a=document.getElementById("iarr").value,b=document.getElementById("idep").value,box=document.getElementById("idays"),pv=document.getElementById("ipreview");
+  box.innerHTML="";pv.innerHTML="";
+  document.getElementById("iprint").textContent=fr?"Imprimer l’itinéraire":"Print itinerary";
+  if(!a||!b){box.textContent=fr?"Entrez les dates d’arrivée et de départ pour ajouter votre programme.":"Enter the arrival and departure dates to add your plan.";return}
+  var A=pdate(a),B=pdate(b),n=Math.round((B-A)/864e5)+1;
+  if(n<1||n>90){box.textContent=fr?"Vérifiez les dates (de 1 à 90 jours).":"Check the dates (1 to 90 days).";return}
+  var loc=fr?"fr-FR":"en-GB";
+  for(var i=0;i<n;i++){
+    (function(){
+      var d=new Date(A.getFullYear(),A.getMonth(),A.getDate()+i),k=dkey(d),row=document.createElement("div"),lb=document.createElement("label"),inp=document.createElement("input");
+      row.className="dayrow";lb.textContent=d.toLocaleDateString(loc,{weekday:"short",day:"numeric",month:"short"});
+      inp.type="text";inp.value=PLAN[k]||"";inp.placeholder=fr?"Où vous serez et ce que vous ferez":"Where you will be and what you will do";
+      inp.id="day"+k;lb.htmlFor=inp.id;
+      inp.addEventListener("input",function(){PLAN[k]=inp.value;iprev()});
+      row.appendChild(lb);row.appendChild(inp);box.appendChild(row);
+    })();
+  }
+  iprev();
+}
+function iprev(){
+  var fr=L==="fr",pv=document.getElementById("ipreview"),a=document.getElementById("iarr").value,b=document.getElementById("idep").value;
+  pv.innerHTML="";
+  if(!a||!b)return;
+  var A=pdate(a),B=pdate(b),n=Math.round((B-A)/864e5)+1;
+  if(n<1||n>90)return;
+  var loc=fr?"fr-FR":"en-GB",long={day:"numeric",month:"long",year:"numeric"};
+  function line(l,v){if(!v)return;var p=document.createElement("p"),b2=document.createElement("b");b2.textContent=l+" : ";p.appendChild(b2);p.appendChild(document.createTextNode(v));pv.appendChild(p)}
+  var h=document.createElement("h3");h.textContent=fr?"Programme de voyage":"Travel itinerary";pv.appendChild(h);
+  line(fr?"Voyageur":"Traveler",document.getElementById("iname").value.trim());
+  line("Destination",document.getElementById("idest").value.trim());
+  line("Dates",A.toLocaleDateString(loc,long)+" – "+B.toLocaleDateString(loc,long));
+  line(fr?"Hébergement":"Accommodation",document.getElementById("iacc").value.trim());
+  var t=document.createElement("table"),hr=t.insertRow();
+  [fr?"Date":"Date",fr?"Programme":"Plan"].forEach(function(x){var th=document.createElement("th");th.textContent=x;hr.appendChild(th)});
+  for(var i=0;i<n;i++){
+    var d=new Date(A.getFullYear(),A.getMonth(),A.getDate()+i),r=t.insertRow(),c1=r.insertCell(),c2=r.insertCell();
+    c1.textContent=d.toLocaleDateString(loc,{weekday:"short",day:"numeric",month:"short"});
+    c2.textContent=PLAN[dkey(d)]||"";
+  }
+  pv.appendChild(t);
+  var f=document.createElement("p");f.style.marginTop="12px";f.style.fontSize=".85rem";
+  f.textContent=(fr?"Préparé le ":"Prepared on ")+new Date().toLocaleDateString(loc,long)+(fr?". Voici mon programme de voyage prévu.":". This is my planned itinerary.");
+  pv.appendChild(f);
+}
+["iname","idest","iacc"].forEach(function(x){document.getElementById(x).addEventListener("input",iprev)});
+["iarr","idep"].forEach(function(x){var e=document.getElementById(x);e.addEventListener("change",itn);e.addEventListener("input",itn)});
+document.getElementById("iprint").addEventListener("click",function(){document.body.classList.add("pi");window.print()});
+window.addEventListener("afterprint",function(){document.body.classList.remove("pi")});
+itn();
+
+(function(){
+  if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol)){
+    window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){})});
+  }
+  var ib=document.getElementById("install"),dp=null;
+  window.addEventListener("beforeinstallprompt",function(e){e.preventDefault();dp=e;ib.hidden=false});
+  ib.addEventListener("click",function(){if(!dp)return;dp.prompt();dp=null;ib.hidden=true});
+  window.addEventListener("appinstalled",function(){ib.hidden=true});
+})();
+</script>
+</body>
+</html>

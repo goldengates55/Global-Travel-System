@@ -1,0 +1,10 @@
+{
+  "name": "visa-guide-app",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Android app project for the Visa Travel Platform guide",
+  "scripts": {
+    "prepare-www": "node prepare.js site",
+    "sync": "node prepare.js site && npx cap sync"
+  }
+}

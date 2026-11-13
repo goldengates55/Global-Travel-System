@@ -1,0 +1,8 @@
+{
+  "appId": "cm.visaguide.app",
+  "appName": "Visa Guide",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}
