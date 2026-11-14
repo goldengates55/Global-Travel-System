@@ -1,13 +1,24 @@
 {
-  "name": "Visa Travel Platform",
+  "id": "./index.html",
+  "name": "Visa Guide",
   "short_name": "Visa Guide",
-  "description": "Visa documents, checklists and tools for visa applications from Cameroon. English and French.",
-  "start_url": "./",
+  "description": "Visa checklist, tools and guides for visa applications from Cameroon. English and French. Works offline.",
+  "lang": "en",
+  "dir": "ltr",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#14202b",
-  "theme_color": "#2f3e9e",
-  "lang": "en",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "portrait",
+  "background_color": "#050b24",
+  "theme_color": "#050b24",
+  "categories": [
+    "travel",
+    "productivity"
+  ],
   "icons": [
     {
       "src": "icon-192.png",
