@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>try{var _l=JSON.parse(localStorage.getItem("vg-lic")||"null"),_n=Math.max(Date.now(),+localStorage.getItem("vg-seen")||0);if(!_l||(_l.x&&_n>=_l.x))document.documentElement.classList.add("unlicensed")}catch(e){document.documentElement.classList.add("unlicensed")}</script>
 <script>try{if(localStorage.getItem("vg-lock"))document.documentElement.classList.add("locked")}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -203,9 +204,20 @@ main{display:block}
 #crm h3{margin-top:10px}
 #crm .row .m{flex:1;align-self:center;margin:0}
 #settings .box{display:grid;gap:14px}
-html.locked body>*:not(#lock){visibility:hidden}
+html.locked body>*:not(#lock):not(#lic),html.unlicensed body>*:not(#lock):not(#lic){visibility:hidden}
 #lock{position:fixed;inset:0;z-index:2000;display:none;align-items:center;justify-content:center;padding:24px;background:var(--paper)}
 html.locked #lock{display:flex}
+#lic{position:fixed;inset:0;z-index:2100;display:none;overflow:auto;padding:24px;background:var(--paper)}
+html.unlicensed #lic{display:block}
+#lic .lk2{max-width:420px;margin:0 auto;display:grid;gap:14px}
+.licpc{font:700 2rem/1 ui-monospace,Menlo,monospace;letter-spacing:.12em;text-align:center;padding:14px;border:2px dashed var(--stamp);border-radius:8px;background:var(--card)}
+.licf{display:grid;gap:10px}
+.licf textarea{width:100%;box-sizing:border-box;font:.85rem ui-monospace,Menlo,monospace;padding:10px;border:1px solid var(--stamp);border-radius:8px;background:var(--card);color:var(--ink)}
+.licb{padding:10px 16px;font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1px solid var(--stamp);border-radius:6px;cursor:pointer}
+.licb.go{background:var(--stamp);color:var(--paper)}
+.licrow{display:flex;gap:8px;flex-wrap:wrap}
+.licm{min-height:1.3em;margin:0;color:var(--bad)}.licm.okm{color:var(--ok)}
+#licbar{display:none;margin:0 0 12px;padding:10px 12px;border-left:4px solid var(--bad);background:var(--card);border-radius:0 6px 6px 0}
 #lock .lk{max-width:340px;width:100%;text-align:center;display:grid;gap:14px}
 #lock input{width:100%;padding:14px;font:inherit;font-size:1.4rem;letter-spacing:.4em;text-align:center;border:2px solid var(--stamp);border-radius:8px;background:var(--card);color:var(--ink)}
 #lock button,#aglk button{padding:10px 16px;font:inherit;font-size:.95rem;color:var(--ink);background:var(--paper);border:1px solid var(--stamp);border-radius:6px;cursor:pointer}
@@ -242,6 +254,7 @@ select{border:0;appearance:none;padding:0;font-weight:600}
 <div class="app">
 <main id="main">
 <div id="home">
+<div id="licbar" role="status"></div>
 <p class="tagline">Checklist, tools and guides for visa applications from Cameroon.</p>
 <div id="search"><input type="search" id="q" autocomplete="off"><div id="sres" aria-live="polite"></div></div>
 <div id="cards"></div>
@@ -367,6 +380,8 @@ select{border:0;appearance:none;padding:0;font-weight:600}
 </section>
 
 <section id="schengen"></section>
+
+<section id="licence"></section>
 
 <section id="settings"></section>
 
@@ -1139,7 +1154,7 @@ function lkshow(){
     document.getElementById("lkfb").addEventListener("click",function(){document.getElementById("lkfx").hidden=true});
     document.getElementById("lkfe").addEventListener("click",function(){
       if(!confirm(lkt().fc))return;
-      try{localStorage.clear()}catch(e){}
+      try{var kp={};["vg-phone","vg-lic","vg-seen"].forEach(function(k){var v=localStorage.getItem(k);if(v!==null)kp[k]=v});localStorage.clear();Object.keys(kp).forEach(function(k){localStorage.setItem(k,kp[k])})}catch(e){}
       location.reload();
     });
   }
@@ -1231,12 +1246,211 @@ function afr(){
   });
   el("p",T7.f,"note");
 }
+var LIC_PUB={kty:"EC",crv:"P-256",x:"WlPHx1MOUJmXafYONjlZ3A7H9Dg3FauOzJm5yAMC7Ns",y:"YZCk9Dj_Tz3jI4FRYlB6WyMZpdH7c_HvGLn5fMIY4i8",ext:true,key_ops:["verify"]};
+var LICS={
+ en:{t:"Activate Visa Guide",tx:"Visa Guide needs an activation code to work on this phone.",texp:"Your licence has ended",xp:"Your clients and settings on this phone are safe. They will be here again after you renew.",
+  pc:"Your phone code",pcn:"Send this code to us. We will send you an activation code made for this phone.",cp:"Copy",cpd:"Copied",wa:"Send on WhatsApp",
+  wam:"Hello, I want to activate Visa Guide. My phone code is {c}.",ph:"Paste your activation code here",go:"Activate",
+  e_fmt:"That is not an activation code. Check that you pasted the whole code.",e_sig:"That code is not valid.",e_dev:"That code was made for another phone. Send us the phone code shown above.",
+  e_err:"This browser cannot check codes. Open the app from its web address (https) and try again.",e_old:"That code has already ended.",e_same:"That code is already in use.",
+  e_short:"You already have a licence that lasts longer than that code.",ok:"Activated. Thank you!",
+  h:"Licence",s_none:"Not activated.",s_ok:"Active until {d} ({n}).",s_life:"Active: lifetime.",s_exp:"Ended on {d}.",
+  d1:"1 day left",dn:"{n} days left",d0:"less than 1 hour left",h1:"1 hour left",hn:"{n} hours left",bar:"Your licence ends soon: {n}. Open More, then Licence, to renew.",
+  ren:"To renew, send us your phone code and paste the new activation code below.",nt:"The licence is checked on this phone. You do not need internet. It works only with the phone code shown above, so if you clear the app data on this phone the code changes and you will need a new activation code."},
+ fr:{t:"Activer Visa Guide",tx:"Visa Guide a besoin d’un code d’activation pour fonctionner sur ce téléphone.",texp:"Votre licence est terminée",xp:"Vos clients et vos paramètres sur ce téléphone sont en sécurité. Ils seront de nouveau là après le renouvellement.",
+  pc:"Le code de votre téléphone",pcn:"Envoyez-nous ce code. Nous vous enverrons un code d’activation fait pour ce téléphone.",cp:"Copier",cpd:"Copié",wa:"Envoyer sur WhatsApp",
+  wam:"Bonjour, je veux activer Visa Guide. Le code de mon téléphone est {c}.",ph:"Collez ici votre code d’activation",go:"Activer",
+  e_fmt:"Ce n’est pas un code d’activation. Vérifiez que vous avez collé le code en entier.",e_sig:"Ce code n’est pas valide.",e_dev:"Ce code a été fait pour un autre téléphone. Envoyez-nous le code du téléphone affiché ci-dessus.",
+  e_err:"Ce navigateur ne peut pas vérifier les codes. Ouvrez l’application depuis son adresse web (https) et réessayez.",e_old:"Ce code est déjà terminé.",e_same:"Ce code est déjà utilisé.",
+  e_short:"Vous avez déjà une licence qui dure plus longtemps que ce code.",ok:"Activé. Merci !",
+  h:"Licence",s_none:"Non activée.",s_ok:"Active jusqu’au {d} ({n}).",s_life:"Active : à vie.",s_exp:"Terminée le {d}.",
+  d1:"1 jour restant",dn:"{n} jours restants",d0:"moins de 1 heure restante",h1:"1 heure restante",hn:"{n} heures restantes",bar:"Votre licence se termine bientôt : {n}. Ouvrez Plus, puis Licence, pour la renouveler.",
+  ren:"Pour renouveler, envoyez-nous le code de votre téléphone et collez ci-dessous le nouveau code d’activation.",nt:"La licence est vérifiée sur ce téléphone. Vous n’avez pas besoin d’internet. Elle ne fonctionne qu’avec le code du téléphone affiché ci-dessus : si vous effacez les données de l’application sur ce téléphone, le code change et il faudra un nouveau code d’activation."}
+};
+function lict(){return LICS[L==="fr"?"fr":"en"]}
+function licphone(){
+  var c="";try{c=localStorage.getItem("vg-phone")||""}catch(e){}
+  if(!/^[A-Z0-9]{6}$/.test(c)){
+    var cs="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",a=new Uint8Array(6);c="";
+    try{crypto.getRandomValues(a)}catch(e){for(var j=0;j<6;j++)a[j]=Math.floor(Math.random()*256)}
+    for(var i=0;i<6;i++)c+=cs.charAt(a[i]%cs.length);
+    try{localStorage.setItem("vg-phone",c)}catch(e){}
+  }
+  return c;
+}
+function licnow(){var seen=0;try{seen=+localStorage.getItem("vg-seen")||0}catch(e){}var n=Math.max(Date.now(),seen);try{localStorage.setItem("vg-seen",String(n))}catch(e){}return n}
+function licb64(s){s=s.replace(/-/g,"+").replace(/_/g,"/");while(s.length%4)s+="=";var b=atob(s),u=new Uint8Array(b.length);for(var i=0;i<b.length;i++)u[i]=b.charCodeAt(i);return u}
+function licparse(code){
+  code=String(code||"").replace(/\s+/g,"");
+  var u;
+  try{u=licb64(code)}catch(e){return Promise.resolve({ok:false,r:"fmt"})}
+  if(!/^[A-Za-z0-9_-]+$/.test(code)||(u.length!==74&&u.length!==75))return Promise.resolve({ok:false,r:"fmt"});
+  if(!(window.crypto&&crypto.subtle))return Promise.resolve({ok:false,r:"err"});
+  var n=u.length-64,data=u.slice(0,n),sig=u.slice(n),dev="";
+  for(var i=0;i<6;i++)dev+=String.fromCharCode(data[i]);
+  return crypto.subtle.importKey("jwk",LIC_PUB,{name:"ECDSA",namedCurve:"P-256"},false,["verify"]).then(function(k){
+    return crypto.subtle.verify({name:"ECDSA",hash:"SHA-256"},k,sig,data);
+  }).then(function(ok){
+    if(!ok)return {ok:false,r:"sig"};
+    if(dev.toLowerCase()!==licphone().toLowerCase())return {ok:false,r:"dev"};
+    var unit=n===11?data[10]:0;
+    if(n===11&&unit!==1&&unit!==2)return {ok:false,r:"fmt"};
+    return {ok:true,day:(data[6]<<8)|data[7],days:(data[8]<<8)|data[9],unit:unit,life:(n===10&&((data[8]<<8)|data[9])===65535)};
+  },function(){return {ok:false,r:"err"}});
+}
+function licexp(p,at){if(p.life)return 0;if(p.unit)return at+p.days*(p.unit===1?6e4:36e5);return (p.day+p.days)*864e5}
+var LICST={s:"none"};
+(function(){
+  var l=null;try{l=JSON.parse(localStorage.getItem("vg-lic")||"null")}catch(e){}
+  if(l&&l.c){var x=+l.x||0,n=Math.max(Date.now(),+localStorage.getItem("vg-seen")||0);LICST=(x&&n>=x)?{s:"expired",exp:x}:{s:"ok",exp:x,life:!x}}
+})();
+function licverify(){
+  var l=null;try{l=JSON.parse(localStorage.getItem("vg-lic")||"null")}catch(e){}
+  if(!l||!l.c){LICST={s:"none"};licui();return Promise.resolve()}
+  return licparse(l.c).then(function(p){
+    if(!p.ok){LICST=p.r==="err"?{s:"err"}:{s:"bad"};licui();return}
+    var exp=licexp(p,+l.at||0),n=licnow();
+    if(+l.x!==exp){l.x=exp;try{localStorage.setItem("vg-lic",JSON.stringify(l))}catch(e){}}
+    LICST=(exp&&n>=exp)?{s:"expired",exp:exp}:{s:"ok",exp:exp,life:!exp};
+    licui();
+  });
+}
+function licactivate(raw,msg){
+  var T=lict();msg.className="licm";msg.textContent="";
+  licparse(raw).then(function(p){
+    if(!p.ok){msg.textContent=T["e_"+p.r]||T.e_fmt;return}
+    var old=null;try{old=JSON.parse(localStorage.getItem("vg-lic")||"null")}catch(e){}
+    var code=String(raw).replace(/\s+/g,"");
+    if(old&&old.c===code){msg.textContent=T.e_same;return}
+    var at=Date.now(),exp=licexp(p,at),n=licnow();
+    if(exp&&n>=exp){msg.textContent=T.e_old;return}
+    if(LICST.s==="ok"&&(LICST.life||(exp&&LICST.exp>=exp))){msg.textContent=T.e_short;return}
+    try{localStorage.setItem("vg-lic",JSON.stringify({c:code,at:at,x:exp}))}catch(e){}
+    LICST={s:"ok",exp:exp,life:!exp};
+    msg.textContent=T.ok;msg.className="licm okm";
+    licui();
+  });
+}
+function licdate(exp){return new Date(exp).toLocaleDateString(L==="fr"?"fr-FR":"en-GB",{timeZone:"UTC",day:"numeric",month:"long",year:"numeric"})}
+function licleft(exp){
+  var T=lict(),rem=exp-licnow();
+  if(rem<864e5){var h=Math.ceil(rem/36e5);return h<=0?T.d0:h===1?T.h1:T.hn.replace("{n}",h)}
+  var d=Math.ceil(rem/864e5);
+  return d===1?T.d1:T.dn.replace("{n}",d);
+}
+function licform(box){
+  var h=document.createElement("div");h.className="licf";
+  h.innerHTML='<b class="lpc"></b><div class="licpc"></div><p class="note lpn"></p><div class="licrow"><button type="button" class="licb lcp"></button><button type="button" class="licb lwa"></button></div><textarea rows="3" spellcheck="false" autocomplete="off" autocapitalize="off"></textarea><button type="button" class="licb go lgo"></button><p class="licm" role="alert"></p>';
+  box.appendChild(h);
+  h.querySelector(".lcp").addEventListener("click",function(){
+    var b=this,c=licphone();
+    try{navigator.clipboard.writeText(licphone().slice(0,3)+"-"+licphone().slice(3)).then(function(){b.textContent=lict().cpd})}catch(e){}
+  });
+  h.querySelector(".lwa").addEventListener("click",function(){
+    var c=licphone().slice(0,3)+"-"+licphone().slice(3),w=(typeof CONTACT!=="undefined"&&CONTACT.whatsapp)?CONTACT.whatsapp.replace(/\D/g,""):"";
+    window.open("https://wa.me/"+w+"?text="+encodeURIComponent(lict().wam.replace("{c}",c)),"_blank");
+  });
+  h.querySelector(".lgo").addEventListener("click",function(){licactivate(h.querySelector("textarea").value,h.querySelector(".licm"))});
+  return h;
+}
+function licfill(h){
+  var T=lict(),c=licphone();
+  h.querySelector(".lpc").textContent=T.pc;h.querySelector(".licpc").textContent=c.slice(0,3)+"-"+c.slice(3);
+  h.querySelector(".lpn").textContent=T.pcn;h.querySelector(".lcp").textContent=T.cp;h.querySelector(".lwa").textContent=T.wa;
+  h.querySelector("textarea").placeholder=T.ph;h.querySelector(".lgo").textContent=T.go;
+}
+var LICB=false;
+function licui(){
+  var T=lict(),ok=LICST.s==="ok",html=document.documentElement;
+  html.classList.toggle("unlicensed",!ok);
+  // full-screen activation screen
+  var ov=document.getElementById("lic");
+  if(!ok&&!ov){
+    ov=document.createElement("div");ov.id="lic";
+    ov.innerHTML='<div class="lk2"><h2 class="lt"></h2><p class="lx"></p><div class="lform"></div><button type="button" class="licb llg"></button></div>';
+    document.body.appendChild(ov);
+    licform(ov.querySelector(".lform"));
+    ov.querySelector(".llg").addEventListener("click",function(){document.getElementById("lang").click()});
+  }
+  if(ov&&!ok){
+    ov.querySelector(".lt").textContent=LICST.s==="expired"?T.texp:T.t;
+    ov.querySelector(".lx").textContent=LICST.s==="expired"?T.xp:LICST.s==="err"?T.e_err:T.tx;
+    licfill(ov.querySelector(".licf"));
+    ov.querySelector(".llg").textContent=document.getElementById("lang").textContent;
+  }
+  // licence page in the More tab
+  var sec=document.getElementById("licence");
+  if(sec){
+    if(!LICB){
+      sec.innerHTML='<h2></h2><p id="licst"></p><p class="note" id="licren"></p><div id="licfm" class="box"></div><p class="note" id="licnt"></p>';
+      licform(document.getElementById("licfm"));LICB=true;
+    }
+    sec.querySelector("h2").textContent=T.h;
+    var st=LICST.s==="ok"?(LICST.life?T.s_life:T.s_ok.replace("{d}",licdate(LICST.exp)).replace("{n}",licleft(LICST.exp))):LICST.s==="expired"?T.s_exp.replace("{d}",licdate(LICST.exp)):T.s_none;
+    document.getElementById("licst").textContent=st;
+    document.getElementById("licren").textContent=T.ren;document.getElementById("licnt").textContent=T.nt;
+    licfill(sec.querySelector(".licf"));
+  }
+  // warning bar on the home page
+  var bar=document.getElementById("licbar");
+  if(bar){
+    var soon=ok&&!LICST.life&&LICST.exp-licnow()<=7*864e5;
+    bar.style.display=soon?"block":"none";bar.textContent=soon?T.bar.replace("{n}",licleft(LICST.exp)):"";
+  }
+}
+licverify();
+setInterval(licverify,60000);
+document.addEventListener("visibilitychange",function(){if(!document.hidden)licverify()});
 var AG={};try{AG=JSON.parse(localStorage.getItem("vg-agency")||"{}")||{}}catch(e){AG={}}
+var LG=null;try{LG=JSON.parse(localStorage.getItem("vg-logo")||"null")}catch(e){}
+function lgpdf(){if(!LG||!LG.u)return null;try{return {bin:atob(LG.u.split(",")[1]),w:LG.w,h:LG.h}}catch(e){return null}}
+function lgload(file,done){
+  var fr=new FileReader();
+  fr.onload=function(){
+    var im=new Image();
+    im.onload=function(){
+      var m=240,sc=Math.min(1,m/Math.max(im.width,im.height)),w=Math.max(1,Math.round(im.width*sc)),h=Math.max(1,Math.round(im.height*sc));
+      var c=document.createElement("canvas");c.width=w;c.height=h;
+      var g=c.getContext("2d");g.fillStyle="#fff";g.fillRect(0,0,w,h);g.drawImage(im,0,0,w,h);
+      done({u:c.toDataURL("image/jpeg",0.88),w:w,h:h});
+    };
+    im.onerror=function(){done(null)};
+    im.src=fr.result;
+  };
+  fr.onerror=function(){done(null)};
+  fr.readAsDataURL(file);
+}
+function agl(){
+  var box=document.getElementById("aglogo"),T8=AGS[L==="fr"?"fr":"en"];
+  if(!box)return;
+  document.getElementById("aglogoh").textContent=T8.lgh;
+  box.innerHTML="";
+  if(LG&&LG.u){var im=document.createElement("img");im.src=LG.u;im.alt="";im.style.maxHeight="70px";im.style.maxWidth="200px";im.style.objectFit="contain";box.appendChild(im)}
+  var er=document.createElement("p");er.style.color="var(--bad)";er.setAttribute("role","alert");
+  var fl=document.createElement("label");fl.className="f";fl.textContent=T8.lgup;
+  var fi=document.createElement("input");fi.type="file";fi.accept="image/*";fi.id="aglfile";fl.appendChild(fi);box.appendChild(fl);
+  fi.addEventListener("change",function(){
+    var f=fi.files&&fi.files[0];if(!f)return;
+    lgload(f,function(o){
+      if(!o){er.textContent=lgt2().lge;return}
+      try{localStorage.setItem("vg-logo",JSON.stringify(o));LG=o;agl()}catch(e){er.textContent=lgt2().lge}
+    });
+  });
+  if(LG&&LG.u){
+    var rb=document.createElement("button");rb.type="button";rb.textContent=T8.lgrm;
+    rb.style.cssText="padding:8px 14px;font:inherit;font-size:.92rem;border:1px solid var(--stamp);border-radius:6px;background:var(--paper);color:var(--ink);cursor:pointer;justify-self:start";
+    rb.addEventListener("click",function(){try{localStorage.removeItem("vg-logo")}catch(e){}LG=null;agl()});
+    box.appendChild(rb);
+  }
+  box.appendChild(er);
+  var nt=document.createElement("p");nt.className="note";nt.textContent=T8.lgn;box.appendChild(nt);
+}
+function lgt2(){return AGS[L==="fr"?"fr":"en"]}
 var AGB=false;
 var AGS={
- en:{h:"Agency settings",p:"Your business details appear on receipts and invoices and are filled into your messages. They stay on this phone.",biz:"Business name",name:"Your name",wa:"WhatsApp number",em:"Email",ad:"Address (city, street)",cc:"Default country code (digits only)",cur:"Default currency",ft:"Note at the bottom of receipts and invoices",
+ en:{h:"Agency settings",p:"Your business details appear on receipts and invoices and are filled into your messages. They stay on this phone.",biz:"Business name",name:"Your name",wa:"WhatsApp number",em:"Email",ad:"Address (city, street)",cc:"Default country code (digits only)",cur:"Default currency",ft:"Note at the bottom of receipts and invoices",tid:"Tax ID number (optional)",reg:"Business registration number (optional)",tax:"Tax rate in % (leave empty if you do not charge tax)",lgh:"Logo",lgup:"Choose an image",lgrm:"Remove logo",lgn:"The logo is resized and saved on this phone only. It appears at the top of receipts and invoices.",lge:"The image could not be read. Try a PNG or JPG file.",taxn:"If you enter a tax rate, receipts can show the amount before tax and the tax, taking the amount you enter as the total that includes tax. Receipts and invoices are your own records: check what your local rules require, such as tax numbers, stamps or a set invoice format.",
   nt:"Your business name and your name replace [business] and [your name] in the message templates. A 9-digit phone number is treated as a number from the default country."},
- fr:{h:"Paramètres de l’agence",p:"Les coordonnées de votre entreprise figurent sur les reçus et les factures et sont insérées dans vos messages. Elles restent sur ce téléphone.",biz:"Nom de l’entreprise",name:"Votre nom",wa:"Numéro WhatsApp",em:"E-mail",ad:"Adresse (ville, rue)",cc:"Indicatif du pays par défaut (chiffres)",cur:"Devise par défaut",ft:"Note en bas des reçus et des factures",
+ fr:{h:"Paramètres de l’agence",p:"Les coordonnées de votre entreprise figurent sur les reçus et les factures et sont insérées dans vos messages. Elles restent sur ce téléphone.",biz:"Nom de l’entreprise",name:"Votre nom",wa:"Numéro WhatsApp",em:"E-mail",ad:"Adresse (ville, rue)",cc:"Indicatif du pays par défaut (chiffres)",cur:"Devise par défaut",ft:"Note en bas des reçus et des factures",tid:"Numéro d’identification fiscale (facultatif)",reg:"Numéro d’enregistrement de l’entreprise (facultatif)",tax:"Taux de taxe en % (laissez vide si vous ne facturez pas de taxe)",lgh:"Logo",lgup:"Choisir une image",lgrm:"Supprimer le logo",lgn:"Le logo est redimensionné et enregistré sur ce téléphone seulement. Il apparaît en haut des reçus et des factures.",lge:"L’image n’a pas pu être lue. Essayez un fichier PNG ou JPG.",taxn:"Si vous indiquez un taux de taxe, les reçus peuvent montrer le montant hors taxe et la taxe, en considérant le montant saisi comme le total taxe comprise. Les reçus et les factures sont vos propres documents : vérifiez ce que exigent les règles locales, comme les numéros fiscaux, les cachets ou un format de facture imposé.",
   nt:"Le nom de l’entreprise et votre nom remplacent [entreprise] et [votre nom] dans les modèles de messages. Un numéro à 9 chiffres est considéré comme un numéro du pays par défaut."}
 };
 function org(){return ORIGINS[AG.org]?AG.org:"cm"}
@@ -1251,15 +1465,15 @@ function ags(){
   var T2=AGS[L==="fr"?"fr":"en"],sec=document.getElementById("settings");
   if(!sec)return;
   if(!AGB){
-    sec.innerHTML='<h2></h2><p></p><div class="box" id="agf"></div><p class="note" id="agnote"></p><h3 id="aglkh"></h3><div class="box" id="aglk"></div>';
+    sec.innerHTML='<h2></h2><p></p><div class="box" id="agf"></div><h3 id="aglogoh"></h3><div class="box" id="aglogo"></div><p class="note" id="agnote"></p><h3 id="aglkh"></h3><div class="box" id="aglk"></div>';
     var f=document.getElementById("agf"),CU=[["XAF","CFA franc (XAF)"],["EUR","Euro (EUR)"],["USD","US dollar (USD)"]];
-    [["biz","text",80],["name","text",60],["wa","tel",30],["em","email",80],["ad","text",120],["cc","text",4],["cur","select",0],["ft","text",160]].forEach(function(x){
+    [["biz","text",80],["name","text",60],["wa","tel",30],["em","email",80],["ad","text",120],["tid","text",40],["reg","text",40],["tax","text",6],["cc","text",4],["cur","select",0],["ft","text",160]].forEach(function(x){
       var d=document.createElement("div"),l=document.createElement("label"),i;
       l.className="f";l.id="agl-"+x[0];l.htmlFor="ag-"+x[0];
       if(x[1]==="select"){i=document.createElement("select");CU.forEach(function(c){var o=document.createElement("option");o.value=c[0];o.textContent=c[1];i.appendChild(o)})}
       else{i=document.createElement("input");i.type=x[1];i.maxLength=x[2];if(x[0]==="cc")i.setAttribute("inputmode","numeric")}
       i.id="ag-"+x[0];i.value=AG[x[0]]||((x[0]==="cc"||x[0]==="cur")?odef(x[0]):"");
-      i.addEventListener("input",function(){var v=i.value;if(x[0]==="cc")v=v.replace(/\D/g,"").slice(0,4);AG[x[0]]=v.trim();agsave()});
+      i.addEventListener("input",function(){var v=i.value;if(x[0]==="cc")v=v.replace(/\D/g,"").slice(0,4);if(x[0]==="tax")v=v.replace(/[^0-9.,]/g,"").slice(0,6);if(x[0]==="cc"||x[0]==="tax")i.value=v;AG[x[0]]=v.trim();agsave()});
       d.appendChild(l);d.appendChild(i);f.appendChild(d);
     });
     if(Object.keys(ORIGINS).length>1){
@@ -1274,8 +1488,9 @@ function ags(){
   }
   var ol2=document.getElementById("agl-org");if(ol2)ol2.textContent=L==="fr"?"Je dépose les demandes depuis":"Applying from";
   sec.querySelector("h2").textContent=T2.h;sec.querySelector("p").textContent=T2.p;
-  ["biz","name","wa","em","ad","cc","cur","ft"].forEach(function(k){document.getElementById("agl-"+k).textContent=T2[k]});
-  document.getElementById("agnote").textContent=T2.nt;
+  ["biz","name","wa","em","ad","tid","reg","tax","cc","cur","ft"].forEach(function(k){document.getElementById("agl-"+k).textContent=T2[k]});
+  document.getElementById("agnote").textContent=T2.nt+" "+T2.taxn;
+  agl();
   lks();
 }
 var SCT=[];try{SCT=JSON.parse(localStorage.getItem("vg-schengen")||"[]")||[]}catch(e){}
@@ -1387,6 +1602,7 @@ function labels(){
   sc();
   ags();
   afr();
+  licui();
   rd();
   lt();
   mt();
@@ -1562,7 +1778,7 @@ FRR=[["Passeport valide au moins 3 mois après la date de retour", "Deux pages v
 var nodes=[],EN=[],btn=document.getElementById("lang");
 (function(){
   var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){
-    if(!n.nodeValue.trim()||n.parentNode.closest("script,style,pre,#list,#count,#lang,#tools,#pcres,#cres,#tres,#ready,#dl,#clinks,#lbtns,#search,#ulist,#mbtns,#warn,#qres,#idays,#ibtns,#ipreview,#install,#tabs,#cards,#sbtns,#report,#crm,#schengen,#settings,#lock,#afterref"))return NodeFilter.FILTER_REJECT;
+    if(!n.nodeValue.trim()||n.parentNode.closest("script,style,pre,#list,#count,#lang,#tools,#pcres,#cres,#tres,#ready,#dl,#clinks,#lbtns,#search,#ulist,#mbtns,#warn,#qres,#idays,#ibtns,#ipreview,#install,#tabs,#cards,#sbtns,#report,#crm,#schengen,#settings,#lock,#afterref,#lic,#licbar,#licence"))return NodeFilter.FILTER_REJECT;
     return NodeFilter.FILTER_ACCEPT}});
   while(w.nextNode()){nodes.push(w.currentNode);EN.push(w.currentNode.nodeValue)}
 })();
@@ -2122,7 +2338,7 @@ var TABS=[
  {id:"guides",ic:"\uD83D\uDCD6",secs:["travel","visa","journey","refusals","afterref","bankstatements","insurance","interview","photos","glossary"]},
  {id:"routes",ic:"\uD83E\uDDED",secs:["cameroon","students","usvisa","canadavisa","ukvisa","ausvisa","updates"]},
  {id:"templates",ic:"\u2709\uFE0F",secs:["letters","messages"]},
- {id:"more",ic:"\u2630",groups:[{k:"build",secs:["design","maintenance","data","architecture","roadmap","money","publish"]},{k:"about",secs:["settings","about","services","faq","privacy","share"]}]}
+ {id:"more",ic:"\u2630",groups:[{k:"build",secs:["design","maintenance","data","architecture","roadmap","money","publish"]},{k:"about",secs:["licence","settings","about","services","faq","privacy","share"]}]}
 ];
 var CUR="tools",UIKEY="";
 try{CUR=localStorage.getItem("vg-tab")||"tools"}catch(e){}
@@ -2247,14 +2463,15 @@ function pdfEnc(t){var MAP={"\u2019":"\x92","\u2018":"\x91","\u201C":"\x93","\u2
 function pdfEsc(t){return t.replace(/\\/g,"\\\\").replace(/\(/g,"\\(").replace(/\)/g,"\\)")}
 function pmoney(n,cur){var r=Math.round(n*100)/100,s=r.toFixed(r%1?2:0).split(".");return s[0].replace(/\B(?=(\d{3})+(?!\d))/g," ")+(s[1]?"."+s[1]:"")+" "+cur}
 function pwrap(t,max){var out=[],cur="";String(t).split(/\s+/).forEach(function(w){if(!w)return;if((cur+" "+w).trim().length>max){if(cur)out.push(cur);cur=w}else cur=(cur?cur+" ":"")+w});if(cur)out.push(cur);return out}
-function pdfOne(content){
+function pdfOne(content,img){
   var objs=[];
   objs[1]="<< /Type /Catalog /Pages 2 0 R >>";
   objs[2]="<< /Type /Pages /Kids [5 0 R] /Count 1 >>";
   objs[3]="<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>";
   objs[4]="<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>";
-  objs[5]="<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>";
+  objs[5]="<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R /F2 4 0 R >>"+(img?" /XObject << /Im1 7 0 R >>":"")+" >> /Contents 6 0 R >>";
   objs[6]="<< /Length "+content.length+" >>\nstream\n"+content+"\nendstream";
+  if(img)objs[7]="<< /Type /XObject /Subtype /Image /Width "+img.w+" /Height "+img.h+" /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length "+img.bin.length+" >>\nstream\n"+img.bin+"\nendstream";
   var out="%PDF-1.4\n",offs=[];
   for(var n=1;n<objs.length;n++){offs[n]=out.length;out+=n+" 0 obj\n"+objs[n]+"\nendobj\n"}
   var xr=out.length;
@@ -2269,10 +2486,11 @@ function rcptPdf(c,d){
   var fr=L==="fr",loc=fr?"fr-FR":"en-GB",rc=d.type==="receipt",cur=d.cur||"XAF",s=[];
   function tx(x,y,sz,b,t,g){s.push("BT /"+(b?"F2":"F1")+" "+sz+" Tf "+(g===undefined?0:g)+" g 1 0 0 1 "+x+" "+y+" Tm ("+pdfEsc(pdfEnc(t))+") Tj ET")}
   function ln(y,w){s.push((w||0.8)+" w 50 "+y+" m 545 "+y+" l S")}
-  var y=792;
-  tx(50,y,18,true,AG.biz||"Visa Guide");y-=18;
-  [AG.name,AG.ad,[AG.wa,AG.em].filter(Boolean).join("  |  ")].forEach(function(t){if(t){tx(50,y,10,false,t,0.35);y-=14}});
-  ln(y-4,1);y-=42;
+  var A=d.ag||AG,lg=lgpdf(),x0=50,y=792;
+  if(lg){var sc=Math.min(54/lg.h,150/lg.w),iw=lg.w*sc,ih=lg.h*sc;s.push("q "+iw.toFixed(1)+" 0 0 "+ih.toFixed(1)+" 50 "+(806-ih).toFixed(1)+" cm /Im1 Do Q");x0=50+iw+14}
+  tx(x0,y,18,true,A.biz||"Visa Guide");y-=18;
+  [A.name,A.ad,[A.wa,A.em].filter(Boolean).join("  |  "),[A.tid?(fr?"N° fiscal : ":"Tax ID: ")+A.tid:"",A.reg?(fr?"N° d’enregistrement : ":"Reg. no.: ")+A.reg:""].filter(Boolean).join("  |  ")].forEach(function(t){if(t){tx(x0,y,10,false,t,0.35);y-=14}});
+  ln(Math.min(y-4,740),1);y=Math.min(y-4,740)-38;
   tx(50,y,22,true,rc?(fr?"REÇU":"RECEIPT"):(fr?"FACTURE":"INVOICE"));
   tx(380,y+8,10,false,(fr?"N° : ":"No.: ")+d.no);
   tx(380,y-6,10,false,"Date"+(fr?" : ":": ")+pdate(d.date).toLocaleDateString(loc,{day:"numeric",month:"long",year:"numeric"}));
@@ -2285,7 +2503,12 @@ function rcptPdf(c,d){
   y-=6;ln(y,0.6);y-=18;
   pwrap(d.desc,62).forEach(function(l,i){tx(50,y,11,false,l);if(i===0)tx(440,y,11,false,pmoney(d.amt,cur));y-=15});
   y-=8;ln(y,0.6);y-=26;
-  tx(280,y,12,true,rc?(fr?"Montant reçu":"Amount received"):(fr?"Montant à régler":"Amount due"));tx(440,y,12,true,pmoney(d.amt,cur));y-=24;
+  if(d.tax>0){
+    var net=Math.round(d.amt/(1+d.tax/100)*100)/100,tv=Math.round((d.amt-net)*100)/100;
+    tx(280,y,10,false,fr?"Montant hors taxe":"Amount excluding tax",0.35);tx(440,y,10,false,pmoney(net,cur));y-=14;
+    tx(280,y,10,false,(fr?"Taxe (":"Tax (")+(+d.tax)+"%)",0.35);tx(440,y,10,false,pmoney(tv,cur));y-=20;
+  }
+  tx(280,y,12,true,d.tax>0?(rc?(fr?"Total reçu":"Total received"):(fr?"Total à régler":"Total due")):(rc?(fr?"Montant reçu":"Amount received"):(fr?"Montant à régler":"Amount due")));tx(440,y,12,true,pmoney(d.amt,cur));y-=24;
   var sn=d.snap||[0,0];
   if(sn[0]){
     tx(280,y,10,false,fr?"Frais de service convenus":"Agreed service fee",0.35);tx(440,y,10,false,pmoney(sn[0],cur));y-=14;
@@ -2294,9 +2517,9 @@ function rcptPdf(c,d){
   }
   if(rc&&d.method){y-=12;tx(50,y,10,false,(fr?"Mode de paiement : ":"Payment method: ")+lab(PAYM,d.method))}
   var fy=130;
-  if(AG.ft)pwrap(AG.ft,90).forEach(function(l){tx(50,fy,10,false,l,0.35);fy-=14});
+  if(A.ft)pwrap(A.ft,90).forEach(function(l){tx(50,fy,10,false,l,0.35);fy-=14});
   tx(50,60,9,false,rc?(fr?"Merci pour votre paiement.":"Thank you for your payment."):(fr?"Merci de votre confiance.":"Thank you for your business."),0.5);
-  return pdfOne(s.join("\n"));
+  return pdfOne(s.join("\n"),lg);
 }
 function crmDoc(box){
   var c=findC(CV.id);if(!c){CV.mode="list";return crmList(box)}
@@ -2305,11 +2528,13 @@ function crmDoc(box){
   function F(label,node,hint){var l=mk("label","",label);l.appendChild(node);if(hint)l.appendChild(mk("div","m",hint));box.appendChild(l);return node}
   var cur=c.cur||odef("cur");
   var ty=mk("select");opt(ty,[["receipt","Receipt (payment received)","Reçu (paiement reçu)"],["invoice","Invoice (payment due)","Facture (paiement à régler)"]],"receipt");F(T("Type","Type"),ty);
-  var amt=mk("input");amt.type="text";amt.setAttribute("inputmode","decimal");amt.value=String(cbal(c)||c.fee||"");F(T("Amount ("+cur+")","Montant ("+cur+")"),amt);
+  var amt=mk("input");amt.type="text";amt.setAttribute("inputmode","decimal");amt.value=String(cbal(c)||c.fee||"");F(T("Amount ("+cur+(cnum(AG.tax)>0?", tax included":"")+")","Montant ("+cur+(cnum(AG.tax)>0?", taxe comprise":"")+")"),amt);
   var dt=mk("input");dt.type="date";dt.value=dkey(new Date());F("Date",dt);
   var me=mk("select");opt(me,PAYM,"momo");F(T("Payment method","Mode de paiement"),me);
   var ds=mk("input");ds.type="text";ds.maxLength=160;ds.value=T("Visa application service fee","Frais de service pour la demande de visa")+" - "+lab(CDEST,c.dest)+", "+lab(CTYPE,c.type);F("Description",ds);
   var al=mk("label","dk"),ad=mk("input");ad.type="checkbox";ad.checked=true;al.appendChild(ad);al.appendChild(document.createTextNode(T("Add this amount to \u201CPaid so far\u201D","Ajouter ce montant à « Montant déjà payé »")));box.appendChild(al);
+  var tr=Math.min(100,cnum(AG.tax)),tc=null;
+  if(tr>0){var tl=mk("label","dk");tc=mk("input");tc.type="checkbox";tc.checked=true;tl.appendChild(tc);tl.appendChild(document.createTextNode(T("Show the tax breakdown ("+tr+"%, included in the amount)","Afficher le détail de la taxe ("+tr+" %, incluse dans le montant)")));box.appendChild(tl)}
   function tog(){var r=ty.value==="receipt";me.parentNode.style.display=r?"":"none";al.style.display=r?"":"none"}
   ty.addEventListener("change",tog);tog();
   var row=mk("div","row");
@@ -2320,6 +2545,8 @@ function crmDoc(box){
     var d={type:ty.value,no:(r?"REC-":"INV-")+new Date().getFullYear()+"-"+("0000"+n).slice(-4),date:dt.value||dkey(new Date()),amt:a,cur:cur,method:r?me.value:"",desc:(ds.value.trim()||"-").slice(0,160)};
     if(r&&ad.checked)c.paid=Math.round(((c.paid||0)+a)*100)/100;
     d.snap=[c.fee||0,c.paid||0];
+    d.tax=(tc&&tc.checked)?tr:0;
+    d.ag={biz:AG.biz||"",name:AG.name||"",ad:AG.ad||"",wa:AG.wa||"",em:AG.em||"",tid:AG.tid||"",reg:AG.reg||"",ft:AG.ft||""};
     c.pays=(c.pays||[]);c.pays.push(d);if(c.pays.length>40)c.pays=c.pays.slice(-40);
     c.updated=Date.now();csave();
     saveFile(d.no+".pdf",rcptPdf(c,d));
@@ -2637,7 +2864,7 @@ function crmClean(c){
   function str(v,n){return typeof v==="string"?v.slice(0,n):""}
   function inList(list,v,d){for(var i=0;i<list.length;i++)if(list[i][0]===v)return v;return d}
   if(!c||typeof c!=="object"||typeof c.name!=="string"||!c.name.trim())return null;
-  return {id:str(c.id,40)||(Date.now().toString(36)+Math.random().toString(36).slice(2,6)),name:str(c.name,80).trim(),phone:str(c.phone,30),dest:inList(CDEST,c.dest,"other"),type:inList(CTYPE,c.type,"tourist"),status:inList(STS,c.status,"new"),appt:/^\d{4}-\d{2}-\d{2}$/.test(c.appt||"")?c.appt:"",notes:str(c.notes,500),follow:/^\d{4}-\d{2}-\d{2}$/.test(c.follow||"")?c.follow:"",cur:inList(CCUR,c.cur,"XAF"),fee:cnum(c.fee),paid:cnum(c.paid),hist:(Array.isArray(c.hist)?c.hist:[]).filter(function(h){return h&&isFinite(+h.t)&&inList(STS,h.s,null)}).slice(-30).map(function(h){return {t:+h.t,s:h.s}}),res:inList(RES,c.res,""),resd:/^\d{4}-\d{2}-\d{2}$/.test(c.resd||"")?c.resd:"",reapply:/^\d{4}-\d{2}-\d{2}$/.test(c.reapply||"")?c.reapply:"",why:(function(){var o={};if(c.why&&typeof c.why==="object")WHY.forEach(function(w){if(c.why[w[0]])o[w[0]]=1});return o})(),pays:(Array.isArray(c.pays)?c.pays:[]).filter(function(d){return d&&typeof d.no==="string"&&cnum(d.amt)}).slice(-40).map(function(d){return {type:d.type==="invoice"?"invoice":"receipt",no:str(d.no,30),date:/^\d{4}-\d{2}-\d{2}$/.test(d.date||"")?d.date:dkey(new Date()),amt:cnum(d.amt),cur:inList(CCUR,d.cur,"XAF"),method:inList(PAYM,d.method,""),desc:str(d.desc,160),snap:[cnum(d.snap&&d.snap[0]),cnum(d.snap&&d.snap[1])]}}),docs:(function(){var o={};if(c.docs&&typeof c.docs==="object")Object.keys(c.docs).slice(0,80).forEach(function(k){if(c.docs[k]&&k.length<=200)o[k]=1});return o})(),created:+c.created||Date.now(),updated:+c.updated||Date.now()};
+  return {id:str(c.id,40)||(Date.now().toString(36)+Math.random().toString(36).slice(2,6)),name:str(c.name,80).trim(),phone:str(c.phone,30),dest:inList(CDEST,c.dest,"other"),type:inList(CTYPE,c.type,"tourist"),status:inList(STS,c.status,"new"),appt:/^\d{4}-\d{2}-\d{2}$/.test(c.appt||"")?c.appt:"",notes:str(c.notes,500),follow:/^\d{4}-\d{2}-\d{2}$/.test(c.follow||"")?c.follow:"",cur:inList(CCUR,c.cur,"XAF"),fee:cnum(c.fee),paid:cnum(c.paid),hist:(Array.isArray(c.hist)?c.hist:[]).filter(function(h){return h&&isFinite(+h.t)&&inList(STS,h.s,null)}).slice(-30).map(function(h){return {t:+h.t,s:h.s}}),res:inList(RES,c.res,""),resd:/^\d{4}-\d{2}-\d{2}$/.test(c.resd||"")?c.resd:"",reapply:/^\d{4}-\d{2}-\d{2}$/.test(c.reapply||"")?c.reapply:"",why:(function(){var o={};if(c.why&&typeof c.why==="object")WHY.forEach(function(w){if(c.why[w[0]])o[w[0]]=1});return o})(),pays:(Array.isArray(c.pays)?c.pays:[]).filter(function(d){return d&&typeof d.no==="string"&&cnum(d.amt)}).slice(-40).map(function(d){return {type:d.type==="invoice"?"invoice":"receipt",no:str(d.no,30),date:/^\d{4}-\d{2}-\d{2}$/.test(d.date||"")?d.date:dkey(new Date()),amt:cnum(d.amt),cur:inList(CCUR,d.cur,"XAF"),method:inList(PAYM,d.method,""),desc:str(d.desc,160),snap:[cnum(d.snap&&d.snap[0]),cnum(d.snap&&d.snap[1])],tax:Math.min(100,cnum(d.tax)),ag:(d.ag&&typeof d.ag==="object")?(function(a){var o={};["biz","name","ad","wa","em","tid","reg","ft"].forEach(function(k){o[k]=str(a[k],160)});return o})(d.ag):undefined}}),docs:(function(){var o={};if(c.docs&&typeof c.docs==="object")Object.keys(c.docs).slice(0,80).forEach(function(k){if(c.docs[k]&&k.length<=200)o[k]=1});return o})(),created:+c.created||Date.now(),updated:+c.updated||Date.now()};
 }
 document.getElementById("crmfile").addEventListener("change",function(e){
   var f=e.target.files&&e.target.files[0];

@@ -1,6 +1,6 @@
 /* Visa Guide service worker: keeps the app files on the phone so it opens with no internet.
    Change VERSION whenever you upload a new index.html so phones pick up the update. */
-var VERSION = "visaguide-9";
+var VERSION = "visaguide-12";
 var FILES = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
 self.addEventListener("install", function (e) { e.waitUntil(caches.open(VERSION).then(function (c) { return c.addAll(FILES); }).then(function () { return self.skipWaiting(); })); });
 var FONTS = "vg-fonts";

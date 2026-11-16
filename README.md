@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-10`; it is now `visaguide-9`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-12`; it is now `visaguide-11`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -49,6 +49,26 @@ For agents. Each client has a name, WhatsApp number, destination, visa type, sta
 - **Income report.** The "Income report" button on the client list shows, month by month, what was received through receipts created in the app: totals per currency, by payment method and by destination, with a CSV export. Below it, "Results by destination" shows approved and refused counts with the approval rate, and the most common refusal reasons. The list also shows "Received this month". Payments entered only by editing "Paid so far" are not counted, because they have no receipt.
 - **Do not store sensitive numbers.** The form has no passport or card fields, and says never to put them in the notes.
 - **Each phone has its own list.** To move clients to another phone, save a backup on one and restore it on the other.
+
+## Licence (activation codes)
+
+The whole app is locked until it is activated. On first start it shows a phone code (for example `K7Q-293`) with a Copy button and a "Send on WhatsApp" button that writes to the number in `CONTACT`. The customer sends you that phone code, you make a code for it in your private code generator, and they paste it in. The same screen appears again when a licence ends.
+
+- **How the check works.** A code holds the phone code, the day it was made and the number of days, signed with your private key. The app checks the signature with the matching public key (`LIC_PUB` in `index.html`). The private key is not in the app and must never be put in it. The check works offline.
+- **One code, one phone.** A code made for one phone code is refused on another phone. If a customer clears the app's data, the phone code changes and they need a new code. The PIN lock's "Forgot PIN?" erase keeps the licence.
+- **Time.** A code made on day D for N days ends N days after D (UTC), like the "Ends in" date in your generator. Lifetime codes never end. The app keeps the latest date it has seen, so setting the phone clock back does not give more time.
+- **Renewing.** The More tab has a Licence page showing the status, the days left and a box for a new code. A new code replaces the old one only if it lasts longer. From 7 days before the end, the home page shows a warning. Your generator's renewal message tells customers to go to "Settings, then Licence": in Visa Guide the path is More, then Licence.
+- **Its own key.** Visa Guide has its own key pair, separate from Stockroom. The public key (`LIC_PUB` in `index.html`) is safe to publish. The private key lives only in the key file `visa-guide-key-PRIVATE.json` and in your browser's saved key inside the code generator, never in this app folder. The generator page `visa-guide-code-generator-PRIVATE.html` holds no key: you load the key file into it once.
+- **Keep keys off GitHub.** The `.gitignore` in this folder blocks any file with `PRIVATE` in its name, files named `*-key*.json`, and the folders `private/` and `keys/`. Keep the key file and the generator outside the folder you push, or inside `private/`. If a private key was ever pushed to GitHub, deleting the file is not enough, because Git keeps history. Make a new key instead: in the generator tap "Create a new key", paste the new public key (x and y) into `LIC_PUB`, publish the app, and issue new codes.
+- **Limits.** Someone who can edit the app's file can remove the check, as with any offline app. There is no free trial: use the generator's 1 day option for demos. While a licence has ended, the whole app is locked, including backup and export. The client data stays on the phone until the licence is renewed.
+
+## Logo and tax details on receipts (More tab, Agency settings)
+
+- **Logo.** Choose a PNG or JPG file. It is resized to at most 240 pixels, saved on the phone only, and printed at the top of receipts and invoices. Transparent areas become white. The logo is not part of client backups, so add it again on a new phone.
+- **Tax ID number and business registration number.** Optional lines printed under your business details.
+- **Tax rate.** Optional. When set, the receipt form offers "Show the tax breakdown". The amount you enter is taken as the total including tax, and the receipt shows the amount before tax, the tax and the total. If the rate is empty, no tax lines appear. The app does not know any country's tax rate: you enter yours.
+- **Saved with each document.** Each receipt or invoice keeps the business details and tax rate that were in use when it was made, so downloading it again later gives the same wording even if you change your settings. The logo is the exception: it is the current one.
+- Receipts and invoices are your own records. Check what your local rules require, such as tax numbers, stamps or a set invoice format.
 
 ## App lock (More tab, Agency settings)
 
