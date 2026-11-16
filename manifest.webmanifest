@@ -1,7 +1,7 @@
 {
   "id": "./index.html",
-  "name": "Visa Guide",
-  "short_name": "Visa Guide",
+  "name": "Global Visa",
+  "short_name": "Global Visa",
   "description": "Visa checklist, tools and guides for visa applications from Cameroon. English and French. Works offline.",
   "lang": "en",
   "dir": "ltr",
@@ -13,8 +13,8 @@
     "minimal-ui"
   ],
   "orientation": "portrait",
-  "background_color": "#050b24",
-  "theme_color": "#050b24",
+  "background_color": "#08171a",
+  "theme_color": "#08171a",
   "categories": [
     "travel",
     "productivity"

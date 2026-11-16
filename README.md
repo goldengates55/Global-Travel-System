@@ -1,4 +1,4 @@
-# Visa Guide (phone app)
+# Global Visa (phone app)
 
 A phone-style app version of the Visa Travel Platform guide, built the same way as the Golden Gates app: one `index.html`, a manifest, a service worker and three icons. It opens full screen from the home screen and works without internet after the first visit.
 
@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-12`; it is now `visaguide-11`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-15`; it is now `visaguide-14`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -57,8 +57,8 @@ The whole app is locked until it is activated. On first start it shows a phone c
 - **How the check works.** A code holds the phone code, the day it was made and the number of days, signed with your private key. The app checks the signature with the matching public key (`LIC_PUB` in `index.html`). The private key is not in the app and must never be put in it. The check works offline.
 - **One code, one phone.** A code made for one phone code is refused on another phone. If a customer clears the app's data, the phone code changes and they need a new code. The PIN lock's "Forgot PIN?" erase keeps the licence.
 - **Time.** A code made on day D for N days ends N days after D (UTC), like the "Ends in" date in your generator. Lifetime codes never end. The app keeps the latest date it has seen, so setting the phone clock back does not give more time.
-- **Renewing.** The More tab has a Licence page showing the status, the days left and a box for a new code. A new code replaces the old one only if it lasts longer. From 7 days before the end, the home page shows a warning. Your generator's renewal message tells customers to go to "Settings, then Licence": in Visa Guide the path is More, then Licence.
-- **Its own key.** Visa Guide has its own key pair, separate from Stockroom. The public key (`LIC_PUB` in `index.html`) is safe to publish. The private key lives only in the key file `visa-guide-key-PRIVATE.json` and in your browser's saved key inside the code generator, never in this app folder. The generator page `visa-guide-code-generator-PRIVATE.html` holds no key: you load the key file into it once.
+- **Renewing.** The More tab has a Licence page showing the status, the days left and a box for a new code. A new code replaces the old one only if it lasts longer. From 7 days before the end, the home page shows a warning. Your generator's renewal message tells customers to go to "Settings, then Licence": in Global Visa the path is More, then Licence.
+- **Its own key.** Global Visa has its own key pair, separate from Stockroom. The public key (`LIC_PUB` in `index.html`) is safe to publish. The private key lives only in the key file `visa-guide-key-PRIVATE.json` and in your browser's saved key inside the code generator, never in this app folder. The generator page `visa-guide-code-generator-PRIVATE.html` holds no key: you load the key file into it once.
 - **Keep keys off GitHub.** The `.gitignore` in this folder blocks any file with `PRIVATE` in its name, files named `*-key*.json`, and the folders `private/` and `keys/`. Keep the key file and the generator outside the folder you push, or inside `private/`. If a private key was ever pushed to GitHub, deleting the file is not enough, because Git keeps history. Make a new key instead: in the generator tap "Create a new key", paste the new public key (x and y) into `LIC_PUB`, publish the app, and issue new codes.
 - **Limits.** Someone who can edit the app's file can remove the check, as with any offline app. There is no free trial: use the generator's 1 day option for demos. While a licence has ended, the whole app is locked, including backup and export. The client data stays on the phone until the licence is renewed.
 
@@ -120,3 +120,7 @@ Cameroon is the only origin today. The structure for more is in place:
 - The first visit needs internet to load the fonts and install the app.
 - In the installed app, printing is replaced by sharing a PDF (checklist and itinerary), and letters, the calendar file and the sample data files open the phone's share sheet (save to Files, send on WhatsApp). In a normal browser, printing and downloads work as usual. Please test these on both Android and iPhone.
 - Every page has a "Report a mistake on this page" button that opens WhatsApp to the number in `CONTACT`, with the page name filled in. Leave `whatsapp` empty to hide it.
+
+## Look and feel
+
+Teal and vermilion "visa sticker" design: fine guilloche lines on the home banner and lock screens, a machine-readable-strip detail at the bottom of tool panels, a floating tab bar, and rounded cards. Colours are the variables at the top of the second style block in `index.html` (`--stamp` teal, `--accent` vermilion; a dark set follows for dark mode). Fonts are Bricolage Grotesque (headings) and Instrument Sans (text), loaded from Google Fonts on the first visit and kept for offline use. App icons and `og.png` use the same colours.
