@@ -31,6 +31,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap"></noscript>
 <style>
+.hc{list-style:none;margin:0 0 .8rem;padding:0}.hc li{padding:.65rem 0;border-bottom:1px solid var(--line)}.hc li b{font-weight:600}
 *{box-sizing:border-box}
 a{color:var(--stamp)}
 :focus-visible{outline:3px solid var(--stamp);outline-offset:2px}
@@ -1104,6 +1105,10 @@ select{border:0;appearance:none;padding:0;font-weight:600}
 <section id="manual"><h2></h2><p></p><div id="manbody"></div></section>
 
 <section id="privacy"><h2></h2><p></p><div id="privbody"></div></section>
+<section id="health"><h2></h2><p></p><div id="healthbody"></div></section>
+<section id="nigeria"><h2></h2><p></p><div id="nigeriabody"></div></section>
+<section id="ghana"><h2></h2><p></p><div id="ghanabody"></div></section>
+<section id="training"><h2></h2><p></p><div id="trainingbody"></div></section>
 
 <section id="convert"><h2></h2><p></p><div class="box" id="cvbox"></div></section>
 
@@ -1198,14 +1203,14 @@ var LKS={
   h:"App lock",on:"The app lock is on. It asks for your PIN when you open the app and after it has been in the background for a minute.",off:"The app lock is off. Anyone who opens the app on this phone can see your clients.",
   n1:"New PIN (4 to 6 digits)",n2:"Repeat the new PIN",cur:"Current PIN",set:"Turn on lock",chg:"Change PIN",rm:"Turn off lock",now:"Lock now",save:"Save",cancel:"Cancel",
   e1:"The PIN must be 4 to 6 digits.",e2:"The two PINs are different.",e3:"The current PIN is wrong.",
-  nt:"The PIN keeps other people out of the app. It does not encrypt the data stored on the phone. Keep a backup of your clients, because if you forget the PIN the only way back in is to erase the app data."},
+  nt:"The PIN keeps other people out of the app and also scrambles your client list on the phone (when the app is opened from its online address). A 4 to 6 digit PIN is not strong against an expert, so also use the phone’s own screen lock. Scans are not scrambled. If you forget the PIN, the client list cannot be read again, so keep a backup."},
  fr:{t:"Global Visa est verrouillé",ph:"Code PIN",go:"Déverrouiller",bad:"Code PIN incorrect.",wait:"Trop d’essais. Attendez {s} secondes.",forgot:"Code PIN oublié ?",
   fh:"Si vous avez oublié le code PIN, le seul moyen de rentrer est d’effacer tout ce qui est enregistré dans cette application sur ce téléphone, y compris les clients, les reçus et les paramètres. Vous pourrez ensuite restaurer une sauvegarde.",
   fe:"Tout effacer et déverrouiller",fc:"Effacer toutes les données sur ce téléphone ? Cette action est définitive.",back:"Retour",
   h:"Verrouillage de l’application",on:"Le verrouillage est activé. L’application demande votre code PIN à l’ouverture et après une minute en arrière-plan.",off:"Le verrouillage est désactivé. Toute personne qui ouvre l’application sur ce téléphone peut voir vos clients.",
   n1:"Nouveau code PIN (4 à 6 chiffres)",n2:"Répétez le nouveau code PIN",cur:"Code PIN actuel",set:"Activer le verrouillage",chg:"Changer le code PIN",rm:"Désactiver le verrouillage",now:"Verrouiller maintenant",save:"Enregistrer",cancel:"Annuler",
   e1:"Le code PIN doit comporter 4 à 6 chiffres.",e2:"Les deux codes PIN sont différents.",e3:"Le code PIN actuel est incorrect.",
-  nt:"Le code PIN empêche les autres personnes d’utiliser l’application. Il ne chiffre pas les données stockées sur le téléphone. Gardez une sauvegarde de vos clients, car si vous oubliez le code PIN, le seul moyen de rentrer est d’effacer les données de l’application."}
+  nt:"Le code PIN empêche les autres d’utiliser l’application et brouille aussi votre liste de clients sur le téléphone (quand l’application est ouverte depuis son adresse en ligne). Un code de 4 à 6 chiffres n’est pas solide face à un expert : utilisez aussi le verrouillage d’écran du téléphone. Les scans ne sont pas brouillés. Si vous oubliez le code PIN, la liste de clients ne pourra plus être lue : gardez une sauvegarde."}
 };
 function lkt(){return LKS[L==="fr"?"fr":"en"]}
 function lkplain(pin,salt){var h=5381,t=salt+":"+pin;for(var r=0;r<2000;r++)for(var i=0;i<t.length;i++)h=((h*33)^t.charCodeAt(i))>>>0;return h.toString(16)}
@@ -1248,7 +1253,12 @@ function lkshow(){
       if(w>0){er.textContent=T3.wait.replace("{s}",Math.ceil(w/1000));return}
       var v=document.getElementById("lkin").value;
       lkcheck(v).then(function(ok){
-        if(ok){lkfail=0;document.getElementById("lkin").value="";er.textContent="";document.documentElement.classList.remove("locked");try{localStorage.removeItem("vg-lockuntil")}catch(e){}}
+        if(ok){
+          var fin=function(){lkfail=0;document.getElementById("lkin").value="";er.textContent="";document.documentElement.classList.remove("locked");try{localStorage.removeItem("vg-lockuntil")}catch(e){}};
+          if(LK&&LK.enc&&window.crypto&&crypto.subtle){
+            vkey(v,LK.s).then(function(k){CKEY=k;if(!CENC)return;return vopen(k,CENC).then(function(arr){CL=Array.isArray(arr)?arr:[];CENC=null;try{crmUI()}catch(e){}})}).then(fin).catch(function(){CKEY=null;er.textContent=lkt().bad});
+          }else fin();
+        }
         else{lkfail++;document.getElementById("lkin").value="";
           if(lkfail%5===0){try{localStorage.setItem("vg-lockuntil",String(Date.now()+30000))}catch(e){}er.textContent=lkt().wait.replace("{s}",30)}
           else er.textContent=lkt().bad}
@@ -1295,9 +1305,12 @@ function lks(){
         if(n1){
           if(!lkpinok(n1.value)){er.textContent=T6.e1;return}
           if(n1.value!==n2.value){er.textContent=T6.e2;return}
-          lkmake(n1.value).then(function(o){LK=o;try{localStorage.setItem("vg-lock",JSON.stringify(o))}catch(e){}lkmode=null;lks()});
+          lkmake(n1.value).then(function(o){
+            var go=function(){LK=o;try{localStorage.setItem("vg-lock",JSON.stringify(o));cwrite()}catch(e){}lkmode=null;lks()};
+            if(o.m==="p"&&window.crypto&&crypto.subtle)vkey(n1.value,o.s).then(function(k){CKEY=k;o.enc=1;go()}).catch(go);else go();
+          });
         }else{
-          LK=null;try{localStorage.removeItem("vg-lock")}catch(e){}document.documentElement.classList.remove("locked");lkmode=null;lks();
+          LK=null;CKEY=null;try{localStorage.removeItem("vg-lock");localStorage.setItem(CRM_KEY,JSON.stringify(CL))}catch(e){}document.documentElement.classList.remove("locked");lkmode=null;lks();
         }
       };
       if(LK)lkcheck(cur.value).then(function(ok){if(!ok){er.textContent=T6.e3;return}proceed()});else proceed();
@@ -1953,6 +1966,8 @@ function cvcalc(){
 
 /* ---------- what's new: a banner for updates; add a line to NEWS and raise the service worker VERSION ---------- */
 var NEWS=[
+ {id:"2026-11-17g",en:"New: route guides for Nigeria and Ghana in Routes, and a one-page training sheet for new staff in More.",fr:"Nouveau : des guides par route pour le Nigeria et le Ghana dans Itinéraires, et une fiche de formation d’une page pour les nouveaux collaborateurs dans Plus.",go:"nigeria"},
+ {id:"2026-11-17f",en:"New: the PIN now scrambles your client list, a Who owes me screen, passport and bank statement alerts, and an App health check in More.",fr:"Nouveau : le PIN brouille maintenant votre liste de clients, un écran Qui me doit de l’argent, des alertes passeport et relevé bancaire, et un État de l’application dans Plus.",go:"clients"},
  {id:"2026-11-17e",en:"New in Clients: protected backups with a passphrase, backup reminders, and import of clients from a spreadsheet.",fr:"Nouveau dans Clients : sauvegardes protégées par une phrase secrète, rappels de sauvegarde et import de clients depuis un tableur.",go:"clients"},
  {id:"2026-11-17d",en:"New in More: a user manual, and a rewritten privacy page that says what the app stores and what it never sends.",fr:"Nouveau dans Plus : un manuel d’utilisation, et une page de confidentialité réécrite qui explique ce que l’application conserve et ce qu’elle n’envoie jamais.",go:"manual"},
  {id:"2026-11-17c",en:"New in Clients: scan and keep client documents on the phone, and share clients with another agent through a protected team file.",fr:"Nouveau dans Clients : scannez et gardez les documents des clients sur le téléphone, et partagez des clients avec un autre agent par un fichier d’équipe protégé.",go:"clients"},
@@ -2009,7 +2024,7 @@ var MAN=[
   ["ol",[["Open the app link in Chrome (Android) or Safari (iPhone).","Ouvrez le lien de l’application dans Chrome (Android) ou Safari (iPhone)."],["Android: tap the menu, then Install app. iPhone: tap Share, then Add to Home Screen.","Android : touchez le menu, puis Installer l’application. iPhone : touchez Partager, puis Sur l’écran d’accueil."],["Open it once while online. After that it works without internet.","Ouvrez-la une première fois en ligne. Ensuite elle fonctionne sans internet."]]],
   ["p",["To give the app to someone else, use More, then Share the app. It shows a QR code and a ready-made message.","Pour donner l’application à quelqu’un, utilisez Plus, puis Partager l’application. Vous y trouverez un code QR et un message prêt à envoyer."]]]],
  [["Language, licence and PIN","Langue, licence et code PIN"],[
-  ["ul",[["The language button at the top right switches between English and French.","Le bouton de langue en haut à droite bascule entre l’anglais et le français."],["If the app asks for a licence code, type the code you were given. Open More, then Licence, to see how long it is valid.","Si l’application demande un code de licence, saisissez celui qu’on vous a remis. Ouvrez Plus, puis Licence, pour voir sa durée de validité."],["To lock the app with a PIN of 4 to 6 digits, open More, then Settings. The PIN keeps other people out of the app. It does not encrypt the data. If you forget it, you may lose access to the client list, so keep a backup.","Pour verrouiller l’application avec un code PIN de 4 à 6 chiffres, ouvrez Plus, puis Réglages. Le PIN empêche les autres d’entrer dans l’application. Il ne chiffre pas les données. Si vous l’oubliez, vous risquez de perdre l’accès à la liste de clients : faites une sauvegarde."]]]]],
+  ["ul",[["The language button at the top right switches between English and French.","Le bouton de langue en haut à droite bascule entre l’anglais et le français."],["If the app asks for a licence code, type the code you were given. Open More, then Licence, to see how long it is valid.","Si l’application demande un code de licence, saisissez celui qu’on vous a remis. Ouvrez Plus, puis Licence, pour voir sa durée de validité."],["To lock the app with a PIN of 4 to 6 digits, open More, then Settings. The PIN keeps other people out of the app and scrambles the client list on the phone. If you forget it, the client list cannot be read again, so keep a backup.","Pour verrouiller l’application avec un code PIN de 4 à 6 chiffres, ouvrez Plus, puis Réglages. Le PIN empêche les autres d’entrer dans l’application. Il brouille aussi la liste de clients sur le téléphone. Si vous l’oubliez, la liste de clients ne pourra plus être lue : faites une sauvegarde."]]]]],
  [["Set up your agency (Settings)","Configurer votre agence (Réglages)"],[
   ["p",["Open More, then Settings. Fill in once, and every invoice, receipt and message uses it.","Ouvrez Plus, puis Réglages. Remplissez une seule fois : chaque facture, reçu et message l’utilisera."]],
   ["ul",[["Applying from: choose the country your clients apply from. It sets the country code, the currency and the home-page line.","Dépôt depuis : choisissez le pays d’où vos clients déposent leur demande. Cela règle l’indicatif, la devise et la ligne de la page d’accueil."],["Business name, your name, WhatsApp number, address and logo appear on documents.","Le nom de l’entreprise, votre nom, votre numéro WhatsApp, l’adresse et le logo figurent sur les documents."],["Payment provider, number and account name appear on invoices, and on receipts that still have a balance, with a QR code.","Le fournisseur de paiement, le numéro et le nom du compte figurent sur les factures, et sur les reçus qui ont encore un solde, avec un code QR."]]]]],
@@ -2033,7 +2048,13 @@ var MAN=[
  [["Guides, Routes and Templates","Guides, Itinéraires et Modèles"],[
   ["ul",[["Guides explain documents such as bank statements, insurance, photos and the interview, and what to do after a refusal.","Les guides expliquent des documents comme les relevés bancaires, l’assurance, les photos et l’entretien, et que faire après un refus."],["Routes has step-by-step guides for each destination. The detailed guides are written for applicants from Cameroon. For other countries it shows a general page with official links.","Itinéraires propose des guides pas à pas par destination. Les guides détaillés sont rédigés pour les demandeurs du Cameroun. Pour les autres pays, une page générale avec des liens officiels s’affiche."],["Templates has letters and messages. Replace everything in square brackets before you use them.","Modèles contient des lettres et des messages. Remplacez tout ce qui est entre crochets avant de les utiliser."],["Fees and rules change. Always confirm on the official site of the embassy or visa centre.","Les frais et les règles changent. Confirmez toujours sur le site officiel de l’ambassade ou du centre de visas."]]]]],
  [["Updates and problems","Mises à jour et problèmes"],[
-  ["ul",[["A What’s new banner on the home page announces changes. Tap Got it to hide it.","Un bandeau Nouveautés sur la page d’accueil annonce les changements. Touchez Compris pour le masquer."],["On any page, Report a mistake on this page opens a message with the page name.","Sur toute page, Signaler une erreur sur cette page ouvre un message avec le nom de la page."],["If something looks old after an update, close the app fully and open it again while online.","Si quelque chose semble ancien après une mise à jour, fermez complètement l’application et rouvrez-la en ligne."]]]]]
+  ["ul",[["A What’s new banner on the home page announces changes. Tap Got it to hide it.","Un bandeau Nouveautés sur la page d’accueil annonce les changements. Touchez Compris pour le masquer."],["On any page, Report a mistake on this page opens a message with the page name.","Sur toute page, Signaler une erreur sur cette page ouvre un message avec le nom de la page."],["If something looks old after an update, close the app fully and open it again while online.","Si quelque chose semble ancien après une mise à jour, fermez complètement l’application et rouvrez-la en ligne."]]]]] ,
+ [["Money owed and document alerts","Argent dû et alertes sur les documents"],[
+  ["ul",[["In Clients, tap Who owes me to see every client with an unpaid balance. Late instalments come first, then the biggest balances. Tap Remind on WhatsApp to send a ready message.","Dans Clients, touchez Qui me doit de l’argent pour voir tous les clients qui ont un solde impayé. Les échéances en retard viennent en premier, puis les plus gros soldes. Touchez Rappeler sur WhatsApp pour envoyer un message prêt."],["When you add or edit a client, fill in the passport expiry date and the date of the latest bank statement. The app warns you when the passport has less than 6 months left at the time of the appointment, or when the bank statement is older than 3 months. Check the exact rules of the embassy: they differ.","Quand vous ajoutez ou modifiez un client, indiquez la date d’expiration du passeport et la date du dernier relevé bancaire. L’application vous prévient quand le passeport a moins de 6 mois de validité au moment du rendez-vous, ou quand le relevé bancaire a plus de 3 mois. Vérifiez les règles exactes de l’ambassade : elles diffèrent."]]]]],
+ [["App health check","État de l’application"],[
+  ["ul",[["Open More, then App health check. A tick means fine and an exclamation mark means something needs your attention.","Ouvrez Plus, puis État de l’application. Une coche veut dire que tout va bien, un point d’exclamation que quelque chose demande votre attention."],["It shows whether the app is installed, works without internet, which version you have, the last backup, the PIN lock and the storage used. If the phone may clear the data, tap Ask the phone to keep my data.","Elle indique si l’application est installée, fonctionne sans internet, quelle version vous avez, la dernière sauvegarde, le verrouillage par PIN et l’espace utilisé. Si le téléphone risque d’effacer les données, touchez Demander au téléphone de garder mes données."],["Tap Check for an update, then close and reopen the app to get the newest version.","Touchez Chercher une mise à jour, puis fermez et rouvrez l’application pour obtenir la dernière version."]]]]] ,
+ [["Route guides and training sheet","Guides par route et fiche de formation"],[
+  ["ul",[["In Routes, Applying from Nigeria and Applying from Ghana list where each destination takes applications, with sources. They come from public pages and news reports, so confirm on the official site before you advise a client.","Dans Procédures, Déposer une demande depuis le Nigeria et depuis le Ghana indiquent où chaque destination reçoit les demandes, avec les sources. Ces informations viennent de pages publiques et d’articles de presse : confirmez sur le site officiel avant de conseiller un client."],["In More, Training sheet opens a one-page PDF in English or French. Print it or share it with new staff.","Dans Plus, Fiche de formation ouvre un PDF d’une page en anglais ou en français. Imprimez-le ou partagez-le avec les nouveaux collaborateurs."]]]]]
 ];
 var PRIV=[
  [["What stays on your phone","Ce qui reste sur votre téléphone"],[
@@ -2043,7 +2064,7 @@ var PRIV=[
  [["Connections the app makes","Connexions établies par l’application"],[
   ["ul",[["The first time the app opens, it loads its fonts from Google Fonts, so Google can see the phone’s address. After that the fonts are kept on the phone.","À la première ouverture, l’application charge ses polices depuis Google Fonts : Google peut donc voir l’adresse du téléphone. Ensuite les polices sont conservées sur le téléphone."],["The website host may keep ordinary visit logs, as any website does.","L’hébergeur du site peut conserver des journaux de visite ordinaires, comme tout site web."],["Links to embassies, visa centres and other sites open pages that we do not control.","Les liens vers des ambassades, centres de visas et autres sites ouvrent des pages que nous ne contrôlons pas."]]]]],
  [["Limits you should know","Limites à connaître"],[
-  ["ul",[["The PIN lock keeps other people out of the app but does not encrypt the data. Also use your phone’s own screen lock.","Le verrouillage par PIN empêche les autres d’entrer dans l’application mais ne chiffre pas les données. Utilisez aussi le verrouillage d’écran du téléphone."],["Backup files are not encrypted unless you set a passphrase when saving. Keep them private and delete old copies.","Les fichiers de sauvegarde ne sont pas chiffrés sauf si vous choisissez une phrase secrète à l’enregistrement. Gardez-les en lieu sûr et supprimez les anciennes copies."],["Clearing the app’s data, or losing the phone, erases the client list and scans. Only your backups remain.","Effacer les données de l’application, ou perdre le téléphone, supprime la liste de clients et les scans. Seules vos sauvegardes subsistent."],["Passport and ID photos are sensitive. Do not keep scans longer than the file needs, and delete them when the case is closed.","Les photos de passeport et de pièces d’identité sont sensibles. Ne gardez pas les scans plus longtemps que nécessaire et supprimez-les à la clôture du dossier."]]]]],
+  ["ul",[["The PIN lock keeps other people out of the app and scrambles the client list stored on the phone. A short PIN is not strong against an expert, so also use your phone’s own screen lock. Scans are not scrambled.","Le verrouillage par PIN empêche les autres d’entrer dans l’application et brouille la liste de clients enregistrée sur le téléphone. Un PIN court n’est pas solide face à un expert : utilisez aussi le verrouillage d’écran du téléphone. Les scans ne sont pas brouillés."],["Backup files are not encrypted unless you set a passphrase when saving. Scans are stored on the phone without the PIN scrambling. Keep them private and delete old copies.","Les fichiers de sauvegarde ne sont pas chiffrés sauf si vous choisissez une phrase secrète à l’enregistrement. Les scans sont enregistrés sur le téléphone sans le brouillage du PIN. Gardez-les en lieu sûr et supprimez les anciennes copies."],["Clearing the app’s data, or losing the phone, erases the client list and scans. Only your backups remain.","Effacer les données de l’application, ou perdre le téléphone, supprime la liste de clients et les scans. Seules vos sauvegardes subsistent."],["Passport and ID photos are sensitive. Do not keep scans longer than the file needs, and delete them when the case is closed.","Les photos de passeport et de pièces d’identité sont sensibles. Ne gardez pas les scans plus longtemps que nécessaire et supprimez-les à la clôture du dossier."]]]]],
  [["Your duties as the agent","Vos obligations en tant qu’agent"],[
   ["ul",[["Tell clients what you keep about them and why, and ask for their agreement before you store their documents.","Dites aux clients ce que vous gardez à leur sujet et pourquoi, et demandez leur accord avant de stocker leurs documents."],["Keep data only as long as you need it for the file or the law requires. Delete the rest.","Ne gardez les données que le temps nécessaire au dossier ou exigé par la loi. Supprimez le reste."],["Never enter passport numbers, card numbers or PINs in notes. Ask clients never to send them in the intake form.","N’inscrivez jamais de numéros de passeport, de carte ou de PIN dans les notes. Demandez aux clients de ne jamais les envoyer dans le formulaire."],["Data protection laws differ by country. Check the rules that apply to you.","Les lois sur la protection des données diffèrent selon les pays. Vérifiez les règles qui s’appliquent à vous."]]]]],
  [["Delete your data","Supprimer vos données"],[
@@ -2066,10 +2087,82 @@ function docui(){
   if(pv){pv.querySelector("h2").textContent=fr?"Confidentialité et données":"Privacy and data";pv.querySelector("p").textContent=fr?"Voici ce que l’application fait de vos informations et de celles de vos clients.":"Here is what the app does with your information and your clients’ information.";docfill(document.getElementById("privbody"),PRIV,fr)}
 }
 
+
+
+/* ---------- route guides: Nigeria and Ghana (English and French) ---------- */
+var ROUTES={nigeria:{"title": ["Applying from Nigeria", "Déposer une demande depuis le Nigeria"], "intro": ["Checked in November 2026 from official pages and news reports. Centers, fees and rules change often, so confirm each one on the official site before advising a client.", "Vérifié en novembre 2026 à partir de pages officielles et d’articles de presse. Les centres, les frais et les règles changent souvent : confirmez chacun sur le site officiel avant de conseiller un client."], "head": [["Destination", "Destination"], ["Where to submit", "Où déposer"], ["Good to know", "Bon à savoir"]], "rows": [[["France", "France"], ["TLScontact centers in Abuja and Lagos", "Centres TLScontact à Abuja et à Lagos"], ["TLScontact opened these France centers on 3 October 2023. Start on the official France-Visas site and check that it still points to the same provider.", "TLScontact a ouvert ces centres pour la France le 3 octobre 2023. Commencez sur le site officiel France-Visas et vérifiez qu’il renvoie toujours vers le même prestataire."]], [["Germany", "Allemagne"], ["VFS Global centers in Abuja and Lagos", "Centres VFS Global à Abuja et à Lagos"], ["Nigerian press reported in 2025 that Germany renewed its contract with VFS Global and announced new centers in these two cities. Confirm on the German mission’s website.", "La presse nigériane a rapporté en 2025 que l’Allemagne a renouvelé son contrat avec VFS Global et annoncé de nouveaux centres dans ces deux villes. Confirmez sur le site de la mission allemande."]], [["Switzerland", "Suisse"], ["VFS Global in Abuja", "VFS Global à Abuja"], ["The Swiss mission says its Schengen applications from Nigeria go through VFS Global in Abuja.", "La mission suisse indique que ses demandes Schengen depuis le Nigeria passent par VFS Global à Abuja."]], [["Other Schengen countries", "Autres pays Schengen"], ["Depends on the country", "Selon le pays"], ["Apply to the country where you will spend the most days. Each country picks its own center, and some are represented by another Schengen country. Check that embassy’s website.", "Déposez la demande auprès du pays où vous passerez le plus de jours. Chaque pays choisit son centre, et certains sont représentés par un autre pays Schengen. Consultez le site de cette ambassade."]], [["United Kingdom", "Royaume-Uni"], ["VFS Global centers: Lagos (Ikeja and Victoria Island), Abuja, Enugu and Port Harcourt", "Centres VFS Global : Lagos (Ikeja et Victoria Island), Abuja, Enugu et Port Harcourt"], ["VFS Global took over from TLScontact between September 2024 and January 2025. Press reports say the Enugu and Port Harcourt centers reopened in May 2025.", "VFS Global a remplacé TLScontact entre septembre 2024 et janvier 2025. La presse indique que les centres d’Enugu et de Port Harcourt ont rouvert en mai 2025."]], [["United States", "États-Unis"], ["US Consulate General in Lagos, after the DS-160 form and fee payment, with an in-person interview", "Consulat général des États-Unis à Lagos, après le formulaire DS-160 et le paiement des frais, avec un entretien en personne"], ["Since 6 September 2025, nonimmigrant applicants must interview in their country of nationality or residence, so Nigerians can no longer book in neighboring countries. Press reports say routine visa services moved from Abuja to Lagos on 1 August 2026, but one report is unclear. Check the US Mission Nigeria website before booking.", "Depuis le 6 septembre 2025, les demandeurs de visa non-immigrant doivent passer l’entretien dans leur pays de nationalité ou de résidence : les Nigérians ne peuvent plus réserver dans les pays voisins. La presse indique que les services de visa courants sont passés d’Abuja à Lagos le 1er août 2026, mais un article n’est pas clair. Consultez le site de la mission américaine au Nigeria avant de réserver."]], [["Canada", "Canada"], ["VFS Global visa application centres in Lagos and Abuja, as listed by IRCC", "Centres de réception des demandes de visa VFS Global à Lagos et à Abuja, selon IRCC"], ["Most applications are made online with IRCC. Biometrics are given at the center. Check the VFS Global Nigeria page for the current service fee and appointments.", "La plupart des demandes se font en ligne auprès d’IRCC. Les données biométriques sont données au centre. Consultez la page VFS Global Nigeria pour les frais de service et les rendez-vous actuels."]], [["Australia", "Australie"], ["Online, through the Australian government’s ImmiAccount", "En ligne, par l’ImmiAccount du gouvernement australien"], ["If biometrics are requested, the letter says where to give them. We could not confirm a collection center in Nigeria, so check the Home Affairs website.", "Si des données biométriques sont demandées, la lettre indique où les donner. Nous n’avons pas pu confirmer de centre de collecte au Nigeria : consultez le site de Home Affairs."]]], "blocks": [[["United States: points to check before paying", "États-Unis : points à vérifier avant de payer"], ["Reports in July 2025 said the US limited many Nigerian nonimmigrant visas to a single entry valid for 3 months. A later report said the US lifted this for Ghana but left Nigeria’s unchanged. Confirm the current validity before telling a client what to expect.", "Des articles de juillet 2025 indiquaient que les États-Unis limitaient de nombreux visas non-immigrants nigérians à une seule entrée valable 3 mois. Un article ultérieur indiquait que cette limite a été levée pour le Ghana mais pas pour le Nigeria. Confirmez la validité actuelle avant d’annoncer quoi que ce soit à un client."]], [null, ["Media reports say Nigeria is among 75 countries where immigrant visa issuance has been paused since 21 January 2026. The pause covers immigrant visas, not tourist, business or student visas. One report adds that Nigerian tourist and business applicants may need a visa bond of up to $15,000 from the same date. Check travel.state.gov before advising, because these measures change.", "Selon la presse, le Nigeria fait partie des 75 pays pour lesquels la délivrance de visas d’immigrant est suspendue depuis le 21 janvier 2026. La suspension concerne les visas d’immigrant, pas les visas de tourisme, d’affaires ou d’études. Un article ajoute que les demandeurs nigérians de visas de tourisme et d’affaires pourraient devoir verser une caution allant jusqu’à 15 000 $ à partir de la même date. Consultez travel.state.gov avant de conseiller, car ces mesures évoluent."]], [["Booking safely", "Réserver en sécurité"], ["Book appointments only on the official center or embassy website. Anyone who sells appointments, or who promises an earlier slot for money, may be committing fraud. Visa application fees are usually non-refundable, even if the visa is refused.", "Réservez les rendez-vous uniquement sur le site officiel du centre ou de l’ambassade. Toute personne qui vend des rendez-vous, ou promet un créneau plus tôt contre de l’argent, peut commettre une fraude. Les frais de demande de visa ne sont généralement pas remboursables, même si le visa est refusé."]], [["Legalization of documents", "Légalisation des documents"], ["We did not find Nigeria in the lists of Apostille Convention members that we checked, so some documents may need authentication by the Federal Ministry of Foreign Affairs and then legalization by the destination country’s embassy. Membership changes, so check the status table on the HCCH website and the embassy’s own rules.", "Nous n’avons pas trouvé le Nigeria dans les listes des membres de la Convention de l’Apostille que nous avons consultées : certains documents peuvent donc devoir être authentifiés par le ministère fédéral des Affaires étrangères, puis légalisés par l’ambassade du pays de destination. La liste des membres évolue : consultez le tableau de situation sur le site de la HCCH et les règles de l’ambassade."]]], "src": [["UK visa centers in Nigeria move to VFS Global (Nairametrics)", "https://nairametrics.com/2025/05/19/uk-reopens-visa-application-centers-in-enugu-and-port-harcourt/"], ["US visa interviews limited to country of residence (ICIR)", "https://www.icirnigeria.org/us-visa-policy-now-requires-interviews-in-country-of-residence/"], ["US visa services move to Lagos (VisaVerge)", "https://www.visaverge.com/visa/us-mission-nigeria-moves-all-routine-visa-services-to-lagos/"], ["US immigrant visa pause for 75 countries (Nairametrics)", "https://nairametrics.com/2026/01/14/u-s-pauses-immigrant-visa-processing-for-nigeria-74-other-countries-starting-jan-21/"], ["US revised visa reciprocity policy for Nigeria (US Embassy)", "https://ng.usembassy.gov/revised-visa-reciprocity-policy-for-nigeria/"], ["France visa centers in sub-Saharan Africa (TLScontact)", "https://www.tlscontact.com/en/news/opening-new-visa-application-centres-for-france-in-sub-saharan-africa/"], ["Germany expands Schengen visa centres in Nigeria (Leadership)", "https://leadership.ng/germany-expands-schengen-visa-centres-in-nigeria-cameroon-cyprus"], ["Where to apply for a Schengen visa in Nigeria (Swiss mission)", "https://www.schweiz-nigeria.eda.admin.ch/en/where-to-apply-for-a-schengen-visa"], ["Find a Canadian visa application centre (IRCC)", "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/contact-ircc/offices/find-visa-application-centre.html"], ["Apostille Convention status table (HCCH)", "https://www.hcch.net/en/instruments/conventions/status-table/?cid=41"]]},ghana:{"title": ["Applying from Ghana", "Déposer une demande depuis le Ghana"], "intro": ["Checked in November 2026 from official pages and news reports. Centers, fees and rules change often, so confirm each one on the official site before advising a client.", "Vérifié en novembre 2026 à partir de pages officielles et d’articles de presse. Les centres, les frais et les règles changent souvent : confirmez chacun sur le site officiel avant de conseiller un client."], "head": [["Destination", "Destination"], ["Where to submit", "Où déposer"], ["Good to know", "Bon à savoir"]], "rows": [[["United Kingdom", "Royaume-Uni"], ["VFS Global visa application centre in Accra, Mezzanine Floor, Grand Oyeeman Building, South Liberation Link", "Centre de réception des demandes de visa VFS Global à Accra, Mezzanine Floor, Grand Oyeeman Building, South Liberation Link"], ["VFS Global replaced TLScontact on 22 October 2024. Book on the VFS Global Ghana website. Prices and decisions did not change.", "VFS Global a remplacé TLScontact le 22 octobre 2024. Réservez sur le site VFS Global Ghana. Les prix et les décisions n’ont pas changé."]], [["France", "France"], ["VFS Global centre, One Airport Square, Airport City, Accra", "Centre VFS Global, One Airport Square, Airport City, Accra"], ["An appointment on the VFS Global website is mandatory, with the service fee paid in advance. Submission is Monday to Friday, 8:00 to 14:00. Decisions are made by the French embassy in Accra, not by VFS.", "Un rendez-vous sur le site de VFS Global est obligatoire, avec paiement anticipé des frais de service. Le dépôt se fait du lundi au vendredi, de 8 h à 14 h. Les décisions sont prises par l’ambassade de France à Accra, pas par VFS."]], [["Other Schengen countries", "Autres pays Schengen"], ["Biometric appointment through VFS Global’s Ghana portal, for most countries", "Rendez-vous biométrique par le portail VFS Global Ghana, pour la plupart des pays"], ["The Swiss mission says demand in Accra is very high and advises starting well ahead of time. Apply to the country where you will spend the most days, and check that embassy’s website.", "La mission suisse indique que la demande à Accra est très forte et conseille de commencer bien à l’avance. Déposez auprès du pays où vous passerez le plus de jours et consultez le site de cette ambassade."]], [["United States", "États-Unis"], ["US Embassy in Accra, after the DS-160 form and fee payment, with an in-person interview", "Ambassade des États-Unis à Accra, après le formulaire DS-160 et le paiement des frais, avec un entretien en personne"], ["Nonimmigrant applicants must interview in their country of nationality or residence. In September 2025 the US restored the longer visa validity for Ghanaians, for example up to 5 years for the B1/B2 visitor visa. In February 2026 the embassy released more than 1,000 extra interview slots.", "Les demandeurs de visa non-immigrant doivent passer l’entretien dans leur pays de nationalité ou de résidence. En septembre 2025, les États-Unis ont rétabli la validité plus longue des visas pour les Ghanéens, par exemple jusqu’à 5 ans pour le visa de visiteur B1/B2. En février 2026, l’ambassade a ouvert plus de 1 000 créneaux d’entretien supplémentaires."]], [["Canada", "Canada"], ["VFS Global visa application centre in Accra, as listed by IRCC", "Centre de réception des demandes de visa VFS Global à Accra, selon IRCC"], ["Most applications are made online with IRCC. Biometrics are given at the center. Check the VFS Global Ghana page for appointments and fees.", "La plupart des demandes se font en ligne auprès d’IRCC. Les données biométriques sont données au centre. Consultez la page VFS Global Ghana pour les rendez-vous et les frais."]], [["Australia", "Australie"], ["Online, through the Australian government’s ImmiAccount", "En ligne, par l’ImmiAccount du gouvernement australien"], ["If biometrics are requested, the letter says where to give them. We could not confirm a collection center in Ghana, so check the Home Affairs website.", "Si des données biométriques sont demandées, la lettre indique où les donner. Nous n’avons pas pu confirmer de centre de collecte au Ghana : consultez le site de Home Affairs."]]], "blocks": [[["United States: points to check before paying", "États-Unis : points à vérifier avant de payer"], ["Media reports say Ghana is among the countries where immigrant visa issuance has been paused since 21 January 2026. Applicants can still apply and attend interviews, but issuance is on hold. Reports also say a presidential proclamation limits entry for nationals of 39 countries from 1 January 2026, and we could not confirm whether Ghana is on that list. Applicants for some visa types, including student, exchange and H-1B visas, must set their social media accounts to public for vetting. Check travel.state.gov before advising.", "Selon la presse, le Ghana fait partie des pays pour lesquels la délivrance de visas d’immigrant est suspendue depuis le 21 janvier 2026. Les demandeurs peuvent toujours déposer et passer l’entretien, mais la délivrance est suspendue. La presse indique aussi qu’une proclamation présidentielle limite l’entrée des ressortissants de 39 pays depuis le 1er janvier 2026 ; nous n’avons pas pu confirmer si le Ghana figure sur cette liste. Les demandeurs de certains types de visas, dont les visas d’études, d’échange et H-1B, doivent rendre publics leurs comptes de réseaux sociaux pour le contrôle. Consultez travel.state.gov avant de conseiller."]], [["Booking safely", "Réserver en sécurité"], ["Book appointments only on the official center or embassy website. Anyone who sells appointments, or who promises an earlier slot for money, may be committing fraud. Visa application fees are usually non-refundable, even if the visa is refused.", "Réservez les rendez-vous uniquement sur le site officiel du centre ou de l’ambassade. Toute personne qui vend des rendez-vous, ou promet un créneau plus tôt contre de l’argent, peut commettre une fraude. Les frais de demande de visa ne sont généralement pas remboursables, même si le visa est refusé."]], [["Legalization of documents", "Légalisation des documents"], ["We did not find Ghana in the lists of Apostille Convention members that we checked, so some documents may need authentication by the Ministry of Foreign Affairs and then legalization by the destination country’s embassy. Membership changes, so check the status table on the HCCH website and the embassy’s own rules.", "Nous n’avons pas trouvé le Ghana dans les listes des membres de la Convention de l’Apostille que nous avons consultées : certains documents peuvent donc devoir être authentifiés par le ministère des Affaires étrangères, puis légalisés par l’ambassade du pays de destination. La liste des membres évolue : consultez le tableau de situation sur le site de la HCCH et les règles de l’ambassade."]]], "src": [["New UK visa application supplier in Ghana (GOV.UK)", "https://www.gov.uk/government/news/new-uk-visa-application-supplier-in-ghana-from-22-october-2024"], ["UK visa services in Ghana through VFS Global (MyJoyOnline)", "https://www.myjoyonline.com/uk-visa-services-in-ghana-are-now-available-through-vfs-global/"], ["Applying for a French visa in Ghana (France-Visas)", "https://france-visas.gouv.fr/en/ghana"], ["Schengen visa in Ghana (Swiss mission)", "https://www.schweiz-ghana.eda.admin.ch/en/schengen-visa"], ["US reverses visa restrictions on Ghana (Ghana News Agency)", "https://gna.org.gh/2025/09/us-reverses-visa-restrictions-on-ghana/"], ["US Embassy releases 1,000 visa slots in Accra (Graphic Online)", "https://www.graphic.com.gh/news/general-news/us-embassy-releases-1-000-visa-slots-in-accra.html"], ["US visa interviews limited to country of residence (ICIR)", "https://www.icirnigeria.org/us-visa-policy-now-requires-interviews-in-country-of-residence/"], ["Find a Canadian visa application centre (IRCC)", "https://www.canada.ca/en/immigration-refugees-citizenship/corporate/contact-ircc/offices/find-visa-application-centre.html"], ["Apostille Convention status table (HCCH)", "https://www.hcch.net/en/instruments/conventions/status-table/?cid=41"]]}};
+var TRAIN={en:"training-en.pdf",fr:"training-fr.pdf"};
+function routeui(){
+  var fr=L==="fr";
+  Object.keys(ROUTES).forEach(function(id){
+    var d=ROUTES[id],sec=document.getElementById(id);if(!sec)return;
+    var i=fr?1:0,body=document.getElementById(id+"body");
+    sec.querySelector("h2").textContent=d.title[i];sec.querySelector("p").textContent=d.intro[i];
+    body.innerHTML="";
+    var wrap=document.createElement("div");wrap.className="scroll";var tb=document.createElement("table");
+    var tr=document.createElement("tr");d.head.forEach(function(h){var th=document.createElement("th");th.textContent=h[i];tr.appendChild(th)});tb.appendChild(tr);
+    d.rows.forEach(function(r){var row=document.createElement("tr");r.forEach(function(c,j){var td=document.createElement("td");if(j===0){var b=document.createElement("b");b.textContent=c[i];td.appendChild(b)}else td.textContent=c[i];row.appendChild(td)});tb.appendChild(row)});
+    wrap.appendChild(tb);body.appendChild(wrap);
+    d.blocks.forEach(function(b){if(b[0]){var h=document.createElement("h3");h.textContent=b[0][i];body.appendChild(h)}var p=document.createElement("p");p.textContent=b[1][i];body.appendChild(p)});
+    var n=document.createElement("p");n.textContent=fr?"Seules les routes ci-dessus ont été vérifiées, et certains détails viennent d’articles de presse. Les règles changent souvent : confirmez chacune sur le site officiel avant de conseiller un client.":"Only the routes above were checked, and some details come from news reports. Rules change often, so confirm each one on the official site before advising a client.";body.appendChild(n);
+    var h3=document.createElement("h3");h3.textContent="Sources";body.appendChild(h3);
+    var ul=document.createElement("ul");d.src.forEach(function(x){var li=document.createElement("li"),a=document.createElement("a");a.href=x[1];a.target="_blank";a.rel="noopener";a.textContent=x[0];li.appendChild(a);ul.appendChild(li)});body.appendChild(ul);
+  });
+  var t=document.getElementById("training");
+  if(t){
+    t.querySelector("h2").textContent=fr?"Fiche de formation":"Training sheet";
+    t.querySelector("p").textContent=fr?"Une page à donner aux nouveaux collaborateurs : les 6 étapes pour bien démarrer avec l’application.":"One page to give new staff: the 6 steps to get started with the app.";
+    var tb2=document.getElementById("trainingbody");tb2.innerHTML="";
+    var pp=document.createElement("p");pp.textContent=fr?"Ouvrez la fiche et imprimez-la ou partagez-la sur WhatsApp. Elle fonctionne aussi sans internet une fois l’application installée.":"Open the sheet, then print it or share it on WhatsApp. It also works without internet once the app is installed.";tb2.appendChild(pp);
+    var r=document.createElement("div");r.className="row";
+    [["en","English"],["fr","Français"]].forEach(function(x){var a=document.createElement("a");a.className="act";a.href=TRAIN[x[0]];a.target="_blank";a.rel="noopener";a.textContent=(fr?"Fiche de formation (PDF) : ":"Training sheet (PDF): ")+x[1];r.appendChild(a)});
+    tb2.appendChild(r);
+  }
+}
+
+/* ---------- health check ---------- */
+function healthui(){
+  var h=document.getElementById("health");if(!h||typeof CL==="undefined")return;
+  var fr=L==="fr",body=document.getElementById("healthbody");
+  h.querySelector("h2").textContent=fr?"État de l’application":"App health check";
+  h.querySelector("p").textContent=fr?"Vérifiez que l’application est installée, à jour et que vos données sont à l’abri.":"Check that the app is installed, up to date and that your data is safe.";
+  body.innerHTML="";
+  var list=document.createElement("ul");list.className="hc";body.appendChild(list);
+  function row(ok,label,detail){var li=document.createElement("li");var b=document.createElement("b");b.textContent=(ok?"✓ ":"! ")+label;li.appendChild(b);if(detail){var d=document.createElement("div");d.className="m";d.textContent=detail;li.appendChild(d)}list.appendChild(li);return li}
+  var sa=window.matchMedia&&matchMedia("(display-mode: standalone)").matches||navigator.standalone;
+  row(!!sa,fr?"Installée sur l’écran d’accueil":"Installed on the home screen",sa?"":(fr?"Android : menu, Installer l’application. iPhone : Partager, Sur l’écran d’accueil.":"Android: menu, Install app. iPhone: Share, Add to Home Screen."));
+  var sw=!!(navigator.serviceWorker&&navigator.serviceWorker.controller);
+  var swr=row(sw,fr?"Fonctionne sans internet":"Works without internet",sw?"":(fr?"Ouvrez l’application une fois avec internet, puis rouvrez-la.":"Open the app once with internet, then open it again."));
+  var vr=row(true,fr?"Version":"Version",fr?"Recherche…":"Checking…");
+  if(window.caches&&caches.keys)caches.keys().then(function(k){var v=k.filter(function(x){return /^visaguide-/.test(x)}).sort().pop();vr.querySelector(".m").textContent=v?v.replace("visaguide-",fr?"Version ":"Version "):(fr?"Inconnue":"Unknown")}).catch(function(){vr.querySelector(".m").textContent="?"});else vr.querySelector(".m").textContent="?";
+  var secure=!!(window.crypto&&crypto.subtle);
+  row(secure,fr?"Adresse sécurisée (https)":"Secure address (https)",secure?(fr?"Les sauvegardes protégées et le brouillage par PIN fonctionnent.":"Protected backups and PIN scrambling work."):(fr?"Ouvrez l’application depuis son adresse en ligne pour activer les sauvegardes protégées.":"Open the app from its online address to turn on protected backups."));
+  var lb=0,chg=0;try{lb=+localStorage.getItem("vg-clients-backup")||0;chg=+localStorage.getItem("vg-changes")||0}catch(e){}
+  var days=lb?Math.floor((Date.now()-lb)/864e5):null;
+  row(!CL.length||(lb&&days<7&&chg<10),fr?"Sauvegarde des clients":"Client backup",!CL.length?(fr?"Aucun client pour le moment.":"No clients yet."):(!lb?(fr?"Aucune sauvegarde enregistrée.":"No backup saved yet."):(fr?"Dernière : il y a "+days+" jours, "+chg+" modifications depuis.":"Last one "+days+" days ago, "+chg+" changes since.")));
+  row(!!LK,fr?"Verrouillage par PIN":"PIN lock",LK?(LK.enc?(fr?"Activé, liste de clients brouillée.":"On, client list scrambled."):(fr?"Activé, sans brouillage des données.":"On, data not scrambled.")):(fr?"Désactivé : toute personne qui ouvre l’application voit vos clients.":"Off: anyone who opens the app sees your clients."));
+  var st=row(true,fr?"Stockage":"Storage",fr?"Calcul…":"Calculating…");
+  if(navigator.storage&&navigator.storage.estimate){navigator.storage.estimate().then(function(e){var mb=function(x){return (x/1048576).toFixed(1)+" Mo"};st.querySelector(".m").textContent=(fr?mb(e.usage||0):mb(e.usage||0).replace("Mo","MB"))+(e.quota?(fr?" utilisés sur ":" used of ")+(e.quota/1048576).toFixed(0)+(fr?" Mo":" MB"):"")}).catch(function(){st.querySelector(".m").textContent="?"})}else st.querySelector(".m").textContent=fr?"Non disponible":"Not available";
+  var pr=row(true,fr?"Données protégées contre l’effacement automatique":"Data protected from automatic clearing","…");
+  if(navigator.storage&&navigator.storage.persisted)navigator.storage.persisted().then(function(p){pr.firstChild.textContent=(p?"✓ ":"! ")+(fr?"Données protégées contre l’effacement automatique":"Data protected from automatic clearing");pr.querySelector(".m").textContent=p?(fr?"Oui.":"Yes."):(fr?"Non. Le téléphone peut effacer les données s’il manque de place.":"No. The phone may clear the data if it runs low on space.");if(!p&&navigator.storage.persist){var bt=document.createElement("button");bt.type="button";bt.className="act";bt.textContent=fr?"Demander au téléphone de garder mes données":"Ask the phone to keep my data";bt.addEventListener("click",function(){navigator.storage.persist().then(function(){healthui()})});pr.appendChild(bt)}});else pr.querySelector(".m").textContent=fr?"Non disponible":"Not available";
+  row(navigator.onLine,fr?"Connexion internet":"Internet connection",navigator.onLine?"":(fr?"Hors ligne : l’application fonctionne quand même.":"Offline: the app still works."));
+  var r=document.createElement("div");r.className="row";
+  var b1=document.createElement("button");b1.type="button";b1.className="act";b1.textContent=fr?"Chercher une mise à jour":"Check for an update";
+  var msg=document.createElement("p");msg.className="m";msg.setAttribute("role","status");
+  b1.addEventListener("click",function(){
+    msg.textContent=fr?"Recherche…":"Checking…";
+    if(!(navigator.serviceWorker&&navigator.serviceWorker.getRegistration)){msg.textContent=fr?"Non disponible ici.":"Not available here.";return}
+    navigator.serviceWorker.getRegistration().then(function(g){if(!g){msg.textContent=fr?"Pas encore installée pour le mode hors ligne.":"Not installed for offline use yet.";return}return g.update().then(function(){msg.textContent=fr?"Terminé. Si une nouvelle version existe, fermez puis rouvrez l’application pour l’obtenir.":"Done. If a new version exists, close and reopen the app to get it."})}).catch(function(){msg.textContent=fr?"Impossible de vérifier (hors ligne ?).":"Could not check (offline?)."});
+  });
+  r.appendChild(b1);
+  var b2=document.createElement("button");b2.type="button";b2.className="act";b2.textContent=fr?"Actualiser":"Refresh";b2.addEventListener("click",healthui);r.appendChild(b2);
+  body.appendChild(r);body.appendChild(msg);
+}
+
 /* ---------- applicant origin: tagline, origin page and option names follow the chosen country ---------- */
 function orgui(){
   var fr=L==="fr",k=org(),o=ORIGINS[k],nm=o.n[fr?1:0];
-  if(typeof cvui==="function"){cvui();nbanner();docui();if(typeof QR!=="undefined")shqr()}
+  if(typeof cvui==="function"){cvui();nbanner();docui();healthui();routeui();if(typeof QR!=="undefined")shqr()}
   var tg=document.querySelector(".tagline");
   if(tg&&tg.firstChild){
     tg.firstChild.nodeValue=k==="cm"?(fr?"Liste de contrôle, outils et guides pour les demandes de visa depuis le Cameroun.":"Checklist, tools and guides for visa applications from Cameroon."):(fr?"Liste de contrôle, outils et guides pour les demandes de visa depuis "+o.fp+".":"Checklist, tools and guides for visa applications from "+nm+".");
@@ -2079,7 +2172,7 @@ function orgui(){
   var sec=document.getElementById("origin");if(!sec)return;
   function e(t,c,x){var n=document.createElement(t);if(c)n.className=c;if(x)n.textContent=x;return n}
   sec.querySelector("h2").textContent=fr?"Déposer une demande depuis "+o.fp:"Applying from "+nm;
-  sec.querySelector("p").textContent=fr?"Les guides détaillés par route sont rédigés pour le Cameroun. Pour "+o.fp+", suivez ces étapes et confirmez toujours sur les sites officiels.":"The detailed route guides are written for Cameroon. For "+nm+", follow these steps and always confirm on the official sites.";
+  sec.querySelector("p").textContent=fr?(k==="ng"||k==="gh"?"Un guide détaillé pour "+o.fp+" se trouve juste après cette page dans cet onglet. Suivez ces étapes et confirmez toujours sur les sites officiels.":"Les guides détaillés par route sont rédigés pour le Cameroun, le Nigeria et le Ghana. Pour "+o.fp+", suivez ces étapes et confirmez toujours sur les sites officiels."):(k==="ng"||k==="gh"?"A detailed guide for "+nm+" is just after this page in this tab. Follow these steps and always confirm on the official sites.":"The detailed route guides are written for Cameroon, Nigeria and Ghana. For "+nm+", follow these steps and always confirm on the official sites.");
   var b=document.getElementById("orgbody");b.innerHTML="";
   var st=[
    [fr?"Vérifiez si un visa est nécessaire":"Check whether you need a visa",fr?"Les règles dépendent de votre passeport et de la destination. Utilisez les sites officiels ci-dessous.":"The rules for a "+nm+" passport depend on the destination. Use the official sites below."],
@@ -2657,9 +2750,9 @@ var TABS=[
  {id:"tools",ic:"\uD83E\uDDF0",secs:["try","passport","costs","convert","timeline","schengen","quiz","itinerary"]},
  {id:"clients",ic:"\uD83D\uDC65",secs:["clients"]},
  {id:"guides",ic:"\uD83D\uDCD6",secs:["travel","visa","journey","refusals","afterref","bankstatements","insurance","interview","photos","glossary"]},
- {id:"routes",ic:"\uD83E\uDDED",secs:["origin","cameroon","students","usvisa","canadavisa","ukvisa","ausvisa","updates"]},
+ {id:"routes",ic:"\uD83E\uDDED",secs:["origin","cameroon","nigeria","ghana","students","usvisa","canadavisa","ukvisa","ausvisa","updates"]},
  {id:"templates",ic:"\u2709\uFE0F",secs:["letters","messages"]},
- {id:"more",ic:"\u2630",groups:[{k:"build",secs:["design","maintenance","data","architecture","roadmap","money","publish"]},{k:"about",secs:["manual","licence","settings","about","services","faq","privacy","share"]}]}
+ {id:"more",ic:"\u2630",groups:[{k:"build",secs:["design","maintenance","data","architecture","roadmap","money","publish"]},{k:"about",secs:["manual","training","licence","settings","about","services","faq","privacy","health","share"]}]}
 ];
 var CUR="tools",UIKEY="";
 try{CUR=localStorage.getItem("vg-tab")||"tools"}catch(e){}
@@ -2720,16 +2813,36 @@ document.querySelector("#top .t").addEventListener("click",function(){location.h
 
 
 /* ---------- client tracker: everything stays on this phone ---------- */
-var CRM_KEY="vg-clients",CL=[];
-try{CL=JSON.parse(localStorage.getItem(CRM_KEY)||"[]")}catch(e){CL=[]}
+var CRM_KEY="vg-clients",CL=[],CKEY=null,CENC=null,CQ=Promise.resolve();
+try{var craw=JSON.parse(localStorage.getItem(CRM_KEY)||"[]");if(craw&&!Array.isArray(craw)&&craw.enc){CENC=craw;CL=[]}else CL=craw}catch(e){CL=[]}
 if(!Array.isArray(CL))CL=[];
+function vkey(pin,salt){
+  var enc=new TextEncoder();
+  return crypto.subtle.importKey("raw",enc.encode(pin),"PBKDF2",false,["deriveKey"]).then(function(k){
+    return crypto.subtle.deriveKey({name:"PBKDF2",salt:enc.encode(salt+":data"),iterations:150000,hash:"SHA-256"},k,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);
+  });
+}
+function vseal(key,text){
+  var iv=crypto.getRandomValues(new Uint8Array(12));
+  return crypto.subtle.encrypt({name:"AES-GCM",iv:iv},key,new TextEncoder().encode(text)).then(function(ct){return {enc:1,i:t64(iv),d:t64(ct)}});
+}
+function vopen(key,env){
+  return crypto.subtle.decrypt({name:"AES-GCM",iv:tun64(env.i)},key,tun64(env.d)).then(function(b){return JSON.parse(new TextDecoder().decode(b))});
+}
+function cwrite(){
+  var text=JSON.stringify(CL);
+  if(CENC&&!CKEY)return;
+  if(LK&&LK.enc&&CKEY){
+    CQ=CQ.then(function(){return vseal(CKEY,text)}).then(function(env){localStorage.setItem(CRM_KEY,JSON.stringify(env))}).catch(function(){alert(T("Could not save on this phone. Free some space and try again.","Impossible d’enregistrer sur ce téléphone. Libérez de l’espace et réessayez."))});
+  }else localStorage.setItem(CRM_KEY,text);
+}
 var CV={mode:"list",id:null,q:"",f:"all"};
 var STS=[["new","New","Nouveau"],["docs","Collecting documents","Collecte des documents"],["ready","Ready to submit","Prêt à déposer"],["appt","Appointment booked","Rendez-vous pris"],["sent","Submitted","Déposé"],["decision","Decision received","Décision reçue"],["passport","Passport ready","Passeport prêt"],["closed","Closed","Clos"]];
 var CDEST=[["schengen","Schengen area","Espace Schengen"],["uk","United Kingdom","Royaume-Uni"],["usa","United States","États-Unis"],["canada","Canada","Canada"],["australia","Australia","Australie"],["other","Other","Autre"]];
 var CTYPE=[["tourist","Tourist","Tourisme"],["business","Business","Affaires"],["student","Study","Études"],["family","Family visit","Visite familiale"],["transit","Transit","Transit"]];
 function T(en,fr){return L==="fr"?fr:en}
 function lab(list,v){for(var i=0;i<list.length;i++)if(list[i][0]===v)return L==="fr"?list[i][2]:list[i][1];return v}
-function csave(){try{localStorage.setItem(CRM_KEY,JSON.stringify(CL));localStorage.setItem("vg-changes",String((+localStorage.getItem("vg-changes")||0)+1))}catch(e){alert(T("Could not save on this phone. Free some space and try again.","Impossible d’enregistrer sur ce téléphone. Libérez de l’espace et réessayez."))}}
+function csave(){try{cwrite();localStorage.setItem("vg-changes",String((+localStorage.getItem("vg-changes")||0)+1))}catch(e){alert(T("Could not save on this phone. Free some space and try again.","Impossible d’enregistrer sur ce téléphone. Libérez de l’espace et réessayez."))}}
 function mk(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined&&txt!==null)e.textContent=txt;return e}
 function cbtn(txt,fn,cls){var b=mk("button",cls||"act",txt);b.type="button";b.addEventListener("click",fn);return b}
 function cdate(v){return pdate(v).toLocaleDateString(L==="fr"?"fr-FR":"en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"})}
@@ -3380,7 +3493,46 @@ function crmCsv(box){
   r1.appendChild(go);r1.appendChild(cbtn(T("Choose another file","Choisir un autre fichier"),function(){CV.csv=null;crmRender()}));
   box.appendChild(r1);box.appendChild(msg);
 }
+
+/* ---------- document alerts and unpaid balances ---------- */
+function cmon(d,n){var x=new Date(d.getTime());x.setMonth(x.getMonth()+n);return x}
+function calerts(c){
+  var out=[];
+  if(!c||["sent","decision","passport","closed"].indexOf(c.status)>=0)return out;
+  var ref=(c.appt&&dleft(c.appt)>=0)?pdate(c.appt):new Date();
+  if(c.pexp){
+    if(dleft(c.pexp)<0)out.push(T("Passport expired on "+cdate(c.pexp)+".","Passeport expiré le "+cdate(c.pexp)+"."));
+    else if(pdate(c.pexp)<cmon(ref,6))out.push(T("Passport expires "+cdate(c.pexp)+": less than 6 months after "+(c.appt&&dleft(c.appt)>=0?"the appointment":"today")+". Many embassies refuse this.","Le passeport expire le "+cdate(c.pexp)+" : moins de 6 mois après "+(c.appt&&dleft(c.appt)>=0?"le rendez-vous":"aujourd’hui")+". Beaucoup d’ambassades refusent."));
+  }
+  if(c.bstmt){
+    var age=Math.floor((ref-pdate(c.bstmt))/864e5);
+    if(age>92)out.push(T("Bank statement of "+cdate(c.bstmt)+" is older than 3 months. Many embassies want a recent one.","Le relevé bancaire du "+cdate(c.bstmt)+" a plus de 3 mois. Beaucoup d’ambassades en veulent un récent."));
+  }
+  return out;
+}
+function crmOwed(box){
+  box.appendChild(cbtn("← "+T("Clients","Clients"),function(){CV.mode="list";crmRender()}));
+  box.appendChild(mk("h3","",T("Who owes me","Qui me doit de l’argent")));
+  var rows=CL.filter(function(c){return cbal(c)>0}).map(function(c){
+    var n=pnext(c),late=n&&dleft(n.d)<0?-dleft(n.d):0;
+    return {c:c,b:cbal(c),n:n,late:late,idle:Math.max(0,Math.floor((Date.now()-(c.updated||Date.now()))/864e5))};
+  }).sort(function(a,b){return (b.late>0)-(a.late>0)||b.late-a.late||b.b-a.b});
+  if(!rows.length){box.appendChild(mk("p","m",T("Nobody owes you anything right now. Balances appear here when a client has a fee that is not fully paid.","Personne ne vous doit rien pour le moment. Les soldes apparaissent ici quand un client a des frais pas entièrement payés.")));return}
+  var tot={};rows.forEach(function(r){var k=r.c.cur||"XAF";tot[k]=(tot[k]||0)+r.b});
+  box.appendChild(mk("p","stat",rows.length+" "+T(rows.length===1?"client owes":"clients owe","client"+(rows.length>1?"s":"")+" "+T("","doivent"))+" · "+Object.keys(tot).map(function(k){return cmoney(tot[k],k)}).join(" + ")));
+  rows.forEach(function(r){
+    var c=r.c,d=mk("div","dcard");
+    d.appendChild(mk("h4","",c.name+" · "+cmoney(r.b,c.cur)));
+    var w=r.late?T("Instalment "+r.late+" day"+(r.late>1?"s":"")+" late","Échéance en retard de "+r.late+" jour"+(r.late>1?"s":"")):(r.n?T("Next instalment ","Prochaine échéance ")+whenTxt(r.n.d):T("No payment plan. Last change "+r.idle+" days ago.","Pas de plan de paiement. Dernière modification il y a "+r.idle+" jours."));
+    d.appendChild(mk("p","m"+(r.late?" late":""),(r.late?"⚠ ":"")+w+" · "+lab(STS,c.status)));
+    var br=mk("div","row");
+    if(c.phone){var a=mk("a","act",T("Remind on WhatsApp","Rappeler sur WhatsApp"));a.target="_blank";a.rel="noopener";a.href=waLink(c,r.n&&r.late?"c:instal":"c:payrem");br.appendChild(a)}
+    br.appendChild(cbtn(T("Open","Ouvrir"),function(){CV.mode="detail";CV.id=c.id;crmRender();window.scrollTo(0,0)}));
+    d.appendChild(br);box.appendChild(d);
+  });
+}
 function crmUI(){if(typeof CL==="undefined"||!CL)return;crmRender()}
+healthui();window.addEventListener("hashchange",function(){if(location.hash==="#health")healthui()});
 function crmRender(){
   var box=document.getElementById("crm");if(!box)return;
   box.innerHTML="";
@@ -3391,6 +3543,7 @@ function crmRender(){
   if(CV.mode==="team")return crmTeam(box);
   if(CV.mode==="backup")return crmBackupUI(box);
   if(CV.mode==="csv")return crmCsv(box);
+  if(CV.mode==="owed")return crmOwed(box);
   if(CV.mode==="doc")return crmDoc(box);
   if(CV.mode==="detail")return crmDetail(box);
   crmList(box);
@@ -3427,6 +3580,7 @@ function crmList(box){
   top.appendChild(cbtn(T("Client intake","Fiche client"),function(){CV.mode="import";crmRender()}));
   top.appendChild(cbtn(T("Dashboard","Tableau de bord"),function(){CV.mode="dash";crmRender()}));
   top.appendChild(cbtn(T("Income report","Rapport des revenus"),function(){CV.mode="report";crmRender()}));
+  top.appendChild(cbtn(T("Who owes me","Qui me doit de l’argent"),function(){CV.mode="owed";crmRender()}));
   box.appendChild(top);
   var up=CL.filter(function(c){return c.appt&&dleft(c.appt)>=0&&dleft(c.appt)<=7}).sort(function(a,b){return a.appt<b.appt?-1:1});
   box.appendChild(mk("p","stat",CL.length+" "+T(CL.length===1?"client":"clients","client"+(CL.length>1?"s":""))));
@@ -3442,6 +3596,12 @@ function crmList(box){
     var f2=mk("div","up");f2.appendChild(mk("b","",T("Follow-ups due","Relances à faire")));
     fu.slice(0,6).forEach(function(c){var a=mk("a","",c.name+" \u00B7 "+whenTxt(c.follow));a.addEventListener("click",function(){CV.mode="detail";CV.id=c.id;crmRender();window.scrollTo(0,0)});f2.appendChild(a)});
     box.appendChild(f2);
+  }
+  var al=CL.filter(function(c){return calerts(c).length});
+  if(al.length){
+    var a2=mk("div","up");a2.appendChild(mk("b","",T("Document alerts","Alertes sur les documents")));
+    al.slice(0,6).forEach(function(c){var a=mk("a","","\u26A0 "+c.name+" \u00B7 "+calerts(c)[0]);a.addEventListener("click",function(){CV.mode="detail";CV.id=c.id;crmRender();window.scrollTo(0,0)});a2.appendChild(a)});
+    box.appendChild(a2);
   }
   var ins=CL.filter(function(c){var n=pnext(c);return n&&c.status!=="closed"&&dleft(n.d)<=7}).sort(function(a,b){return pnext(a).d<pnext(b).d?-1:1});
   if(ins.length){
@@ -3501,6 +3661,8 @@ function crmForm(box){
   var by=mk("input");by.type="text";by.maxLength=40;by.value=c.by!==undefined?c.by:(c.id?"":(AG.name||""));F(T("Handled by (optional)","Pris en charge par (facultatif)"),by);
   var ap=mk("input");ap.type="date";ap.value=c.appt||"";F(T("Next appointment (optional)","Prochain rendez-vous (facultatif)"),ap);
   var fo=mk("input");fo.type="date";fo.value=c.follow||"";F(T("Follow up on (optional)","Relancer le (facultatif)"),fo,T("The client list reminds you on this date.","La liste des clients vous le rappelle à cette date."));
+  var pe=mk("input");pe.type="date";pe.value=c.pexp||"";F(T("Passport expiry date (optional)","Date d’expiration du passeport (facultatif)"),pe,T("Many embassies want a passport valid for at least 6 months after the trip.","Beaucoup d’ambassades demandent un passeport valable au moins 6 mois après le voyage."));
+  var bs=mk("input");bs.type="date";bs.value=c.bstmt||"";F(T("Date of the latest bank statement (optional)","Date du dernier relevé bancaire (facultatif)"),bs,T("Many embassies want statements from the last 3 months.","Beaucoup d’ambassades demandent des relevés des 3 derniers mois."));
   var cur=mk("select");opt(cur,CCUR,c.cur||odef("cur"));F(T("Currency","Devise"),cur);
   var fee=mk("input");fee.type="text";fee.setAttribute("inputmode","decimal");fee.value=c.fee||"";F(T("Your service fee (optional)","Vos frais de service (facultatif)"),fee,T("Your own fee for this client, not the visa fee.","Vos propres frais pour ce client, pas les frais de visa."));
   var paid=mk("input");paid.type="text";paid.setAttribute("inputmode","decimal");paid.value=c.paid||"";F(T("Amount paid so far","Montant déjà payé"),paid);
@@ -3511,7 +3673,7 @@ function crmForm(box){
     if(!nm){name.focus();alert(T("Please enter the client’s name.","Veuillez entrer le nom du client."));return}
     var oldst=c.id?c.status:null;
     var o=c.id?c:{id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),created:Date.now()};
-    o.name=nm.slice(0,80);o.phone=phone.value.trim().slice(0,30);o.dest=dest.value;o.type=type.value;o.status=st.value;o.appt=ap.value||"";o.notes=nt.value.slice(0,500);o.follow=fo.value||"";o.cur=cur.value;o.by=by.value.trim().slice(0,40);o.fee=cnum(fee.value);o.paid=cnum(paid.value);o.updated=Date.now();chist(o,o.status,oldst);
+    o.name=nm.slice(0,80);o.phone=phone.value.trim().slice(0,30);o.dest=dest.value;o.type=type.value;o.status=st.value;o.appt=ap.value||"";o.notes=nt.value.slice(0,500);o.follow=fo.value||"";o.cur=cur.value;o.by=by.value.trim().slice(0,40);o.fee=cnum(fee.value);o.paid=cnum(paid.value);o.pexp=pe.value||"";o.bstmt=bs.value||"";o.updated=Date.now();chist(o,o.status,oldst);
     if(!c.id)CL.push(o);
     csave();CV.mode="detail";CV.id=o.id;crmRender();window.scrollTo(0,0);
   }));
@@ -3746,6 +3908,7 @@ function crmDetail(box){
     box.appendChild(mk("p","m",T("Fee: ","Frais : ")+cmoney(c.fee||0,c.cur)+" \u00B7 "+T("Paid: ","Payé : ")+cmoney(c.paid||0,c.cur)+" \u00B7 "+T("Balance: ","Solde : ")+cmoney(bl,c.cur)));
     if(bl>0){var pr=mk("div","row");pr.appendChild(cbtn(T("Mark as fully paid","Marquer comme payé en totalité"),function(){c.paid=c.fee;c.updated=Date.now();csave();crmRender()}));box.appendChild(pr)}
   }
+  calerts(c).forEach(function(t){box.appendChild(mk("p","m late","\u26A0 "+t))});
   cplanUI(box,c);
   var sl=mk("label","",T("Status","Statut")),st=mk("select");opt(st,STS,c.status);sl.appendChild(st);box.appendChild(sl);
   st.addEventListener("change",function(){var os=c.status;c.status=st.value;c.updated=Date.now();chist(c,c.status,os);csave();crmRender()});
@@ -3856,7 +4019,7 @@ function crmClean(c){
   function str(v,n){return typeof v==="string"?v.slice(0,n):""}
   function inList(list,v,d){for(var i=0;i<list.length;i++)if(list[i][0]===v)return v;return d}
   if(!c||typeof c!=="object"||typeof c.name!=="string"||!c.name.trim())return null;
-  return {id:str(c.id,40)||(Date.now().toString(36)+Math.random().toString(36).slice(2,6)),name:str(c.name,80).trim(),phone:str(c.phone,30),dest:inList(CDEST,c.dest,"other"),type:inList(CTYPE,c.type,"tourist"),status:inList(STS,c.status,"new"),appt:/^\d{4}-\d{2}-\d{2}$/.test(c.appt||"")?c.appt:"",notes:str(c.notes,500),by:str(c.by,40),follow:/^\d{4}-\d{2}-\d{2}$/.test(c.follow||"")?c.follow:"",cur:inList(CCUR,c.cur,"XAF"),fee:cnum(c.fee),paid:cnum(c.paid),hist:(Array.isArray(c.hist)?c.hist:[]).filter(function(h){return h&&isFinite(+h.t)&&inList(STS,h.s,null)}).slice(-30).map(function(h){return {t:+h.t,s:h.s}}),res:inList(RES,c.res,""),resd:/^\d{4}-\d{2}-\d{2}$/.test(c.resd||"")?c.resd:"",reapply:/^\d{4}-\d{2}-\d{2}$/.test(c.reapply||"")?c.reapply:"",plan:(Array.isArray(c.plan)?c.plan:[]).filter(function(x){return x&&/^\d{4}-\d{2}-\d{2}$/.test(x.d||"")&&cnum(x.a)>0}).slice(0,12).map(function(x){return {d:x.d,a:cnum(x.a),ok:x.ok?1:0}}),why:(function(){var o={};if(c.why&&typeof c.why==="object")WHY.forEach(function(w){if(c.why[w[0]])o[w[0]]=1});return o})(),pays:(Array.isArray(c.pays)?c.pays:[]).filter(function(d){return d&&typeof d.no==="string"&&cnum(d.amt)}).slice(-40).map(function(d){return {type:d.type==="invoice"?"invoice":"receipt",no:str(d.no,30),date:/^\d{4}-\d{2}-\d{2}$/.test(d.date||"")?d.date:dkey(new Date()),amt:cnum(d.amt),cur:inList(CCUR,d.cur,"XAF"),method:inList(PAYM,d.method,""),desc:str(d.desc,160),snap:[cnum(d.snap&&d.snap[0]),cnum(d.snap&&d.snap[1])],tax:Math.min(100,cnum(d.tax)),ag:(d.ag&&typeof d.ag==="object")?(function(a){var o={};["biz","name","ad","wa","em","tid","reg","ft","pm","pn","pa"].forEach(function(k){o[k]=str(a[k],160)});return o})(d.ag):undefined}}),docs:(function(){var o={};if(c.docs&&typeof c.docs==="object")Object.keys(c.docs).slice(0,80).forEach(function(k){if(c.docs[k]&&k.length<=200)o[k]=1});return o})(),created:+c.created||Date.now(),updated:+c.updated||Date.now()};
+  return {id:str(c.id,40)||(Date.now().toString(36)+Math.random().toString(36).slice(2,6)),name:str(c.name,80).trim(),phone:str(c.phone,30),dest:inList(CDEST,c.dest,"other"),type:inList(CTYPE,c.type,"tourist"),status:inList(STS,c.status,"new"),appt:/^\d{4}-\d{2}-\d{2}$/.test(c.appt||"")?c.appt:"",notes:str(c.notes,500),by:str(c.by,40),follow:/^\d{4}-\d{2}-\d{2}$/.test(c.follow||"")?c.follow:"",cur:inList(CCUR,c.cur,"XAF"),fee:cnum(c.fee),paid:cnum(c.paid),hist:(Array.isArray(c.hist)?c.hist:[]).filter(function(h){return h&&isFinite(+h.t)&&inList(STS,h.s,null)}).slice(-30).map(function(h){return {t:+h.t,s:h.s}}),res:inList(RES,c.res,""),resd:/^\d{4}-\d{2}-\d{2}$/.test(c.resd||"")?c.resd:"",reapply:/^\d{4}-\d{2}-\d{2}$/.test(c.reapply||"")?c.reapply:"",pexp:/^\d{4}-\d{2}-\d{2}$/.test(c.pexp||"")?c.pexp:"",bstmt:/^\d{4}-\d{2}-\d{2}$/.test(c.bstmt||"")?c.bstmt:"",plan:(Array.isArray(c.plan)?c.plan:[]).filter(function(x){return x&&/^\d{4}-\d{2}-\d{2}$/.test(x.d||"")&&cnum(x.a)>0}).slice(0,12).map(function(x){return {d:x.d,a:cnum(x.a),ok:x.ok?1:0}}),why:(function(){var o={};if(c.why&&typeof c.why==="object")WHY.forEach(function(w){if(c.why[w[0]])o[w[0]]=1});return o})(),pays:(Array.isArray(c.pays)?c.pays:[]).filter(function(d){return d&&typeof d.no==="string"&&cnum(d.amt)}).slice(-40).map(function(d){return {type:d.type==="invoice"?"invoice":"receipt",no:str(d.no,30),date:/^\d{4}-\d{2}-\d{2}$/.test(d.date||"")?d.date:dkey(new Date()),amt:cnum(d.amt),cur:inList(CCUR,d.cur,"XAF"),method:inList(PAYM,d.method,""),desc:str(d.desc,160),snap:[cnum(d.snap&&d.snap[0]),cnum(d.snap&&d.snap[1])],tax:Math.min(100,cnum(d.tax)),ag:(d.ag&&typeof d.ag==="object")?(function(a){var o={};["biz","name","ad","wa","em","tid","reg","ft","pm","pn","pa"].forEach(function(k){o[k]=str(a[k],160)});return o})(d.ag):undefined}}),docs:(function(){var o={};if(c.docs&&typeof c.docs==="object")Object.keys(c.docs).slice(0,80).forEach(function(k){if(c.docs[k]&&k.length<=200)o[k]=1});return o})(),created:+c.created||Date.now(),updated:+c.updated||Date.now()};
 }
 function crmApply(o){
   if(!o||o.app!=="visa-guide-clients"||!Array.isArray(o.clients))throw new Error("bad");

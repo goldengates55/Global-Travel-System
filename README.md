@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-21`; it is now `visaguide-20`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-23`; it is now `visaguide-22`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -160,3 +160,15 @@ Both are in More and are written in English and French inside `index.html` (the 
 - Restore backup opens both kinds of file and asks for the passphrase when needed.
 - The Clients tab reminds the agent after 7 days or 10 changes since the last backup, with a "remind me in 3 days" button.
 - Import spreadsheet reads a CSV file (comma, semicolon or tab; English or French column titles), lets the agent check the column mapping, shows a preview, skips clients already in the app (same phone or name), and imports up to 500 rows at a time.
+
+## PIN, unpaid balances, document alerts, health check
+
+- When the app lock is on and the app is opened over https (or localhost), the client list is stored encrypted (AES-256-GCM) with a key derived from the PIN (PBKDF2, 150,000 rounds). The key lives only in memory after unlock. A 4 to 6 digit PIN is weak against an expert, and scans in IndexedDB are not encrypted. A forgotten PIN means the list cannot be read again, only restored from a backup.
+- Clients > Who owes me lists balances, late instalments first, with WhatsApp reminders.
+- Each client can hold a passport expiry date and a bank statement date. Warnings: passport valid for less than 6 months after the appointment (or today), statement older than about 3 months. These are common embassy rules, not universal, and the text says so.
+- More > App health check shows install, offline, version, https, backup, PIN, storage and persistence status, and can ask the browser to keep the data.
+
+## Route guides and training sheet
+
+- Routes now has Applying from Nigeria and Applying from Ghana. They are written as data (`ROUTES` in `index.html`) with English and French together, and list sources. Facts come from official pages and news reports read in November 2026. Re-check them before relying on them: centres and US rules change often. Apostille status was not confirmed from an official source, so the text says to check the HCCH table.
+- `training-en.pdf` and `training-fr.pdf` are the one-page training sheets, made with `tools/training.py` (not included in the zip). They are listed in the service worker precache and linked from More, Training sheet.
