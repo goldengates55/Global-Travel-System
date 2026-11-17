@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-18`; it is now `visaguide-17`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-21`; it is now `visaguide-20`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -144,3 +144,19 @@ Teal and vermilion "visa sticker" design: fine guilloche lines on the home banne
 - **Currency converter (Tools):** XAF, XOF, NGN, GHS, EUR, USD, GBP, CAD and AUD. You type the rate; it is saved on the phone for that pair. The euro is fixed at 655.957 CFA francs (XAF and XOF). The app never goes online for rates.
 - **What's new banner (home page):** to announce a fee or rule change, add a line at the top of the `NEWS` list in `index.html` with a new `id` (a later date sorts higher), an English text, a French text and optionally `go` (the page to open). Then raise `VERSION` in `sw.js` and upload. Each phone shows the banner once, until the person taps “Got it”.
 - **Share the app:** shows a QR code of the app's own address (only once the app is online) and an install guide for Android and iPhone.
+
+## Scans and team sharing
+
+- **Scans (client page):** take a photo or choose photos, pick what the document is (this also ticks it in the client's checklist) and a clean-up mode (original, brighten, black and white). Photos are shrunk, stored in the phone's own database (IndexedDB), and can be viewed, saved, or combined into one PDF. They are **not** included in client backups or team files, and they are deleted when the client is deleted. Clearing the app's data on the phone deletes them.
+- **Team sharing (Clients tab):** creates a file protected with a passphrase (AES-256-GCM, key from PBKDF2 with 250,000 rounds, built into the browser). Another agent chooses the file, enters the passphrase and the clients are merged: new clients are added, for a client on both phones the most recent edit wins, and receipts from both copies are kept. Deleting a client is not passed on. This needs the app to be opened from its online (https) address, because browsers only allow this encryption there. There is no server, so there are no accounts and no live sync. Each client has an optional “Handled by” name.
+
+## User manual and privacy page
+
+Both are in More and are written in English and French inside `index.html` (the `MAN` and `PRIV` lists). When you add or change a feature, update the matching topic in both languages so the manual stays correct. The privacy page lists what stays on the phone, what leaves it only when the agent chooses, the connections the app makes (Google Fonts on the first visit), the limits (the PIN does not encrypt, backups are not encrypted) and the agent's duties. If you add anything that sends data off the phone, update the privacy page first.
+
+## Backups and import
+
+- Save backup now asks for a passphrase (8 characters or more) and writes an encrypted file (AES-256-GCM, key from PBKDF2). The passphrase is never stored and cannot be recovered. Saving without protection is still possible. Encryption needs https or localhost.
+- Restore backup opens both kinds of file and asks for the passphrase when needed.
+- The Clients tab reminds the agent after 7 days or 10 changes since the last backup, with a "remind me in 3 days" button.
+- Import spreadsheet reads a CSV file (comma, semicolon or tab; English or French column titles), lets the agent check the column mapping, shows a preview, skips clients already in the app (same phone or name), and imports up to 500 rows at a time.

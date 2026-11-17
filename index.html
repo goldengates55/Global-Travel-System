@@ -334,6 +334,14 @@ code,pre{border-radius:10px}
 #cvres{font:700 1.25rem/1.3 var(--display);overflow-wrap:anywhere}
 #cvbox{display:grid;gap:14px}#cv-sw{justify-self:start}
 .sqr{width:min(100%,240px);height:auto;display:block;border-radius:12px;border:1px solid var(--line);margin:8px 0}
+/* scans */
+.scans{display:grid;gap:10px;margin-top:8px}
+.scan{display:grid;grid-template-columns:84px 1fr;gap:12px;align-items:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px}
+.scan img{width:84px;height:84px;object-fit:cover;border-radius:10px;border:1px solid var(--line);background:#fff}
+.scan b{display:block;overflow-wrap:anywhere}.scan .row{margin-top:6px}
+.sov{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.92);display:flex;flex-direction:column;align-items:center;gap:10px;padding:12px;overflow:auto}
+.sov img{max-width:100%;max-height:calc(100vh - 90px);object-fit:contain;background:#fff;border-radius:8px}
+.sov .act{align-self:flex-end}
 @media print{
 :root{--paper:#fff;--ink:#000;--card:#fff;--line:#999;--mute:#333}
 body{background:#fff;padding:0}
@@ -1093,20 +1101,9 @@ select{border:0;appearance:none;padding:0;font-weight:600}
 </div>
 </section>
 
-<section id="privacy">
-<h2>Privacy and data</h2>
-<p>This site is a guide and a demo. Here is what it does with your information.</p>
-<ul>
-<li>It does not collect your information. There are no accounts, no forms that send data, and no tracking scripts. Like any website, its host may keep ordinary visit logs.</li>
-<li>Your checklist choices are saved only in your own browser, on your device. Press “Start over” or clear your browser data to remove them.</li>
-<li>The passport check, cost estimator and timeline planner do not store what you type.</li>
-<li>The copy and WhatsApp buttons share only the checklist text you see, never your documents.</li>
-<li>Links to other sites open pages that we do not control.</li>
-<li>The client tracker in the app saves client details only on the phone where it is used and never sends them anywhere. Back them up yourself.</li>
-</ul>
-<h3>For the future system</h3>
-<p>When real client documents are handled, they will need encrypted storage, a clear retention period, access limited by role, and the client’s consent. This demo has none of that, so never use it for real client files.</p>
-</section>
+<section id="manual"><h2></h2><p></p><div id="manbody"></div></section>
+
+<section id="privacy"><h2></h2><p></p><div id="privbody"></div></section>
 
 <section id="convert"><h2></h2><p></p><div class="box" id="cvbox"></div></section>
 
@@ -1956,6 +1953,9 @@ function cvcalc(){
 
 /* ---------- what's new: a banner for updates; add a line to NEWS and raise the service worker VERSION ---------- */
 var NEWS=[
+ {id:"2026-11-17e",en:"New in Clients: protected backups with a passphrase, backup reminders, and import of clients from a spreadsheet.",fr:"Nouveau dans Clients : sauvegardes protégées par une phrase secrète, rappels de sauvegarde et import de clients depuis un tableur.",go:"clients"},
+ {id:"2026-11-17d",en:"New in More: a user manual, and a rewritten privacy page that says what the app stores and what it never sends.",fr:"Nouveau dans Plus : un manuel d’utilisation, et une page de confidentialité réécrite qui explique ce que l’application conserve et ce qu’elle n’envoie jamais.",go:"manual"},
+ {id:"2026-11-17c",en:"New in Clients: scan and keep client documents on the phone, and share clients with another agent through a protected team file.",fr:"Nouveau dans Clients : scannez et gardez les documents des clients sur le téléphone, et partagez des clients avec un autre agent par un fichier d’équipe protégé.",go:"clients"},
  {id:"2026-11-17b",en:"New: a currency converter in Tools, and a QR code and install guide in Share the app.",fr:"Nouveau : un convertisseur de devises dans Outils, et un code QR avec un guide d’installation dans Partager l’application.",go:"convert"},
  {id:"2026-11-17a",en:"New in Clients: client intake form, payment plans with instalment reminders, appointment reminders, a dashboard, and payment QR codes on invoices.",fr:"Nouveau dans Clients : fiche client à distance, plans de paiement avec rappels d’échéance, rappels de rendez-vous, tableau de bord et codes QR de paiement sur les factures.",go:"clients"}
 ];
@@ -2002,10 +2002,74 @@ function shqr(){
   });
 }
 
+
+/* ---------- user manual and privacy page (English and French) ---------- */
+var MAN=[
+ [["Install and open the app","Installer et ouvrir l’application"],[
+  ["ol",[["Open the app link in Chrome (Android) or Safari (iPhone).","Ouvrez le lien de l’application dans Chrome (Android) ou Safari (iPhone)."],["Android: tap the menu, then Install app. iPhone: tap Share, then Add to Home Screen.","Android : touchez le menu, puis Installer l’application. iPhone : touchez Partager, puis Sur l’écran d’accueil."],["Open it once while online. After that it works without internet.","Ouvrez-la une première fois en ligne. Ensuite elle fonctionne sans internet."]]],
+  ["p",["To give the app to someone else, use More, then Share the app. It shows a QR code and a ready-made message.","Pour donner l’application à quelqu’un, utilisez Plus, puis Partager l’application. Vous y trouverez un code QR et un message prêt à envoyer."]]]],
+ [["Language, licence and PIN","Langue, licence et code PIN"],[
+  ["ul",[["The language button at the top right switches between English and French.","Le bouton de langue en haut à droite bascule entre l’anglais et le français."],["If the app asks for a licence code, type the code you were given. Open More, then Licence, to see how long it is valid.","Si l’application demande un code de licence, saisissez celui qu’on vous a remis. Ouvrez Plus, puis Licence, pour voir sa durée de validité."],["To lock the app with a PIN of 4 to 6 digits, open More, then Settings. The PIN keeps other people out of the app. It does not encrypt the data. If you forget it, you may lose access to the client list, so keep a backup.","Pour verrouiller l’application avec un code PIN de 4 à 6 chiffres, ouvrez Plus, puis Réglages. Le PIN empêche les autres d’entrer dans l’application. Il ne chiffre pas les données. Si vous l’oubliez, vous risquez de perdre l’accès à la liste de clients : faites une sauvegarde."]]]]],
+ [["Set up your agency (Settings)","Configurer votre agence (Réglages)"],[
+  ["p",["Open More, then Settings. Fill in once, and every invoice, receipt and message uses it.","Ouvrez Plus, puis Réglages. Remplissez une seule fois : chaque facture, reçu et message l’utilisera."]],
+  ["ul",[["Applying from: choose the country your clients apply from. It sets the country code, the currency and the home-page line.","Dépôt depuis : choisissez le pays d’où vos clients déposent leur demande. Cela règle l’indicatif, la devise et la ligne de la page d’accueil."],["Business name, your name, WhatsApp number, address and logo appear on documents.","Le nom de l’entreprise, votre nom, votre numéro WhatsApp, l’adresse et le logo figurent sur les documents."],["Payment provider, number and account name appear on invoices, and on receipts that still have a balance, with a QR code.","Le fournisseur de paiement, le numéro et le nom du compte figurent sur les factures, et sur les reçus qui ont encore un solde, avec un code QR."]]]]],
+ [["Tools: checklist, passport, costs and more","Outils : liste, passeport, coûts et plus"],[
+  ["ul",[["Visa checklist: pick the destination, purpose and situation. The list of documents rebuilds itself. Use Copy, Print or WhatsApp to share it.","Liste de contrôle visa : choisissez la destination, le motif et la situation. La liste des documents se reconstruit. Utilisez Copier, Imprimer ou WhatsApp pour la partager."],["Passport check: enter the expiry and return dates to see if the passport lasts long enough.","Vérification du passeport : saisissez les dates d’expiration et de retour pour voir si le passeport est assez valide."],["Cost estimator: enter the official fees and your own prices. Nothing is pre-filled, because fees change.","Estimateur de coûts : saisissez les frais officiels et vos propres tarifs. Rien n’est prérempli, car les frais changent."],["Currency converter: type today’s rate yourself. The app never goes online for rates.","Convertisseur de devises : saisissez vous-même le taux du jour. L’application ne se connecte jamais pour obtenir les taux."],["Timeline planner, Schengen stay calculator, readiness quiz and itinerary builder are in the same tab.","Le planificateur de calendrier, le calculateur de séjour Schengen, le quiz de préparation et le créateur d’itinéraire sont dans le même onglet."]]]]],
+ [["Clients: add and follow a client","Clients : ajouter et suivre un client"],[
+  ["ol",[["Open Clients and tap + Add client. Fill in the name, phone number, destination and visa type. “Handled by” shows who looks after the file.","Ouvrez Clients et touchez + Ajouter un client. Renseignez le nom, le téléphone, la destination et le type de visa. « Pris en charge par » indique qui s’occupe du dossier."],["Open the client to change the status as the file moves forward, set an appointment or a follow-up date, and record the visa result.","Ouvrez le client pour changer le statut au fil du dossier, fixer un rendez-vous ou une date de relance, et noter le résultat du visa."],["Use the search box and the status filter to find clients quickly. Follow-ups and appointments due soon appear at the top of the list.","Utilisez la recherche et le filtre de statut pour retrouver vite un client. Les relances et rendez-vous proches s’affichent en haut de la liste."]]]]],
+ [["Clients: documents and scans","Clients : documents et scans"],[
+  ["ul",[["The Documents list comes from the visa checklist for that client. Tick each document when you receive it.","La liste des documents vient de la liste de contrôle visa du client. Cochez chaque document à sa réception."],["Scans: tap Take a photo or Choose photos, say what the document is, and pick a clean-up. Choosing a checklist document also ticks it.","Scans : touchez Prendre une photo ou Choisir des photos, indiquez de quel document il s’agit et choisissez une retouche. Choisir un document de la liste le coche aussi."],["Each scan can be viewed, saved or deleted. Make one PDF combines all scans of the client.","Chaque scan peut être vu, enregistré ou supprimé. Créer un seul PDF regroupe tous les scans du client."],["Scans stay on this phone only. They are not in backups or team files.","Les scans restent sur ce téléphone seulement. Ils ne sont pas dans les sauvegardes ni les fichiers d’équipe."]]]]],
+ [["Clients: fees, receipts and instalments","Clients : frais, reçus et échéances"],[
+  ["ul",[["Enter the fee in the client’s details. The balance updates when you record payments.","Saisissez les frais dans la fiche du client. Le solde se met à jour quand vous enregistrez des paiements."],["Create receipt or invoice makes a PDF with your agency details. An invoice, or a receipt with a balance left, also shows how to pay, with a QR code.","Créer un reçu ou une facture produit un PDF avec les informations de votre agence. Une facture, ou un reçu avec un solde restant, indique aussi comment payer, avec un code QR."],["Payment plan: add dated instalments or split the balance into 2 to 6 monthly payments. Mark paid adds the amount to what the client has paid.","Plan de paiement : ajoutez des échéances datées ou répartissez le solde en 2 à 6 mensualités. Marquer payé ajoute le montant à ce que le client a payé."],["Overdue instalments are shown on the client list and in a box at the top.","Les échéances en retard apparaissent dans la liste des clients et dans un encadré en haut."]]]]],
+ [["Clients: messages and reminders","Clients : messages et rappels"],[
+  ["ul",[["Send a message opens WhatsApp with the text ready: documents missing, payment reminder, instalment reminder, appointment reminder or a check-in. Read it before you send.","Envoyer un message ouvre WhatsApp avec le texte prêt : documents manquants, rappel de paiement, rappel d’échéance, rappel de rendez-vous ou prise de nouvelles. Relisez-le avant d’envoyer."],["For a client with an appointment, Add to my calendar downloads an event with a reminder the day before.","Pour un client avec un rendez-vous, Ajouter à mon agenda télécharge un événement avec un rappel la veille."],["The Templates tab has more ready-made letters and messages.","L’onglet Modèles contient d’autres lettres et messages prêts à l’emploi."]]]]],
+ [["Client intake form","Fiche client à distance"],[
+  ["ol",[["In Clients, tap Client intake, then Share intake link. Send the link to your client.","Dans Clients, touchez Fiche client, puis Partager le lien du formulaire. Envoyez le lien à votre client."],["The client fills in a short form. It opens WhatsApp with their details ready to send to your number.","Le client remplit un court formulaire. Il ouvre WhatsApp avec ses informations prêtes à vous être envoyées."],["Paste the client’s message in Client intake and tap Add as client. Check the details, then save.","Collez le message du client dans Fiche client et touchez Ajouter comme client. Vérifiez les informations, puis enregistrez."]]],
+  ["p",["The form does not send anything to a server. It tells clients not to enter passport or card numbers.","Le formulaire n’envoie rien à un serveur. Il demande aux clients de ne pas indiquer de numéro de passeport ou de carte."]]]],
+ [["Dashboard and income report","Tableau de bord et rapport de revenus"],[
+  ["ul",[["Dashboard: open cases, money still to collect, money received this month, clients by stage, approval rate by destination and income for the last 6 months.","Tableau de bord : dossiers ouverts, reste à encaisser, argent reçu ce mois-ci, clients par étape, taux d’acceptation par destination et revenus des 6 derniers mois."],["Income report: choose a month to see receipts and totals, and share it as a PDF.","Rapport de revenus : choisissez un mois pour voir les reçus et les totaux, et partagez-le en PDF."],["Both use only the data on this phone.","Les deux utilisent uniquement les données de ce téléphone."]]]]],
+ [["Backups and team sharing","Sauvegardes et partage en équipe"],[
+  ["ul",[["Back up your clients often. Save backup saves a file with your client list. Protect it with a passphrase so nobody else can read it. If you forget the passphrase, the backup cannot be opened. Restore backup replaces the list on the phone with the file. The app reminds you after 7 days or 10 changes.","Sauvegardez vos clients souvent. Enregistrer une sauvegarde crée un fichier avec votre liste de clients. Protégez-le avec une phrase secrète pour que personne d’autre ne puisse le lire. Si vous oubliez la phrase secrète, la sauvegarde ne peut pas être ouverte. Restaurer une sauvegarde remplace la liste du téléphone par ce fichier. L’application vous le rappelle après 7 jours ou 10 modifications."],["Team sharing creates a file protected by a passphrase. Another agent chooses the file, enters the passphrase and the clients merge into their phone. The most recent edit wins. Send the passphrase by phone or in person, not in the same message as the file.","Le partage en équipe crée un fichier protégé par une phrase secrète. Un autre agent choisit le fichier, saisit la phrase secrète et les clients sont fusionnés dans son téléphone. La modification la plus récente l’emporte. Communiquez la phrase secrète par téléphone ou en personne, pas dans le même message que le fichier."],["Team sharing needs the app to be opened from its online address.","Le partage en équipe demande que l’application soit ouverte depuis son adresse en ligne."]]]]],
+ [["Guides, Routes and Templates","Guides, Itinéraires et Modèles"],[
+  ["ul",[["Guides explain documents such as bank statements, insurance, photos and the interview, and what to do after a refusal.","Les guides expliquent des documents comme les relevés bancaires, l’assurance, les photos et l’entretien, et que faire après un refus."],["Routes has step-by-step guides for each destination. The detailed guides are written for applicants from Cameroon. For other countries it shows a general page with official links.","Itinéraires propose des guides pas à pas par destination. Les guides détaillés sont rédigés pour les demandeurs du Cameroun. Pour les autres pays, une page générale avec des liens officiels s’affiche."],["Templates has letters and messages. Replace everything in square brackets before you use them.","Modèles contient des lettres et des messages. Remplacez tout ce qui est entre crochets avant de les utiliser."],["Fees and rules change. Always confirm on the official site of the embassy or visa centre.","Les frais et les règles changent. Confirmez toujours sur le site officiel de l’ambassade ou du centre de visas."]]]]],
+ [["Updates and problems","Mises à jour et problèmes"],[
+  ["ul",[["A What’s new banner on the home page announces changes. Tap Got it to hide it.","Un bandeau Nouveautés sur la page d’accueil annonce les changements. Touchez Compris pour le masquer."],["On any page, Report a mistake on this page opens a message with the page name.","Sur toute page, Signaler une erreur sur cette page ouvre un message avec le nom de la page."],["If something looks old after an update, close the app fully and open it again while online.","Si quelque chose semble ancien après une mise à jour, fermez complètement l’application et rouvrez-la en ligne."]]]]]
+];
+var PRIV=[
+ [["What stays on your phone","Ce qui reste sur votre téléphone"],[
+  ["ul",[["Your client list, receipts, payment plans, notes and results are saved only on the phone where you use the app.","Votre liste de clients, vos reçus, plans de paiement, notes et résultats sont enregistrés uniquement sur le téléphone où vous utilisez l’application."],["Scans are saved in the phone’s own storage. They are not in backups or team files.","Les scans sont enregistrés dans le stockage du téléphone. Ils ne sont pas dans les sauvegardes ni les fichiers d’équipe."],["Your agency details, logo, payment number, currency rates, checklist choices, licence and PIN settings are also saved on the phone.","Les informations de votre agence, le logo, le numéro de paiement, les taux de change, vos choix de liste, la licence et les réglages du PIN sont aussi enregistrés sur le téléphone."],["The app has no accounts and no tracking, and it does not send client data to any server.","L’application n’a ni compte ni suivi, et n’envoie aucune donnée client à un serveur."]]]]],
+ [["What leaves your phone, and only when you choose","Ce qui quitte votre téléphone, et seulement si vous le décidez"],[
+  ["ul",[["Messages: WhatsApp opens with text ready. Once you send it, it is handled by WhatsApp under its own rules.","Messages : WhatsApp s’ouvre avec un texte prêt. Une fois envoyé, il est géré par WhatsApp selon ses propres règles."],["Backups, PDFs, scans and calendar files are saved or shared only when you tap the button for them.","Les sauvegardes, PDF, scans et fichiers d’agenda sont enregistrés ou partagés uniquement quand vous touchez le bouton correspondant."],["The client intake form sends nothing to a server. What the client types goes to you through WhatsApp.","Le formulaire client n’envoie rien à un serveur. Ce que le client saisit vous parvient par WhatsApp."],["Team files are encrypted with your passphrase. Anyone who has both the file and the passphrase can read the clients in it.","Les fichiers d’équipe sont chiffrés avec votre phrase secrète. Quiconque a le fichier et la phrase secrète peut lire les clients qu’il contient."]]]]],
+ [["Connections the app makes","Connexions établies par l’application"],[
+  ["ul",[["The first time the app opens, it loads its fonts from Google Fonts, so Google can see the phone’s address. After that the fonts are kept on the phone.","À la première ouverture, l’application charge ses polices depuis Google Fonts : Google peut donc voir l’adresse du téléphone. Ensuite les polices sont conservées sur le téléphone."],["The website host may keep ordinary visit logs, as any website does.","L’hébergeur du site peut conserver des journaux de visite ordinaires, comme tout site web."],["Links to embassies, visa centres and other sites open pages that we do not control.","Les liens vers des ambassades, centres de visas et autres sites ouvrent des pages que nous ne contrôlons pas."]]]]],
+ [["Limits you should know","Limites à connaître"],[
+  ["ul",[["The PIN lock keeps other people out of the app but does not encrypt the data. Also use your phone’s own screen lock.","Le verrouillage par PIN empêche les autres d’entrer dans l’application mais ne chiffre pas les données. Utilisez aussi le verrouillage d’écran du téléphone."],["Backup files are not encrypted unless you set a passphrase when saving. Keep them private and delete old copies.","Les fichiers de sauvegarde ne sont pas chiffrés sauf si vous choisissez une phrase secrète à l’enregistrement. Gardez-les en lieu sûr et supprimez les anciennes copies."],["Clearing the app’s data, or losing the phone, erases the client list and scans. Only your backups remain.","Effacer les données de l’application, ou perdre le téléphone, supprime la liste de clients et les scans. Seules vos sauvegardes subsistent."],["Passport and ID photos are sensitive. Do not keep scans longer than the file needs, and delete them when the case is closed.","Les photos de passeport et de pièces d’identité sont sensibles. Ne gardez pas les scans plus longtemps que nécessaire et supprimez-les à la clôture du dossier."]]]]],
+ [["Your duties as the agent","Vos obligations en tant qu’agent"],[
+  ["ul",[["Tell clients what you keep about them and why, and ask for their agreement before you store their documents.","Dites aux clients ce que vous gardez à leur sujet et pourquoi, et demandez leur accord avant de stocker leurs documents."],["Keep data only as long as you need it for the file or the law requires. Delete the rest.","Ne gardez les données que le temps nécessaire au dossier ou exigé par la loi. Supprimez le reste."],["Never enter passport numbers, card numbers or PINs in notes. Ask clients never to send them in the intake form.","N’inscrivez jamais de numéros de passeport, de carte ou de PIN dans les notes. Demandez aux clients de ne jamais les envoyer dans le formulaire."],["Data protection laws differ by country. Check the rules that apply to you.","Les lois sur la protection des données diffèrent selon les pays. Vérifiez les règles qui s’appliquent à vous."]]]]],
+ [["Delete your data","Supprimer vos données"],[
+  ["ul",[["One client: open the client, then Delete. This also removes that client’s scans from this phone.","Un client : ouvrez le client, puis Supprimer. Cela retire aussi ses scans de ce téléphone."],["Everything: clear the app’s site data in the browser or phone settings, or uninstall the app.","Tout : effacez les données du site de l’application dans les réglages du navigateur ou du téléphone, ou désinstallez l’application."],["Copies you made (backups, team files, PDFs, WhatsApp messages) must be deleted separately.","Les copies que vous avez faites (sauvegardes, fichiers d’équipe, PDF, messages WhatsApp) doivent être supprimées séparément."]]]]]
+];
+function docfill(el,data,fr){
+  el.innerHTML="";
+  data.forEach(function(t){
+    var d=document.createElement("details"),sm=document.createElement("summary");sm.textContent=t[0][fr?1:0];d.appendChild(sm);
+    t[1].forEach(function(b){
+      if(b[0]==="p"){var p2=document.createElement("p");p2.textContent=b[1][fr?1:0];d.appendChild(p2)}
+      else{var l=document.createElement(b[0]);if(b[0]==="ol")l.className="steps";b[1].forEach(function(x){var li=document.createElement("li");li.textContent=x[fr?1:0];l.appendChild(li)});d.appendChild(l)}
+    });
+    el.appendChild(d);
+  });
+}
+function docui(){
+  var fr=L==="fr",m=document.getElementById("manual"),pv=document.getElementById("privacy");
+  if(m){m.querySelector("h2").textContent=fr?"Manuel d’utilisation":"User manual";m.querySelector("p").textContent=fr?"Comment utiliser chaque partie de l’application. Touchez un sujet pour l’ouvrir.":"How to use each part of the app. Tap a topic to open it.";docfill(document.getElementById("manbody"),MAN,fr)}
+  if(pv){pv.querySelector("h2").textContent=fr?"Confidentialité et données":"Privacy and data";pv.querySelector("p").textContent=fr?"Voici ce que l’application fait de vos informations et de celles de vos clients.":"Here is what the app does with your information and your clients’ information.";docfill(document.getElementById("privbody"),PRIV,fr)}
+}
+
 /* ---------- applicant origin: tagline, origin page and option names follow the chosen country ---------- */
 function orgui(){
   var fr=L==="fr",k=org(),o=ORIGINS[k],nm=o.n[fr?1:0];
-  if(typeof cvui==="function"){cvui();nbanner();if(typeof QR!=="undefined")shqr()}
+  if(typeof cvui==="function"){cvui();nbanner();docui();if(typeof QR!=="undefined")shqr()}
   var tg=document.querySelector(".tagline");
   if(tg&&tg.firstChild){
     tg.firstChild.nodeValue=k==="cm"?(fr?"Liste de contrôle, outils et guides pour les demandes de visa depuis le Cameroun.":"Checklist, tools and guides for visa applications from Cameroon."):(fr?"Liste de contrôle, outils et guides pour les demandes de visa depuis "+o.fp+".":"Checklist, tools and guides for visa applications from "+nm+".");
@@ -2595,7 +2659,7 @@ var TABS=[
  {id:"guides",ic:"\uD83D\uDCD6",secs:["travel","visa","journey","refusals","afterref","bankstatements","insurance","interview","photos","glossary"]},
  {id:"routes",ic:"\uD83E\uDDED",secs:["origin","cameroon","students","usvisa","canadavisa","ukvisa","ausvisa","updates"]},
  {id:"templates",ic:"\u2709\uFE0F",secs:["letters","messages"]},
- {id:"more",ic:"\u2630",groups:[{k:"build",secs:["design","maintenance","data","architecture","roadmap","money","publish"]},{k:"about",secs:["licence","settings","about","services","faq","privacy","share"]}]}
+ {id:"more",ic:"\u2630",groups:[{k:"build",secs:["design","maintenance","data","architecture","roadmap","money","publish"]},{k:"about",secs:["manual","licence","settings","about","services","faq","privacy","share"]}]}
 ];
 var CUR="tools",UIKEY="";
 try{CUR=localStorage.getItem("vg-tab")||"tools"}catch(e){}
@@ -2665,7 +2729,7 @@ var CDEST=[["schengen","Schengen area","Espace Schengen"],["uk","United Kingdom"
 var CTYPE=[["tourist","Tourist","Tourisme"],["business","Business","Affaires"],["student","Study","Études"],["family","Family visit","Visite familiale"],["transit","Transit","Transit"]];
 function T(en,fr){return L==="fr"?fr:en}
 function lab(list,v){for(var i=0;i<list.length;i++)if(list[i][0]===v)return L==="fr"?list[i][2]:list[i][1];return v}
-function csave(){try{localStorage.setItem(CRM_KEY,JSON.stringify(CL))}catch(e){alert(T("Could not save on this phone. Free some space and try again.","Impossible d’enregistrer sur ce téléphone. Libérez de l’espace et réessayez."))}}
+function csave(){try{localStorage.setItem(CRM_KEY,JSON.stringify(CL));localStorage.setItem("vg-changes",String((+localStorage.getItem("vg-changes")||0)+1))}catch(e){alert(T("Could not save on this phone. Free some space and try again.","Impossible d’enregistrer sur ce téléphone. Libérez de l’espace et réessayez."))}}
 function mk(tag,cls,txt){var e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined&&txt!==null)e.textContent=txt;return e}
 function cbtn(txt,fn,cls){var b=mk("button",cls||"act",txt);b.type="button";b.addEventListener("click",fn);return b}
 function cdate(v){return pdate(v).toLocaleDateString(L==="fr"?"fr-FR":"en-GB",{weekday:"short",day:"numeric",month:"short",year:"numeric"})}
@@ -3116,6 +3180,206 @@ function crmImport(box){
   }));
   box.appendChild(r2);
 }
+
+/* ---------- team sharing: an encrypted file that other agents merge into their own phone (no server) ---------- */
+function t64(buf){var b=new Uint8Array(buf),t="",i;for(i=0;i<b.length;i++)t+=String.fromCharCode(b[i]);return btoa(t)}
+function tun64(t){var x=atob(t),b=new Uint8Array(x.length),i;for(i=0;i<x.length;i++)b[i]=x.charCodeAt(i);return b}
+function tkey(pass,salt){
+  var enc=new TextEncoder();
+  return crypto.subtle.importKey("raw",enc.encode(pass),"PBKDF2",false,["deriveKey"]).then(function(k){
+    return crypto.subtle.deriveKey({name:"PBKDF2",salt:salt,iterations:250000,hash:"SHA-256"},k,{name:"AES-GCM",length:256},false,["encrypt","decrypt"]);
+  });
+}
+function tseal(pass,obj,tag){
+  var salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),data=new TextEncoder().encode(JSON.stringify(obj));
+  return tkey(pass,salt).then(function(k){return crypto.subtle.encrypt({name:"AES-GCM",iv:iv},k,data)}).then(function(ct){
+    return new Blob([JSON.stringify({app:tag,v:1,s:t64(salt),i:t64(iv),d:t64(ct)})],{type:"application/json"});
+  });
+}
+function tmake(pass){
+  var salt=crypto.getRandomValues(new Uint8Array(16)),iv=crypto.getRandomValues(new Uint8Array(12)),
+      data=new TextEncoder().encode(JSON.stringify({app:"visa-guide-clients",clients:CL,by:AG.name||"",at:Date.now()}));
+  return tkey(pass,salt).then(function(k){return crypto.subtle.encrypt({name:"AES-GCM",iv:iv},k,data)}).then(function(ct){
+    return new Blob([JSON.stringify({app:"global-visa-team",v:1,s:t64(salt),i:t64(iv),d:t64(ct)})],{type:"application/json"});
+  });
+}
+function topen(text,pass,tag){
+  var w;try{w=JSON.parse(text)}catch(e){return Promise.reject(new Error("bad"))}
+  if(!w||w.app!==(tag||"global-visa-team")||w.v!==1||typeof w.s!=="string"||typeof w.i!=="string"||typeof w.d!=="string")return Promise.reject(new Error("bad"));
+  return tkey(pass,tun64(w.s)).then(function(k){return crypto.subtle.decrypt({name:"AES-GCM",iv:tun64(w.i)},k,tun64(w.d))}).then(function(pt){
+    var o=JSON.parse(new TextDecoder().decode(pt));
+    if(!o||!Array.isArray(o.clients))throw new Error("bad");
+    return o;
+  });
+}
+function tmerge(incoming){
+  var add=0,upd=0,keep=0;
+  incoming.map(crmClean).filter(Boolean).forEach(function(n){
+    var i=-1,k;for(k=0;k<CL.length;k++)if(CL[k].id===n.id){i=k;break}
+    if(i<0){CL.push(n);add++;return}
+    var o=CL[i];
+    function union(a,b){var seen={},out=[];a.concat(b).forEach(function(r){if(!seen[r.no]){seen[r.no]=1;out.push(r)}});return out.slice(-40)}
+    if(n.updated>o.updated){
+      n.pays=union(n.pays||[],o.pays||[]);n.plan=n.plan&&n.plan.length?n.plan:(o.plan||[]);
+      Object.keys(o.docs||{}).forEach(function(d){n.docs[d]=1});
+      CL[i]=n;upd++;
+    }else{
+      o.pays=union(o.pays||[],n.pays||[]);keep++;
+    }
+  });
+  csave();
+  return {add:add,upd:upd,keep:keep};
+}
+function crmTeam(box){
+  box.appendChild(cbtn("← "+T("Clients","Clients"),function(){CV.mode="list";crmRender()}));
+  box.appendChild(mk("h3","",T("Team sharing","Partage en équipe")));
+  box.appendChild(mk("p","m",T("Share your clients with another agent without any server. Create a protected file, send it by WhatsApp or email, and the other agent merges it into their phone. Everyone keeps their own copy.","Partagez vos clients avec un autre agent sans serveur. Créez un fichier protégé, envoyez-le par WhatsApp ou par e-mail, et l’autre agent le fusionne dans son téléphone. Chacun garde sa propre copie.")));
+  if(!(window.crypto&&crypto.subtle)){box.appendChild(mk("p","m late",T("Protected files need the app to be opened from its online address (https). They are not available here.","Les fichiers protégés demandent que l’application soit ouverte depuis son adresse en ligne (https). Ils ne sont pas disponibles ici.")));return}
+  var msg=mk("p","m");msg.setAttribute("role","status");
+  function pw(label){var l=mk("label","",label),i=mk("input");i.type="password";i.autocomplete="off";l.appendChild(i);return [l,i]}
+  box.appendChild(mk("h4","",T("Create a team file","Créer un fichier d’équipe")));
+  var a=pw(T("Passphrase (at least 8 characters)","Phrase secrète (au moins 8 caractères)")),b=pw(T("Type it again","Saisissez-la à nouveau"));
+  box.appendChild(a[0]);box.appendChild(b[0]);
+  var r1=mk("div","row");
+  r1.appendChild(cbtn(T("Create and share file","Créer et partager le fichier"),function(){
+    if(a[1].value.length<8){msg.textContent=T("The passphrase needs at least 8 characters.","La phrase secrète doit contenir au moins 8 caractères.");a[1].focus();return}
+    if(a[1].value!==b[1].value){msg.textContent=T("The two passphrases are different.","Les deux phrases secrètes sont différentes.");b[1].focus();return}
+    if(!CL.length){msg.textContent=T("There are no clients to share yet.","Il n’y a pas encore de clients à partager.");return}
+    msg.textContent=T("Creating the file…","Création du fichier…");
+    tmake(a[1].value).then(function(bl){saveFile("global-visa-team-"+dkey(new Date())+".json",bl);msg.textContent=T("File created. Tell the other agent the passphrase in person or by phone call, not in the same message.","Fichier créé. Communiquez la phrase secrète à l’autre agent en personne ou par téléphone, pas dans le même message.");a[1].value="";b[1].value=""}).catch(function(){msg.textContent=T("Could not create the file.","Impossible de créer le fichier.")});
+  }));
+  box.appendChild(r1);
+  box.appendChild(mk("h4","",T("Merge a team file","Fusionner un fichier d’équipe")));
+  var c2=pw(T("Passphrase of the file","Phrase secrète du fichier"));box.appendChild(c2[0]);
+  var r2=mk("div","row");
+  r2.appendChild(cbtn(T("Choose file and merge","Choisir le fichier et fusionner"),function(){
+    if(!c2[1].value){msg.textContent=T("Enter the passphrase first.","Saisissez d’abord la phrase secrète.");c2[1].focus();return}
+    var fi=document.createElement("input");fi.type="file";fi.accept=".json,application/json";
+    fi.addEventListener("change",function(){
+      var f=fi.files&&fi.files[0];if(!f)return;
+      var fr=new FileReader();
+      fr.onload=function(){
+        topen(String(fr.result),c2[1].value).then(function(o){
+          var r=tmerge(o.clients);c2[1].value="";
+          msg.textContent=T("Done: "+r.add+" added, "+r.upd+" updated, "+r.keep+" kept as they were.","Terminé : "+r.add+" ajouté"+(r.add>1?"s":"")+", "+r.upd+" mis à jour, "+r.keep+" conservé"+(r.keep>1?"s":"")+" tel"+(r.keep>1?"s":"")+" quel"+(r.keep>1?"s":"")+".");
+        }).catch(function(e){msg.textContent=(e&&e.message==="bad"&&!/OperationError/.test(String(e)))?T("This is not a team file.","Ceci n’est pas un fichier d’équipe."):T("Wrong passphrase, or the file is damaged.","Phrase secrète incorrecte, ou fichier endommagé.")});
+      };
+      fr.readAsText(f);
+    });
+    fi.click();
+  }));
+  box.appendChild(r2);box.appendChild(msg);
+  box.appendChild(mk("h4","",T("How merging works","Comment fonctionne la fusion")));
+  var ul=mk("ul");
+  [T("New clients are added.","Les nouveaux clients sont ajoutés."),
+   T("For a client on both phones, the most recent edit wins. Receipts from both copies are kept.","Pour un client présent sur les deux téléphones, la modification la plus récente l’emporte. Les reçus des deux copies sont conservés."),
+   T("Deleting a client does not delete it on other phones.","Supprimer un client ne le supprime pas sur les autres téléphones."),
+   T("Scans stay on the phone that took them and are not shared.","Les scans restent sur le téléphone qui les a pris et ne sont pas partagés."),
+   T("Set “Handled by” on each client to see who looks after whom.","Renseignez « Pris en charge par » sur chaque client pour savoir qui s’occupe de qui.")].forEach(function(t){ul.appendChild(mk("li","",t))});
+  box.appendChild(ul);
+}
+
+/* ---------- import clients from a spreadsheet saved as CSV ---------- */
+var CSVF=[["name","Name","Nom"],["phone","WhatsApp number","Numéro WhatsApp"],["dest","Destination","Destination"],["type","Visa type","Type de visa"],["status","Status","Statut"],["appt","Appointment date","Date du rendez-vous"],["follow","Follow-up date","Date de relance"],["cur","Currency","Devise"],["fee","Fee","Frais"],["paid","Paid so far","Déjà payé"],["by","Handled by","Pris en charge par"],["notes","Notes","Notes"]];
+var CSVR={name:/^(full\s*)?name$|^nom|client/i,phone:/phone|whats|tel|mobile|num[eé]ro|number|contact/i,dest:/destin/i,type:/visa\s*type|^type|purpose|motif|objet/i,status:/status|statut|stage|[eé]tape/i,appt:/appoint|rendez/i,follow:/follow|relance/i,cur:/curr|devise/i,fee:/^fee|frais|price|prix|amount|montant|total/i,paid:/paid|pay[eé]|deposit|acompte/i,by:/handled|assign|agent|pris en charge/i,notes:/note|comment|remark/i};
+function csvParse(t){
+  t=String(t||"").replace(/^﻿/,"");
+  var first=t.split(/\r?\n/)[0]||"",cands=[",",";","\t"],dl=",",best=-1;
+  cands.forEach(function(c){var n=first.split(c).length;if(n>best){best=n;dl=c}});
+  var rows=[],row=[],cell="",q=false,i,ch;
+  for(i=0;i<t.length;i++){
+    ch=t.charAt(i);
+    if(q){if(ch==='"'){if(t.charAt(i+1)==='"'){cell+='"';i++}else q=false}else cell+=ch}
+    else if(ch==='"')q=true;
+    else if(ch===dl){row.push(cell);cell=""}
+    else if(ch==="\n"||ch==="\r"){if(ch==="\r"&&t.charAt(i+1)==="\n")i++;row.push(cell);cell="";if(row.some(function(x){return x.trim()!==""}))rows.push(row);row=[]}
+    else cell+=ch;
+  }
+  row.push(cell);if(row.some(function(x){return x.trim()!==""}))rows.push(row);
+  return rows;
+}
+function cvmatch(list,v,d){
+  var t=String(v||"").trim().toLowerCase(),i;if(!t)return d;
+  for(i=0;i<list.length;i++)if(list[i][0]===t||String(list[i][1]).toLowerCase()===t||String(list[i][2]).toLowerCase()===t)return list[i][0];
+  for(i=0;i<list.length;i++)if(t.indexOf(String(list[i][1]).toLowerCase())>=0||t.indexOf(String(list[i][2]).toLowerCase())>=0)return list[i][0];
+  if(t.length>=4)for(i=0;i<list.length;i++)if(String(list[i][1]).toLowerCase().indexOf(t)>=0||String(list[i][2]).toLowerCase().indexOf(t)>=0)return list[i][0];
+  if(/[eé]tud|student|school|[eé]cole/.test(t)&&list===CTYPE)return "student";
+  return d;
+}
+function cviso(y,mo,d){y=+y;mo=+mo;d=+d;if(mo<1||mo>12||d<1||d>31||y<2000||y>2100)return "";return y+"-"+("0"+mo).slice(-2)+"-"+("0"+d).slice(-2)}
+function cvdate(v){
+  v=String(v||"").trim();var m=/^(\d{4})-(\d{1,2})-(\d{1,2})/.exec(v);if(m)return cviso(m[1],m[2],m[3]);
+  m=/^(\d{1,2})[\/.\-](\d{1,2})[\/.\-](\d{2,4})$/.exec(v);if(m)return cviso(m[3].length===2?"20"+m[3]:m[3],m[2],m[1]);
+  return "";
+}
+function cvnum(v){
+  var t=String(v==null?"":v).replace(/\s/g,"").replace(/[^\d.,]/g,"");if(!t)return 0;
+  if(/^\d{1,3}([.,]\d{3})+$/.test(t))t=t.replace(/[.,]/g,"");
+  else{var lc=t.lastIndexOf(","),ld=t.lastIndexOf(".");if(lc>ld)t=t.replace(/\./g,"").replace(",",".");else t=t.replace(/,/g,"")}
+  return parseFloat(t)||0;
+}
+function cvclean(v){v=String(v==null?"":v).trim();return /^'[=+\-@]/.test(v)?v.slice(1):v}
+function cvkey(c){var d=String(c.phone||"").replace(/\D/g,"");return d.length>=7?"p"+d.slice(-9):"n"+String(c.name||"").trim().toLowerCase()}
+function cvbuild(rows,map){
+  var out=[],skipName=0,skipDup=0,seen={},i;
+  CL.forEach(function(c){seen[cvkey(c)]=1});
+  for(i=1;i<rows.length&&i<=500;i++){
+    var r=rows[i];function g(f){return map[f]>=0?cvclean(r[map[f]]):""}
+    var name=g("name");if(!name){skipName++;continue}
+    var c=crmClean({name:name,phone:g("phone"),dest:cvmatch(CDEST,g("dest"),"other"),type:cvmatch(CTYPE,g("type"),"tourist"),status:cvmatch(STS,g("status"),"new"),appt:cvdate(g("appt")),follow:cvdate(g("follow")),cur:(g("cur")||"").toUpperCase().trim()||odef("cur"),fee:cvnum(g("fee")),paid:cvnum(g("paid")),by:g("by"),notes:g("notes"),pays:[],docs:{},hist:[]});
+    if(!c)continue;
+    var k=cvkey(c);if(seen[k]){skipDup++;continue}
+    seen[k]=1;out.push(c);
+  }
+  return {list:out,skipName:skipName,skipDup:skipDup,over:Math.max(0,rows.length-1-500)};
+}
+function crmCsv(box){
+  box.appendChild(cbtn("← "+T("Clients","Clients"),function(){CV.csv=null;CV.mode="list";crmRender()}));
+  box.appendChild(mk("h3","",T("Import clients from a spreadsheet","Importer des clients depuis un tableur")));
+  var msg=mk("p","m");msg.setAttribute("role","status");
+  if(!CV.csv){
+    box.appendChild(mk("p","m",T("Save your spreadsheet as a CSV file first. Excel: File, Save As, CSV. Google Sheets: File, Download, Comma-separated values. The first row must have column titles. Up to 500 clients at a time.","Enregistrez d’abord votre tableur au format CSV. Excel : Fichier, Enregistrer sous, CSV. Google Sheets : Fichier, Télécharger, Valeurs séparées par des virgules. La première ligne doit contenir les titres des colonnes. Jusqu’à 500 clients à la fois.")));
+    var r0=mk("div","row");
+    r0.appendChild(cbtn(T("Choose CSV file","Choisir le fichier CSV"),function(){
+      var fi=document.createElement("input");fi.type="file";fi.accept=".csv,text/csv,.txt";
+      fi.addEventListener("change",function(){
+        var f=fi.files&&fi.files[0];if(!f)return;
+        var fr=new FileReader();
+        fr.onload=function(){
+          var rows=csvParse(String(fr.result));
+          if(rows.length<2){msg.textContent=T("No clients found. Check that the first row has column titles.","Aucun client trouvé. Vérifiez que la première ligne contient les titres des colonnes.");return}
+          var map={};CSVF.forEach(function(x){map[x[0]]=-1;rows[0].forEach(function(h,ix){if(map[x[0]]<0&&CSVR[x[0]].test(String(h).trim())&&Object.keys(map).every(function(k){return map[k]!==ix}))map[x[0]]=ix})});
+          CV.csv={rows:rows,map:map};crmRender();
+        };
+        fr.readAsText(f);
+      });
+      fi.click();
+    }));
+    box.appendChild(r0);box.appendChild(msg);return;
+  }
+  var rows=CV.csv.rows,map=CV.csv.map;
+  box.appendChild(mk("p","m",T("Found "+(rows.length-1)+" rows. Check which column holds each detail.","Trouvé "+(rows.length-1)+" lignes. Vérifiez quelle colonne contient chaque information.")));
+  CSVF.forEach(function(x){
+    var l=mk("label","",(L==="fr"?x[2]:x[1])+(x[0]==="name"?" *":"")),sel=mk("select"),none=mk("option","",T("(not in my file)","(absent de mon fichier)"));none.value="-1";sel.appendChild(none);
+    rows[0].forEach(function(h,ix){var o=mk("option","",String(h).trim()||T("Column ","Colonne ")+(ix+1));o.value=ix;sel.appendChild(o)});
+    sel.value=String(map[x[0]]);sel.addEventListener("change",function(){map[x[0]]=+sel.value;crmRender()});
+    l.appendChild(sel);box.appendChild(l);
+  });
+  var res=cvbuild(rows,map);
+  var pv=mk("div","dcard");pv.appendChild(mk("h4","",T("Preview","Aperçu")));
+  if(map.name<0)pv.appendChild(mk("p","m late",T("Choose the column that holds the client name.","Choisissez la colonne qui contient le nom du client.")));
+  res.list.slice(0,5).forEach(function(c){pv.appendChild(mk("p","m",c.name+" · "+(c.phone||"-")+" · "+lab(CDEST,c.dest)+" · "+lab(CTYPE,c.type)+" · "+lab(STS,c.status)+(c.fee?" · "+cmoney(c.fee,c.cur):"")))});
+  pv.appendChild(mk("p","m",T("Will add "+res.list.length+". Skipped: "+res.skipDup+" already in the app, "+res.skipName+" without a name"+(res.over?", "+res.over+" beyond the first 500":"")+".","Sera ajouté : "+res.list.length+". Ignorés : "+res.skipDup+" déjà dans l’application, "+res.skipName+" sans nom"+(res.over?", "+res.over+" au-delà des 500 premiers":"")+".")));
+  box.appendChild(pv);
+  var r1=mk("div","row");
+  var go=cbtn(T("Import "+res.list.length+" clients","Importer "+res.list.length+" clients"),function(){
+    if(!res.list.length)return;
+    CL=CL.concat(res.list);csave();CV.csv=null;CV.mode="list";crmRender();
+  });
+  if(!res.list.length)go.disabled=true;
+  r1.appendChild(go);r1.appendChild(cbtn(T("Choose another file","Choisir un autre fichier"),function(){CV.csv=null;crmRender()}));
+  box.appendChild(r1);box.appendChild(msg);
+}
 function crmUI(){if(typeof CL==="undefined"||!CL)return;crmRender()}
 function crmRender(){
   var box=document.getElementById("crm");if(!box)return;
@@ -3124,6 +3388,9 @@ function crmRender(){
   if(CV.mode==="report")return crmReport(box);
   if(CV.mode==="dash")return crmDash(box);
   if(CV.mode==="import")return crmImport(box);
+  if(CV.mode==="team")return crmTeam(box);
+  if(CV.mode==="backup")return crmBackupUI(box);
+  if(CV.mode==="csv")return crmCsv(box);
   if(CV.mode==="doc")return crmDoc(box);
   if(CV.mode==="detail")return crmDetail(box);
   crmList(box);
@@ -3134,12 +3401,12 @@ function crmFill(){
   var q=CV.q.trim().toLowerCase(),n=0;
   sortedC().forEach(function(c){
     if(CV.f!=="all"&&c.status!==CV.f)return;
-    var hay=(c.name+" "+c.phone+" "+lab(CDEST,c.dest)+" "+c.notes).toLowerCase();
+    var hay=(c.name+" "+c.phone+" "+lab(CDEST,c.dest)+" "+c.notes+" "+(c.by||"")).toLowerCase();
     if(q&&hay.indexOf(q)<0)return;
     n++;
     var b=mk("button","cl"),h=mk("div","");
     b.type="button";h.appendChild(mk("b","",c.name));h.appendChild(mk("span","pill",lab(STS,c.status)));
-    b.appendChild(h);b.appendChild(mk("div","m",lab(CDEST,c.dest)+" \u00B7 "+lab(CTYPE,c.type)));
+    b.appendChild(h);b.appendChild(mk("div","m",lab(CDEST,c.dest)+" \u00B7 "+lab(CTYPE,c.type)+(c.by?" \u00B7 "+c.by:"")));
     if(c.appt){var a=mk("div","m","\uD83D\uDCC5 "+cdate(c.appt)+" ("+whenTxt(c.appt)+")");if(dleft(c.appt)<0&&c.status==="appt")a.className="m late";b.appendChild(a)}
     var bal=cbal(c);if(bal>0)b.appendChild(mk("div","m",T("Balance due: ","Solde dû : ")+cmoney(bal,c.cur)));
     var ni=pnext(c);if(ni&&dleft(ni.d)<=3)b.appendChild(mk("div","m"+(dleft(ni.d)<0?" late":""),"\u23F0 "+T("Instalment ","Échéance ")+cmoney(ni.a,c.cur)+" \u00B7 "+whenTxt(ni.d)));
@@ -3155,6 +3422,8 @@ function crmList(box){
   top.appendChild(cbtn(T("Save backup","Enregistrer une sauvegarde"),crmBackup));
   top.appendChild(cbtn(T("Restore backup","Restaurer une sauvegarde"),function(){document.getElementById("crmfile").click()}));
   top.appendChild(cbtn(T("Export spreadsheet","Exporter en tableur"),ccsv));
+  top.appendChild(cbtn(T("Import spreadsheet","Importer un tableur"),function(){CV.csv=null;CV.mode="csv";crmRender()}));
+  top.appendChild(cbtn(T("Team sharing","Partage en équipe"),function(){CV.mode="team";crmRender()}));
   top.appendChild(cbtn(T("Client intake","Fiche client"),function(){CV.mode="import";crmRender()}));
   top.appendChild(cbtn(T("Dashboard","Tableau de bord"),function(){CV.mode="dash";crmRender()}));
   top.appendChild(cbtn(T("Income report","Rapport des revenus"),function(){CV.mode="report";crmRender()}));
@@ -3180,9 +3449,16 @@ function crmList(box){
     ins.slice(0,6).forEach(function(c){var n=pnext(c),a=mk("a","",c.name+" \u00B7 "+cmoney(n.a,c.cur)+" \u00B7 "+whenTxt(n.d));a.addEventListener("click",function(){CV.mode="detail";CV.id=c.id;crmRender();window.scrollTo(0,0)});i2.appendChild(a)});
     box.appendChild(i2);
   }
-  var lb=0;try{lb=+localStorage.getItem("vg-clients-backup")||0}catch(e){}
-  if(CL.length&&(!lb||Date.now()-lb>14*864e5)){
-    box.appendChild(mk("div","up",T("Tip: save a backup of your clients. Last backup: "+(lb?cdate(dkey(new Date(lb))):"never")+".","Conseil : enregistrez une sauvegarde de vos clients. Dernière sauvegarde : "+(lb?cdate(dkey(new Date(lb))):"jamais")+".")));
+  var lb=0,chg=0,sn=0;try{lb=+localStorage.getItem("vg-clients-backup")||0;chg=+localStorage.getItem("vg-changes")||0;sn=+localStorage.getItem("vg-backup-snooze")||0}catch(e){}
+  var days=lb?Math.floor((Date.now()-lb)/864e5):999;
+  if(CL.length&&Date.now()>sn&&(!lb||days>=7||chg>=10)){
+    var bk=mk("div","up"),why=!lb?T("You have not saved a backup yet.","Vous n’avez pas encore enregistré de sauvegarde."):(chg>=10&&days<7?T(chg+" changes since your last backup.",chg+" modifications depuis votre dernière sauvegarde."):T("Last backup: "+cdate(dkey(new Date(lb)))+" ("+days+" days ago).","Dernière sauvegarde : "+cdate(dkey(new Date(lb)))+" (il y a "+days+" jours)."));
+    bk.appendChild(mk("b","",T("Save a backup of your clients","Enregistrez une sauvegarde de vos clients")));
+    bk.appendChild(mk("div","m",why+" "+T("If the phone is lost or its data is cleared, a backup is the only way to get your clients back.","Si le téléphone est perdu ou que ses données sont effacées, une sauvegarde est le seul moyen de retrouver vos clients.")));
+    var br=mk("div","row");
+    br.appendChild(cbtn(T("Save backup now","Enregistrer maintenant"),crmBackup));
+    br.appendChild(cbtn(T("Remind me in 3 days","Me le rappeler dans 3 jours"),function(){try{localStorage.setItem("vg-backup-snooze",String(Date.now()+3*864e5))}catch(e){}crmRender()}));
+    bk.appendChild(br);box.appendChild(bk);
   }
   if(up.length){
     var u=mk("div","up");u.appendChild(mk("b","",T("Appointments in the next 7 days","Rendez-vous dans les 7 prochains jours")));
@@ -3222,6 +3498,7 @@ function crmForm(box){
   var dest=mk("select");opt(dest,CDEST,c.dest||"schengen");F(T("Destination","Destination"),dest);
   var type=mk("select");opt(type,CTYPE,c.type||"tourist");F(T("Visa type","Type de visa"),type);
   var st=mk("select");opt(st,STS,c.status||"new");F(T("Status","Statut"),st);
+  var by=mk("input");by.type="text";by.maxLength=40;by.value=c.by!==undefined?c.by:(c.id?"":(AG.name||""));F(T("Handled by (optional)","Pris en charge par (facultatif)"),by);
   var ap=mk("input");ap.type="date";ap.value=c.appt||"";F(T("Next appointment (optional)","Prochain rendez-vous (facultatif)"),ap);
   var fo=mk("input");fo.type="date";fo.value=c.follow||"";F(T("Follow up on (optional)","Relancer le (facultatif)"),fo,T("The client list reminds you on this date.","La liste des clients vous le rappelle à cette date."));
   var cur=mk("select");opt(cur,CCUR,c.cur||odef("cur"));F(T("Currency","Devise"),cur);
@@ -3234,7 +3511,7 @@ function crmForm(box){
     if(!nm){name.focus();alert(T("Please enter the client’s name.","Veuillez entrer le nom du client."));return}
     var oldst=c.id?c.status:null;
     var o=c.id?c:{id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),created:Date.now()};
-    o.name=nm.slice(0,80);o.phone=phone.value.trim().slice(0,30);o.dest=dest.value;o.type=type.value;o.status=st.value;o.appt=ap.value||"";o.notes=nt.value.slice(0,500);o.follow=fo.value||"";o.cur=cur.value;o.fee=cnum(fee.value);o.paid=cnum(paid.value);o.updated=Date.now();chist(o,o.status,oldst);
+    o.name=nm.slice(0,80);o.phone=phone.value.trim().slice(0,30);o.dest=dest.value;o.type=type.value;o.status=st.value;o.appt=ap.value||"";o.notes=nt.value.slice(0,500);o.follow=fo.value||"";o.cur=cur.value;o.by=by.value.trim().slice(0,40);o.fee=cnum(fee.value);o.paid=cnum(paid.value);o.updated=Date.now();chist(o,o.status,oldst);
     if(!c.id)CL.push(o);
     csave();CV.mode="detail";CV.id=o.id;crmRender();window.scrollTo(0,0);
   }));
@@ -3317,13 +3594,138 @@ function cplanUI(box,c){
     box.appendChild(mk("p","m",T("The first instalment uses the due date above; the others follow one month apart.","La première échéance utilise la date ci-dessus ; les suivantes suivent à un mois d’intervalle.")));
   }
 }
+
+/* ---------- document scans: photos stay on this phone (IndexedDB), not in client backups ---------- */
+var SDB=null;
+function sdb(){
+  if(SDB)return SDB;
+  SDB=new Promise(function(res,rej){
+    if(!window.indexedDB){rej(new Error("nodb"));return}
+    var q=indexedDB.open("vg-scans",1);
+    q.onupgradeneeded=function(){var d=q.result;if(!d.objectStoreNames.contains("scans")){var st=d.createObjectStore("scans",{keyPath:"id"});st.createIndex("cid","cid")}};
+    q.onsuccess=function(){res(q.result)};q.onerror=function(){rej(q.error)};
+  });
+  return SDB;
+}
+function stx(mode,fn){return sdb().then(function(d){return new Promise(function(res,rej){var t=d.transaction("scans",mode),r=fn(t.objectStore("scans"));t.oncomplete=function(){res(r&&r.result)};t.onerror=function(){rej(t.error)};t.onabort=function(){rej(t.error||new Error("abort"))}})})}
+function sput(rec){return stx("readwrite",function(st){return st.put(rec)})}
+function sdel(id){return stx("readwrite",function(st){return st.delete(id)})}
+function sall(cid){return stx("readonly",function(st){return st.index("cid").getAll(cid)}).then(function(a){return (a||[]).sort(function(x,y){return x.ts-y.ts})})}
+function sdelc(cid){return sall(cid).then(function(a){if(a.length)return stx("readwrite",function(st){a.forEach(function(r){st.delete(r.id)})})})}
+function sload(file){return new Promise(function(res,rej){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){URL.revokeObjectURL(u);res(im)};im.onerror=function(){URL.revokeObjectURL(u);rej(new Error("img"))};im.src=u})}
+function blobOf(cv,q){return new Promise(function(res){cv.toBlob(function(b){res(b)},"image/jpeg",q)})}
+function senhance(cx,w,h,gray){
+  var d=cx.getImageData(0,0,w,h),p=d.data,hist=new Uint32Array(256),i,a=0,lo=0,hi=255,tot=w*h;
+  for(i=0;i<p.length;i+=4)hist[(p[i]*77+p[i+1]*150+p[i+2]*29)>>8]++;
+  for(i=0;i<256;i++){a+=hist[i];if(a>tot*0.02){lo=i;break}}
+  a=0;for(i=255;i>=0;i--){a+=hist[i];if(a>tot*0.02){hi=i;break}}
+  if(hi-lo<30){lo=0;hi=255}
+  var lut=new Uint8Array(256);for(i=0;i<256;i++)lut[i]=Math.max(0,Math.min(255,(i-lo)*255/(hi-lo)));
+  for(i=0;i<p.length;i+=4){
+    if(gray){var g=lut[(p[i]*77+p[i+1]*150+p[i+2]*29)>>8];p[i]=p[i+1]=p[i+2]=g}
+    else{p[i]=lut[p[i]];p[i+1]=lut[p[i+1]];p[i+2]=lut[p[i+2]]}
+  }
+  cx.putImageData(d,0,0);
+}
+function simg(file,mode){
+  return sload(file).then(function(im){
+    var W=im.naturalWidth,H=im.naturalHeight,k=Math.min(1,1800/Math.max(W,H)),w=Math.max(1,Math.round(W*k)),h=Math.max(1,Math.round(H*k));
+    var cv=document.createElement("canvas");cv.width=w;cv.height=h;
+    var cx=cv.getContext("2d",{willReadFrequently:true});cx.fillStyle="#fff";cx.fillRect(0,0,w,h);cx.drawImage(im,0,0,w,h);
+    if(mode!=="orig")senhance(cx,w,h,mode==="gray");
+    var th=document.createElement("canvas"),tk=Math.min(1,200/Math.max(w,h));th.width=Math.max(1,Math.round(w*tk));th.height=Math.max(1,Math.round(h*tk));
+    th.getContext("2d").drawImage(cv,0,0,th.width,th.height);
+    return Promise.all([blobOf(cv,.78),blobOf(th,.7)]).then(function(b){return {w:w,h:h,blob:b[0],thumb:b[1]}});
+  });
+}
+function scanPdf(a){
+  return Promise.all(a.map(function(r){return new Promise(function(res){var fr=new FileReader();fr.onload=function(){res({w:r.w,h:r.h,bin:fr.result})};fr.readAsBinaryString(r.blob)})})).then(function(imgs){
+    var objs=[],n=imgs.length,kids=[],i;
+    objs[1]="<< /Type /Catalog /Pages 2 0 R >>";
+    for(i=0;i<n;i++)kids.push((3+i*3)+" 0 R");
+    objs[2]="<< /Type /Pages /Kids ["+kids.join(" ")+"] /Count "+n+" >>";
+    imgs.forEach(function(im,i2){
+      var pg=3+i2*3,ct=pg+1,ix=pg+2,k=Math.min(555/im.w,802/im.h),dw=im.w*k,dh=im.h*k,x=(595-dw)/2,y=(842-dh)/2;
+      var content="q "+dw.toFixed(1)+" 0 0 "+dh.toFixed(1)+" "+x.toFixed(1)+" "+y.toFixed(1)+" cm /Im1 Do Q";
+      objs[pg]="<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /XObject << /Im1 "+ix+" 0 R >> >> /Contents "+ct+" 0 R >>";
+      objs[ct]="<< /Length "+content.length+" >>\nstream\n"+content+"\nendstream";
+      objs[ix]="<< /Type /XObject /Subtype /Image /Width "+im.w+" /Height "+im.h+" /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length "+im.bin.length+" >>\nstream\n"+im.bin+"\nendstream";
+    });
+    var out="%PDF-1.4\n",offs=[],m;
+    for(m=1;m<objs.length;m++){offs[m]=out.length;out+=m+" 0 obj\n"+objs[m]+"\nendobj\n"}
+    var xr=out.length;out+="xref\n0 "+objs.length+"\n0000000000 65535 f \n";
+    for(m=1;m<objs.length;m++)out+=("0000000000"+offs[m]).slice(-10)+" 00000 n \n";
+    out+="trailer\n<< /Size "+objs.length+" /Root 1 0 R >>\nstartxref\n"+xr+"\n%%EOF";
+    var bytes=new Uint8Array(out.length);for(m=0;m<out.length;m++)bytes[m]=out.charCodeAt(m)&255;
+    return new Blob([bytes],{type:"application/pdf"});
+  });
+}
+var SURLS=[];
+function sview(r){
+  var ov=mk("div","sov"),im=mk("img"),u=URL.createObjectURL(r.blob);im.src=u;im.alt=r.label;
+  var bt=cbtn(T("Close","Fermer"),function(){document.body.removeChild(ov);URL.revokeObjectURL(u)});
+  ov.setAttribute("role","dialog");ov.setAttribute("aria-label",r.label);ov.appendChild(bt);ov.appendChild(im);document.body.appendChild(ov);bt.focus();
+}
+function cscanUI(box,c){
+  box.appendChild(mk("h3","",T("Scans","Scans")));
+  var dl=cdocs(c),sel=mk("select"),ms=mk("select");
+  dl.forEach(function(r){var o=mk("option","",cdname(r));o.value=r.n;sel.appendChild(o)});
+  var oo=mk("option","",T("Other document","Autre document"));oo.value="";sel.appendChild(oo);
+  [["orig",T("Original photo","Photo d’origine")],["bright",T("Brighten (recommended)","Éclaircir (recommandé)")],["gray",T("Black and white document","Document noir et blanc")]].forEach(function(x){var o=mk("option","",x[1]);o.value=x[0];if(x[0]==="bright")o.selected=true;ms.appendChild(o)});
+  var l1=mk("label","",T("What is it?","De quoi s’agit-il ?"));l1.appendChild(sel);box.appendChild(l1);
+  var l2=mk("label","",T("Clean-up","Retouche"));l2.appendChild(ms);box.appendChild(l2);
+  var st=mk("p","m","");st.setAttribute("role","status");
+  var list=mk("div","scans");
+  function pick(cap){
+    var fi=document.createElement("input");fi.type="file";fi.accept="image/*";fi.multiple=!cap;if(cap)fi.setAttribute("capture","environment");
+    fi.addEventListener("change",function(){
+      var fs=Array.prototype.slice.call(fi.files||[]),i=0,label=sel.options[sel.selectedIndex].text,key=sel.value;
+      if(!fs.length)return;
+      (function next(){
+        if(i>=fs.length){st.textContent=T("Saved on this phone.","Enregistré sur ce téléphone.");if(key){c.docs=c.docs||{};c.docs[key]=1;c.updated=Date.now();csave();crmRender();return}render();return}
+        st.textContent=T("Processing "+(i+1)+" of "+fs.length+"…","Traitement "+(i+1)+" sur "+fs.length+"…");
+        simg(fs[i],ms.value).then(function(o){
+          return sput({id:c.id+"-"+Date.now().toString(36)+"-"+i,cid:c.id,label:label,doc:key,ts:Date.now(),w:o.w,h:o.h,size:o.blob.size,blob:o.blob,thumb:o.thumb});
+        }).then(function(){i++;next()}).catch(function(){st.textContent=T("Could not save this photo. The phone may be out of space, or the file is not an image.","Impossible d’enregistrer cette photo. Le téléphone manque peut-être d’espace, ou le fichier n’est pas une image.")});
+      })();
+    });
+    fi.click();
+  }
+  var r1=mk("div","row");
+  r1.appendChild(cbtn(T("Take a photo","Prendre une photo"),function(){pick(true)}));
+  r1.appendChild(cbtn(T("Choose photos","Choisir des photos"),function(){pick(false)}));
+  box.appendChild(r1);box.appendChild(st);box.appendChild(list);
+  function render(){
+    SURLS.forEach(function(u){URL.revokeObjectURL(u)});SURLS=[];list.innerHTML="";
+    sall(c.id).then(function(a){
+      if(!a.length){list.appendChild(mk("p","m",T("No scans yet. Photos are stored only on this phone and are not included in client backups.","Aucun scan pour l’instant. Les photos restent sur ce téléphone et ne sont pas incluses dans les sauvegardes des clients.")));return}
+      var tot=0;
+      a.forEach(function(r){
+        tot+=r.size||0;
+        var rw=mk("div","scan"),im=mk("img"),u=URL.createObjectURL(r.thumb);SURLS.push(u);im.src=u;im.alt=r.label;
+        var tx=mk("div","");tx.appendChild(mk("b","",r.label));tx.appendChild(mk("span","m",cdate(dkey(new Date(r.ts)))+" · "+Math.max(1,Math.round((r.size||0)/1024))+" KB"));
+        var bs=mk("div","row");
+        bs.appendChild(cbtn(T("View","Voir"),function(){sview(r)}));
+        bs.appendChild(cbtn(T("Save","Enregistrer"),function(){saveFile((c.name.replace(/[^\w\-]+/g,"_")||"scan")+"-"+r.label.replace(/[^\w\-]+/g,"_").slice(0,30)+".jpg",r.blob)}));
+        bs.appendChild(cbtn(T("Delete","Supprimer"),function(){if(confirm(T("Delete this scan?","Supprimer ce scan ?")))sdel(r.id).then(render)},"act danger"));
+        tx.appendChild(bs);rw.appendChild(im);rw.appendChild(tx);list.appendChild(rw);
+      });
+      list.appendChild(mk("p","m",a.length+" "+T(a.length===1?"scan":"scans","scan"+(a.length>1?"s":""))+" · "+(tot/1048576).toFixed(1)+" MB"));
+      var rp2=mk("div","row");
+      rp2.appendChild(cbtn(T("Make one PDF","Créer un seul PDF"),function(){scanPdf(a).then(function(b){saveFile((c.name.replace(/[^\w\-]+/g,"_")||"scans")+"-documents.pdf",b)})}));
+      rp2.appendChild(cbtn(T("Delete all scans","Supprimer tous les scans"),function(){if(confirm(T("Delete all scans of this client? This cannot be undone.","Supprimer tous les scans de ce client ? Cette action est définitive.")))sdelc(c.id).then(render)},"act danger"));
+      list.appendChild(rp2);
+    }).catch(function(){list.appendChild(mk("p","m late",T("Scans are not available in this browser.","Les scans ne sont pas disponibles dans ce navigateur.")))});
+  }
+  render();
+}
 function crmDetail(box){
   var c=findC(CV.id);
   if(!c){CV.mode="list";return crmList(box)}
   box.appendChild(cbtn("\u2190 "+T("Clients","Clients"),function(){CV.mode="list";crmRender()}));
   box.appendChild(mk("h3","",c.name));
   var info=mk("p","m");
-  info.appendChild(document.createTextNode(lab(CDEST,c.dest)+" \u00B7 "+lab(CTYPE,c.type)));
+  info.appendChild(document.createTextNode(lab(CDEST,c.dest)+" \u00B7 "+lab(CTYPE,c.type)+(c.by?" \u00B7 "+c.by:"")));
   box.appendChild(info);
   if(c.phone){var pp=mk("p","m"),a=mk("a","",c.phone);a.href="tel:+"+waNum(c.phone);pp.appendChild(document.createTextNode(T("Phone: ","Téléphone : ")));pp.appendChild(a);box.appendChild(pp)}
   if(c.appt){
@@ -3362,6 +3764,7 @@ function crmDetail(box){
     });
     box.appendChild(mk("p","m",T("Based on the destination and visa type. Open the Visa checklist for documents that depend on the case.","D’après la destination et le type de visa. Ouvrez la liste de contrôle visa pour les documents qui dépendent du cas.")));
   }
+  cscanUI(box,c);
   if(c.hist&&c.hist.length){
     box.appendChild(mk("h3","",T("History","Historique")));
     c.hist.slice(-8).reverse().forEach(function(h){
@@ -3414,34 +3817,67 @@ function crmDetail(box){
   var row2=mk("div","row");
   row2.appendChild(cbtn(T("Edit","Modifier"),function(){CV.mode="form";crmRender();window.scrollTo(0,0)}));
   row2.appendChild(cbtn(T("Delete","Supprimer"),function(){
-    if(confirm(T("Delete this client? This cannot be undone.","Supprimer ce client ? Cette action est définitive."))){CL=CL.filter(function(x){return x.id!==c.id});csave();CV.mode="list";crmRender()}
+    if(confirm(T("Delete this client? This cannot be undone.","Supprimer ce client ? Cette action est définitive."))){CL=CL.filter(function(x){return x.id!==c.id});csave();sdelc(c.id).catch(function(){});CV.mode="list";crmRender()}
   },"act danger"));
   box.appendChild(row2);
 }
-function crmBackup(){
-  var o={app:"visa-guide-clients",version:1,exported:new Date().toISOString(),clients:CL,docn:(function(){try{return JSON.parse(localStorage.getItem("vg-docn")||"{}")||{}}catch(e){return {}}})()};
-  try{localStorage.setItem("vg-clients-backup",String(Date.now()))}catch(e){}
-  saveFile("visa-guide-clients-"+dkey(new Date())+".json",new Blob([JSON.stringify(o,null,2)],{type:"application/json"}));
-  setTimeout(crmRender,300);
+function crmBackupObj(){return {app:"visa-guide-clients",version:1,exported:new Date().toISOString(),clients:CL,docn:(function(){try{return JSON.parse(localStorage.getItem("vg-docn")||"{}")||{}}catch(e){return {}}})()}}
+function crmBackupDone(){try{localStorage.setItem("vg-clients-backup",String(Date.now()));localStorage.setItem("vg-changes","0");localStorage.removeItem("vg-backup-snooze")}catch(e){}}
+function crmBackup(){CV.mode="backup";crmRender();window.scrollTo(0,0)}
+function crmBackupUI(box){
+  box.appendChild(cbtn("← "+T("Clients","Clients"),function(){CV.mode="list";crmRender()}));
+  box.appendChild(mk("h3","",T("Save a backup","Enregistrer une sauvegarde")));
+  box.appendChild(mk("p","m",T("A backup is a file with your client list. Protect it with a passphrase so that nobody else can read it. If you forget the passphrase, the backup cannot be opened. Scans are not included.","Une sauvegarde est un fichier avec votre liste de clients. Protégez-la avec une phrase secrète pour que personne d’autre ne puisse la lire. Si vous oubliez la phrase secrète, la sauvegarde ne peut pas être ouverte. Les scans ne sont pas inclus.")));
+  var msg=mk("p","m");msg.setAttribute("role","status");
+  function plain(){
+    saveFile("visa-guide-clients-"+dkey(new Date())+".json",new Blob([JSON.stringify(crmBackupObj(),null,2)],{type:"application/json"}));
+    crmBackupDone();msg.textContent=T("Backup saved without protection. Keep the file private.","Sauvegarde enregistrée sans protection. Gardez le fichier en lieu sûr.");
+  }
+  if(window.crypto&&crypto.subtle){
+    function pw(label){var l=mk("label","",label),i=mk("input");i.type="password";i.autocomplete="off";l.appendChild(i);return [l,i]}
+    var a=pw(T("Passphrase (at least 8 characters)","Phrase secrète (au moins 8 caractères)")),b=pw(T("Type it again","Saisissez-la à nouveau"));
+    box.appendChild(a[0]);box.appendChild(b[0]);
+    var r1=mk("div","row");
+    r1.appendChild(cbtn(T("Save protected backup","Enregistrer une sauvegarde protégée"),function(){
+      if(a[1].value.length<8){msg.textContent=T("The passphrase needs at least 8 characters.","La phrase secrète doit contenir au moins 8 caractères.");a[1].focus();return}
+      if(a[1].value!==b[1].value){msg.textContent=T("The two passphrases are different.","Les deux phrases secrètes sont différentes.");b[1].focus();return}
+      msg.textContent=T("Creating the backup…","Création de la sauvegarde…");
+      tseal(a[1].value,crmBackupObj(),"global-visa-backup").then(function(bl){saveFile("global-visa-backup-"+dkey(new Date())+".json",bl);crmBackupDone();a[1].value="";b[1].value="";msg.textContent=T("Protected backup saved. Write the passphrase down somewhere safe.","Sauvegarde protégée enregistrée. Notez la phrase secrète dans un endroit sûr.")}).catch(function(){msg.textContent=T("Could not create the backup.","Impossible de créer la sauvegarde.")});
+    }));
+    box.appendChild(r1);
+    var r2=mk("div","row");r2.appendChild(cbtn(T("Save without protection","Enregistrer sans protection"),plain));box.appendChild(r2);
+  }else{
+    box.appendChild(mk("p","m",T("Protected backups need the app to be opened from its online address (https).","Les sauvegardes protégées demandent que l’application soit ouverte depuis son adresse en ligne (https).")));
+    var r3=mk("div","row");r3.appendChild(cbtn(T("Save backup","Enregistrer une sauvegarde"),plain));box.appendChild(r3);
+  }
+  box.appendChild(msg);
 }
 function crmClean(c){
   function str(v,n){return typeof v==="string"?v.slice(0,n):""}
   function inList(list,v,d){for(var i=0;i<list.length;i++)if(list[i][0]===v)return v;return d}
   if(!c||typeof c!=="object"||typeof c.name!=="string"||!c.name.trim())return null;
-  return {id:str(c.id,40)||(Date.now().toString(36)+Math.random().toString(36).slice(2,6)),name:str(c.name,80).trim(),phone:str(c.phone,30),dest:inList(CDEST,c.dest,"other"),type:inList(CTYPE,c.type,"tourist"),status:inList(STS,c.status,"new"),appt:/^\d{4}-\d{2}-\d{2}$/.test(c.appt||"")?c.appt:"",notes:str(c.notes,500),follow:/^\d{4}-\d{2}-\d{2}$/.test(c.follow||"")?c.follow:"",cur:inList(CCUR,c.cur,"XAF"),fee:cnum(c.fee),paid:cnum(c.paid),hist:(Array.isArray(c.hist)?c.hist:[]).filter(function(h){return h&&isFinite(+h.t)&&inList(STS,h.s,null)}).slice(-30).map(function(h){return {t:+h.t,s:h.s}}),res:inList(RES,c.res,""),resd:/^\d{4}-\d{2}-\d{2}$/.test(c.resd||"")?c.resd:"",reapply:/^\d{4}-\d{2}-\d{2}$/.test(c.reapply||"")?c.reapply:"",plan:(Array.isArray(c.plan)?c.plan:[]).filter(function(x){return x&&/^\d{4}-\d{2}-\d{2}$/.test(x.d||"")&&cnum(x.a)>0}).slice(0,12).map(function(x){return {d:x.d,a:cnum(x.a),ok:x.ok?1:0}}),why:(function(){var o={};if(c.why&&typeof c.why==="object")WHY.forEach(function(w){if(c.why[w[0]])o[w[0]]=1});return o})(),pays:(Array.isArray(c.pays)?c.pays:[]).filter(function(d){return d&&typeof d.no==="string"&&cnum(d.amt)}).slice(-40).map(function(d){return {type:d.type==="invoice"?"invoice":"receipt",no:str(d.no,30),date:/^\d{4}-\d{2}-\d{2}$/.test(d.date||"")?d.date:dkey(new Date()),amt:cnum(d.amt),cur:inList(CCUR,d.cur,"XAF"),method:inList(PAYM,d.method,""),desc:str(d.desc,160),snap:[cnum(d.snap&&d.snap[0]),cnum(d.snap&&d.snap[1])],tax:Math.min(100,cnum(d.tax)),ag:(d.ag&&typeof d.ag==="object")?(function(a){var o={};["biz","name","ad","wa","em","tid","reg","ft"].forEach(function(k){o[k]=str(a[k],160)});return o})(d.ag):undefined}}),docs:(function(){var o={};if(c.docs&&typeof c.docs==="object")Object.keys(c.docs).slice(0,80).forEach(function(k){if(c.docs[k]&&k.length<=200)o[k]=1});return o})(),created:+c.created||Date.now(),updated:+c.updated||Date.now()};
+  return {id:str(c.id,40)||(Date.now().toString(36)+Math.random().toString(36).slice(2,6)),name:str(c.name,80).trim(),phone:str(c.phone,30),dest:inList(CDEST,c.dest,"other"),type:inList(CTYPE,c.type,"tourist"),status:inList(STS,c.status,"new"),appt:/^\d{4}-\d{2}-\d{2}$/.test(c.appt||"")?c.appt:"",notes:str(c.notes,500),by:str(c.by,40),follow:/^\d{4}-\d{2}-\d{2}$/.test(c.follow||"")?c.follow:"",cur:inList(CCUR,c.cur,"XAF"),fee:cnum(c.fee),paid:cnum(c.paid),hist:(Array.isArray(c.hist)?c.hist:[]).filter(function(h){return h&&isFinite(+h.t)&&inList(STS,h.s,null)}).slice(-30).map(function(h){return {t:+h.t,s:h.s}}),res:inList(RES,c.res,""),resd:/^\d{4}-\d{2}-\d{2}$/.test(c.resd||"")?c.resd:"",reapply:/^\d{4}-\d{2}-\d{2}$/.test(c.reapply||"")?c.reapply:"",plan:(Array.isArray(c.plan)?c.plan:[]).filter(function(x){return x&&/^\d{4}-\d{2}-\d{2}$/.test(x.d||"")&&cnum(x.a)>0}).slice(0,12).map(function(x){return {d:x.d,a:cnum(x.a),ok:x.ok?1:0}}),why:(function(){var o={};if(c.why&&typeof c.why==="object")WHY.forEach(function(w){if(c.why[w[0]])o[w[0]]=1});return o})(),pays:(Array.isArray(c.pays)?c.pays:[]).filter(function(d){return d&&typeof d.no==="string"&&cnum(d.amt)}).slice(-40).map(function(d){return {type:d.type==="invoice"?"invoice":"receipt",no:str(d.no,30),date:/^\d{4}-\d{2}-\d{2}$/.test(d.date||"")?d.date:dkey(new Date()),amt:cnum(d.amt),cur:inList(CCUR,d.cur,"XAF"),method:inList(PAYM,d.method,""),desc:str(d.desc,160),snap:[cnum(d.snap&&d.snap[0]),cnum(d.snap&&d.snap[1])],tax:Math.min(100,cnum(d.tax)),ag:(d.ag&&typeof d.ag==="object")?(function(a){var o={};["biz","name","ad","wa","em","tid","reg","ft","pm","pn","pa"].forEach(function(k){o[k]=str(a[k],160)});return o})(d.ag):undefined}}),docs:(function(){var o={};if(c.docs&&typeof c.docs==="object")Object.keys(c.docs).slice(0,80).forEach(function(k){if(c.docs[k]&&k.length<=200)o[k]=1});return o})(),created:+c.created||Date.now(),updated:+c.updated||Date.now()};
+}
+function crmApply(o){
+  if(!o||o.app!=="visa-guide-clients"||!Array.isArray(o.clients))throw new Error("bad");
+  var arr=o.clients.map(crmClean).filter(Boolean);
+  if(!arr.length&&o.clients.length)throw new Error("bad");
+  if(confirm(T("Replace the "+CL.length+" client"+(CL.length===1?"":"s")+" on this phone with the "+arr.length+" client"+(arr.length===1?"":"s")+" in the backup?","Remplacer les "+CL.length+" client"+(CL.length>1?"s":"")+" de ce téléphone par les "+arr.length+" client"+(arr.length>1?"s":"")+" de la sauvegarde ?"))){CL=arr;csave();try{var dn=o.docn||{},cu=JSON.parse(localStorage.getItem("vg-docn")||"{}")||{};["r","i"].forEach(function(k){cu[k]=Math.max(+cu[k]||0,+dn[k]||0)});localStorage.setItem("vg-docn",JSON.stringify(cu));localStorage.setItem("vg-changes","0")}catch(e){}CV.mode="list";CV.id=null;crmRender()}
 }
 document.getElementById("crmfile").addEventListener("change",function(e){
   var f=e.target.files&&e.target.files[0];
   if(!f)return;
   var r=new FileReader();
   r.onload=function(){
-    try{
-      var o=JSON.parse(r.result);
-      if(!o||o.app!=="visa-guide-clients"||!Array.isArray(o.clients))throw new Error("bad");
-      var arr=o.clients.map(crmClean).filter(Boolean);
-      if(!arr.length&&o.clients.length)throw new Error("bad");
-      if(confirm(T("Replace the "+CL.length+" client"+(CL.length===1?"":"s")+" on this phone with the "+arr.length+" client"+(arr.length===1?"":"s")+" in the backup?","Remplacer les "+CL.length+" client"+(CL.length>1?"s":"")+" de ce téléphone par les "+arr.length+" client"+(arr.length>1?"s":"")+" de la sauvegarde ?"))){CL=arr;csave();try{var dn=o.docn||{},cu=JSON.parse(localStorage.getItem("vg-docn")||"{}")||{};["r","i"].forEach(function(k){cu[k]=Math.max(+cu[k]||0,+dn[k]||0)});localStorage.setItem("vg-docn",JSON.stringify(cu))}catch(e){}CV.mode="list";CV.id=null;crmRender()}
-    }catch(x){alert(T("This file is not a Global Visa client backup.","Ce fichier n’est pas une sauvegarde de clients Global Visa."))}
+    var txt=String(r.result),w=null;try{w=JSON.parse(txt)}catch(x){}
+    function bad(){alert(T("This file is not a Global Visa client backup.","Ce fichier n’est pas une sauvegarde de clients Global Visa."))}
+    if(w&&w.app==="global-visa-backup"){
+      if(!(window.crypto&&crypto.subtle)){alert(T("Protected backups can only be opened from the app’s online address (https).","Les sauvegardes protégées ne peuvent être ouvertes que depuis l’adresse en ligne de l’application (https)."))}
+      else{
+        var pass=prompt(T("Passphrase of this backup","Phrase secrète de cette sauvegarde"));
+        if(pass)topen(txt,pass,"global-visa-backup").then(function(o){crmApply(o)}).catch(function(){alert(T("Wrong passphrase, or the file is damaged.","Phrase secrète incorrecte, ou fichier endommagé."))});
+      }
+    }else{try{crmApply(w)}catch(x){bad()}}
     e.target.value="";
   };
   r.readAsText(f);
