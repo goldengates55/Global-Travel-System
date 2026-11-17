@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-15`; it is now `visaguide-14`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-18`; it is now `visaguide-17`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -124,3 +124,23 @@ Cameroon is the only origin today. The structure for more is in place:
 ## Look and feel
 
 Teal and vermilion "visa sticker" design: fine guilloche lines on the home banner and lock screens, a machine-readable-strip detail at the bottom of tool panels, a floating tab bar, and rounded cards. Colours are the variables at the top of the second style block in `index.html` (`--stamp` teal, `--accent` vermilion; a dark set follows for dark mode). Fonts are Bricolage Grotesque (headings) and Instrument Sans (text), loaded from Google Fonts on the first visit and kept for offline use. App icons and `og.png` use the same colours.
+
+## Countries, payment details and dashboard
+
+- **Applying from (Settings):** Cameroon, Nigeria, Ghana, Senegal and Côte d’Ivoire. The choice sets the default country code and currency, the home-page line, and the checklist rule about ties to the home country. For Cameroon the Routes tab shows the detailed guides. For the other four it shows a general “Applying from…” page with steps and official links, because detailed route guides are only written for Cameroon. To add a country, add a line to `ORIGINS` in `index.html` (name in English and French, French “from” phrase `fp`, country code `cc`, currency `cur`).
+- **Payment details (Settings):** payment provider, number and account name. They appear on invoices, and on receipts that still have a balance, with a QR code. The QR code is made inside the app (`QR` in `index.html`) and holds plain text: provider, number, amount and reference. It does not start a payment by itself.
+- **Dashboard (Clients tab):** open cases, money still to collect, money received this month, clients by stage, approval rate by destination and money received over the last 6 months, with a table view. It reads only the client data on the phone.
+- **Currencies:** XAF, XOF, NGN, GHS, EUR, USD.
+
+## Client intake, payment plans and reminders
+
+- **Client intake:** `intake.html` is a short public form for clients (English and French). It sends nothing to a server. It opens WhatsApp with the client's details and a code line that starts with `GVI1:`. In the Clients tab, **Client intake** shares the link (with your WhatsApp number and business name filled in) and turns a pasted message into a new client. The link only works once the app is uploaded online. Upload `intake.html` together with `index.html`.
+- **Payment plan:** on a client page, add dated instalments or split the balance into 2 to 6 monthly instalments. Overdue and soon-due instalments show on the client list. “Mark paid” adds the amount to “Paid so far”. “Instalment reminder” writes a WhatsApp message with your payment number. Instalments are included in backups.
+- **Appointment reminders:** on a client page with an upcoming appointment, **Add to my calendar** downloads a calendar file with a reminder the day before, and **Remind client on WhatsApp** writes the message, including documents still missing.
+- The “Documents still needed” and “Payment reminder” messages were already in the app.
+
+## Converter, what's new and share page
+
+- **Currency converter (Tools):** XAF, XOF, NGN, GHS, EUR, USD, GBP, CAD and AUD. You type the rate; it is saved on the phone for that pair. The euro is fixed at 655.957 CFA francs (XAF and XOF). The app never goes online for rates.
+- **What's new banner (home page):** to announce a fee or rule change, add a line at the top of the `NEWS` list in `index.html` with a new `id` (a later date sorts higher), an English text, a French text and optionally `go` (the page to open). Then raise `VERSION` in `sw.js` and upload. Each phone shows the banner once, until the person taps “Got it”.
+- **Share the app:** shows a QR code of the app's own address (only once the app is online) and an install guide for Android and iPhone.
