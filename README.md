@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-23`; it is now `visaguide-22`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-28`; it is now `visaguide-27`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -172,3 +172,21 @@ Both are in More and are written in English and French inside `index.html` (the 
 
 - Routes now has Applying from Nigeria and Applying from Ghana. They are written as data (`ROUTES` in `index.html`) with English and French together, and list sources. Facts come from official pages and news reports read in November 2026. Re-check them before relying on them: centres and US rules change often. Apostille status was not confirmed from an official source, so the text says to check the HCCH table.
 - `training-en.pdf` and `training-fr.pdf` are the one-page training sheets, made with `tools/training.py` (not included in the zip). They are listed in the service worker precache and linked from More, Training sheet.
+
+## Stage messages, expenses, attention list
+
+- Changing a client's status offers a WhatsApp message for the new stage (`cstage` in `index.html`). Editable text lives in the WhatsApp compose box.
+- Expenses (`vg-expenses`) are stored like the client list: plain, or encrypted with the PIN key when the lock is on. They are in backups but not in team files. The Income report shows profit per currency for the month.
+- `cattn(c)` decides who "needs attention": follow-up due, appointment within 2 days or passed, instalment due, document alert, or 14 days idle in early stages. Destination and handler filters sit under the search box.
+
+## Referrals and team results
+
+- Each client can have `src` (one of `SRC`) and `ref` (name of the referrer, up to 60 characters). Both are in the CSV export and in team files. They are not read by the CSV import.
+- Clients > Where clients come from groups by source and by referrer. Clients > Team results groups by the Handled by field. Money figures use "Paid so far" on each client, per currency, not monthly receipts.
+
+## Immigration
+
+- New visa type `immigration` (client form, intake page, CSV). Seven extra checklist rules apply when Visa type is Immigration and Destination is Canada (job offer, recommendation, language test, education, work experience, funds, police and medical). The "return flight", "accommodation" and "ties to home country" rules are hidden for this type.
+- Routes > Immigration to Canada: rural programs is written as data (`IMM` in `index.html`), English and French together, with sources. Facts about the permanent RCIP (opens 1 January 2027) come from news reports of the 9 November 2026 announcement, not from an IRCC page we could open. The six FCIP communities and the FCIP French level were not readable, so the guide says to check IRCC. Re-check before relying on it.
+- The Immigration guide also covers Express Entry (French-language category, 2026 draw figures, proposed language reforms that were not in force) and Quebec (PSTQ, fees, the temporary PEQ window). Most figures come from news reports and the Quebec government page; re-check them against IRCC's Express Entry rounds page and quebec.ca before relying on them.
+- The Immigration guide also covers the Atlantic Immigration Program and the provincial nominee programs. PNP and AIP details (stream changes in Ontario, BC and Nova Scotia, the New Brunswick designation pause, the six FCIP communities) come from secondary news sources, not from the provincial or IRCC pages. Re-check them before relying on them.
