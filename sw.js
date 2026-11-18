@@ -1,6 +1,6 @@
 /* Global Visa service worker: keeps the app working offline. Change VERSION on every update. */
-var VERSION = "visaguide-32";
-var FILES = ["./", "./index.html", "./intake.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./training-en.pdf", "./training-fr.pdf"];
+var VERSION = "visaguide-33";
+var FILES = ["./", "./index.html", "./intake.html", "./status.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png", "./training-en.pdf", "./training-fr.pdf"];
 self.addEventListener("install", function (e) {
   e.waitUntil(caches.open(VERSION).then(function (c) {
     return Promise.all(FILES.map(function (f) { return c.add(f).catch(function () {}); }));

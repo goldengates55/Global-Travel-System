@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-33`; it is now `visaguide-32`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-34`; it is now `visaguide-33`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -202,3 +202,8 @@ Both are in More and are written in English and French inside `index.html` (the 
 - In a client's page: **Appointment sheet (PDF)** (documents to bring, ticked when held) and **Send status on WhatsApp** (stage, appointment, documents received and missing, balance).
 
 - The checklist PDF (installed app) now follows the printed page design: title, selections box, ticked boxes and a note.
+
+## Studio and client status link
+
+- **Studio** (Clients, Studio): one home screen with client engagement (open clients, today's messages), team workload per person, this month's money, marketing sources, and brand/profile gaps, with buttons to the full screens.
+- **Client status link**: in a client's page. Opens `status.html`, a read-only page with stage, appointment, documents and balance. The data is inside the link (after the #), not on a server, so it is a snapshot: send a new link to update it. Upload `status.html` with the other files.
