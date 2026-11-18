@@ -2009,6 +2009,8 @@ function cvcalc(){
 
 /* ---------- what's new: a banner for updates; add a line to NEWS and raise the service worker VERSION ---------- */
 var NEWS=[
+ {id:"2026-11-19f",en:"New: a Refusal and reapply planner (reasons, what to fix, a date to apply again, a message to the client) and a Year summary with a PDF, both in Studio.",fr:"Nouveau : un plan après refus (motifs, quoi corriger, date pour redéposer, message au client) et un Bilan de l\u2019année en PDF, tous deux dans Studio.",go:"clients"},
+ {id:"2026-11-19e",en:"New: Ask for feedback. Send approved clients a WhatsApp message that thanks them and asks for a recommendation or review.",fr:"Nouveau : Demander un avis. Envoyez aux clients dont le visa est accordé un message WhatsApp qui les remercie et demande une recommandation ou un avis.",go:"clients"},
  {id:"2026-11-19d",en:"New: Studio, one screen for your whole agency (clients, team workload, money, marketing, brand), and a status link each client can open to follow their own file.",fr:"Nouveau : Studio, un écran pour toute votre agence (clients, charge de l\u2019équipe, argent, marketing, image), et un lien de suivi que chaque client peut ouvrir pour suivre son dossier.",go:"clients"},
  {id:"2026-11-19c",en:"New: in a client\u2019s page, print an Appointment sheet (documents to bring, with ticks) and send the client a status message on WhatsApp.",fr:"Nouveau : dans la page d\u2019un client, imprimez une Fiche du rendez-vous (documents à apporter, avec coches) et envoyez au client un point sur WhatsApp.",go:"clients"},
  {id:"2026-11-19b",en:"New: the Checklist page now has an Immigration (permanent residence) purpose, with the Canada documents.",fr:"Nouveau : la page Liste de contrôle propose maintenant l’objectif Immigration (résidence permanente), avec les documents pour le Canada.",go:"try"},
@@ -2113,7 +2115,7 @@ var MAN=[
   ["ul",[["When you add or edit a client, choose How did the client find you? and, for a recommendation, write who referred them. Only write a name if that person agrees.","Quand vous ajoutez ou modifiez un client, choisissez Comment le client vous a-t-il trouvé ? et, pour une recommandation, écrivez qui l’a envoyé. N’écrivez un nom que si cette personne est d’accord."],["In Clients, tap Where clients come from to see which source brings the most clients, how many paid and how many visas were granted. People who send you several clients appear in a separate list, so you can thank them.","Dans Clients, touchez D’où viennent les clients pour voir quelle source apporte le plus de clients, combien ont payé et combien de visas ont été accordés. Les personnes qui vous envoient plusieurs clients apparaissent dans une liste à part, pour que vous puissiez les remercier."],["Tap Team results to compare team members using the Handled by field: clients, granted and refused, money collected, money still owed and clients that need attention. Fill in Handled by on every client for a fair comparison.","Touchez Résultats de l’équipe pour comparer les membres de l’équipe grâce au champ Pris en charge par : clients, accordés et refusés, argent encaissé, argent encore dû et clients à traiter. Remplissez Pris en charge par pour chaque client afin que la comparaison soit juste."]]]]] ,
  [["Immigration clients","Clients en immigration"],[
   ["ul",[["In Routes, Immigration to Canada: main pathways explains the rural programs (permanent from 1 January 2027, as reported), the Francophone pilots, Express Entry with its French-language category, the Quebec programs, the Atlantic program and the provincial nominee programs. It lists the steps, requirements and sources.","Dans Procédures, Immigration au Canada : principales voies explique les programmes ruraux (permanents à partir du 1er janvier 2027, selon la presse), les projets pilotes francophones, Entrée express avec sa catégorie en langue française, les programmes du Québec, le programme de l’Atlantique et les programmes des candidats des provinces. Il présente les étapes, les conditions et les sources."],["On the Checklist page, choose Purpose Immigration (permanent residence) and Destination Canada to see the documents for a permanent residence file. You can print it or save it as a PDF like any other checklist.","Sur la page Liste de contrôle, choisissez Objectif Immigration (résidence permanente) et Destination Canada pour voir les documents d’un dossier de résidence permanente. Vous pouvez l’imprimer ou l’enregistrer en PDF comme les autres listes."],["For an immigration client, choose Visa type Immigration (permanent residence) and Destination Canada. The checklist then asks for the job offer, the community recommendation, the language test, education, work experience, funds, and police and medical documents.","Pour un client en immigration, choisissez le Type de visa Immigration (résidence permanente) et la Destination Canada. La liste de contrôle demande alors l’offre d’emploi, la recommandation de la communauté, le test de langue, les études, l’expérience de travail, les fonds, et les documents de police et médicaux."],["Never promise a job offer or an approval, and never sell job offers or recommendations.","Ne promettez jamais une offre d’emploi ni une approbation, et ne vendez jamais d’offres d’emploi ni de recommandations."]]]]],
- [["Price list, today’s messages and service agreement", "Liste de prix, messages du jour et contrat de service"], [["ul", [["Price list: in Clients, tap Price list and save your usual fee for each destination, and for a visa type if you like. When you add a new client, the fee and currency are filled in. You can still change them.", "Liste de prix : dans Clients, touchez Liste de prix et enregistrez vos frais habituels pour chaque destination, et pour un type de visa si vous le souhaitez. Quand vous ajoutez un client, les frais et la devise sont remplis. Vous pouvez toujours les modifier."], ["Today’s messages: the button shows how many clients need a WhatsApp message today (appointment today or tomorrow, instalment due or late, follow-up due, documents missing for a week). Tap Message on WhatsApp, send the message yourself, and the client moves out of the list for today.", "Messages du jour : le bouton indique combien de clients ont besoin d’un message WhatsApp aujourd’hui (rendez-vous aujourd’hui ou demain, échéance à régler ou en retard, relance à faire, documents manquants depuis une semaine). Touchez Écrire sur WhatsApp, envoyez le message vous-même, et le client sort de la liste pour aujourd’hui."], ["Studio: in Clients, tap Studio. It shows your open clients, today\u2019s messages, the workload of each team member, this month\u2019s money, where clients come from, and what is missing in your agency profile, with buttons to the full screens.","Studio : dans Clients, touchez Studio. Il montre vos clients en cours, les messages du jour, la charge de chaque membre de l\u2019équipe, l\u2019argent du mois, d\u2019où viennent les clients et ce qui manque dans le profil de l\u2019agence, avec des boutons vers les écrans complets."],["Client status link: in a client\u2019s page, copy the link or send it on WhatsApp. The client opens a simple page with the stage of the file, appointment, documents received and missing, and balance. The page is a snapshot stored inside the link, not on a server: send a new link to show changes. The link contains the client\u2019s first name, stage and balance, so share it only with that client.","Lien de suivi du client : dans la page d\u2019un client, copiez le lien ou envoyez-le sur WhatsApp. Le client ouvre une page simple avec l\u2019étape du dossier, le rendez-vous, les documents reçus et manquants, et le solde. La page est un instantané contenu dans le lien, pas sur un serveur : envoyez un nouveau lien pour montrer les changements. Le lien contient le prénom, l\u2019étape et le solde du client : ne le partagez qu\u2019avec ce client."],["Appointment sheet: in a client\u2019s page, tap Appointment sheet (PDF) for a one-page list of the documents to bring. Ticked boxes are the documents you already hold. Tap Send status on WhatsApp to send the client the stage, appointment, documents received and missing, and balance.","Fiche du rendez-vous : dans la page d\u2019un client, touchez Fiche du rendez-vous (PDF) pour une liste d\u2019une page des documents à apporter. Les cases cochées sont les documents que vous avez déjà. Touchez Envoyer le point sur WhatsApp pour envoyer au client l\u2019étape, le rendez-vous, les documents reçus et manquants, et le solde."],["Service agreement: open a client and tap Service agreement (PDF). Choose the language and the refund policy, add an extra clause if you wish, and create the PDF. It shows the fee and instalments, and has signature lines. It is a template, not legal advice.", "Contrat de service : ouvrez un client et touchez Contrat de service (PDF). Choisissez la langue et la politique de remboursement, ajoutez une clause supplémentaire si vous le souhaitez, puis créez le PDF. Il indique les frais et les échéances, et comporte des lignes de signature. C’est un modèle, pas un avis juridique."]]]]]
+ [["Price list, today’s messages and service agreement", "Liste de prix, messages du jour et contrat de service"], [["ul", [["Price list: in Clients, tap Price list and save your usual fee for each destination, and for a visa type if you like. When you add a new client, the fee and currency are filled in. You can still change them.", "Liste de prix : dans Clients, touchez Liste de prix et enregistrez vos frais habituels pour chaque destination, et pour un type de visa si vous le souhaitez. Quand vous ajoutez un client, les frais et la devise sont remplis. Vous pouvez toujours les modifier."], ["Today’s messages: the button shows how many clients need a WhatsApp message today (appointment today or tomorrow, instalment due or late, follow-up due, documents missing for a week). Tap Message on WhatsApp, send the message yourself, and the client moves out of the list for today.", "Messages du jour : le bouton indique combien de clients ont besoin d’un message WhatsApp aujourd’hui (rendez-vous aujourd’hui ou demain, échéance à régler ou en retard, relance à faire, documents manquants depuis une semaine). Touchez Écrire sur WhatsApp, envoyez le message vous-même, et le client sort de la liste pour aujourd’hui."], ["Refusals: in Studio, tap Refusals, or open a refused client and tap Refusal and reapply plan. Tick the reasons from the refusal letter, read what to fix, tick each fix when done, and choose a date to apply again. You can set a reminder for that date, send the client a WhatsApp message, or start a new application. Do not reapply with the same file.","Refus : dans Studio, touchez Refus, ou ouvrez un client refusé et touchez Plan après refus. Cochez les motifs de la lettre de refus, lisez quoi corriger, cochez chaque correction faite et choisissez une date pour redéposer. Vous pouvez fixer un rappel à cette date, écrire au client sur WhatsApp ou commencer une nouvelle demande. Ne redéposez pas le même dossier."],["Year summary: in Studio, under Money, tap Year summary. It shows the year\u2019s clients, approvals and refusals, money received and spent, profit, best month, top destinations and sources, and each team member. Save it as a PDF or copy it as text.","Bilan de l\u2019année : dans Studio, sous Argent, touchez Bilan de l\u2019année. Il montre les clients de l\u2019année, accords et refus, argent reçu et dépensé, bénéfice, meilleur mois, destinations et origines principales, et chaque membre de l\u2019équipe. Enregistrez-le en PDF ou copiez-le en texte."],["Ask for feedback: in Studio, under Marketing, tap Ask for feedback. It lists clients whose result is Approved. Tap Ask on WhatsApp to open a ready message that thanks them and asks for a recommendation. Add your Google Maps or Facebook review link to include it. A client you have asked moves to Already asked, so nobody gets the same request twice by mistake.","Demander un avis : dans Studio, sous Marketing, touchez Demander un avis. La liste montre les clients dont le résultat est Accordé. Touchez Demander sur WhatsApp pour ouvrir un message prêt qui les remercie et demande une recommandation. Ajoutez votre lien d\u2019avis Google Maps ou Facebook pour l\u2019inclure. Un client sollicité passe dans Déjà sollicités, pour que personne ne reçoive deux fois la même demande par erreur."],["Studio: in Clients, tap Studio. It shows your open clients, today\u2019s messages, the workload of each team member, this month\u2019s money, where clients come from, and what is missing in your agency profile, with buttons to the full screens.","Studio : dans Clients, touchez Studio. Il montre vos clients en cours, les messages du jour, la charge de chaque membre de l\u2019équipe, l\u2019argent du mois, d\u2019où viennent les clients et ce qui manque dans le profil de l\u2019agence, avec des boutons vers les écrans complets."],["Client status link: in a client\u2019s page, copy the link or send it on WhatsApp. The client opens a simple page with the stage of the file, appointment, documents received and missing, and balance. The page is a snapshot stored inside the link, not on a server: send a new link to show changes. The link contains the client\u2019s first name, stage and balance, so share it only with that client.","Lien de suivi du client : dans la page d\u2019un client, copiez le lien ou envoyez-le sur WhatsApp. Le client ouvre une page simple avec l\u2019étape du dossier, le rendez-vous, les documents reçus et manquants, et le solde. La page est un instantané contenu dans le lien, pas sur un serveur : envoyez un nouveau lien pour montrer les changements. Le lien contient le prénom, l\u2019étape et le solde du client : ne le partagez qu\u2019avec ce client."],["Appointment sheet: in a client\u2019s page, tap Appointment sheet (PDF) for a one-page list of the documents to bring. Ticked boxes are the documents you already hold. Tap Send status on WhatsApp to send the client the stage, appointment, documents received and missing, and balance.","Fiche du rendez-vous : dans la page d\u2019un client, touchez Fiche du rendez-vous (PDF) pour une liste d\u2019une page des documents à apporter. Les cases cochées sont les documents que vous avez déjà. Touchez Envoyer le point sur WhatsApp pour envoyer au client l\u2019étape, le rendez-vous, les documents reçus et manquants, et le solde."],["Service agreement: open a client and tap Service agreement (PDF). Choose the language and the refund policy, add an extra clause if you wish, and create the PDF. It shows the fee and instalments, and has signature lines. It is a template, not legal advice.", "Contrat de service : ouvrez un client et touchez Contrat de service (PDF). Choisissez la langue et la politique de remboursement, ajoutez une clause supplémentaire si vous le souhaitez, puis créez le PDF. Il indique les frais et les échéances, et comporte des lignes de signature. C’est un modèle, pas un avis juridique."]]]]]
 ];
 var PRIV=[
  [["What stays on your phone","Ce qui reste sur votre téléphone"],[
@@ -3762,6 +3764,10 @@ function crmRender(){
   if(CV.mode==="src")return crmSources(box);
   if(CV.mode==="staff")return crmStaff(box);
   if(CV.mode==="studio")return crmStudio(box);
+  if(CV.mode==="refusals")return crmRefusals(box);
+  if(CV.mode==="refusal")return crmRefusal(box);
+  if(CV.mode==="year")return crmYear(box);
+  if(CV.mode==="feedback")return crmFeedback(box);
   if(CV.mode==="prices")return crmPrices(box);
   if(CV.mode==="today")return crmToday(box);
   if(CV.mode==="contract")return crmContract(box);
@@ -4060,7 +4066,7 @@ function crmStudio(box){
   var wk=open.filter(function(c){return c.appt&&dleft(c.appt)>=0&&dleft(c.appt)<=7}).length;
   var a=card(T("Client engagement","Relation client"));
   a.appendChild(mk("p","m",T("Open clients: ","Clients en cours : ")+open.length+" · "+T("Need attention: ","À traiter : ")+att+" · "+T("Messages to send today: ","Messages à envoyer aujourd’hui : ")+td+" · "+T("Appointments this week: ","Rendez-vous cette semaine : ")+wk));
-  row(a,[[T("+ Add client","+ Ajouter un client"),function(){CV.mode="form";CV.id=null;crmRender();window.scrollTo(0,0)}],[T("Today’s messages","Messages du jour"),go("today")],[T("Clients","Clients"),go("list")]]);
+  row(a,[[T("Refusals","Refus")+" ("+CL.filter(function(x){return x.res==="refused"}).length+")",go("refusals")],[T("+ Add client","+ Ajouter un client"),function(){CV.mode="form";CV.id=null;crmRender();window.scrollTo(0,0)}],[T("Today’s messages","Messages du jour"),go("today")],[T("Clients","Clients"),go("list")]]);
   a.appendChild(mk("p","m",T("In each client’s page: appointment sheet, service agreement, receipts, payment plan, and a status link you can send so the client can follow their file.","Dans la page de chaque client : fiche du rendez-vous, contrat de service, reçus, échéancier, et un lien de suivi à envoyer pour que le client suive son dossier.")));
   var b=card(T("Team workload","Charge de l’équipe"));
   var by={};open.forEach(function(c){var k=(c.by||"").trim();(by[k]||(by[k]=[])).push(c)});
@@ -4081,19 +4087,149 @@ function crmStudio(box){
   if(!ks.length)c.appendChild(mk("p","m",T("No receipts or expenses this month yet.","Aucun reçu ni dépense ce mois-ci.")));
   ks.forEach(function(k){var r=Math.round((rec[k]||0)*100)/100,e=Math.round((sp[k]||0)*100)/100;c.appendChild(mk("p","m",T("Received ","Reçu ")+cmoney(r,k)+" − "+T("spent ","dépensé ")+cmoney(e,k)+" = "+T("profit ","bénéfice ")+cmoney(Math.round((r-e)*100)/100,k)))});
   c.appendChild(mk("p","m "+(Object.keys(st.owed).length?"late":""),T("Still owed by clients: ","Encore dû par les clients : ")+gmoney(st.owed)));
-  row(c,[[T("Income report","Rapport des revenus"),go("report")],[T("Expenses","Dépenses"),go("exp")],[T("Who owes me","Qui me doit"),go("owed")]]);
+  row(c,[[T("Year summary","Bilan de l’année"),go("year")],[T("Income report","Rapport des revenus"),go("report")],[T("Expenses","Dépenses"),go("exp")],[T("Who owes me","Qui me doit"),go("owed")]]);
   var d=card(T("Marketing and referrals","Marketing et recommandations"));
   var sc={};CL.forEach(function(x){var k=x.src||"";sc[k]=(sc[k]||0)+1});
   var top=Object.keys(sc).filter(function(k){return k}).sort(function(x,y){return sc[y]-sc[x]})[0];
   d.appendChild(mk("p","m",top?T("Most clients come from: ","La plupart des clients viennent de : ")+lab(SRC,top)+" ("+sc[top]+")":T("No client source recorded yet. Fill in How did the client find you? on each client.","Aucune origine enregistrée. Remplissez Comment le client vous a-t-il trouvé ? pour chaque client.")));
   var happy=CL.filter(function(x){return x.res==="approved"}).length;
   d.appendChild(mk("p","m",T("Clients with an approved visa: ","Clients avec un visa accordé : ")+happy+T(". Ask them to recommend you.",". Demandez-leur de vous recommander.")));
-  row(d,[[T("Where clients come from","D’où viennent les clients"),go("src")]]);
+  row(d,[[T("Ask for feedback","Demander un avis")+" ("+fbCount()+")",go("feedback")],[T("Where clients come from","D’où viennent les clients"),go("src")]]);
   var e=card(T("Brand and documents","Image et documents"));
   var miss=[];if(!AG.biz)miss.push(T("business name","nom de l’entreprise"));if(!AG.name)miss.push(T("your name","votre nom"));if(!AG.ad)miss.push(T("address","adresse"));if(!AG.wa)miss.push("WhatsApp");if(!AG.em)miss.push("e-mail");if(!lgpdf())miss.push("logo");
   e.appendChild(mk("p","m"+(miss.length?" late":""),miss.length?T("Missing in your agency profile: ","Manque dans le profil de l’agence : ")+miss.join(", "):T("Your agency profile is complete.","Le profil de votre agence est complet.")));
   e.appendChild(mk("p","m",T("Prices in your price list: ","Prix dans votre liste : ")+PRICES.length+T(". Receipts, agreements and appointment sheets use your profile and logo.",". Les reçus, contrats et fiches de rendez-vous utilisent votre profil et votre logo.")));
   row(e,[[T("Price list","Liste de prix"),go("prices")],[T("Agency settings","Paramètres de l’agence"),function(){location.hash="settings"}],[T("Backup","Sauvegarde"),go("backup")]]);
+}
+
+/* ---------- feedback requests ---------- */
+function fbMap(){var o={};try{o=JSON.parse(localStorage.getItem("vg-fb")||"{}")||{}}catch(e){}return o}
+function fbSet(c){var o=fbMap();o[c.id]=dkey(new Date());try{localStorage.setItem("vg-fb",JSON.stringify(o))}catch(e){}}
+function fbLink(){try{return (localStorage.getItem("vg-review")||"").slice(0,300)}catch(e){return ""}}
+function fbCount(){var m=fbMap();return CL.filter(function(c){return c.res==="approved"&&c.phone&&!m[c.id]}).length}
+function crmFeedback(box){
+  box.appendChild(cbtn("← "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  box.appendChild(mk("h3","",T("Ask for feedback","Demander un avis")));
+  box.appendChild(mk("p","m",T("Clients whose visa was approved are your best advertising. Send each one a short WhatsApp message that thanks them and asks for a recommendation. Only clients with a phone number appear. Ask once, and do not push.","Les clients dont le visa est accordé sont votre meilleure publicité. Envoyez à chacun un court message WhatsApp qui les remercie et demande une recommandation. Seuls les clients avec un numéro de téléphone apparaissent. Demandez une fois, sans insister.")));
+  var l=mk("label","",T("Your review page link (optional)","Lien de votre page d’avis (facultatif)")),i=mk("input");i.type="url";i.placeholder="https://";i.maxLength=300;i.value=fbLink();
+  i.addEventListener("change",function(){var v=i.value.trim();if(v&&!/^https?:\/\//i.test(v)){alert(T("The link must start with https://","Le lien doit commencer par https://"));i.value=fbLink();return}try{localStorage.setItem("vg-review",v)}catch(e){}});
+  l.appendChild(i);box.appendChild(l);
+  box.appendChild(mk("p","m",T("A Google Maps or Facebook page link. It is added to the message.","Un lien Google Maps ou de page Facebook. Il est ajouté au message.")));
+  var m=fbMap(),all=CL.filter(function(c){return c.res==="approved"}),todo=all.filter(function(c){return c.phone&&!m[c.id]}),done=all.filter(function(c){return m[c.id]});
+  box.appendChild(mk("h3","",T("To ask","À contacter")+" ("+todo.length+")"));
+  if(!todo.length)box.appendChild(mk("p","m",all.length?T("Everyone with a phone number has been asked.","Tous ceux qui ont un téléphone ont été sollicités."):T("No approved client yet. In a client’s page, set the result to Approved.","Aucun client accordé pour le moment. Dans la page d’un client, mettez le résultat sur Accordé.")));
+  function item(c,again){
+    var w=mk("div","up");w.appendChild(mk("b","",c.name));w.appendChild(mk("div","m",lab(CDEST,c.dest)+(m[c.id]?" · "+T("asked on ","sollicité le ")+cdate(m[c.id]):"")));
+    var r=mk("div","row"),a=mk("a","act",again?T("Ask again","Redemander"):T("Ask on WhatsApp","Demander sur WhatsApp"));a.target="_blank";a.rel="noopener";a.href=waLink(c,"c:fb");
+    a.addEventListener("click",function(){fbSet(c);setTimeout(crmRender,400)});r.appendChild(a);
+    r.appendChild(cbtn(T("Open","Ouvrir"),function(){CV.mode="detail";CV.id=c.id;crmRender();window.scrollTo(0,0)}));
+    w.appendChild(r);box.appendChild(w);
+  }
+  todo.forEach(function(c){item(c,false)});
+  if(done.length){box.appendChild(mk("h3","",T("Already asked","Déjà sollicités")+" ("+done.length+")"));done.filter(function(c){return c.phone}).forEach(function(c){item(c,true)})}
+}
+
+/* ---------- refusal and reapply planner ---------- */
+var RFR=[
+ ["funds","Not enough proof of funds","Preuves de fonds insuffisantes","Show regular income and bank statements that cover the whole trip. Avoid large deposits just before applying. If someone sponsors the trip, add a sponsor letter, their statements and proof of the relationship.","Montrez des revenus réguliers et des relevés bancaires couvrant tout le voyage. Évitez les gros dépôts juste avant la demande. Si quelqu’un finance le voyage, ajoutez sa lettre, ses relevés et la preuve du lien."],
+ ["ties","Weak ties to the home country","Attaches faibles avec le pays d’origine","Add proof that the client will return: job letter with leave dates, business papers, property, family, studies.","Ajoutez des preuves du retour : attestation de travail avec dates de congé, documents d’entreprise, biens, famille, études."],
+ ["purpose","Purpose or itinerary not clear","Objet ou itinéraire peu clair","Write a clear day-by-day plan, matching bookings, and a short cover letter that explains the purpose of the trip.","Rédigez un plan jour par jour clair, des réservations cohérentes et une courte lettre expliquant l’objet du voyage."],
+ ["docs","Documents missing or wrong","Documents manquants ou erronés","Use the checklist for this destination, check names and dates against the passport, and fix every gap before applying again.","Utilisez la liste de contrôle de cette destination, vérifiez noms et dates avec le passeport et corrigez chaque lacune avant de redéposer."],
+ ["auth","Documents doubted or not genuine","Documents mis en doute ou non authentiques","Only use documents that are true and can be checked. Never submit anything false: it can cause a long ban. Get fresh originals from the issuing offices.","N’utilisez que des documents vrais et vérifiables. Ne déposez jamais de faux : cela peut entraîner une longue interdiction. Obtenez des originaux récents auprès des organismes émetteurs."],
+ ["history","Past visa problem or overstay","Problème de visa passé ou dépassement de séjour","Read the refusal letter and the rules for this country. Ask for professional advice before applying again.","Lisez la lettre de refus et les règles du pays. Demandez un avis professionnel avant de redéposer."],
+ ["job","Doubts about work or study plans","Doutes sur le travail ou les études","Add a clear job offer or admission letter, proof of the employer or school, and a plan that makes sense for the client’s background.","Ajoutez une offre d’emploi ou une lettre d’admission claire, la preuve de l’employeur ou de l’école, et un projet cohérent avec le parcours du client."],
+ ["passport","Passport problem","Problème de passeport","Renew the passport if it is short on validity or has no blank pages, then apply with the new one.","Renouvelez le passeport s’il est trop court ou sans pages vierges, puis déposez avec le nouveau."],
+ ["insurance","Insurance or booking problem","Problème d’assurance ou de réservation","Buy travel insurance that meets the destination rules and use bookings with matching dates.","Prenez une assurance voyage conforme aux règles de la destination et des réservations aux dates cohérentes."],
+ ["interview","Interview answers not consistent","Réponses d’entretien incohérentes","Practise the interview with the client. Answers must match the file: purpose, funds, job, plans.","Faites répéter l’entretien au client. Les réponses doivent correspondre au dossier : objet, fonds, emploi, projets."],
+ ["other","Other or not stated","Autre ou non précisé","Ask the embassy or visa centre for the reasons if the letter does not give them, and write them here.","Demandez à l’ambassade ou au centre de visas les motifs si la lettre n’en donne pas, et notez-les ici."]];
+function rfMap(){var o={};try{o=JSON.parse(localStorage.getItem("vg-refusal")||"{}")||{}}catch(e){}return o}
+function rfGet(c){var m=rfMap(),x=m[c.id]||{};return {r:Array.isArray(x.r)?x.r.filter(function(k){return RFR.some(function(a){return a[0]===k})}):[],d:/^\d{4}-\d{2}-\d{2}$/.test(x.d||"")?x.d:"",t:/^\d{4}-\d{2}-\d{2}$/.test(x.t||"")?x.t:"",f:Array.isArray(x.f)?x.f.filter(function(k){return RFR.some(function(a){return a[0]===k})}):[]}}
+function rfSet(c,x){var m=rfMap();m[c.id]=x;try{localStorage.setItem("vg-refusal",JSON.stringify(m))}catch(e){}}
+function crmRefusals(box){
+  box.appendChild(cbtn("\u2190 "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  box.appendChild(mk("h3","",T("Refusals and reapplying","Refus et nouvelle demande")));
+  box.appendChild(mk("p","m",T("A refusal is not the end. For each refused client, write the reasons, fix them one by one, and choose a good date to apply again. Do not reapply with the same file: it usually gets the same answer.","Un refus n\u2019est pas la fin. Pour chaque client refusé, notez les motifs, corrigez-les un par un et choisissez une bonne date pour redéposer. Ne redéposez pas le même dossier : il reçoit en général la même réponse.")));
+  var l=CL.filter(function(c){return c.res==="refused"});
+  if(!l.length)box.appendChild(mk("p","m",T("No refused client. In a client\u2019s page, set the result to Refused to plan the next step.","Aucun client refusé. Dans la page d\u2019un client, mettez le résultat sur Refusé pour préparer la suite.")));
+  l.forEach(function(c){var x=rfGet(c),w=mk("div","up");w.appendChild(mk("b","",c.name));w.appendChild(mk("div","m",lab(CDEST,c.dest)+" \u00B7 "+x.r.length+" "+T("reasons noted","motifs notés")+" \u00B7 "+x.f.length+"/"+x.r.length+" "+T("fixed","corrigés")+(x.t?" \u00B7 "+T("reapply ","redépôt ")+cdate(x.t):"")));
+    var r=mk("div","row");r.appendChild(cbtn(T("Open plan","Ouvrir le plan"),function(){CV.mode="refusal";CV.id=c.id;crmRender();window.scrollTo(0,0)}));w.appendChild(r);box.appendChild(w)});
+}
+function crmRefusal(box){
+  var c=findC(CV.id);if(!c){CV.mode="refusals";return crmRefusals(box)}
+  var x=rfGet(c);
+  box.appendChild(cbtn("\u2190 "+c.name,function(){CV.mode="detail";crmRender()}));
+  box.appendChild(mk("h3","",T("Refusal and reapply plan","Plan après refus")));
+  box.appendChild(mk("p","m",T("Tick the reasons given in the refusal letter. Each one shows what to fix. Tick a fix when it is done.","Cochez les motifs de la lettre de refus. Chacun indique quoi corriger. Cochez une correction quand elle est faite.")));
+  function save(){rfSet(c,x)}
+  var dl=mk("label","",T("Date of the refusal","Date du refus")),di=mk("input");di.type="date";di.value=x.d;di.addEventListener("change",function(){x.d=di.value;save()});dl.appendChild(di);box.appendChild(dl);
+  RFR.forEach(function(a){
+    var on=x.r.indexOf(a[0])>=0,w=mk("div","dcard"),lb=mk("label","");lb.style.display="flex";lb.style.gap="8px";lb.style.alignItems="center";
+    var cb=mk("input");cb.type="checkbox";cb.checked=on;cb.addEventListener("change",function(){x.r=x.r.filter(function(k){return k!==a[0]});if(cb.checked)x.r.push(a[0]);else x.f=x.f.filter(function(k){return k!==a[0]});save();crmRender()});
+    lb.appendChild(cb);lb.appendChild(mk("b","",L==="fr"?a[2]:a[1]));w.appendChild(lb);
+    if(on){w.appendChild(mk("p","m",L==="fr"?a[4]:a[3]));var fl=mk("label","");fl.style.display="flex";fl.style.gap="8px";var fc=mk("input");fc.type="checkbox";fc.checked=x.f.indexOf(a[0])>=0;fc.addEventListener("change",function(){x.f=x.f.filter(function(k){return k!==a[0]});if(fc.checked)x.f.push(a[0]);save();crmRender()});fl.appendChild(fc);fl.appendChild(mk("span","",T("Fixed","Corrigé")));w.appendChild(fl)}
+    box.appendChild(w);
+  });
+  var tl=mk("label","",T("Plan to apply again on","Redéposer le")),ti=mk("input");ti.type="date";ti.value=x.t;ti.addEventListener("change",function(){x.t=ti.value;save()});tl.appendChild(ti);box.appendChild(tl);
+  box.appendChild(mk("p","m",T("Choose a date when the reasons will be fixed. Some countries also have waiting rules: check the official site.","Choisissez une date où les motifs seront corrigés. Certains pays ont aussi des délais d\u2019attente : vérifiez le site officiel.")));
+  var r=mk("div","row");
+  r.appendChild(cbtn(T("Remind me on that date","Me rappeler à cette date"),function(){if(!ti.value){ti.focus();alert(T("Choose a date first.","Choisissez d\u2019abord une date."));return}c.follow=ti.value;csave();alert(T("Follow-up set for ","Relance fixée au ")+cdate(ti.value))}));
+  r.appendChild(cbtn(T("Start a new application","Commencer une nouvelle demande"),function(){
+    var n=crmClean({name:c.name,phone:c.phone,dest:c.dest,type:c.type,status:"new",notes:T("New application after a refusal. Fix the reasons first.","Nouvelle demande après un refus. Corrigez d\u2019abord les motifs."),cur:c.cur,by:c.by,src:c.src,ref:c.ref});
+    if(!n)return;n.created=Date.now();n.updated=Date.now();CL.push(n);csave();CV.mode="detail";CV.id=n.id;crmRender();window.scrollTo(0,0)}));
+  box.appendChild(r);
+  if(c.phone){var wa=mk("a","act",T("Message the client on WhatsApp","Écrire au client sur WhatsApp"));wa.target="_blank";wa.rel="noopener";wa.href=waLink(c,"c:refusal");box.appendChild(wa)}
+}
+/* ---------- year-end summary ---------- */
+function yrOf(c){var t=c.created||c.updated;return t?new Date(t).getFullYear():0}
+function yearStats(y){
+  var cl=CL.filter(function(c){return yrOf(c)===y}),st=gstat(cl),dec=st.ap+st.rf;
+  var inc={},best={m:"",v:0,k:""};
+  for(var m=1;m<=12;m++){var key=y+"-"+("0"+m).slice(-2),tot={};crows(key).forEach(function(r){var k=r.d.cur||"XAF";inc[k]=(inc[k]||0)+r.d.amt;tot[k]=(tot[k]||0)+r.d.amt});Object.keys(tot).forEach(function(k){if(tot[k]>best.v){best={m:key,v:tot[k],k:k}}})}
+  var ex={};EX.filter(function(e){return e.d.slice(0,4)===String(y)}).forEach(function(e){ex[e.cur]=(ex[e.cur]||0)+e.a});
+  function top(f,n){var o={};cl.forEach(function(c){var k=f(c);if(k)o[k]=(o[k]||0)+1});return Object.keys(o).sort(function(a,b){return o[b]-o[a]}).slice(0,n).map(function(k){return [k,o[k]]})}
+  var staff={};cl.forEach(function(c){var k=(c.by||"").trim();if(!k)return;var o=staff[k]||(staff[k]={n:0,ap:0});o.n++;if(c.res==="approved")o.ap++});
+  return {y:y,n:cl.length,st:st,dec:dec,rate:dec?Math.round(st.ap/dec*100):null,inc:inc,ex:ex,best:best,dest:top(function(c){return c.dest},3),src:top(function(c){return c.src},3),staff:staff};
+}
+function yearLines(d){
+  var Ls=[];Ls.push([T("Clients added: ","Clients ajoutés : ")+d.n]);
+  Ls.push([T("Visas approved: ","Visas accordés : ")+d.st.ap+T(" \u00B7 refused: "," \u00B7 refusés : ")+d.st.rf+(d.rate!==null?T(" \u00B7 approval rate "," \u00B7 taux d\u2019acceptation ")+d.rate+"%":"")]);
+  Ls.push([T("Money received: ","Argent reçu : ")+gmoney(d.inc)]);
+  Ls.push([T("Money spent: ","Argent dépensé : ")+gmoney(d.ex)]);
+  var pr={};Object.keys(d.inc).forEach(function(k){pr[k]=(d.inc[k]||0)-(d.ex[k]||0)});Object.keys(d.ex).forEach(function(k){if(!(k in pr))pr[k]=-(d.ex[k])});
+  var ps=Object.keys(pr).map(function(k){return cmoney(Math.round(pr[k]*100)/100,k)}).join(" + ");
+  Ls.push([T("Profit: ","Bénéfice : ")+(ps||"0")]);
+  if(d.best.m)Ls.push([T("Best month: ","Meilleur mois : ")+cmonthLabel(d.best.m)+" ("+cmoney(Math.round(d.best.v*100)/100,d.best.k)+")"]);
+  Ls.push([T("Still owed by clients: ","Encore dû par les clients : ")+gmoney(d.st.owed)]);
+  if(d.dest.length)Ls.push([T("Top destinations: ","Destinations principales : ")+d.dest.map(function(x){return lab(CDEST,x[0])+" ("+x[1]+")"}).join(", ")]);
+  if(d.src.length)Ls.push([T("Top sources: ","Origines principales : ")+d.src.map(function(x){return lab(SRC,x[0])+" ("+x[1]+")"}).join(", ")]);
+  Object.keys(d.staff).sort(function(a,b){return d.staff[b].n-d.staff[a].n}).forEach(function(k){Ls.push([T("Team, ","Équipe, ")+k+": "+d.staff[k].n+" "+T("clients, ","clients, ")+d.staff[k].ap+" "+T("approved","accordés")])});
+  return Ls.map(function(x){return x[0]});
+}
+function yearPdf(d){
+  var s=[],y=790,lg=lgpdf(),A=AG,x0=50;
+  function tx(x,yy,sz,b,t,g){s.push("BT /"+(b?"F2":"F1")+" "+sz+" Tf "+(g===undefined?0:g)+" g 1 0 0 1 "+x+" "+yy+" Tm ("+pdfEsc(pdfEnc(t))+") Tj ET")}
+  if(lg){var sc=Math.min(46/lg.h,130/lg.w),iw=lg.w*sc,ih=lg.h*sc;s.push("q "+iw.toFixed(1)+" 0 0 "+ih.toFixed(1)+" 50 "+(806-ih).toFixed(1)+" cm /Im1 Do Q");x0=50+iw+14}
+  tx(x0,y,14,true,A.biz||A.name||"Global Visa");y-=44;
+  tx(50,y,22,true,T("Year summary ","Bilan de l\u2019année ")+d.y);y-=34;
+  s.push("0.8 w 50 "+y+" m 545 "+y+" l S");y-=26;
+  yearLines(d).forEach(function(l){pwrap(l,88).forEach(function(w,i){tx(50+(i?12:0),y,11.5,false,w);y-=17});y-=6});
+  tx(50,60,9,false,T("Made with Global Visa on ","Créé avec Global Visa le ")+dkey(new Date()),0.45);
+  return pdfMany([s.join("\n")],lg);
+}
+function crmYear(box){
+  box.appendChild(cbtn("\u2190 "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  var y=CV.yr||new Date().getFullYear();
+  box.appendChild(mk("h3","",T("Year summary","Bilan de l\u2019année")));
+  var nav=mk("div","row"),lb=mk("b","",String(y));lb.style.flex="1";lb.style.textAlign="center";lb.style.alignSelf="center";
+  nav.appendChild(cbtn("\u2039",function(){CV.yr=y-1;crmRender()}));nav.appendChild(lb);nav.appendChild(cbtn("\u203A",function(){CV.yr=y+1;crmRender()}));box.appendChild(nav);
+  var d=yearStats(y);
+  box.appendChild(mk("p","m",T("Clients are counted by the year they were added. Money comes from receipts and expenses you recorded.","Les clients sont comptés selon l\u2019année d\u2019ajout. L\u2019argent vient des reçus et dépenses que vous avez enregistrés.")));
+  if(!d.n&&!Object.keys(d.inc).length&&!Object.keys(d.ex).length)box.appendChild(mk("p","m",T("Nothing recorded for this year.","Rien n\u2019est enregistré pour cette année.")));
+  else yearLines(d).forEach(function(l){box.appendChild(mk("p","stat",l))});
+  var r=mk("div","row");
+  r.appendChild(cbtn(T("Save as PDF","Enregistrer en PDF"),function(){saveFile("year-summary-"+y+".pdf",yearPdf(d))}));
+  r.appendChild(cbtn(T("Copy as text","Copier en texte"),function(){var t=T("Year summary ","Bilan de l\u2019année ")+y+"\n"+yearLines(d).join("\n");if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){alert(T("Copied.","Copié."))},function(){prompt("",t)});else prompt("",t)}));
+  box.appendChild(r);
 }
 function crmList(box){
   var top=mk("div","row");
@@ -4260,6 +4396,18 @@ function cmsg(c,key){
     var n=pnext(c)||{d:dkey(new Date()),a:0},lt=dleft(n.d)<0,pay=AG.pn?(fr?"Paiement : ":"Pay to: ")+(AG.pm?pmName(AG.pm)+" ":"")+AG.pn+(AG.pa?" ("+AG.pa+")":""):"";
     lines=(fr?["Bonjour "+first+", rappel : une échéance de "+cmoney(n.a,c.cur)+(lt?" était prévue le ":" est prévue le ")+cdate(n.d)+" pour votre dossier de visa "+dest+".",pay,"Dites-nous quand c’est fait afin que nous le confirmions. Merci !"]
       :["Hello "+first+", a friendly reminder: an instalment of "+cmoney(n.a,c.cur)+(lt?" was due on ":" is due on ")+cdate(n.d)+" for your "+dest+" visa file.",pay,"Please tell us once it is done so that we can confirm it. Thank you!"]).filter(Boolean);
+  }else if(key==="c:refusal"){
+    var rx=rfGet(c),rl=rx.r.map(function(k){for(var i=0;i<RFR.length;i++)if(RFR[i][0]===k)return "- "+(fr?RFR[i][2]:RFR[i][1])}).filter(Boolean).join("\n");
+    lines=[fr?"Bonjour "+first+", nous sommes désolés pour la décision sur votre visa "+dest+". Un refus n\u2019est pas la fin, et nous allons préparer ensemble une meilleure demande.":"Hello "+first+", we are sorry about the decision on your "+dest+" visa. A refusal is not the end, and we will prepare a stronger application together."];
+    if(rl)lines.push((fr?"Points à corriger :\n":"What we need to fix:\n")+rl);
+    if(rx.t)lines.push((fr?"Date visée pour redéposer : ":"Target date to apply again: ")+cdate(rx.t));
+    lines.push(fr?"Écrivez-nous pour fixer un rendez-vous.":"Write to us to set up a meeting.");
+  }else if(key==="c:fb"){
+    var rv=fbLink();
+    lines=[fr?"Bonjour "+first+", félicitations encore pour votre visa "+dest+" ! Merci de nous avoir fait confiance.":"Hello "+first+", congratulations again on your "+dest+" visa! Thank you for trusting us.",
+      fr?"Si vous êtes satisfait(e) de notre travail, pouvez-vous nous écrire deux lignes sur votre expérience, ou nous recommander à un ami ou à un proche qui veut voyager ?":"If you are happy with our work, could you write two lines about your experience, or recommend us to a friend or relative who wants to travel?"];
+    if(rv)lines.push((fr?"Vous pouvez laisser votre avis ici : ":"You can leave your review here: ")+rv);
+    lines.push(fr?"Merci beaucoup et bon voyage !":"Thank you very much, and safe travels!");
   }else if(key==="c:link"){
     lines=[fr?"Bonjour "+first+", suivez votre dossier de visa "+dest+" ici :":"Hello "+first+", you can follow your "+dest+" visa file here:",statusLink(c),fr?"Le lien montre l\u2019étape, le rendez-vous, les documents et le solde.":"The link shows the stage, appointment, documents and balance."];
   }else if(key==="c:summary"){
@@ -4551,6 +4699,7 @@ function crmDetail(box){
   var lk=mk("div","row");
   lk.appendChild(cbtn(T("Copy client status link","Copier le lien de suivi du client"),function(){var u=statusLink(c);if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(function(){alert(T("Link copied.","Lien copié."))},function(){prompt("",u)});else prompt("",u)}));
   if(c.phone){var sl=mk("a","act",T("Send status link on WhatsApp","Envoyer le lien de suivi sur WhatsApp"));sl.target="_blank";sl.rel="noopener";sl.href=waLink(c,"c:link");lk.appendChild(sl)}
+  if(c.res==="refused")lk.appendChild(cbtn(T("Refusal and reapply plan","Plan après refus"),function(){CV.mode="refusal";crmRender();window.scrollTo(0,0)}));
   box.appendChild(sr2);box.appendChild(lk);
   box.appendChild(mk("h3","",T("Send a message","Envoyer un message")));
   var ml=mk("label","",T("Message","Message")),ms=mk("select");
@@ -4575,7 +4724,7 @@ function crmDetail(box){
   },"act danger"));
   box.appendChild(row2);
 }
-function crmBackupObj(){return {app:"visa-guide-clients",version:1,exported:new Date().toISOString(),clients:CL,docn:(function(){try{return JSON.parse(localStorage.getItem("vg-docn")||"{}")||{}}catch(e){return {}}})(),exp:EX,prices:PRICES}}
+function crmBackupObj(){return {app:"visa-guide-clients",version:1,exported:new Date().toISOString(),clients:CL,docn:(function(){try{return JSON.parse(localStorage.getItem("vg-docn")||"{}")||{}}catch(e){return {}}})(),exp:EX,prices:PRICES,fb:fbMap(),rf:rfMap()}}
 function crmBackupDone(){try{localStorage.setItem("vg-clients-backup",String(Date.now()));localStorage.setItem("vg-changes","0");localStorage.removeItem("vg-backup-snooze")}catch(e){}}
 function crmBackup(){CV.mode="backup";crmRender();window.scrollTo(0,0)}
 function crmBackupUI(box){
@@ -4616,7 +4765,7 @@ function crmApply(o){
   if(!o||o.app!=="visa-guide-clients"||!Array.isArray(o.clients))throw new Error("bad");
   var arr=o.clients.map(crmClean).filter(Boolean);
   if(!arr.length&&o.clients.length)throw new Error("bad");
-  if(confirm(T("Replace the "+CL.length+" client"+(CL.length===1?"":"s")+" on this phone with the "+arr.length+" client"+(arr.length===1?"":"s")+" in the backup?","Remplacer les "+CL.length+" client"+(CL.length>1?"s":"")+" de ce téléphone par les "+arr.length+" client"+(arr.length>1?"s":"")+" de la sauvegarde ?"))){CL=arr;if(Array.isArray(o.exp)){EX=o.exp.map(exClean).filter(Boolean)}if(Array.isArray(o.prices)){PRICES=o.prices.map(prClean).filter(Boolean);prsave()}csave();try{var dn=o.docn||{},cu=JSON.parse(localStorage.getItem("vg-docn")||"{}")||{};["r","i"].forEach(function(k){cu[k]=Math.max(+cu[k]||0,+dn[k]||0)});localStorage.setItem("vg-docn",JSON.stringify(cu));localStorage.setItem("vg-changes","0")}catch(e){}CV.mode="list";CV.id=null;crmRender()}
+  if(confirm(T("Replace the "+CL.length+" client"+(CL.length===1?"":"s")+" on this phone with the "+arr.length+" client"+(arr.length===1?"":"s")+" in the backup?","Remplacer les "+CL.length+" client"+(CL.length>1?"s":"")+" de ce téléphone par les "+arr.length+" client"+(arr.length>1?"s":"")+" de la sauvegarde ?"))){CL=arr;if(Array.isArray(o.exp)){EX=o.exp.map(exClean).filter(Boolean)}if(o.fb&&typeof o.fb==="object"){try{var fo={};Object.keys(o.fb).slice(0,5000).forEach(function(k){if(/^\d{4}-\d{2}-\d{2}$/.test(o.fb[k]))fo[String(k).slice(0,40)]=o.fb[k]});localStorage.setItem("vg-fb",JSON.stringify(fo))}catch(e){}}if(o.rf&&typeof o.rf==="object"){try{var ro={};Object.keys(o.rf).slice(0,5000).forEach(function(k){var v=o.rf[k];if(v&&typeof v==="object")ro[String(k).slice(0,40)]={r:(Array.isArray(v.r)?v.r:[]).slice(0,12).map(String),f:(Array.isArray(v.f)?v.f:[]).slice(0,12).map(String),d:String(v.d||"").slice(0,10),t:String(v.t||"").slice(0,10)}});localStorage.setItem("vg-refusal",JSON.stringify(ro))}catch(e){}}if(Array.isArray(o.prices)){PRICES=o.prices.map(prClean).filter(Boolean);prsave()}csave();try{var dn=o.docn||{},cu=JSON.parse(localStorage.getItem("vg-docn")||"{}")||{};["r","i"].forEach(function(k){cu[k]=Math.max(+cu[k]||0,+dn[k]||0)});localStorage.setItem("vg-docn",JSON.stringify(cu));localStorage.setItem("vg-changes","0")}catch(e){}CV.mode="list";CV.id=null;crmRender()}
 }
 document.getElementById("crmfile").addEventListener("change",function(e){
   var f=e.target.files&&e.target.files[0];

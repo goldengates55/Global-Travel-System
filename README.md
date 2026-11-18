@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-34`; it is now `visaguide-33`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-36`; it is now `visaguide-35`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -207,3 +207,8 @@ Both are in More and are written in English and French inside `index.html` (the 
 
 - **Studio** (Clients, Studio): one home screen with client engagement (open clients, today's messages), team workload per person, this month's money, marketing sources, and brand/profile gaps, with buttons to the full screens.
 - **Client status link**: in a client's page. Opens `status.html`, a read-only page with stage, appointment, documents and balance. The data is inside the link (after the #), not on a server, so it is a snapshot: send a new link to update it. Upload `status.html` with the other files.
+
+- **Ask for feedback** (Studio, Marketing): lists approved clients with a phone number, opens a ready WhatsApp message asking for a recommendation or review (optional review link), and remembers who was asked. Included in backups.
+
+- **Refusals** (Studio, or a refused client): reasons, what to fix, a reapply date with reminder, a WhatsApp message and a new application. Included in backups.
+- **Year summary** (Studio, Money): clients, approvals, money, profit, best month, top destinations and sources, team. PDF or text.
