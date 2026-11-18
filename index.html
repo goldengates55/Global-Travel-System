@@ -1830,7 +1830,41 @@ document.getElementById("reset").addEventListener("click",function(){
   ids.forEach(function(i){document.getElementById(i).selectedIndex=0});
   build();
 });
-document.getElementById("print").addEventListener("click",function(){document.body.classList.remove("pi");if(STAND){var fr=L==="fr";saveFile("checklist-"+(fr?"fr":"en")+".pdf",pdfBlob(fr?"Liste de contrôle visa":"Visa document checklist",plain()))}else window.print()});
+
+function checkPdf(){
+  var fr=L==="fr",pages=[],s=[],y,top,X=50;
+  function tx(x,yy,sz,b,t,g){s.push("BT /"+(b?"F2":"F1")+" "+sz+" Tf "+(g===undefined?0:g)+" g 1 0 0 1 "+x+" "+yy+" Tm ("+pdfEsc(pdfEnc(t))+") Tj ET")}
+  function rr(x,yb,w,h,r,g){var k=r*0.5523,t=yb+h,rt=x+w;s.push((g||0.7)+" G 0.8 w "+(x+r)+" "+yb+" m "+(rt-r)+" "+yb+" l "+(rt-r+k)+" "+yb+" "+rt+" "+(yb+r-k)+" "+rt+" "+(yb+r)+" c "+rt+" "+(t-r)+" l "+rt+" "+(t-r+k)+" "+(rt-r+k)+" "+t+" "+(rt-r)+" "+t+" c "+(x+r)+" "+t+" l "+(x+r-k)+" "+t+" "+x+" "+(t-r+k)+" "+x+" "+(t-r)+" c "+x+" "+(yb+r)+" l "+x+" "+(yb+r-k)+" "+(x+r-k)+" "+yb+" "+(x+r)+" "+yb+" c S 0 G")}
+  function endPage(){rr(36,40,523,top-40,8);pages.push(s.join("\n"));s=[];top=800;y=top-26}
+  var sec=document.getElementById("try"),title=sec.querySelector("h1").textContent,intro=sec.querySelector("p.lead").textContent;
+  y=780;pwrap(title,38).forEach(function(l){tx(36,y,24,true,l);y-=28});y-=0;
+  pwrap(intro,100).forEach(function(l){tx(36,y,10.5,false,l,0.35);y-=14});
+  top=y-6;y=top-26;
+  var cells=[];
+  ids.forEach(function(i){var e=document.getElementById(i),lb=document.querySelector('label[for="'+i+'"]');if(!e||!lb||e.closest("[hidden]"))return;var o=e.options[e.selectedIndex];cells.push([lb.textContent,o?o.textContent:""])});
+  cells.forEach(function(c,n){var col=n%3,x=X+col*176;if(col===0&&n>0)y-=36;tx(x,y,9,true,c[0]);tx(x,y-15,9,false,c[1])});
+  y-=44;
+  tx(X,y,9.5,false,count.textContent);y-=14;
+  tx(X,y,9.5,true,readyText()[0]);y-=26;
+  list.querySelectorAll("li").forEach(function(li){
+    var b=li.querySelector("b").textContent,sm=li.querySelectorAll("small"),why=sm[0]?sm[0].textContent:"",vf=sm[1]?sm[1].textContent:"",ok=li.querySelector("input").checked;
+    var wl=pwrap(why,95);
+    if(y-(30+wl.length*11)<56){endPage()}
+    rr(X,y-4,13,13,2.5,0.45);
+    if(ok){s.push("0.15 0.5 0.3 RG 1.6 w "+(X+3)+" "+(y+2)+" m "+(X+6)+" "+(y-1)+" l "+(X+11)+" "+(y+7)+" l S 0 G")}
+    tx(X+21,y,10.5,true,b);y-=12;
+    wl.forEach(function(l){tx(X+21,y,8.5,false,l,0.4);y-=11});
+    if(vf){tx(X+21,y,8,false,vf,0.45);y-=11}
+    y-=6;s.push("0.55 G 0.6 w "+X+" "+y+" m 545 "+y+" l S 0 G");y-=16;
+  });
+  var note=fr?["Procédures et exigences varient selon l’ambassade et le demandeur.","Confirmez toujours les exigences sur le site de l’ambassade ou du centre de visas."]:["Requirements vary by embassy and applicant.","Always confirm requirements on the embassy or visa center website."];
+  if(y<90)endPage();
+  note.forEach(function(l){tx(X,y,9,false,l,0.3);y-=13});
+  top=top;rr(36,y-10,523,top-(y-10),8);pages.push(s.join("\n"));
+  for(var i=0;i<pages.length;i++)pages[i]+="\nBT /F1 8 Tf 0.5 g 1 0 0 1 280 22 Tm ("+(i+1)+" / "+pages.length+") Tj ET";
+  return pdfMany(pages,null);
+}
+document.getElementById("print").addEventListener("click",function(){document.body.classList.remove("pi");if(STAND){var fr=L==="fr";saveFile("checklist-"+(fr?"fr":"en")+".pdf",checkPdf())}else window.print()});
 document.getElementById("copy").addEventListener("click",function(){
   var t=plain(),ok=L==="fr"?"Copié":"Copied",no=L==="fr"?"Copie impossible":"Could not copy";
   function old(){
@@ -1975,6 +2009,7 @@ function cvcalc(){
 
 /* ---------- what's new: a banner for updates; add a line to NEWS and raise the service worker VERSION ---------- */
 var NEWS=[
+ {id:"2026-11-19c",en:"New: in a client\u2019s page, print an Appointment sheet (documents to bring, with ticks) and send the client a status message on WhatsApp.",fr:"Nouveau : dans la page d\u2019un client, imprimez une Fiche du rendez-vous (documents à apporter, avec coches) et envoyez au client un point sur WhatsApp.",go:"clients"},
  {id:"2026-11-19b",en:"New: the Checklist page now has an Immigration (permanent residence) purpose, with the Canada documents.",fr:"Nouveau : la page Liste de contrôle propose maintenant l’objectif Immigration (résidence permanente), avec les documents pour le Canada.",go:"try"},
  {id:"2026-11-19a",en:"New: a price list that fills in your fee for each destination, Today’s messages (who to write to on WhatsApp today), and a service agreement PDF for each client.",fr:"Nouveau : une liste de prix qui remplit vos frais pour chaque destination, les Messages du jour (à qui écrire sur WhatsApp aujourd’hui) et un contrat de service en PDF pour chaque client.",go:"manual"},
  {id:"2026-11-18c",en:"Updated: the Immigration guide now covers the Atlantic Immigration Program and the provincial nominee programs, with the six Francophone pilot communities.",fr:"Mis à jour : le guide Immigration couvre maintenant le programme d’immigration au Canada atlantique et les programmes des candidats des provinces, avec les six communautés du projet pilote francophone.",go:"immigration"},
@@ -2077,7 +2112,7 @@ var MAN=[
   ["ul",[["When you add or edit a client, choose How did the client find you? and, for a recommendation, write who referred them. Only write a name if that person agrees.","Quand vous ajoutez ou modifiez un client, choisissez Comment le client vous a-t-il trouvé ? et, pour une recommandation, écrivez qui l’a envoyé. N’écrivez un nom que si cette personne est d’accord."],["In Clients, tap Where clients come from to see which source brings the most clients, how many paid and how many visas were granted. People who send you several clients appear in a separate list, so you can thank them.","Dans Clients, touchez D’où viennent les clients pour voir quelle source apporte le plus de clients, combien ont payé et combien de visas ont été accordés. Les personnes qui vous envoient plusieurs clients apparaissent dans une liste à part, pour que vous puissiez les remercier."],["Tap Team results to compare team members using the Handled by field: clients, granted and refused, money collected, money still owed and clients that need attention. Fill in Handled by on every client for a fair comparison.","Touchez Résultats de l’équipe pour comparer les membres de l’équipe grâce au champ Pris en charge par : clients, accordés et refusés, argent encaissé, argent encore dû et clients à traiter. Remplissez Pris en charge par pour chaque client afin que la comparaison soit juste."]]]]] ,
  [["Immigration clients","Clients en immigration"],[
   ["ul",[["In Routes, Immigration to Canada: main pathways explains the rural programs (permanent from 1 January 2027, as reported), the Francophone pilots, Express Entry with its French-language category, the Quebec programs, the Atlantic program and the provincial nominee programs. It lists the steps, requirements and sources.","Dans Procédures, Immigration au Canada : principales voies explique les programmes ruraux (permanents à partir du 1er janvier 2027, selon la presse), les projets pilotes francophones, Entrée express avec sa catégorie en langue française, les programmes du Québec, le programme de l’Atlantique et les programmes des candidats des provinces. Il présente les étapes, les conditions et les sources."],["On the Checklist page, choose Purpose Immigration (permanent residence) and Destination Canada to see the documents for a permanent residence file. You can print it or save it as a PDF like any other checklist.","Sur la page Liste de contrôle, choisissez Objectif Immigration (résidence permanente) et Destination Canada pour voir les documents d’un dossier de résidence permanente. Vous pouvez l’imprimer ou l’enregistrer en PDF comme les autres listes."],["For an immigration client, choose Visa type Immigration (permanent residence) and Destination Canada. The checklist then asks for the job offer, the community recommendation, the language test, education, work experience, funds, and police and medical documents.","Pour un client en immigration, choisissez le Type de visa Immigration (résidence permanente) et la Destination Canada. La liste de contrôle demande alors l’offre d’emploi, la recommandation de la communauté, le test de langue, les études, l’expérience de travail, les fonds, et les documents de police et médicaux."],["Never promise a job offer or an approval, and never sell job offers or recommendations.","Ne promettez jamais une offre d’emploi ni une approbation, et ne vendez jamais d’offres d’emploi ni de recommandations."]]]]],
- [["Price list, today’s messages and service agreement", "Liste de prix, messages du jour et contrat de service"], [["ul", [["Price list: in Clients, tap Price list and save your usual fee for each destination, and for a visa type if you like. When you add a new client, the fee and currency are filled in. You can still change them.", "Liste de prix : dans Clients, touchez Liste de prix et enregistrez vos frais habituels pour chaque destination, et pour un type de visa si vous le souhaitez. Quand vous ajoutez un client, les frais et la devise sont remplis. Vous pouvez toujours les modifier."], ["Today’s messages: the button shows how many clients need a WhatsApp message today (appointment today or tomorrow, instalment due or late, follow-up due, documents missing for a week). Tap Message on WhatsApp, send the message yourself, and the client moves out of the list for today.", "Messages du jour : le bouton indique combien de clients ont besoin d’un message WhatsApp aujourd’hui (rendez-vous aujourd’hui ou demain, échéance à régler ou en retard, relance à faire, documents manquants depuis une semaine). Touchez Écrire sur WhatsApp, envoyez le message vous-même, et le client sort de la liste pour aujourd’hui."], ["Service agreement: open a client and tap Service agreement (PDF). Choose the language and the refund policy, add an extra clause if you wish, and create the PDF. It shows the fee and instalments, and has signature lines. It is a template, not legal advice.", "Contrat de service : ouvrez un client et touchez Contrat de service (PDF). Choisissez la langue et la politique de remboursement, ajoutez une clause supplémentaire si vous le souhaitez, puis créez le PDF. Il indique les frais et les échéances, et comporte des lignes de signature. C’est un modèle, pas un avis juridique."]]]]]
+ [["Price list, today’s messages and service agreement", "Liste de prix, messages du jour et contrat de service"], [["ul", [["Price list: in Clients, tap Price list and save your usual fee for each destination, and for a visa type if you like. When you add a new client, the fee and currency are filled in. You can still change them.", "Liste de prix : dans Clients, touchez Liste de prix et enregistrez vos frais habituels pour chaque destination, et pour un type de visa si vous le souhaitez. Quand vous ajoutez un client, les frais et la devise sont remplis. Vous pouvez toujours les modifier."], ["Today’s messages: the button shows how many clients need a WhatsApp message today (appointment today or tomorrow, instalment due or late, follow-up due, documents missing for a week). Tap Message on WhatsApp, send the message yourself, and the client moves out of the list for today.", "Messages du jour : le bouton indique combien de clients ont besoin d’un message WhatsApp aujourd’hui (rendez-vous aujourd’hui ou demain, échéance à régler ou en retard, relance à faire, documents manquants depuis une semaine). Touchez Écrire sur WhatsApp, envoyez le message vous-même, et le client sort de la liste pour aujourd’hui."], ["Appointment sheet: in a client\u2019s page, tap Appointment sheet (PDF) for a one-page list of the documents to bring. Ticked boxes are the documents you already hold. Tap Send status on WhatsApp to send the client the stage, appointment, documents received and missing, and balance.","Fiche du rendez-vous : dans la page d\u2019un client, touchez Fiche du rendez-vous (PDF) pour une liste d\u2019une page des documents à apporter. Les cases cochées sont les documents que vous avez déjà. Touchez Envoyer le point sur WhatsApp pour envoyer au client l\u2019étape, le rendez-vous, les documents reçus et manquants, et le solde."],["Service agreement: open a client and tap Service agreement (PDF). Choose the language and the refund policy, add an extra clause if you wish, and create the PDF. It shows the fee and instalments, and has signature lines. It is a template, not legal advice.", "Contrat de service : ouvrez un client et touchez Contrat de service (PDF). Choisissez la langue et la politique de remboursement, ajoutez une clause supplémentaire si vous le souhaitez, puis créez le PDF. Il indique les frais et les échéances, et comporte des lignes de signature. C’est un modèle, pas un avis juridique."]]]]]
 ];
 var PRIV=[
  [["What stays on your phone","Ce qui reste sur votre téléphone"],[
@@ -2613,6 +2648,7 @@ function wn(){
   }else if(st.type==="immigration"){
     w.hidden=false;
     w.textContent=st.dest==="canada"?(fr?"Liste pour la résidence permanente au Canada (programmes ruraux et francophones, Entrée express). Les documents exacts dépendent du programme : consultez le guide Immigration dans Procédures et le site d’IRCC. Ne promettez jamais une offre d’emploi ni une approbation.":"Checklist for permanent residence in Canada (rural and francophone programs, Express Entry). The exact documents depend on the program: see the Immigration guide in Routes and the IRCC website. Never promise a job offer or an approval."):(fr?"La liste Immigration est détaillée pour le Canada seulement. Pour les autres destinations, elle montre les documents de base : vérifiez les règles du pays.":"The Immigration checklist is detailed for Canada only. For other destinations it shows the basic documents: check that country’s rules.");
+    if(st.dest==="canada"){var ga=document.createElement("a");ga.href="#immigration";ga.textContent=fr?" Ouvrir le guide Immigration vers le Canada (programmes ruraux, Entrée express, Québec, Atlantique, provinces)":" Open the full Immigration to Canada guide (rural programs, Express Entry, Quebec, Atlantic, provinces)";ga.style.fontWeight="700";w.appendChild(ga)}
   }else{w.hidden=true;w.textContent=""}
 }
 
@@ -3963,6 +3999,41 @@ function crmContract(box){
     saveFile("service-agreement-"+(c.name||"client").replace(/[^A-Za-z0-9]+/g,"-").slice(0,30)+"-"+dkey(new Date())+".pdf",blob);
   }));
 }
+
+/* ---------- appointment sheet (PDF) and client status message ---------- */
+function apptPdf(c){
+  var fr=L==="fr",pages=[],s=[],y=790,lg=lgpdf(),A=AG,x0=50;
+  function tx(x,yy,sz,b,t,g){s.push("BT /"+(b?"F2":"F1")+" "+sz+" Tf "+(g===undefined?0:g)+" g 1 0 0 1 "+x+" "+yy+" Tm ("+pdfEsc(pdfEnc(t))+") Tj ET")}
+  function np(){pages.push(s.join("\n"));s=[];y=790}
+  function need(h){if(y-h<60)np()}
+  if(lg){var sc=Math.min(46/lg.h,130/lg.w),iw=lg.w*sc,ih=lg.h*sc;s.push("q "+iw.toFixed(1)+" 0 0 "+ih.toFixed(1)+" 50 "+(806-ih).toFixed(1)+" cm /Im1 Do Q");x0=50+iw+14}
+  tx(x0,y,14,true,A.biz||A.name||"Global Visa");y-=15;
+  var ct=[A.name,A.wa].filter(Boolean).join("  |  ");if(ct){tx(x0,y,10,false,ct,0.35)}
+  y-=34;
+  tx(50,y,18,true,fr?"À APPORTER AU RENDEZ-VOUS":"BRING TO THE APPOINTMENT");y-=24;
+  tx(50,y,12,true,c.name);y-=16;
+  tx(50,y,10,false,lab(CDEST,c.dest)+" - "+lab(CTYPE,c.type)+(c.appt?"  |  "+(fr?"Rendez-vous : ":"Appointment: ")+pdate(c.appt).toLocaleDateString(fr?"fr-FR":"en-GB",{weekday:"long",day:"numeric",month:"long",year:"numeric"}):""),0.3);y-=22;
+  s.push("0.8 w 50 "+y+" m 545 "+y+" l S");y-=22;
+  var list=cdocs(c),have=0;
+  list.forEach(function(r){
+    var ok=!!(c.docs&&c.docs[r.n]);if(ok)have++;
+    var i=RULES.indexOf(r),why=(fr&&FRR[i]?FRR[i][1]:r.w)||"";
+    var wl=pwrap(why,88);need(16+wl.length*11);
+    s.push("0.8 w 50 "+(y-1)+" 10 10 re S");
+    if(ok){s.push("1.2 w 52 "+(y+1)+" m 58 "+(y+7)+" l S 58 "+(y+7)+" m 62 "+(y+9)+" l S")}
+    tx(68,y,10.5,true,cdname(r));y-=12;
+    wl.forEach(function(l){tx(68,y,9,false,l,0.4);y-=11});
+    y-=6;
+  });
+  need(110);y-=6;
+  tx(50,y,11,true,fr?"Rappels":"Reminders");y-=15;
+  (fr?["Apportez le passeport, la confirmation du rendez-vous, les originaux et une copie de chaque document.","Arrivez en avance. Éteignez ou laissez le téléphone si le lieu l’exige.","Répondez avec calme et honnêteté. Ne donnez jamais de faux documents.","Ne payez personne qui promet un visa garanti."]
+      :["Bring your passport, the appointment confirmation, the originals and one copy of each document.","Arrive early. Switch off your phone or leave it behind if the venue requires it.","Answer calmly and honestly. Never give false documents.","Do not pay anyone who promises a guaranteed visa."]).forEach(function(t){pwrap("- "+t,95).forEach(function(l){need(13);tx(50,y,10,false,l);y-=13})});
+  tx(50,y-8,9,false,(fr?"Documents prêts : ":"Documents ready: ")+have+" / "+list.length,0.4);
+  pages.push(s.join("\n"));
+  for(var i=0;i<pages.length;i++)pages[i]+="\nBT /F1 9 Tf 0.45 g 1 0 0 1 270 36 Tm ("+pdfEsc(pdfEnc((i+1)+" / "+pages.length))+") Tj ET";
+  return pdfMany(pages,lg);
+}
 function crmList(box){
   var top=mk("div","row");
   top.appendChild(cbtn(T("+ Add client","+ Ajouter un client"),function(){CV.mode="form";CV.id=null;crmRender();window.scrollTo(0,0)}));
@@ -4127,6 +4198,15 @@ function cmsg(c,key){
     var n=pnext(c)||{d:dkey(new Date()),a:0},lt=dleft(n.d)<0,pay=AG.pn?(fr?"Paiement : ":"Pay to: ")+(AG.pm?pmName(AG.pm)+" ":"")+AG.pn+(AG.pa?" ("+AG.pa+")":""):"";
     lines=(fr?["Bonjour "+first+", rappel : une échéance de "+cmoney(n.a,c.cur)+(lt?" était prévue le ":" est prévue le ")+cdate(n.d)+" pour votre dossier de visa "+dest+".",pay,"Dites-nous quand c’est fait afin que nous le confirmions. Merci !"]
       :["Hello "+first+", a friendly reminder: an instalment of "+cmoney(n.a,c.cur)+(lt?" was due on ":" is due on ")+cdate(n.d)+" for your "+dest+" visa file.",pay,"Please tell us once it is done so that we can confirm it. Thank you!"]).filter(Boolean);
+  }else if(key==="c:summary"){
+    var dl=cdocs(c),mm=dl.filter(function(r){return !(c.docs&&c.docs[r.n])}).map(function(r){return "- "+cdname(r)}).join("\n");
+    lines=[fr?"Bonjour "+first+", voici où en est votre dossier de visa "+dest+" :":"Hello "+first+", here is where your "+dest+" visa file stands:",
+      (fr?"Étape : ":"Stage: ")+lab(STS,c.status)];
+    if(c.appt&&dleft(c.appt)>=0)lines.push((fr?"Rendez-vous : ":"Appointment: ")+cdate(c.appt)+" ("+whenTxt(c.appt)+")");
+    lines.push((fr?"Documents reçus : ":"Documents received: ")+(dl.length-mm.split("\n").filter(Boolean).length)+" / "+dl.length);
+    if(mm)lines.push((fr?"Il nous manque encore :\n":"We still need:\n")+mm);
+    if(cbal(c)>0)lines.push((fr?"Solde à régler : ":"Balance to pay: ")+cmoney(cbal(c),c.cur));
+    lines.push(fr?"Écrivez-nous si vous avez une question.":"Write to us if you have any question.");
   }else if(key==="c:docs"){
     var miss=cdocs(c).filter(function(r){return !(c.docs&&c.docs[r.n])}).map(function(r){return "- "+cdname(r)}).join("\n");
     lines=fr?["Bonjour "+first+", pour continuer votre dossier de visa "+dest+", il nous manque encore ces documents :",miss,"Merci d’envoyer des photos ou des scans nets (les quatre coins visibles). Merci !"]
@@ -4401,6 +4481,10 @@ function crmDetail(box){
     box.appendChild(rw);
   });
   var nr=mk("div","row");nr.appendChild(cbtn(T("Create receipt or invoice","Créer un reçu ou une facture"),function(){CV.mode="doc";crmRender();window.scrollTo(0,0)}));nr.appendChild(cbtn(T("Service agreement (PDF)","Contrat de service (PDF)"),function(){CV.mode="contract";crmRender();window.scrollTo(0,0)}));box.appendChild(nr);
+  var sr2=mk("div","row");
+  sr2.appendChild(cbtn(T("Appointment sheet (PDF)","Fiche du rendez-vous (PDF)"),function(){saveFile("appointment-"+(c.name||"client").replace(/[^A-Za-z0-9]+/g,"-").slice(0,30)+".pdf",apptPdf(c))}));
+  if(c.phone){var sw2=mk("a","act",T("Send status on WhatsApp","Envoyer le point sur WhatsApp"));sw2.target="_blank";sw2.rel="noopener";sw2.href=waLink(c,"c:summary");sr2.appendChild(sw2)}
+  box.appendChild(sr2);
   box.appendChild(mk("h3","",T("Send a message","Envoyer un message")));
   var ml=mk("label","",T("Message","Message")),ms=mk("select");
   Array.prototype.forEach.call(document.querySelectorAll("#mtype option"),function(o){var op=mk("option","",o.textContent);op.value=o.value;ms.appendChild(op)});

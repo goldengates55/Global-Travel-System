@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-30`; it is now `visaguide-29`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-33`; it is now `visaguide-32`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -198,3 +198,7 @@ Both are in More and are written in English and French inside `index.html` (the 
 - **Service agreement (PDF)**: in a client's page. English or French, with fee and instalments, refund policy, client duties, data use, an extra immigration clause when relevant, and signature lines. It is a template, not legal advice.
 
 - The main Checklist page now has the purpose **Immigration (permanent residence)**. With Canada it lists the immigration documents; other destinations show the basic documents with a note.
+
+- In a client's page: **Appointment sheet (PDF)** (documents to bring, ticked when held) and **Send status on WhatsApp** (stage, appointment, documents received and missing, balance).
+
+- The checklist PDF (installed app) now follows the printed page design: title, selections box, ticked boxes and a note.
