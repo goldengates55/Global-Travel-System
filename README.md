@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-28`; it is now `visaguide-27`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-30`; it is now `visaguide-29`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -190,3 +190,11 @@ Both are in More and are written in English and French inside `index.html` (the 
 - Routes > Immigration to Canada: rural programs is written as data (`IMM` in `index.html`), English and French together, with sources. Facts about the permanent RCIP (opens 1 January 2027) come from news reports of the 9 November 2026 announcement, not from an IRCC page we could open. The six FCIP communities and the FCIP French level were not readable, so the guide says to check IRCC. Re-check before relying on it.
 - The Immigration guide also covers Express Entry (French-language category, 2026 draw figures, proposed language reforms that were not in force) and Quebec (PSTQ, fees, the temporary PEQ window). Most figures come from news reports and the Quebec government page; re-check them against IRCC's Express Entry rounds page and quebec.ca before relying on them.
 - The Immigration guide also covers the Atlantic Immigration Program and the provincial nominee programs. PNP and AIP details (stream changes in Ontario, BC and Nova Scotia, the New Brunswick designation pause, the six FCIP communities) come from secondary news sources, not from the provincial or IRCC pages. Re-check them before relying on them.
+
+## Price list, today's messages and service agreement
+
+- **Price list** (Clients, Price list): your usual service fee per destination, and optionally per visa type. A new client gets the fee and currency filled in. It is saved on the phone and included in backups.
+- **Today's messages**: the clients who need a WhatsApp message today (appointment today or tomorrow, instalment due or late, follow-up due, documents missing for 7 days). The message opens ready in WhatsApp. Done or skipped clients leave the list for the day.
+- **Service agreement (PDF)**: in a client's page. English or French, with fee and instalments, refund policy, client duties, data use, an extra immigration clause when relevant, and signature lines. It is a template, not legal advice.
+
+- The main Checklist page now has the purpose **Immigration (permanent residence)**. With Canada it lists the immigration documents; other destinations show the basic documents with a note.
