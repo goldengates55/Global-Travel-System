@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-36`; it is now `visaguide-35`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-37`; it is now `visaguide-36`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -212,3 +212,9 @@ Both are in More and are written in English and French inside `index.html` (the 
 
 - **Refusals** (Studio, or a refused client): reasons, what to fix, a reapply date with reminder, a WhatsApp message and a new application. Included in backups.
 - **Year summary** (Studio, Money): clients, approvals, money, profit, best month, top destinations and sources, team. PDF or text.
+
+## Practice, scam checker, appearance, voice notes
+
+- **Interview practice** and **Scam checker** are in the Tools tab.
+- **Appearance** (More): theme (automatic/light/dark) and text size, kept per device.
+- **Voice notes**: in a client's page, stored in IndexedDB on the phone only (not in backups, not scrambled by the PIN). Needs microphone permission and HTTPS.
