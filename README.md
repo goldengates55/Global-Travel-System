@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-37`; it is now `visaguide-36`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-40`; it is now `visaguide-39`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -218,3 +218,17 @@ Both are in More and are written in English and French inside `index.html` (the 
 - **Interview practice** and **Scam checker** are in the Tools tab.
 - **Appearance** (More): theme (automatic/light/dark) and text size, kept per device.
 - **Voice notes**: in a client's page, stored in IndexedDB on the phone only (not in backups, not scrambled by the PIN). Needs microphone permission and HTTPS.
+
+## Calendar, report, commissions, estimate, expiry reminders
+
+- **Calendar** (Studio or Clients): appointments, follow-ups, unpaid instalments; `.ics` export of upcoming dates.
+- **Agency report**: daily or 7-day text summary to copy or send.
+- **Commissions**: per client (who, amount, paid), totals per person in Studio. Included in backups.
+- **Cost estimate**: official fee (typed by you, remembered per destination and type) + other costs + your price-list fee. No official fees are built in because they change.
+- **Expiry reminders**: clients with a passport or bank statement alert appear in Today's messages (not repeated for 14 days).
+
+- **Client rating** (1 to 5, average in Studio), **Translations** list per client, **Receipt photos** on expenses (IndexedDB, phone only). Rating and translations are in backups; photos are not.
+
+## Agency profiles
+
+Studio, Agency profiles: up to 3 agencies per phone. Profile 1 keeps the existing storage keys, so nothing moves. Profiles 2 and 3 use a prefix (`p2:`, `p3:`) on every saved item and on the IndexedDB database names. A small script at the top of `<head>` installs this before anything else reads storage. Shared across profiles: licence, language, theme, text size, exchange rates, last tab. "Erase all data" only erases the agency you are in.

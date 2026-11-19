@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script>/* agency profiles: profile 1 keeps the old keys; profiles 2 and 3 use a prefix for every saved item and database */
+(function(){try{
+var P=localStorage.getItem("vg-profile");if(P!=="2"&&P!=="3")P="1";window.VG_PROFILE=P;
+var pre=P==="1"?"":"p"+P+":",G={"vg-profile":1,"vg-pnames":1,"vg-theme":1,"vg-size":1,"vg-tab":1,"vg-lic":1,"vg-seen":1,"vg-phone":1,"vg-news-seen":1,"vg-rates":1,"lang":1};
+function k(x){x=String(x);return (pre&&x.indexOf("vg-")===0&&!G[x])?pre+x:x}
+function own(x){if(pre)return x.indexOf(pre)===0;return !/^p[23]:/.test(x)&&!G[x]}
+var sp=Storage.prototype,g=sp.getItem,st=sp.setItem,rm=sp.removeItem,cl=sp.clear;
+sp.getItem=function(x){return g.call(this,this===localStorage?k(x):x)};
+sp.setItem=function(x,v){return st.call(this,this===localStorage?k(x):x,v)};
+sp.removeItem=function(x){return rm.call(this,this===localStorage?k(x):x)};
+sp.clear=function(){if(this!==localStorage)return cl.call(this);var ks=[];for(var i=0;i<localStorage.length;i++){var n=localStorage.key(i);if(own(n))ks.push(n)}ks.forEach(function(n){rm.call(localStorage,n)})};
+if(pre&&window.IDBFactory){var o=IDBFactory.prototype.open,d=IDBFactory.prototype.deleteDatabase;IDBFactory.prototype.open=function(n,v){return v===undefined?o.call(this,pre+n):o.call(this,pre+n,v)};IDBFactory.prototype.deleteDatabase=function(n){return d.call(this,pre+n)}}
+}catch(e){}})();</script>
 <script>try{var _l=JSON.parse(localStorage.getItem("vg-lic")||"null"),_n=Math.max(Date.now(),+localStorage.getItem("vg-seen")||0);if(!_l||(_l.x&&_n>=_l.x))document.documentElement.classList.add("unlicensed")}catch(e){document.documentElement.classList.add("unlicensed")}</script>
 <script>try{if(localStorage.getItem("vg-lock"))document.documentElement.classList.add("locked")}catch(e){}</script>
 <meta charset="utf-8">
@@ -2017,6 +2030,9 @@ function cvcalc(){
 
 /* ---------- what's new: a banner for updates; add a line to NEWS and raise the service worker VERSION ---------- */
 var NEWS=[
+ {id:"2026-11-20c",en:"New: Agency profiles. Keep up to 3 agencies on one phone, each with its own clients, prices, settings, logo and PIN. Switch in Studio.",fr:"Nouveau : Profils d\u2019agence. Gardez jusqu\u2019à 3 agences sur un même téléphone, chacune avec ses clients, prix, réglages, logo et code PIN. Changez dans Studio.",go:"clients"},
+ {id:"2026-11-20b",en:"New: a rating for each client (average shown in Studio), a translations and certified copies list for each client, and receipt photos on expenses.",fr:"Nouveau : une note pour chaque client (moyenne dans Studio), une liste de traductions et copies certifiées pour chaque client, et des photos de reçu sur les dépenses.",go:"clients"},
+ {id:"2026-11-20a",en:"New in Studio: Calendar (with phone-calendar export), Agency report, Commissions, Cost estimate, and reminders to clients whose passport or bank statement needs renewing.",fr:"Nouveau dans Studio : Calendrier (avec export vers l\u2019agenda du téléphone), Rapport de l\u2019agence, Commissions, Estimation des coûts, et rappels aux clients dont le passeport ou le relevé bancaire est à renouveler.",go:"clients"},
  {id:"2026-11-19g",en:"New: Interview practice and Scam checker (Tools), Appearance (More: theme and text size), and voice notes in each client\u2019s page.",fr:"Nouveau : Entraînement à l\u2019entretien et Vérifier une arnaque (Outils), Apparence (Plus : thème et taille du texte), et notes vocales dans la page de chaque client.",go:"tools"},
  {id:"2026-11-19f",en:"New: a Refusal and reapply planner (reasons, what to fix, a date to apply again, a message to the client) and a Year summary with a PDF, both in Studio.",fr:"Nouveau : un plan après refus (motifs, quoi corriger, date pour redéposer, message au client) et un Bilan de l\u2019année en PDF, tous deux dans Studio.",go:"clients"},
  {id:"2026-11-19e",en:"New: Ask for feedback. Send approved clients a WhatsApp message that thanks them and asks for a recommendation or review.",fr:"Nouveau : Demander un avis. Envoyez aux clients dont le visa est accordé un message WhatsApp qui les remercie et demande une recommandation ou un avis.",go:"clients"},
@@ -2124,7 +2140,7 @@ var MAN=[
   ["ul",[["When you add or edit a client, choose How did the client find you? and, for a recommendation, write who referred them. Only write a name if that person agrees.","Quand vous ajoutez ou modifiez un client, choisissez Comment le client vous a-t-il trouvé ? et, pour une recommandation, écrivez qui l’a envoyé. N’écrivez un nom que si cette personne est d’accord."],["In Clients, tap Where clients come from to see which source brings the most clients, how many paid and how many visas were granted. People who send you several clients appear in a separate list, so you can thank them.","Dans Clients, touchez D’où viennent les clients pour voir quelle source apporte le plus de clients, combien ont payé et combien de visas ont été accordés. Les personnes qui vous envoient plusieurs clients apparaissent dans une liste à part, pour que vous puissiez les remercier."],["Tap Team results to compare team members using the Handled by field: clients, granted and refused, money collected, money still owed and clients that need attention. Fill in Handled by on every client for a fair comparison.","Touchez Résultats de l’équipe pour comparer les membres de l’équipe grâce au champ Pris en charge par : clients, accordés et refusés, argent encaissé, argent encore dû et clients à traiter. Remplissez Pris en charge par pour chaque client afin que la comparaison soit juste."]]]]] ,
  [["Immigration clients","Clients en immigration"],[
   ["ul",[["In Routes, Immigration to Canada: main pathways explains the rural programs (permanent from 1 January 2027, as reported), the Francophone pilots, Express Entry with its French-language category, the Quebec programs, the Atlantic program and the provincial nominee programs. It lists the steps, requirements and sources.","Dans Procédures, Immigration au Canada : principales voies explique les programmes ruraux (permanents à partir du 1er janvier 2027, selon la presse), les projets pilotes francophones, Entrée express avec sa catégorie en langue française, les programmes du Québec, le programme de l’Atlantique et les programmes des candidats des provinces. Il présente les étapes, les conditions et les sources."],["On the Checklist page, choose Purpose Immigration (permanent residence) and Destination Canada to see the documents for a permanent residence file. You can print it or save it as a PDF like any other checklist.","Sur la page Liste de contrôle, choisissez Objectif Immigration (résidence permanente) et Destination Canada pour voir les documents d’un dossier de résidence permanente. Vous pouvez l’imprimer ou l’enregistrer en PDF comme les autres listes."],["For an immigration client, choose Visa type Immigration (permanent residence) and Destination Canada. The checklist then asks for the job offer, the community recommendation, the language test, education, work experience, funds, and police and medical documents.","Pour un client en immigration, choisissez le Type de visa Immigration (résidence permanente) et la Destination Canada. La liste de contrôle demande alors l’offre d’emploi, la recommandation de la communauté, le test de langue, les études, l’expérience de travail, les fonds, et les documents de police et médicaux."],["Never promise a job offer or an approval, and never sell job offers or recommendations.","Ne promettez jamais une offre d’emploi ni une approbation, et ne vendez jamais d’offres d’emploi ni de recommandations."]]]]],
- [["Price list, today’s messages and service agreement", "Liste de prix, messages du jour et contrat de service"], [["ul", [["Price list: in Clients, tap Price list and save your usual fee for each destination, and for a visa type if you like. When you add a new client, the fee and currency are filled in. You can still change them.", "Liste de prix : dans Clients, touchez Liste de prix et enregistrez vos frais habituels pour chaque destination, et pour un type de visa si vous le souhaitez. Quand vous ajoutez un client, les frais et la devise sont remplis. Vous pouvez toujours les modifier."], ["Today’s messages: the button shows how many clients need a WhatsApp message today (appointment today or tomorrow, instalment due or late, follow-up due, documents missing for a week). Tap Message on WhatsApp, send the message yourself, and the client moves out of the list for today.", "Messages du jour : le bouton indique combien de clients ont besoin d’un message WhatsApp aujourd’hui (rendez-vous aujourd’hui ou demain, échéance à régler ou en retard, relance à faire, documents manquants depuis une semaine). Touchez Écrire sur WhatsApp, envoyez le message vous-même, et le client sort de la liste pour aujourd’hui."], ["Interview practice (Tools): choose the interview type and go through the questions one by one. Show what a good answer needs, then ask the client to answer out loud. Answers must be true and match the file.","Entraînement à l\u2019entretien (Outils) : choisissez le type d\u2019entretien et passez les questions une à une. Montrez ce qu\u2019une bonne réponse demande, puis demandez au client de répondre à voix haute. Les réponses doivent être vraies et conformes au dossier."],["Scam checker (Tools): tick the warning signs of an agency or person. You see the risk level and how to check them. It is a guide, not proof.","Vérifier une arnaque (Outils) : cochez les signaux d\u2019alerte d\u2019une agence ou d\u2019une personne. Vous voyez le niveau de risque et comment vérifier. C\u2019est un guide, pas une preuve."],["Appearance (More): choose Light, Dark or Automatic, and Normal, Large or Extra large text. It applies on this device only.","Apparence (Plus) : choisissez Clair, Sombre ou Automatique, et un texte Normal, Grand ou Très grand. Cela s\u2019applique à cet appareil seulement."],["Voice notes: in a client\u2019s page, tap Record, speak, then Stop and save (up to 2 minutes). Play or delete notes there. They stay on this phone, are not scrambled by the PIN and are not in backups.","Notes vocales : dans la page d\u2019un client, touchez Enregistrer, parlez, puis Arrêter et enregistrer (2 minutes au plus). Écoutez ou supprimez les notes à cet endroit. Elles restent sur ce téléphone, ne sont pas brouillées par le code PIN et ne sont pas dans les sauvegardes."],["Refusals: in Studio, tap Refusals, or open a refused client and tap Refusal and reapply plan. Tick the reasons from the refusal letter, read what to fix, tick each fix when done, and choose a date to apply again. You can set a reminder for that date, send the client a WhatsApp message, or start a new application. Do not reapply with the same file.","Refus : dans Studio, touchez Refus, ou ouvrez un client refusé et touchez Plan après refus. Cochez les motifs de la lettre de refus, lisez quoi corriger, cochez chaque correction faite et choisissez une date pour redéposer. Vous pouvez fixer un rappel à cette date, écrire au client sur WhatsApp ou commencer une nouvelle demande. Ne redéposez pas le même dossier."],["Year summary: in Studio, under Money, tap Year summary. It shows the year\u2019s clients, approvals and refusals, money received and spent, profit, best month, top destinations and sources, and each team member. Save it as a PDF or copy it as text.","Bilan de l\u2019année : dans Studio, sous Argent, touchez Bilan de l\u2019année. Il montre les clients de l\u2019année, accords et refus, argent reçu et dépensé, bénéfice, meilleur mois, destinations et origines principales, et chaque membre de l\u2019équipe. Enregistrez-le en PDF ou copiez-le en texte."],["Ask for feedback: in Studio, under Marketing, tap Ask for feedback. It lists clients whose result is Approved. Tap Ask on WhatsApp to open a ready message that thanks them and asks for a recommendation. Add your Google Maps or Facebook review link to include it. A client you have asked moves to Already asked, so nobody gets the same request twice by mistake.","Demander un avis : dans Studio, sous Marketing, touchez Demander un avis. La liste montre les clients dont le résultat est Accordé. Touchez Demander sur WhatsApp pour ouvrir un message prêt qui les remercie et demande une recommandation. Ajoutez votre lien d\u2019avis Google Maps ou Facebook pour l\u2019inclure. Un client sollicité passe dans Déjà sollicités, pour que personne ne reçoive deux fois la même demande par erreur."],["Studio: in Clients, tap Studio. It shows your open clients, today\u2019s messages, the workload of each team member, this month\u2019s money, where clients come from, and what is missing in your agency profile, with buttons to the full screens.","Studio : dans Clients, touchez Studio. Il montre vos clients en cours, les messages du jour, la charge de chaque membre de l\u2019équipe, l\u2019argent du mois, d\u2019où viennent les clients et ce qui manque dans le profil de l\u2019agence, avec des boutons vers les écrans complets."],["Client status link: in a client\u2019s page, copy the link or send it on WhatsApp. The client opens a simple page with the stage of the file, appointment, documents received and missing, and balance. The page is a snapshot stored inside the link, not on a server: send a new link to show changes. The link contains the client\u2019s first name, stage and balance, so share it only with that client.","Lien de suivi du client : dans la page d\u2019un client, copiez le lien ou envoyez-le sur WhatsApp. Le client ouvre une page simple avec l\u2019étape du dossier, le rendez-vous, les documents reçus et manquants, et le solde. La page est un instantané contenu dans le lien, pas sur un serveur : envoyez un nouveau lien pour montrer les changements. Le lien contient le prénom, l\u2019étape et le solde du client : ne le partagez qu\u2019avec ce client."],["Appointment sheet: in a client\u2019s page, tap Appointment sheet (PDF) for a one-page list of the documents to bring. Ticked boxes are the documents you already hold. Tap Send status on WhatsApp to send the client the stage, appointment, documents received and missing, and balance.","Fiche du rendez-vous : dans la page d\u2019un client, touchez Fiche du rendez-vous (PDF) pour une liste d\u2019une page des documents à apporter. Les cases cochées sont les documents que vous avez déjà. Touchez Envoyer le point sur WhatsApp pour envoyer au client l\u2019étape, le rendez-vous, les documents reçus et manquants, et le solde."],["Service agreement: open a client and tap Service agreement (PDF). Choose the language and the refund policy, add an extra clause if you wish, and create the PDF. It shows the fee and instalments, and has signature lines. It is a template, not legal advice.", "Contrat de service : ouvrez un client et touchez Contrat de service (PDF). Choisissez la langue et la politique de remboursement, ajoutez une clause supplémentaire si vous le souhaitez, puis créez le PDF. Il indique les frais et les échéances, et comporte des lignes de signature. C’est un modèle, pas un avis juridique."]]]]]
+ [["Price list, today’s messages and service agreement", "Liste de prix, messages du jour et contrat de service"], [["ul", [["Price list: in Clients, tap Price list and save your usual fee for each destination, and for a visa type if you like. When you add a new client, the fee and currency are filled in. You can still change them.", "Liste de prix : dans Clients, touchez Liste de prix et enregistrez vos frais habituels pour chaque destination, et pour un type de visa si vous le souhaitez. Quand vous ajoutez un client, les frais et la devise sont remplis. Vous pouvez toujours les modifier."], ["Today’s messages: the button shows how many clients need a WhatsApp message today (appointment today or tomorrow, instalment due or late, follow-up due, documents missing for a week). Tap Message on WhatsApp, send the message yourself, and the client moves out of the list for today.", "Messages du jour : le bouton indique combien de clients ont besoin d’un message WhatsApp aujourd’hui (rendez-vous aujourd’hui ou demain, échéance à régler ou en retard, relance à faire, documents manquants depuis une semaine). Touchez Écrire sur WhatsApp, envoyez le message vous-même, et le client sort de la liste pour aujourd’hui."], ["Agency profiles: in Studio, the Agency profiles card lets you keep up to 3 agencies on one phone. Rename them, then tap Switch. Each agency has its own clients, receipts, prices, settings, logo, PIN and photos. The name of the agency you are in shows at the top. Back up each agency separately. The licence, language, theme and text size are shared.","Profils d\u2019agence : dans Studio, la carte Profils d\u2019agence permet de garder jusqu\u2019à 3 agences sur un même téléphone. Renommez-les, puis touchez Changer. Chaque agence a ses clients, reçus, prix, réglages, logo, code PIN et photos. Le nom de l\u2019agence active s\u2019affiche en haut. Sauvegardez chaque agence séparément. La licence, la langue, le thème et la taille du texte sont partagés."],["Client rating: in a client\u2019s page, tap 1 to 5 stars for how happy the client was. Studio shows the average. Only you see it.","Note du client : dans la page d\u2019un client, touchez 1 à 5 étoiles selon la satisfaction du client. Studio montre la moyenne. Vous seul la voyez."],["Translations: in a client\u2019s page, add each document that must be translated or certified and update its status. Studio shows how many are waiting.","Traductions : dans la page d\u2019un client, ajoutez chaque document à traduire ou à certifier et mettez son état à jour. Studio montre combien sont en attente."],["Expense photos: in Expenses, tap Add receipt photo on an expense. The photo is made smaller and kept on this phone only (not in backups, not scrambled by the PIN).","Photos des dépenses : dans Dépenses, touchez Ajouter une photo du reçu sur une dépense. La photo est réduite et gardée sur ce téléphone seulement (pas dans les sauvegardes, non brouillée par le code PIN)."],["Calendar: in Studio or Clients, tap Calendar. Each day shows how many appointments, follow-ups and unpaid instalments you have. Tap a day to see them. Add upcoming dates to your phone calendar with the .ics button.","Calendrier : dans Studio ou Clients, touchez Calendrier. Chaque jour indique le nombre de rendez-vous, relances et échéances impayées. Touchez un jour pour les voir. Ajoutez les prochaines dates à l\u2019agenda du téléphone avec le bouton .ics."],["Agency report: in Studio, under Money, tap Agency report for today or the last 7 days: new clients, money received, appointments, late instalments and follow-ups. Copy it or send it on WhatsApp.","Rapport de l\u2019agence : dans Studio, sous Argent, touchez Rapport de l\u2019agence pour aujourd\u2019hui ou les 7 derniers jours : nouveaux clients, argent reçu, rendez-vous, échéances en retard et relances. Copiez-le ou envoyez-le sur WhatsApp."],["Commissions: in a client\u2019s page, write who gets a commission and how much. In Studio, Commissions shows what you owe each person and lets you mark it paid.","Commissions : dans la page d\u2019un client, indiquez qui reçoit une commission et le montant. Dans Studio, Commissions montre ce que vous devez à chaque personne et permet de la marquer payée."],["Cost estimate: in Studio, choose the destination and visa type, type the official visa fee from the official website, and add other costs. Your service fee comes from your price list. Copy the total or send it on WhatsApp.","Estimation des coûts : dans Studio, choisissez la destination et le type de visa, saisissez les frais de visa officiels du site officiel et ajoutez les autres coûts. Vos frais viennent de votre liste de prix. Copiez le total ou envoyez-le sur WhatsApp."],["Expiry reminders: when a client\u2019s passport or bank statement needs renewing, the client appears in Today\u2019s messages with a ready message. The same reminder is not shown again for 14 days.","Rappels d\u2019expiration : quand le passeport ou le relevé bancaire d\u2019un client est à renouveler, le client apparaît dans Messages du jour avec un message prêt. Le même rappel ne revient pas avant 14 jours."],["Interview practice (Tools): choose the interview type and go through the questions one by one. Show what a good answer needs, then ask the client to answer out loud. Answers must be true and match the file.","Entraînement à l\u2019entretien (Outils) : choisissez le type d\u2019entretien et passez les questions une à une. Montrez ce qu\u2019une bonne réponse demande, puis demandez au client de répondre à voix haute. Les réponses doivent être vraies et conformes au dossier."],["Scam checker (Tools): tick the warning signs of an agency or person. You see the risk level and how to check them. It is a guide, not proof.","Vérifier une arnaque (Outils) : cochez les signaux d\u2019alerte d\u2019une agence ou d\u2019une personne. Vous voyez le niveau de risque et comment vérifier. C\u2019est un guide, pas une preuve."],["Appearance (More): choose Light, Dark or Automatic, and Normal, Large or Extra large text. It applies on this device only.","Apparence (Plus) : choisissez Clair, Sombre ou Automatique, et un texte Normal, Grand ou Très grand. Cela s\u2019applique à cet appareil seulement."],["Voice notes: in a client\u2019s page, tap Record, speak, then Stop and save (up to 2 minutes). Play or delete notes there. They stay on this phone, are not scrambled by the PIN and are not in backups.","Notes vocales : dans la page d\u2019un client, touchez Enregistrer, parlez, puis Arrêter et enregistrer (2 minutes au plus). Écoutez ou supprimez les notes à cet endroit. Elles restent sur ce téléphone, ne sont pas brouillées par le code PIN et ne sont pas dans les sauvegardes."],["Refusals: in Studio, tap Refusals, or open a refused client and tap Refusal and reapply plan. Tick the reasons from the refusal letter, read what to fix, tick each fix when done, and choose a date to apply again. You can set a reminder for that date, send the client a WhatsApp message, or start a new application. Do not reapply with the same file.","Refus : dans Studio, touchez Refus, ou ouvrez un client refusé et touchez Plan après refus. Cochez les motifs de la lettre de refus, lisez quoi corriger, cochez chaque correction faite et choisissez une date pour redéposer. Vous pouvez fixer un rappel à cette date, écrire au client sur WhatsApp ou commencer une nouvelle demande. Ne redéposez pas le même dossier."],["Year summary: in Studio, under Money, tap Year summary. It shows the year\u2019s clients, approvals and refusals, money received and spent, profit, best month, top destinations and sources, and each team member. Save it as a PDF or copy it as text.","Bilan de l\u2019année : dans Studio, sous Argent, touchez Bilan de l\u2019année. Il montre les clients de l\u2019année, accords et refus, argent reçu et dépensé, bénéfice, meilleur mois, destinations et origines principales, et chaque membre de l\u2019équipe. Enregistrez-le en PDF ou copiez-le en texte."],["Ask for feedback: in Studio, under Marketing, tap Ask for feedback. It lists clients whose result is Approved. Tap Ask on WhatsApp to open a ready message that thanks them and asks for a recommendation. Add your Google Maps or Facebook review link to include it. A client you have asked moves to Already asked, so nobody gets the same request twice by mistake.","Demander un avis : dans Studio, sous Marketing, touchez Demander un avis. La liste montre les clients dont le résultat est Accordé. Touchez Demander sur WhatsApp pour ouvrir un message prêt qui les remercie et demande une recommandation. Ajoutez votre lien d\u2019avis Google Maps ou Facebook pour l\u2019inclure. Un client sollicité passe dans Déjà sollicités, pour que personne ne reçoive deux fois la même demande par erreur."],["Studio: in Clients, tap Studio. It shows your open clients, today\u2019s messages, the workload of each team member, this month\u2019s money, where clients come from, and what is missing in your agency profile, with buttons to the full screens.","Studio : dans Clients, touchez Studio. Il montre vos clients en cours, les messages du jour, la charge de chaque membre de l\u2019équipe, l\u2019argent du mois, d\u2019où viennent les clients et ce qui manque dans le profil de l\u2019agence, avec des boutons vers les écrans complets."],["Client status link: in a client\u2019s page, copy the link or send it on WhatsApp. The client opens a simple page with the stage of the file, appointment, documents received and missing, and balance. The page is a snapshot stored inside the link, not on a server: send a new link to show changes. The link contains the client\u2019s first name, stage and balance, so share it only with that client.","Lien de suivi du client : dans la page d\u2019un client, copiez le lien ou envoyez-le sur WhatsApp. Le client ouvre une page simple avec l\u2019étape du dossier, le rendez-vous, les documents reçus et manquants, et le solde. La page est un instantané contenu dans le lien, pas sur un serveur : envoyez un nouveau lien pour montrer les changements. Le lien contient le prénom, l\u2019étape et le solde du client : ne le partagez qu\u2019avec ce client."],["Appointment sheet: in a client\u2019s page, tap Appointment sheet (PDF) for a one-page list of the documents to bring. Ticked boxes are the documents you already hold. Tap Send status on WhatsApp to send the client the stage, appointment, documents received and missing, and balance.","Fiche du rendez-vous : dans la page d\u2019un client, touchez Fiche du rendez-vous (PDF) pour une liste d\u2019une page des documents à apporter. Les cases cochées sont les documents que vous avez déjà. Touchez Envoyer le point sur WhatsApp pour envoyer au client l\u2019étape, le rendez-vous, les documents reçus et manquants, et le solde."],["Service agreement: open a client and tap Service agreement (PDF). Choose the language and the refund policy, add an extra clause if you wish, and create the PDF. It shows the fee and instalments, and has signature lines. It is a template, not legal advice.", "Contrat de service : ouvrez un client et touchez Contrat de service (PDF). Choisissez la langue et la politique de remboursement, ajoutez une clause supplémentaire si vous le souhaitez, puis créez le PDF. Il indique les frais et les échéances, et comporte des lignes de signature. C’est un modèle, pas un avis juridique."]]]]]
 ];
 var PRIV=[
  [["What stays on your phone","Ce qui reste sur votre téléphone"],[
@@ -2139,7 +2155,8 @@ var PRIV=[
   ["ul",[["Tell clients what you keep about them and why, and ask for their agreement before you store their documents.","Dites aux clients ce que vous gardez à leur sujet et pourquoi, et demandez leur accord avant de stocker leurs documents."],["Keep data only as long as you need it for the file or the law requires. Delete the rest.","Ne gardez les données que le temps nécessaire au dossier ou exigé par la loi. Supprimez le reste."],["Never enter passport numbers, card numbers or PINs in notes. Ask clients never to send them in the intake form.","N’inscrivez jamais de numéros de passeport, de carte ou de PIN dans les notes. Demandez aux clients de ne jamais les envoyer dans le formulaire."],["Data protection laws differ by country. Check the rules that apply to you.","Les lois sur la protection des données diffèrent selon les pays. Vérifiez les règles qui s’appliquent à vous."]]]]],
  [["Delete your data","Supprimer vos données"],[
   ["ul",[["One client: open the client, then Delete. This also removes that client’s scans from this phone.","Un client : ouvrez le client, puis Supprimer. Cela retire aussi ses scans de ce téléphone."],["Everything: clear the app’s site data in the browser or phone settings, or uninstall the app.","Tout : effacez les données du site de l’application dans les réglages du navigateur ou du téléphone, ou désinstallez l’application."],["Copies you made (backups, team files, PDFs, WhatsApp messages) must be deleted separately.","Les copies que vous avez faites (sauvegardes, fichiers d’équipe, PDF, messages WhatsApp) doivent être supprimées séparément."]]]]],
- [["Voice notes","Notes vocales"],[["ul",[["Voice notes are saved only on this phone, in the browser storage. They are not scrambled by the PIN and are not included in backups. Deleting a client deletes that client\u2019s notes.","Les notes vocales sont enregistrées uniquement sur ce téléphone, dans le stockage du navigateur. Elles ne sont pas brouillées par le code PIN ni incluses dans les sauvegardes. Supprimer un client supprime ses notes."]]]]]
+ [["Voice notes","Notes vocales"],[["ul",[["Voice notes are saved only on this phone, in the browser storage. They are not scrambled by the PIN and are not included in backups. Deleting a client deletes that client\u2019s notes.","Les notes vocales sont enregistrées uniquement sur ce téléphone, dans le stockage du navigateur. Elles ne sont pas brouillées par le code PIN ni incluses dans les sauvegardes. Supprimer un client supprime ses notes."]]]]],
+ [["Receipt photos","Photos de reçus"],[["ul",[["Photos of expense receipts are saved only on this phone, in the browser storage. They are not scrambled by the PIN and are not in backups.","Les photos de reçus de dépenses sont enregistrées uniquement sur ce téléphone, dans le stockage du navigateur. Elles ne sont pas brouillées par le code PIN ni incluses dans les sauvegardes."]]]]]
 ];
 function docfill(el,data,fr){
   el.innerHTML="";
@@ -3327,8 +3344,8 @@ function crmExpenses(box){
     var dc=mk("div","dcard");
     dc.appendChild(mk("h4","",cmoney(x.a,x.cur)+" \u00B7 "+lab(EXC,x.cat)));
     dc.appendChild(mk("p","m",cdate(x.d)+(x.note?" \u00B7 "+x.note:"")));
-    var br=mk("div","row");br.appendChild(cbtn(T("Delete","Supprimer"),function(){if(!confirm(T("Delete this expense?","Supprimer cette dépense ?")))return;EX=EX.filter(function(y){return y!==x});esave();crmRender()}));
-    dc.appendChild(br);box.appendChild(dc);
+    var br=mk("div","row");br.appendChild(cbtn(T("Delete","Supprimer"),function(){if(!confirm(T("Delete this expense?","Supprimer cette dépense ?")))return;EX=EX.filter(function(y){return y!==x});esave();pdel(x.id);crmRender()}));
+    photoBtn(x,br);dc.appendChild(br);box.appendChild(dc);
   });
   var ex=mk("div","row");
   ex.appendChild(cbtn(T("Export this month (CSV)","Exporter ce mois (CSV)"),function(){
@@ -3774,6 +3791,10 @@ function crmRender(){
   if(CV.mode==="src")return crmSources(box);
   if(CV.mode==="staff")return crmStaff(box);
   if(CV.mode==="studio")return crmStudio(box);
+  if(CV.mode==="cal")return crmCalendar(box);
+  if(CV.mode==="daily")return crmDaily(box);
+  if(CV.mode==="comm")return crmComm(box);
+  if(CV.mode==="est")return crmEstimate(box);
   if(CV.mode==="refusals")return crmRefusals(box);
   if(CV.mode==="refusal")return crmRefusal(box);
   if(CV.mode==="year")return crmYear(box);
@@ -3880,7 +3901,9 @@ function ctoday(c){
     var miss=cdocs(c).filter(function(q){return !(c.docs&&c.docs[q.n])}).length;
     if(idle>=7&&miss){r.push(T("Documents missing for "+idle+" days","Documents manquants depuis "+idle+" jours"));if(!key)key="c:docs"}
   }
-  return key?{reasons:r,key:key}:null;
+  var ex=false;
+  if(calerts(c).length&&!expRecent(c)){r.push(T("Passport or bank statement needs renewing","Passeport ou relevé bancaire à renouveler"));ex=true;if(!key)key="c:expiry"}
+  return key?{reasons:r,key:key,exp:ex}:null;
 }
 function todayList(){return CL.map(function(c){var t=ctoday(c);return t?{c:c,t:t}:null}).filter(Boolean)}
 function crmToday(box){
@@ -3895,7 +3918,7 @@ function crmToday(box){
     w.appendChild(mk("div","m",x.t.reasons.join(" · ")));
     var r=mk("div","row");
     var a=mk("a","act",T("Message on WhatsApp","Écrire sur WhatsApp"));a.target="_blank";a.rel="noopener";a.href=waLink(c,x.t.key);
-    a.addEventListener("click",function(){todayMark(c);setTimeout(crmRender,400)});
+    a.addEventListener("click",function(){todayMark(c);if(x.t.exp)expMark(c);setTimeout(crmRender,400)});
     r.appendChild(a);
     r.appendChild(cbtn(T("Skip today","Passer pour aujourd’hui"),function(){todayMark(c);crmRender()}));
     r.appendChild(cbtn(T("Open","Ouvrir"),function(){CV.mode="detail";CV.id=c.id;crmRender();window.scrollTo(0,0)}));
@@ -4069,6 +4092,7 @@ function crmStudio(box){
   box.appendChild(mk("h3","",T("Studio","Studio")));
   box.appendChild(mk("p","m",T("Your whole agency in one place: your clients, your team, your money, your marketing and your brand.","Toute votre agence au même endroit : vos clients, votre équipe, votre argent, votre marketing et votre image.")));
   function card(title){var d=mk("div","dcard");d.appendChild(mk("h4","",title));box.appendChild(d);return d}
+  profCard(box);
   function row(d,btns){var r=mk("div","row");btns.forEach(function(b){r.appendChild(cbtn(b[0],b[1]))});d.appendChild(r)}
   function go(m){return function(){CV.mode=m;crmRender();window.scrollTo(0,0)}}
   var open=CL.filter(function(c){return c.status!=="closed"}),att=open.filter(function(c){return cattn(c).length}).length;
@@ -4076,7 +4100,8 @@ function crmStudio(box){
   var wk=open.filter(function(c){return c.appt&&dleft(c.appt)>=0&&dleft(c.appt)<=7}).length;
   var a=card(T("Client engagement","Relation client"));
   a.appendChild(mk("p","m",T("Open clients: ","Clients en cours : ")+open.length+" · "+T("Need attention: ","À traiter : ")+att+" · "+T("Messages to send today: ","Messages à envoyer aujourd’hui : ")+td+" · "+T("Appointments this week: ","Rendez-vous cette semaine : ")+wk));
-  row(a,[[T("Refusals","Refus")+" ("+CL.filter(function(x){return x.res==="refused"}).length+")",go("refusals")],[T("+ Add client","+ Ajouter un client"),function(){CV.mode="form";CV.id=null;crmRender();window.scrollTo(0,0)}],[T("Today’s messages","Messages du jour"),go("today")],[T("Clients","Clients"),go("list")]]);
+  var tp=trPending();if(tp)a.appendChild(mk("p","m",T("Documents waiting for translation or certification: ","Documents en attente de traduction ou de certification : ")+tp));
+  row(a,[[T("Calendar","Calendrier"),go("cal")],[T("Cost estimate","Estimation des coûts"),go("est")],[T("Refusals","Refus")+" ("+CL.filter(function(x){return x.res==="refused"}).length+")",go("refusals")],[T("+ Add client","+ Ajouter un client"),function(){CV.mode="form";CV.id=null;crmRender();window.scrollTo(0,0)}],[T("Today’s messages","Messages du jour"),go("today")],[T("Clients","Clients"),go("list")]]);
   a.appendChild(mk("p","m",T("In each client’s page: appointment sheet, service agreement, receipts, payment plan, and a status link you can send so the client can follow their file.","Dans la page de chaque client : fiche du rendez-vous, contrat de service, reçus, échéancier, et un lien de suivi à envoyer pour que le client suive son dossier.")));
   var b=card(T("Team workload","Charge de l’équipe"));
   var by={};open.forEach(function(c){var k=(c.by||"").trim();(by[k]||(by[k]=[])).push(c)});
@@ -4097,13 +4122,14 @@ function crmStudio(box){
   if(!ks.length)c.appendChild(mk("p","m",T("No receipts or expenses this month yet.","Aucun reçu ni dépense ce mois-ci.")));
   ks.forEach(function(k){var r=Math.round((rec[k]||0)*100)/100,e=Math.round((sp[k]||0)*100)/100;c.appendChild(mk("p","m",T("Received ","Reçu ")+cmoney(r,k)+" − "+T("spent ","dépensé ")+cmoney(e,k)+" = "+T("profit ","bénéfice ")+cmoney(Math.round((r-e)*100)/100,k)))});
   c.appendChild(mk("p","m "+(Object.keys(st.owed).length?"late":""),T("Still owed by clients: ","Encore dû par les clients : ")+gmoney(st.owed)));
-  row(c,[[T("Year summary","Bilan de l’année"),go("year")],[T("Income report","Rapport des revenus"),go("report")],[T("Expenses","Dépenses"),go("exp")],[T("Who owes me","Qui me doit"),go("owed")]]);
+  row(c,[[T("Agency report","Rapport de l’agence"),go("daily")],[T("Commissions","Commissions"),go("comm")],[T("Year summary","Bilan de l’année"),go("year")],[T("Income report","Rapport des revenus"),go("report")],[T("Expenses","Dépenses"),go("exp")],[T("Who owes me","Qui me doit"),go("owed")]]);
   var d=card(T("Marketing and referrals","Marketing et recommandations"));
   var sc={};CL.forEach(function(x){var k=x.src||"";sc[k]=(sc[k]||0)+1});
   var top=Object.keys(sc).filter(function(k){return k}).sort(function(x,y){return sc[y]-sc[x]})[0];
   d.appendChild(mk("p","m",top?T("Most clients come from: ","La plupart des clients viennent de : ")+lab(SRC,top)+" ("+sc[top]+")":T("No client source recorded yet. Fill in How did the client find you? on each client.","Aucune origine enregistrée. Remplissez Comment le client vous a-t-il trouvé ? pour chaque client.")));
   var happy=CL.filter(function(x){return x.res==="approved"}).length;
   d.appendChild(mk("p","m",T("Clients with an approved visa: ","Clients avec un visa accordé : ")+happy+T(". Ask them to recommend you.",". Demandez-leur de vous recommander.")));
+  var sv=satStats();if(sv.n)d.appendChild(mk("p","m",T("Client satisfaction: ","Satisfaction des clients : ")+sv.avg+" / 5 ("+sv.n+" "+T(sv.n===1?"rating":"ratings","note"+(sv.n===1?"":"s"))+")"));
   row(d,[[T("Ask for feedback","Demander un avis")+" ("+fbCount()+")",go("feedback")],[T("Where clients come from","D’où viennent les clients"),go("src")]]);
   var e=card(T("Brand and documents","Image et documents"));
   var miss=[];if(!AG.biz)miss.push(T("business name","nom de l’entreprise"));if(!AG.name)miss.push(T("your name","votre nom"));if(!AG.ad)miss.push(T("address","adresse"));if(!AG.wa)miss.push("WhatsApp");if(!AG.em)miss.push("e-mail");if(!lgpdf())miss.push("logo");
@@ -4332,9 +4358,225 @@ function voiceUI(box,c){
   }
   d.appendChild(list);if(ok)refresh();
 }
+
+/* ---------- calendar, daily report, commissions, cost estimate, expiry reminders ---------- */
+function calEvents(){
+  var m={};function add(d,e){if(/^\d{4}-\d{2}-\d{2}$/.test(d||""))(m[d]||(m[d]=[])).push(e)}
+  CL.forEach(function(c){
+    if(c.status==="closed")return;
+    if(c.appt)add(c.appt,{k:"appt",c:c,t:T("Appointment","Rendez-vous")});
+    if(c.follow)add(c.follow,{k:"fu",c:c,t:T("Follow-up","Relance")});
+    cplan(c).forEach(function(x){if(!x.ok)add(x.d,{k:"pay",c:c,t:T("Instalment ","Échéance ")+cmoney(x.a,c.cur||"XAF")})});
+  });
+  return m;
+}
+function icsEsc(t){return String(t).replace(/\\/g,"\\\\").replace(/;/g,"\;").replace(/,/g,"\\,").replace(/\r?\n/g," ")}
+function icsFile(){
+  var ev=calEvents(),today=dkey(new Date()),L2=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Global Visa//EN","CALSCALE:GREGORIAN"],st=dkey(new Date()).replace(/-/g,"")+"T000000Z";
+  Object.keys(ev).sort().forEach(function(d){if(d<today)return;ev[d].forEach(function(e){
+    var nx=pdate(d);nx.setDate(nx.getDate()+1);
+    L2.push("BEGIN:VEVENT","UID:vg-"+e.c.id+"-"+e.k+"-"+d+"@globalvisa","DTSTAMP:"+st,"DTSTART;VALUE=DATE:"+d.replace(/-/g,""),"DTEND;VALUE=DATE:"+dkey(nx).replace(/-/g,""),"SUMMARY:"+icsEsc(e.t+": "+e.c.name),"END:VEVENT")})});
+  L2.push("END:VCALENDAR");return new Blob([L2.join("\r\n")],{type:"text/calendar"});
+}
+function crmCalendar(box){
+  box.appendChild(cbtn("\u2190 "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  box.appendChild(mk("h3","",T("Calendar","Calendrier")));
+  var key=CV.cal||dkey(new Date()).slice(0,7),y=+key.slice(0,4),mo=+key.slice(5,7);
+  var nav=mk("div","row"),lb=mk("b","",cmonthLabel(key));lb.style.flex="1";lb.style.textAlign="center";lb.style.alignSelf="center";
+  nav.appendChild(cbtn("\u2039",function(){CV.cal=cshift?cshift(key,-1):key;crmRender()}));nav.appendChild(lb);nav.appendChild(cbtn("\u203A",function(){CV.cal=cshift?cshift(key,1):key;crmRender()}));box.appendChild(nav);
+  var ev=calEvents(),today=dkey(new Date()),sel=CV.cd&&CV.cd.slice(0,7)===key?CV.cd:(today.slice(0,7)===key?today:key+"-01");
+  var g=mk("div");g.style.cssText="display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin:10px 0";
+  (L==="fr"?["L","M","M","J","V","S","D"]:["M","T","W","T","F","S","S"]).forEach(function(d){var h=mk("div","m",d);h.style.textAlign="center";g.appendChild(h)});
+  var off=(new Date(y,mo-1,1).getDay()+6)%7,days=new Date(y,mo,0).getDate(),i;
+  for(i=0;i<off;i++)g.appendChild(mk("div"));
+  for(i=1;i<=days;i++)(function(d){
+    var dk=key+"-"+("0"+d).slice(-2),n=(ev[dk]||[]).length,b=mk("button","",String(d));b.type="button";
+    b.style.cssText="padding:8px 0;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;position:relative;cursor:pointer"+(dk===today?";border-color:var(--stamp);font-weight:700":"")+(dk===sel?";background:var(--stamp);color:#fff":"");
+    if(n){var dot=mk("span","",String(n));dot.style.cssText="display:block;font-size:.65rem;line-height:1;margin-top:2px";b.appendChild(dot)}
+    b.addEventListener("click",function(){CV.cd=dk;crmRender()});g.appendChild(b);
+  })(i);
+  box.appendChild(g);
+  box.appendChild(mk("h3","",cdate(sel)));
+  var list=ev[sel]||[];
+  if(!list.length)box.appendChild(mk("p","m",T("Nothing on this day.","Rien ce jour-là.")));
+  list.forEach(function(e){var w=mk("div","up");w.appendChild(mk("b","",e.c.name));w.appendChild(mk("div","m",e.t+" \u00B7 "+lab(CDEST,e.c.dest)));var r=mk("div","row");r.appendChild(cbtn(T("Open","Ouvrir"),function(){CV.mode="detail";CV.id=e.c.id;crmRender();window.scrollTo(0,0)}));w.appendChild(r);box.appendChild(w)});
+  box.appendChild(mk("p","m",T("Shows appointments, follow-ups and unpaid instalments of open clients.","Affiche les rendez-vous, relances et échéances impayées des clients en cours.")));
+  box.appendChild(cbtn(T("Add upcoming dates to my phone calendar (.ics)","Ajouter les prochaines dates à l\u2019agenda du téléphone (.ics)"),function(){saveFile("global-visa-agenda.ics",icsFile())}));
+}
+function repText(days){
+  var t0=new Date();t0.setHours(0,0,0,0);var s0=new Date(t0);s0.setDate(s0.getDate()-(days-1));var a=dkey(s0),b=dkey(t0),Ls=[];
+  var nw=CL.filter(function(c){return c.created&&c.created>=s0.getTime()}).length;
+  var rec={},mon={};for(var d=new Date(s0);d<=t0;d.setDate(d.getDate()+1))mon[dkey(d).slice(0,7)]=1;
+  Object.keys(mon).forEach(function(m){crows(m).forEach(function(r){var dd=r.d.date||"";if(dd>=a&&dd<=b){var k=r.d.cur||"XAF";rec[k]=(rec[k]||0)+r.d.amt}})});
+  var open=CL.filter(function(c){return c.status!=="closed"});
+  var ap=open.filter(function(c){return c.appt&&dleft(c.appt)>=0&&dleft(c.appt)<=7}).sort(function(x,y){return x.appt<y.appt?-1:1});
+  var late=open.filter(function(c){var n=pnext(c);return n&&dleft(n.d)<0});
+  var fu=open.filter(function(c){return c.follow&&dleft(c.follow)<=0});
+  Ls.push((AG.biz||AG.name||"Global Visa")+" - "+(days===1?T("Daily report ","Rapport du jour ")+b:T("Weekly report ","Rapport de la semaine ")+a+" > "+b));
+  Ls.push(T("New clients: ","Nouveaux clients : ")+nw);
+  Ls.push(T("Money received: ","Argent reçu : ")+gmoney(rec));
+  Ls.push(T("Open clients: ","Clients en cours : ")+open.length);
+  Ls.push(T("Appointments in the next 7 days: ","Rendez-vous dans les 7 prochains jours : ")+ap.length);
+  ap.slice(0,10).forEach(function(c){Ls.push("- "+c.name+" ("+cdate(c.appt)+")")});
+  Ls.push(T("Late instalments: ","Échéances en retard : ")+late.length);
+  late.slice(0,10).forEach(function(c){var n=pnext(c);Ls.push("- "+c.name+" ("+cmoney(n.a,c.cur||"XAF")+")")});
+  Ls.push(T("Follow-ups due: ","Relances à faire : ")+fu.length);
+  fu.slice(0,10).forEach(function(c){Ls.push("- "+c.name)});
+  return Ls;
+}
+function crmDaily(box){
+  box.appendChild(cbtn("\u2190 "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  box.appendChild(mk("h3","",T("Agency report","Rapport de l\u2019agence")));
+  var days=CV.rd||1,r=mk("div","row");
+  r.appendChild(cbtn(T("Today","Aujourd\u2019hui"),function(){CV.rd=1;crmRender()},days===1?"":"act"));r.appendChild(cbtn(T("Last 7 days","7 derniers jours"),function(){CV.rd=7;crmRender()},days===7?"":"act"));box.appendChild(r);
+  var Ls=repText(days);Ls.forEach(function(l,i){box.appendChild(mk("p",i?"m":"stat",l))});
+  var t=Ls.join("\n"),r2=mk("div","row");
+  r2.appendChild(cbtn(T("Copy","Copier"),function(){if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(t).then(function(){alert(T("Copied.","Copié."))},function(){prompt("",t)});else prompt("",t)}));
+  var a=mk("a","act",T("Send on WhatsApp","Envoyer sur WhatsApp"));a.target="_blank";a.rel="noopener";a.href="https://wa.me/?text="+encodeURIComponent(t);r2.appendChild(a);box.appendChild(r2);
+  box.appendChild(mk("p","m",T("Client names are included. Send it only to people who should see them.","Les noms des clients sont inclus. Envoyez-le seulement aux personnes concernées.")));
+}
+function commMap(){var o={};try{o=JSON.parse(localStorage.getItem("vg-comm")||"{}")||{}}catch(e){}return o}
+function commSave(m){try{localStorage.setItem("vg-comm",JSON.stringify(m))}catch(e){}}
+function commClean(v){if(!v||typeof v!=="object")return null;var a=Math.round(parseFloat(v.a)*100)/100;if(!(a>0)||a>1e12)return null;return {w:String(v.w||"").slice(0,60),a:a,k:CCUR.some(function(x){return x[0]===v.k})?v.k:"XAF",p:v.p?1:0}}
+function commUI(box,c){
+  var m=commMap(),v=m[c.id]||{w:"",a:"",k:c.cur||"XAF",p:0},d=mk("div","dcard");d.appendChild(mk("h4","",T("Commission (referrer or staff)","Commission (apporteur ou employé)")));box.appendChild(d);
+  function F(label,node){var l=mk("label","",label);l.appendChild(node);d.appendChild(l);return node}
+  var w=mk("input");w.type="text";w.maxLength=60;w.value=v.w;F(T("Who gets it","Qui la reçoit"),w);
+  var a=mk("input");a.type="text";a.setAttribute("inputmode","decimal");a.value=v.a||"";F(T("Amount","Montant"),a);
+  var k=mk("select");opt(k,CCUR,v.k);F(T("Currency","Devise"),k);
+  var pl=mk("label"),pc=mk("input");pc.type="checkbox";pc.checked=!!v.p;pl.style.cssText="display:flex;gap:8px;align-items:center";pl.appendChild(pc);pl.appendChild(mk("span","",T("Already paid","Déjà payée")));d.appendChild(pl);
+  d.appendChild(cbtn(T("Save commission","Enregistrer la commission"),function(){
+    var mm=commMap();
+    if(!a.value.trim()&&!w.value.trim()){delete mm[c.id];commSave(mm);alert(T("Commission cleared.","Commission supprimée."));return}
+    var o=commClean({w:w.value.trim(),a:cnum(a.value),k:k.value,p:pc.checked});
+    if(!o){a.focus();alert(T("Please enter an amount above zero.","Veuillez entrer un montant supérieur à zéro."));return}
+    mm[c.id]=o;commSave(mm);alert(T("Saved.","Enregistré."))}));
+}
+function crmComm(box){
+  box.appendChild(cbtn("\u2190 "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  box.appendChild(mk("h3","",T("Commissions","Commissions")));
+  box.appendChild(mk("p","m",T("What you owe to referrers and staff. Add a commission in each client\u2019s page.","Ce que vous devez aux apporteurs et employés. Ajoutez une commission dans la page de chaque client.")));
+  var m=commMap(),by={};
+  Object.keys(m).forEach(function(id){var c=findC(id),v=commClean(m[id]);if(!c||!v)return;var k=v.w||T("(no name)","(sans nom)");(by[k]||(by[k]=[])).push({c:c,v:v,id:id})});
+  var names=Object.keys(by).sort();
+  if(!names.length)box.appendChild(mk("p","m",T("No commission recorded yet.","Aucune commission enregistrée.")));
+  names.forEach(function(n){
+    var un={},pd={};by[n].forEach(function(x){var o=x.v.p?pd:un;o[x.v.k]=(o[x.v.k]||0)+x.v.a});
+    var cd=mk("div","dcard");cd.appendChild(mk("h4","",n));cd.appendChild(mk("p","m "+(Object.keys(un).length?"late":""),T("To pay: ","À payer : ")+gmoney(un)+" \u00B7 "+T("Paid: ","Payé : ")+gmoney(pd)));
+    by[n].forEach(function(x){var r=mk("div","row");r.style.alignItems="center";r.appendChild(mk("span","m",x.c.name+" \u00B7 "+(x.c.res==="approved"?T("approved","accordé"):x.c.res==="refused"?T("refused","refusé"):T("pending","en cours"))+" \u00B7 "+cmoney(x.v.a,x.v.k)));
+      r.appendChild(cbtn(x.v.p?T("Mark unpaid","Marquer non payée"):T("Mark paid","Marquer payée"),function(){var mm=commMap();mm[x.id]=Object.assign({},x.v,{p:x.v.p?0:1});commSave(mm);crmRender()},"act"));cd.appendChild(r)});
+    box.appendChild(cd);
+  });
+}
+function offMap(){var o={};try{o=JSON.parse(localStorage.getItem("vg-off")||"{}")||{}}catch(e){}return o}
+function crmEstimate(box){
+  box.appendChild(cbtn("\u2190 "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  box.appendChild(mk("h3","",T("Cost estimate","Estimation des coûts")));
+  box.appendChild(mk("p","m",T("Show a client the total cost before they start. Type the official visa fee from the embassy or visa-centre website, because fees change. Your own fee comes from your price list.","Montrez au client le coût total avant de commencer. Saisissez les frais de visa officiels du site de l\u2019ambassade ou du centre de visas, car les frais changent. Vos frais viennent de votre liste de prix.")));
+  function F(label,node){var l=mk("label","",label);l.appendChild(node);box.appendChild(l);return node}
+  var d=mk("select");opt(d,CDEST,"schengen");F(T("Destination","Destination"),d);
+  var t=mk("select");opt(t,CTYPE,"tourist");F(T("Visa type","Type de visa"),t);
+  function num(label,cl){var i=mk("input");i.type="text";i.setAttribute("inputmode","decimal");F(label,i);var c=mk("select");opt(c,CCUR,odef("cur")||"XAF");if(!c.value)c.value="XAF";F(T("Currency","Devise"),c);return [i,c]}
+  var of=num(T("Official visa fee","Frais de visa officiels")),ex=num(T("Other costs (translation, courier, insurance…)","Autres coûts (traduction, courrier, assurance…)")),ag=num(T("Your service fee","Vos frais de service"));
+  var out=mk("div","dcard");box.appendChild(out);
+  function prefill(){var o=offMap()[d.value+"|"+t.value],pr=priceFor(d.value,t.value);of[0].value=o?o.a:"";if(o)of[1].value=o.k;if(pr){ag[0].value=pr.fee;ag[1].value=pr.cur}else ag[0].value="";calc()}
+  function calc(){
+    var tot={},ls=[];
+    [[T("Official visa fee","Frais de visa officiels"),of],[T("Other costs","Autres coûts"),ex],[T("Our service fee","Nos frais de service"),ag]].forEach(function(x){var v=cnum(x[1][0].value);if(v>0){tot[x[1][1].value]=(tot[x[1][1].value]||0)+v;ls.push(x[0]+": "+cmoney(v,x[1][1].value))}});
+    out.innerHTML="";var hd=T("Estimated cost: ","Coût estimé : ")+lab(CDEST,d.value)+" - "+lab(CTYPE,t.value);out.appendChild(mk("h4","",hd));
+    ls.forEach(function(l){out.appendChild(mk("p","m",l))});
+    out.appendChild(mk("p","stat",T("Total: ","Total : ")+(ls.length?gmoney(tot):"0")));
+    var msg=hd+"\n"+ls.join("\n")+"\n"+T("Total: ","Total : ")+(ls.length?gmoney(tot):"0")+"\n"+T("Official fees can change. Other costs may apply.","Les frais officiels peuvent changer. D\u2019autres coûts peuvent s\u2019appliquer.");
+    var r=mk("div","row");
+    r.appendChild(cbtn(T("Copy","Copier"),function(){if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(msg).then(function(){alert(T("Copied.","Copié."))},function(){prompt("",msg)});else prompt("",msg)}));
+    var a=mk("a","act",T("Send on WhatsApp","Envoyer sur WhatsApp"));a.target="_blank";a.rel="noopener";a.href="https://wa.me/?text="+encodeURIComponent(msg);r.appendChild(a);out.appendChild(r);
+  }
+  [d,t].forEach(function(e){e.addEventListener("change",prefill)});[of,ex,ag].forEach(function(x){x[0].addEventListener("input",calc);x[1].addEventListener("change",calc)});
+  box.appendChild(cbtn(T("Remember this official fee","Retenir ces frais officiels"),function(){var v=cnum(of[0].value);if(!(v>0)){of[0].focus();return}var o=offMap();o[d.value+"|"+t.value]={a:v,k:of[1].value};try{localStorage.setItem("vg-off",JSON.stringify(o))}catch(e){}alert(T("Saved for this destination and visa type.","Enregistré pour cette destination et ce type de visa."))}));
+  prefill();
+}
+function expMap(){var o={};try{o=JSON.parse(localStorage.getItem("vg-exp")||"{}")||{}}catch(e){}return o}
+function expRecent(c){var d=expMap()[c.id];return !!d&&(Date.now()-pdate(d).getTime())/864e5<14}
+function expMark(c){var o=expMap();o[c.id]=dkey(new Date());try{localStorage.setItem("vg-exp",JSON.stringify(o))}catch(e){}}
+
+/* ---------- client rating, translations, expense photos ---------- */
+function satMap(){var o={};try{o=JSON.parse(localStorage.getItem("vg-sat")||"{}")||{}}catch(e){}return o}
+function satSave(m){try{localStorage.setItem("vg-sat",JSON.stringify(m))}catch(e){}}
+function satUI(box,c){
+  var d=mk("div","dcard");d.appendChild(mk("h4","",T("Client rating","Note du client")));box.appendChild(d);
+  d.appendChild(mk("p","m",T("How happy was the client with your service? 1 is not happy, 5 is very happy. Only you see this.","Dans quelle mesure le client était-il satisfait de votre service ? 1 : pas satisfait, 5 : très satisfait. Vous seul le voyez.")));
+  var cur=satMap()[c.id]||0,r=mk("div","row");
+  for(var i=1;i<=5;i++)(function(n){var b=cbtn(String(n)+"★",function(){var m=satMap();if(m[c.id]===n)delete m[c.id];else m[c.id]=n;satSave(m);crmRender()},n===cur?"":"act");b.setAttribute("aria-pressed",n===cur?"true":"false");r.appendChild(b)})(i);
+  d.appendChild(r);
+}
+function satStats(){var m=satMap(),v=CL.map(function(c){return m[c.id]}).filter(function(n){return n>=1&&n<=5});return {n:v.length,avg:v.length?Math.round(v.reduce(function(a,b){return a+b},0)/v.length*10)/10:0}}
+var TRS=[["need","Needs translation","À traduire"],["sent","Sent to translator","Chez le traducteur"],["done","Done","Terminé"]];
+function trMap(){var o={};try{o=JSON.parse(localStorage.getItem("vg-tr")||"{}")||{}}catch(e){}return o}
+function trSave(m){try{localStorage.setItem("vg-tr",JSON.stringify(m))}catch(e){}}
+function trClean(a){return (Array.isArray(a)?a:[]).slice(0,30).map(function(x){return x&&typeof x==="object"&&TRS.some(function(t){return t[0]===x.s})&&String(x.n||"").trim()?{n:String(x.n).trim().slice(0,60),s:x.s}:null}).filter(Boolean)}
+function trPending(){var m=trMap(),n=0;CL.forEach(function(c){if(c.status!=="closed")trClean(m[c.id]).forEach(function(x){if(x.s!=="done")n++})});return n}
+function trUI(box,c){
+  var d=mk("div","dcard");d.appendChild(mk("h4","",T("Translations and certified copies","Traductions et copies certifiées")));box.appendChild(d);
+  d.appendChild(mk("p","m",T("Note documents that must be translated or certified for this file, and where each one stands. Check the requirement on the embassy website.","Notez les documents à traduire ou à certifier pour ce dossier, et où ils en sont. Vérifiez l’exigence sur le site de l’ambassade.")));
+  var m=trMap(),list=trClean(m[c.id]);
+  list.forEach(function(x,i){var r=mk("div","row");r.style.alignItems="center";r.appendChild(mk("span","",x.n));var sl=mk("select");opt(sl,TRS,x.s);sl.addEventListener("change",function(){var mm=trMap(),l=trClean(mm[c.id]);l[i].s=sl.value;mm[c.id]=l;trSave(mm);crmRender()});r.appendChild(sl);r.appendChild(cbtn(T("Delete","Supprimer"),function(){var mm=trMap(),l=trClean(mm[c.id]);l.splice(i,1);if(l.length)mm[c.id]=l;else delete mm[c.id];trSave(mm);crmRender()},"act"));d.appendChild(r)});
+  var nm=mk("input");nm.type="text";nm.maxLength=60;nm.placeholder=T("e.g. Birth certificate to English","ex. Acte de naissance vers l’anglais");d.appendChild(nm);
+  d.appendChild(cbtn(T("Add","Ajouter"),function(){var v=nm.value.trim();if(!v){nm.focus();return}var mm=trMap(),l=trClean(mm[c.id]);if(l.length>=30)return;l.push({n:v.slice(0,60),s:"need"});mm[c.id]=l;trSave(mm);crmRender()}));
+}
+function pdb(){return new Promise(function(res,rej){var r=indexedDB.open("vg-exphoto",1);r.onupgradeneeded=function(){r.result.createObjectStore("p",{keyPath:"id"})};r.onsuccess=function(){res(r.result)};r.onerror=function(){rej(r.error)}})}
+function ptx(mode,fn){return pdb().then(function(d){return new Promise(function(res,rej){var t=d.transaction("p",mode),q=fn(t.objectStore("p"));t.oncomplete=function(){res(q&&q.result)};t.onerror=function(){rej(t.error)}})})}
+function pdel(id){return ptx("readwrite",function(st){return st.delete(id)}).catch(function(){})}
+function shrinkImg(file,cb){
+  var u=URL.createObjectURL(file),im=new Image();
+  im.onload=function(){var k=Math.min(1,1100/Math.max(im.width,im.height)),cv=document.createElement("canvas");cv.width=Math.max(1,Math.round(im.width*k));cv.height=Math.max(1,Math.round(im.height*k));cv.getContext("2d").drawImage(im,0,0,cv.width,cv.height);URL.revokeObjectURL(u);cv.toBlob(function(b){cb(b)},"image/jpeg",0.7)};
+  im.onerror=function(){URL.revokeObjectURL(u);cb(null)};im.src=u;
+}
+function photoView(x){
+  ptx("readonly",function(st){return st.get(x.id)}).then(function(o){
+    if(!o)return;var ov=mk("div");ov.style.cssText="position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:2000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px";
+    var im=document.createElement("img");im.alt=T("Receipt photo","Photo du reçu");var u=URL.createObjectURL(o.b);im.src=u;im.style.cssText="max-width:100%;max-height:75vh;border-radius:8px";
+    var r=mk("div","row");function close(){URL.revokeObjectURL(u);ov.remove()}
+    r.appendChild(cbtn(T("Close","Fermer"),close));
+    r.appendChild(cbtn(T("Delete photo","Supprimer la photo"),function(){if(confirm(T("Delete this photo?","Supprimer cette photo ?")))pdel(x.id).then(function(){close();crmRender()})},"act"));
+    ov.appendChild(im);ov.appendChild(r);document.body.appendChild(ov);
+  });
+}
+function photoBtn(x,row){
+  if(!window.indexedDB)return;
+  var b=cbtn(T("Receipt photo","Photo du reçu"),function(){});row.appendChild(b);
+  var f=mk("input");f.type="file";f.accept="image/*";f.style.display="none";row.appendChild(f);
+  var has=false;b.addEventListener("click",function(){if(has)photoView(x);else f.click()});
+  ptx("readonly",function(st){return st.get(x.id)}).then(function(o){if(o){has=true;b.textContent=T("View receipt photo","Voir la photo du reçu")}else b.textContent=T("Add receipt photo","Ajouter une photo du reçu")}).catch(function(){b.textContent=T("Add receipt photo","Ajouter une photo du reçu")});
+  f.addEventListener("change",function(){var file=f.files&&f.files[0];if(!file)return;shrinkImg(file,function(bl){if(!bl){alert(T("This file is not a usable image.","Ce fichier n’est pas une image utilisable."));return}ptx("readwrite",function(st){return st.put({id:x.id,b:bl,t:Date.now()})}).then(crmRender).catch(function(){alert(T("Could not save the photo. Free some space.","Impossible d’enregistrer la photo. Libérez de l’espace."))})});f.value=""});
+}
+
+/* ---------- agency profiles ---------- */
+function pnames(){var o={};try{o=JSON.parse(localStorage.getItem("vg-pnames")||"{}")||{}}catch(e){}return o}
+function pname(n){var v=pnames()[n];return (typeof v==="string"&&v.trim())?v.trim().slice(0,30):T("Agency ","Agence ")+n}
+function profBadge(){
+  var P=window.VG_PROFILE||"1",top=document.querySelector("#top .in"),old=document.getElementById("profbadge");if(old)old.remove();
+  if(P==="1"||!top)return;
+  var b=document.createElement("span");b.id="profbadge";b.textContent=pname(P);b.style.cssText="font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--stamp);color:#fff;margin-left:8px;white-space:nowrap;max-width:40vw;overflow:hidden;text-overflow:ellipsis";
+  var t=top.querySelector(".t");if(t&&t.nextSibling)top.insertBefore(b,t.nextSibling);else top.appendChild(b);
+}
+profBadge();
+function profCard(box){
+  var P=window.VG_PROFILE||"1",d=mk("div","dcard");d.appendChild(mk("h4","",T("Agency profiles","Profils d’agence")));box.appendChild(d);
+  d.appendChild(mk("p","m",T("Keep up to 3 agencies on this phone, for example one per country. Each has its own clients, receipts, prices, settings, logo and PIN. Backups are made for the agency you are working in.","Gardez jusqu’à 3 agences sur ce téléphone, par exemple une par pays. Chacune a ses propres clients, reçus, prix, réglages, logo et code PIN. Les sauvegardes concernent l’agence dans laquelle vous travaillez.")));
+  ["1","2","3"].forEach(function(n){
+    var r=mk("div","row");r.style.alignItems="center";
+    var i=mk("input");i.type="text";i.maxLength=30;i.value=pname(n);i.setAttribute("aria-label",T("Agency name","Nom de l’agence"));
+    i.addEventListener("change",function(){var m=pnames();m[n]=i.value.trim().slice(0,30);try{localStorage.setItem("vg-pnames",JSON.stringify(m))}catch(e){}profBadge()});
+    r.appendChild(i);
+    if(n===P){r.appendChild(mk("b","m",T("Current","Actuelle")))}
+    else r.appendChild(cbtn(T("Switch","Changer"),function(){if(!confirm(T("Switch to ","Passer à ")+pname(n)+T("? The app will reload.","? L’application va se recharger.")))return;try{if(n==="1")localStorage.removeItem("vg-profile");else localStorage.setItem("vg-profile",n)}catch(e){}location.reload()}));
+    d.appendChild(r);
+  });
+}
 function crmList(box){
   var top=mk("div","row");
   top.appendChild(cbtn(T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  top.appendChild(cbtn(T("Calendar","Calendrier"),function(){CV.mode="cal";crmRender()}));
   top.appendChild(cbtn(T("+ Add client","+ Ajouter un client"),function(){CV.mode="form";CV.id=null;crmRender();window.scrollTo(0,0)}));
   var tn=todayList().filter(function(x){return !todayDone(x.c)}).length;
   top.appendChild(cbtn(T("Today’s messages","Messages du jour")+(tn?" ("+tn+")":""),function(){CV.mode="today";crmRender()}));
@@ -4497,6 +4739,11 @@ function cmsg(c,key){
     var n=pnext(c)||{d:dkey(new Date()),a:0},lt=dleft(n.d)<0,pay=AG.pn?(fr?"Paiement : ":"Pay to: ")+(AG.pm?pmName(AG.pm)+" ":"")+AG.pn+(AG.pa?" ("+AG.pa+")":""):"";
     lines=(fr?["Bonjour "+first+", rappel : une échéance de "+cmoney(n.a,c.cur)+(lt?" était prévue le ":" est prévue le ")+cdate(n.d)+" pour votre dossier de visa "+dest+".",pay,"Dites-nous quand c’est fait afin que nous le confirmions. Merci !"]
       :["Hello "+first+", a friendly reminder: an instalment of "+cmoney(n.a,c.cur)+(lt?" was due on ":" is due on ")+cdate(n.d)+" for your "+dest+" visa file.",pay,"Please tell us once it is done so that we can confirm it. Thank you!"]).filter(Boolean);
+  }else if(key==="c:expiry"){
+    var ex2=[];
+    if(c.pexp)ex2.push(fr?"- Passeport : expire le "+cdate(c.pexp)+". Beaucoup d\u2019ambassades veulent 6 mois de validité après le voyage.":"- Passport: expires "+cdate(c.pexp)+". Many embassies want 6 months of validity after the trip.");
+    if(c.bstmt)ex2.push(fr?"- Relevé bancaire : le dernier date du "+cdate(c.bstmt)+". Il en faut un récent (3 derniers mois).":"- Bank statement: your latest is from "+cdate(c.bstmt)+". We need a recent one (last 3 months).");
+    lines=[fr?"Bonjour "+first+", pour votre dossier de visa "+dest+", il faut mettre à jour des documents :":"Hello "+first+", for your "+dest+" visa file, some documents need updating:",ex2.join("\n"),fr?"Envoyez-nous le nouveau document dès que vous l\u2019avez.":"Please send us the new document as soon as you have it."];
   }else if(key==="c:refusal"){
     var rx=rfGet(c),rl=rx.r.map(function(k){for(var i=0;i<RFR.length;i++)if(RFR[i][0]===k)return "- "+(fr?RFR[i][2]:RFR[i][1])}).filter(Boolean).join("\n");
     lines=[fr?"Bonjour "+first+", nous sommes désolés pour la décision sur votre visa "+dest+". Un refus n\u2019est pas la fin, et nous allons préparer ensemble une meilleure demande.":"Hello "+first+", we are sorry about the decision on your "+dest+" visa. A refusal is not the end, and we will prepare a stronger application together."];
@@ -4801,7 +5048,7 @@ function crmDetail(box){
   lk.appendChild(cbtn(T("Copy client status link","Copier le lien de suivi du client"),function(){var u=statusLink(c);if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(function(){alert(T("Link copied.","Lien copié."))},function(){prompt("",u)});else prompt("",u)}));
   if(c.phone){var sl=mk("a","act",T("Send status link on WhatsApp","Envoyer le lien de suivi sur WhatsApp"));sl.target="_blank";sl.rel="noopener";sl.href=waLink(c,"c:link");lk.appendChild(sl)}
   if(c.res==="refused")lk.appendChild(cbtn(T("Refusal and reapply plan","Plan après refus"),function(){CV.mode="refusal";crmRender();window.scrollTo(0,0)}));
-  box.appendChild(sr2);box.appendChild(lk);voiceUI(box,c);
+  box.appendChild(sr2);box.appendChild(lk);voiceUI(box,c);commUI(box,c);satUI(box,c);trUI(box,c);
   box.appendChild(mk("h3","",T("Send a message","Envoyer un message")));
   var ml=mk("label","",T("Message","Message")),ms=mk("select");
   Array.prototype.forEach.call(document.querySelectorAll("#mtype option"),function(o){var op=mk("option","",o.textContent);op.value=o.value;ms.appendChild(op)});
@@ -4825,7 +5072,7 @@ function crmDetail(box){
   },"act danger"));
   box.appendChild(row2);
 }
-function crmBackupObj(){return {app:"visa-guide-clients",version:1,exported:new Date().toISOString(),clients:CL,docn:(function(){try{return JSON.parse(localStorage.getItem("vg-docn")||"{}")||{}}catch(e){return {}}})(),exp:EX,prices:PRICES,fb:fbMap(),rf:rfMap()}}
+function crmBackupObj(){return {app:"visa-guide-clients",version:1,exported:new Date().toISOString(),clients:CL,docn:(function(){try{return JSON.parse(localStorage.getItem("vg-docn")||"{}")||{}}catch(e){return {}}})(),exp:EX,prices:PRICES,fb:fbMap(),rf:rfMap(),cm:commMap(),sat:satMap(),tr:trMap()}}
 function crmBackupDone(){try{localStorage.setItem("vg-clients-backup",String(Date.now()));localStorage.setItem("vg-changes","0");localStorage.removeItem("vg-backup-snooze")}catch(e){}}
 function crmBackup(){CV.mode="backup";crmRender();window.scrollTo(0,0)}
 function crmBackupUI(box){
@@ -4866,7 +5113,7 @@ function crmApply(o){
   if(!o||o.app!=="visa-guide-clients"||!Array.isArray(o.clients))throw new Error("bad");
   var arr=o.clients.map(crmClean).filter(Boolean);
   if(!arr.length&&o.clients.length)throw new Error("bad");
-  if(confirm(T("Replace the "+CL.length+" client"+(CL.length===1?"":"s")+" on this phone with the "+arr.length+" client"+(arr.length===1?"":"s")+" in the backup?","Remplacer les "+CL.length+" client"+(CL.length>1?"s":"")+" de ce téléphone par les "+arr.length+" client"+(arr.length>1?"s":"")+" de la sauvegarde ?"))){CL=arr;if(Array.isArray(o.exp)){EX=o.exp.map(exClean).filter(Boolean)}if(o.fb&&typeof o.fb==="object"){try{var fo={};Object.keys(o.fb).slice(0,5000).forEach(function(k){if(/^\d{4}-\d{2}-\d{2}$/.test(o.fb[k]))fo[String(k).slice(0,40)]=o.fb[k]});localStorage.setItem("vg-fb",JSON.stringify(fo))}catch(e){}}if(o.rf&&typeof o.rf==="object"){try{var ro={};Object.keys(o.rf).slice(0,5000).forEach(function(k){var v=o.rf[k];if(v&&typeof v==="object")ro[String(k).slice(0,40)]={r:(Array.isArray(v.r)?v.r:[]).slice(0,12).map(String),f:(Array.isArray(v.f)?v.f:[]).slice(0,12).map(String),d:String(v.d||"").slice(0,10),t:String(v.t||"").slice(0,10)}});localStorage.setItem("vg-refusal",JSON.stringify(ro))}catch(e){}}if(Array.isArray(o.prices)){PRICES=o.prices.map(prClean).filter(Boolean);prsave()}csave();try{var dn=o.docn||{},cu=JSON.parse(localStorage.getItem("vg-docn")||"{}")||{};["r","i"].forEach(function(k){cu[k]=Math.max(+cu[k]||0,+dn[k]||0)});localStorage.setItem("vg-docn",JSON.stringify(cu));localStorage.setItem("vg-changes","0")}catch(e){}CV.mode="list";CV.id=null;crmRender()}
+  if(confirm(T("Replace the "+CL.length+" client"+(CL.length===1?"":"s")+" on this phone with the "+arr.length+" client"+(arr.length===1?"":"s")+" in the backup?","Remplacer les "+CL.length+" client"+(CL.length>1?"s":"")+" de ce téléphone par les "+arr.length+" client"+(arr.length>1?"s":"")+" de la sauvegarde ?"))){CL=arr;if(Array.isArray(o.exp)){EX=o.exp.map(exClean).filter(Boolean)}if(o.fb&&typeof o.fb==="object"){try{var fo={};Object.keys(o.fb).slice(0,5000).forEach(function(k){if(/^\d{4}-\d{2}-\d{2}$/.test(o.fb[k]))fo[String(k).slice(0,40)]=o.fb[k]});localStorage.setItem("vg-fb",JSON.stringify(fo))}catch(e){}}if(o.sat&&typeof o.sat==="object"){var so={};Object.keys(o.sat).slice(0,5000).forEach(function(k){var n=+o.sat[k];if(n>=1&&n<=5)so[String(k).slice(0,40)]=Math.round(n)});satSave(so)}if(o.tr&&typeof o.tr==="object"){var to={};Object.keys(o.tr).slice(0,5000).forEach(function(k){var l=trClean(o.tr[k]);if(l.length)to[String(k).slice(0,40)]=l});trSave(to)}if(o.cm&&typeof o.cm==="object"){var cmo={};Object.keys(o.cm).slice(0,5000).forEach(function(k){var v=commClean(o.cm[k]);if(v)cmo[String(k).slice(0,40)]=v});commSave(cmo)}if(o.rf&&typeof o.rf==="object"){try{var ro={};Object.keys(o.rf).slice(0,5000).forEach(function(k){var v=o.rf[k];if(v&&typeof v==="object")ro[String(k).slice(0,40)]={r:(Array.isArray(v.r)?v.r:[]).slice(0,12).map(String),f:(Array.isArray(v.f)?v.f:[]).slice(0,12).map(String),d:String(v.d||"").slice(0,10),t:String(v.t||"").slice(0,10)}});localStorage.setItem("vg-refusal",JSON.stringify(ro))}catch(e){}}if(Array.isArray(o.prices)){PRICES=o.prices.map(prClean).filter(Boolean);prsave()}csave();try{var dn=o.docn||{},cu=JSON.parse(localStorage.getItem("vg-docn")||"{}")||{};["r","i"].forEach(function(k){cu[k]=Math.max(+cu[k]||0,+dn[k]||0)});localStorage.setItem("vg-docn",JSON.stringify(cu));localStorage.setItem("vg-changes","0")}catch(e){}CV.mode="list";CV.id=null;crmRender()}
 }
 document.getElementById("crmfile").addEventListener("change",function(e){
   var f=e.target.files&&e.target.files[0];
