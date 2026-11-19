@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-40`; it is now `visaguide-39`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-44`; it is now `visaguide-43`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -232,3 +232,11 @@ Both are in More and are written in English and French inside `index.html` (the 
 ## Agency profiles
 
 Studio, Agency profiles: up to 3 agencies per phone. Profile 1 keeps the existing storage keys, so nothing moves. Profiles 2 and 3 use a prefix (`p2:`, `p3:`) on every saved item and on the IndexedDB database names. A small script at the top of `<head>` installs this before anything else reads storage. Shared across profiles: licence, language, theme, text size, exchange rates, last tab. "Erase all data" only erases the agency you are in.
+
+- **Quote (PDF)**, **Documents we hold** (+ handover receipt), **Embassy booking** (printed on the appointment sheet), **Goals** (progress bars in Studio), **Bulk messages** (one WhatsApp after another). The held list, booking details and goals are included in backups.
+
+- **Appointment checklist** (+ WhatsApp reminder), **view-only mode** (Studio; blocks saving to local storage, not IndexedDB), **Photo check** (Tools), **Client FAQ**, **Season planner**. Checklist ticks, FAQ and notes are included in backups.
+
+- **Studio:** Search, Closing the day, Passport expiry dashboard, Data health check (+ duplicate merge, which closes the second card and never deletes), Message scripts. **Client page:** Timeline (`vg-tl`), Statement of account (PDF). New clients are checked for duplicates. Timeline notes and edited scripts are in backups.
+
+- **Morning briefing** (`vg-brief`, `vg-brief-off`), **My document lists** (`vg-dl`, wraps `cdocs`), **Accountant pack** PDF, **Update now** (App health: unregisters the service worker, deletes `visaguide-*` caches, reloads; data untouched). `vg-dl` is in backups.
