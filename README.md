@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-44`; it is now `visaguide-43`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-47`; it is now `visaguide-46`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -240,3 +240,8 @@ Studio, Agency profiles: up to 3 agencies per phone. Profile 1 keeps the existin
 - **Studio:** Search, Closing the day, Passport expiry dashboard, Data health check (+ duplicate merge, which closes the second card and never deletes), Message scripts. **Client page:** Timeline (`vg-tl`), Statement of account (PDF). New clients are checked for duplicates. Timeline notes and edited scripts are in backups.
 
 - **Morning briefing** (`vg-brief`, `vg-brief-off`), **My document lists** (`vg-dl`, wraps `cdocs`), **Accountant pack** PDF, **Update now** (App health: unregisters the service worker, deletes `visaguide-*` caches, reloads; data untouched). `vg-dl` is in backups.
+
+- **Tags + saved filters** (`vg-tag`, `vg-sf`), **Quick add** from a pasted message, **Folder cover** PDF, **Receipt photos** gallery with one-PDF export (`pdfPhotos`, reads the `vg-exphoto` store), **Referral rewards** (`vg-rw`), **Second attempts** tracker (`vg-rap`, set when a new application is started from a refusal plan). All the maps are in backups.
+
+- Removed the in-app "Publish this on GitHub" page (hosting steps stay in this README).
+- Removed the in-app developer pages (Design, Maintenance, Data, Architecture, Roadmap, Business model). The "Build your own system" group is gone from More.
