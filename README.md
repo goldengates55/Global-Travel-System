@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-50`; it is now `visaguide-49`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-53`; it is now `visaguide-52`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -248,3 +248,40 @@ Studio, Agency profiles: up to 3 agencies per phone. Profile 1 keeps the existin
 - **Layout review:** Studio regrouped (Today, Clients, Team, Money, Marketing, Brand, collapsed Setup); button grids; the extra cards in a client page are collapsible (`collapseCards`, wraps `crmDetail`); checkbox rows fixed.
 - **Payment schedule** PDF + weekly / 2-weekly / monthly split, **Interview day pack** PDF (uses `PQ` practice questions), **Move to a new phone** guide (Studio).
 - **Quick tour** (`vg-tour`), **review reminders** (`fbDue`), **Documents that must be recent** (`vg-dage`), **Notice board** (`vg-note`), improved `.ics` (times, alarms, fixed `;` escaping), quote total in another currency (uses the typed `vg-rates`). `vg-dage` and `vg-note` are in backups.
+
+## Cloud backup with Firebase (optional)
+
+The app can keep an encrypted backup in your own Firebase project. The data is scrambled on the phone with your passphrase before it is sent. This is backup and phone-to-phone restore, not live sharing.
+
+1. Go to the Firebase console and create a project (the free Spark plan is enough).
+2. Build > Authentication > Get started > Sign-in method: switch on **Email/Password**. Do not offer sign-up to anyone else.
+3. Authentication > Users > Add user: create one email and password for your agency.
+4. Build > Firestore Database > Create database (production mode).
+5. Firestore > Rules: replace the rules with the text below and Publish.
+6. Project settings > General: copy the **Web API key** and the **Project ID**.
+7. In the app: Studio > Cloud backup. Enter the four values and sign in. Then Upload a backup now.
+
+```
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /users/{uid}/backup/{doc} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && doc.matches('meta|c[0-9]|c1[0-9]')
+        && (doc == 'meta' || request.resource.data.d.size() < 800000);
+    }
+  }
+}
+```
+
+Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB per document). Voice notes, scans and receipt photos are not included. If the passphrase is lost, the cloud copy cannot be opened. Clients uploading their own documents is not built, because it needs a separate, stricter privacy design.
+
+## One shared cloud for all agencies (owner setup)
+
+1. Create the Firebase project as above (steps 1, 4, 5 and 6) and enable Email/Password sign-in. Use the rules shown above: each account can touch only its own `users/{uid}/backup` folder, at most 20 small documents.
+2. In `index.html`, find `var CLOUD_SHARED={k:"",p:""};` and put your Web API key and Project ID between the quotes. These two values are public by design. The rules protect the data, not the key. Rebuild the zip and upload it.
+3. In Google Cloud console, set a **billing budget alert** and, in Firebase Authentication settings, keep "Email enumeration protection" on. If spam accounts appear, switch sign-up off (Authentication > Settings > User actions) and add users by hand.
+4. The app asks agencies for an email and password and shows a consent notice before it creates an account. The licence check on the Create account button is only a courtesy in the app: Firebase itself accepts any sign-up while sign-up is on.
+5. You hold: emails, creation dates, and the size and date of each backup. You cannot read backup contents. Ask a local lawyer to review the terms and privacy text before you invite agencies (see `cloud-terms-draft.md` delivered with this release).
+- **Form data sheet** (`vg-fd`, `fdRows`, `fdPdf`), **Travel date planner** (`tpPlan`, `vg-tpd`, times saved per destination), **Payments check** (`vg-rc`, transaction reference `tx` on receipts, `reconPdf`). All three are in the backup (`fd`, `tpd`, `rc`).
