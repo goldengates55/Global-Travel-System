@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-47`; it is now `visaguide-46`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-50`; it is now `visaguide-49`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -245,3 +245,6 @@ Studio, Agency profiles: up to 3 agencies per phone. Profile 1 keeps the existin
 
 - Removed the in-app "Publish this on GitHub" page (hosting steps stay in this README).
 - Removed the in-app developer pages (Design, Maintenance, Data, Architecture, Roadmap, Business model). The "Build your own system" group is gone from More.
+- **Layout review:** Studio regrouped (Today, Clients, Team, Money, Marketing, Brand, collapsed Setup); button grids; the extra cards in a client page are collapsible (`collapseCards`, wraps `crmDetail`); checkbox rows fixed.
+- **Payment schedule** PDF + weekly / 2-weekly / monthly split, **Interview day pack** PDF (uses `PQ` practice questions), **Move to a new phone** guide (Studio).
+- **Quick tour** (`vg-tour`), **review reminders** (`fbDue`), **Documents that must be recent** (`vg-dage`), **Notice board** (`vg-note`), improved `.ics` (times, alarms, fixed `;` escaping), quote total in another currency (uses the typed `vg-rates`). `vg-dage` and `vg-note` are in backups.
