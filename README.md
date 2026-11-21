@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-55`; it is now `visaguide-54`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-57`; it is now `visaguide-56`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -287,3 +287,5 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 - **Form data sheet** (`vg-fd`, `fdRows`, `fdPdf`), **Travel date planner** (`tpPlan`, `vg-tpd`, times saved per destination), **Payments check** (`vg-rc`, transaction reference `tx` on receipts, `reconPdf`). All three are in the backup (`fd`, `tpd`, `rc`).
 - **Families and groups** (`grp` on the client, `grpPdf`), **Late payers ladder** (`ladInfo`, `c:pay1..3`, `vg-lad`), **Staff mode** (`vg-staff`, a filter on one phone, not in backups) and **day report PDF** (`repPdf`).
 - **Bookings** (`vg-bk`, `bkClean`, margin and deadline alerts), **Supplier payables** (`suppPdf`) and **Traveller pack** (`tvPdf`, `tvText`). Bookings are in the backup (`bk`).
+- **Client language** (`lang` on the client, `pl`, `wl`, `lwrap` wrap messages and PDFs), **What happens next** (`vg-nx`), **Appointment-day card** (`apptCardPdf`, place/time in `vg-fd`), **Price sheet terms** (`vg-pol`, printed by `quotePdf`). The tracking page shows the next step and the arrival time.
+- **Privacy**: consent (`c.cons`, `consClean`; withdrawn clients are skipped by `bulkKey`), data copy (`dcObj`, `dcPdf`), deletion (`purgeClient`, `delFlow`, log `vg-dr`), complaints (`vg-cmp`, `crmCmp`), and `practice.html` (questions embedded from `PQ`; link `#p=` payload built by `practiceLink`).

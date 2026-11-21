@@ -64,7 +64,8 @@ function render(){
   if(D.r==="approved")c1.appendChild(el("p",T("Decision: approved.","Décision : accordé."),"pill"));
   else if(D.r==="refused")c1.appendChild(el("p",T("Decision: refused. Your agent will explain the next steps.","Décision : refusé. Votre agent vous expliquera la suite."),"m"));
   app.appendChild(c1);
-  if(D.a){var c2=el("section",undefined,"card");c2.appendChild(el("h2",T("Your appointment","Votre rendez-vous")));c2.appendChild(el("p",fdate(D.a)||""));app.appendChild(c2)}
+  if(D.nx&&pick(D.nx)){var cn=el("section",undefined,"card");cn.appendChild(el("h2",T("What happens next","Et ensuite")));cn.appendChild(el("p",pick(D.nx).slice(0,400)));app.appendChild(cn)}
+  if(D.a){var c2=el("section",undefined,"card");c2.appendChild(el("h2",T("Your appointment","Votre rendez-vous")));c2.appendChild(el("p",fdate(D.a)||""));if(Array.isArray(D.ap)){if(D.ap[1])c2.appendChild(el("p",T("Arrive at ","Arrivez à ")+String(D.ap[1]).slice(0,40),"m"));if(D.ap[0])c2.appendChild(el("p",String(D.ap[0]).slice(0,200),"m"))}app.appendChild(c2)}
   var dn=D.dn||[0,0],c3=el("section",undefined,"card");c3.appendChild(el("h2",T("Your documents","Vos documents")));
   c3.appendChild(el("p",dn[0]+" / "+dn[1]+T(" received"," reçus"),"m"));
   var bar=el("div",undefined,"bar"),sp=el("span");sp.style.width=(dn[1]?Math.round(dn[0]/dn[1]*100):0)+"%";bar.appendChild(sp);c3.appendChild(bar);
