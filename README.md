@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-53`; it is now `visaguide-52`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-55`; it is now `visaguide-54`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -285,3 +285,5 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 4. The app asks agencies for an email and password and shows a consent notice before it creates an account. The licence check on the Create account button is only a courtesy in the app: Firebase itself accepts any sign-up while sign-up is on.
 5. You hold: emails, creation dates, and the size and date of each backup. You cannot read backup contents. Ask a local lawyer to review the terms and privacy text before you invite agencies (see `cloud-terms-draft.md` delivered with this release).
 - **Form data sheet** (`vg-fd`, `fdRows`, `fdPdf`), **Travel date planner** (`tpPlan`, `vg-tpd`, times saved per destination), **Payments check** (`vg-rc`, transaction reference `tx` on receipts, `reconPdf`). All three are in the backup (`fd`, `tpd`, `rc`).
+- **Families and groups** (`grp` on the client, `grpPdf`), **Late payers ladder** (`ladInfo`, `c:pay1..3`, `vg-lad`), **Staff mode** (`vg-staff`, a filter on one phone, not in backups) and **day report PDF** (`repPdf`).
+- **Bookings** (`vg-bk`, `bkClean`, margin and deadline alerts), **Supplier payables** (`suppPdf`) and **Traveller pack** (`tvPdf`, `tvText`). Bookings are in the backup (`bk`).
