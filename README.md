@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-57`; it is now `visaguide-56`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-63`; it is now `visaguide-62`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -289,3 +289,9 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 - **Bookings** (`vg-bk`, `bkClean`, margin and deadline alerts), **Supplier payables** (`suppPdf`) and **Traveller pack** (`tvPdf`, `tvText`). Bookings are in the backup (`bk`).
 - **Client language** (`lang` on the client, `pl`, `wl`, `lwrap` wrap messages and PDFs), **What happens next** (`vg-nx`), **Appointment-day card** (`apptCardPdf`, place/time in `vg-fd`), **Price sheet terms** (`vg-pol`, printed by `quotePdf`). The tracking page shows the next step and the arrival time.
 - **Privacy**: consent (`c.cons`, `consClean`; withdrawn clients are skipped by `bulkKey`), data copy (`dcObj`, `dcPdf`), deletion (`purgeClient`, `delFlow`, log `vg-dr`), complaints (`vg-cmp`, `crmCmp`), and `practice.html` (questions embedded from `PQ`; link `#p=` payload built by `practiceLink`).
+- **Client portal**: `status.html` is now the portal (same `#s=` link). `statusLink` adds `pt pf pp pn py rc rf rt`. Ticks are stored on the client phone only (`vgp*` key). Existing old links keep working.
+- **Refund** (`c.rfd`, `rfdClean`, `rfdUI`, `rfdPdf`, message `c:refund`; portal payload `rd`).
+- **Profit by client** (`profitRows`, `crmProfit`, `profPdf`): received − refunded − costs of active bookings; hidden in staff mode.
+- **Package quote** (`c.pkg`, `pkgClean`, `pkgUI`, `pkgPdf`, message `c:pkg`; accepting creates bookings via `bkClean`).
+- **Group tour sheet** (`vg-gt`, `gtUI`, `gtPdf`), **Visa validity** (`c.visa`, `visaClean`, `visaWarn`, `visaAlerts`, `visaUI`, `crmVisas`; messages `c:vexp`, `c:ret`; portal payload `vz`).
+- **Client page tabs** (`sideTabs`, `DSIDE` lists which card is Client or Agency; key `vg-dtab`: client, agency or all). Tests set `vg-dtab` to `all` so every card is visible.

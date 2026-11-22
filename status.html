@@ -29,6 +29,7 @@ li.st.now{color:var(--ink);font-weight:700}li.st.now i{border-color:var(--stamp)
 .bar span{display:block;height:100%;background:var(--stamp)}
 ul{margin:6px 0 0;padding-left:20px}
 .pill{display:inline-block;border-radius:99px;padding:4px 12px;font-weight:700;font-size:.9rem;background:var(--stamp);color:#fff}
+.tkl{list-style:none;padding:0}.tk label{display:flex;gap:10px;align-items:flex-start;padding:6px 0}.tk input{width:20px;height:20px;flex:none;margin-top:2px}input[type=text]{width:100%;margin:6px 0;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit}.card button,.btn2{font:600 1rem system-ui,sans-serif;border-radius:14px;padding:12px 16px;border:1px solid var(--stamp);background:var(--card);color:var(--stamp);cursor:pointer;display:inline-block;margin-top:8px;text-decoration:none}.b{font-weight:700;margin:10px 0 2px}
 .btns{display:flex;gap:10px;flex-wrap:wrap}
 .btns a{flex:1;text-align:center;text-decoration:none;font-weight:700;padding:12px 14px;border-radius:14px;border:1px solid var(--stamp);color:var(--stamp);min-width:140px}
 </style>
@@ -65,15 +66,48 @@ function render(){
   else if(D.r==="refused")c1.appendChild(el("p",T("Decision: refused. Your agent will explain the next steps.","Décision : refusé. Votre agent vous expliquera la suite."),"m"));
   app.appendChild(c1);
   if(D.nx&&pick(D.nx)){var cn=el("section",undefined,"card");cn.appendChild(el("h2",T("What happens next","Et ensuite")));cn.appendChild(el("p",pick(D.nx).slice(0,400)));app.appendChild(cn)}
-  if(D.a){var c2=el("section",undefined,"card");c2.appendChild(el("h2",T("Your appointment","Votre rendez-vous")));c2.appendChild(el("p",fdate(D.a)||""));if(Array.isArray(D.ap)){if(D.ap[1])c2.appendChild(el("p",T("Arrive at ","Arrivez à ")+String(D.ap[1]).slice(0,40),"m"));if(D.ap[0])c2.appendChild(el("p",String(D.ap[0]).slice(0,200),"m"))}app.appendChild(c2)}
+  function hs(x){var h=0;for(var i=0;i<x.length;i++)h=(h*31+x.charCodeAt(i))|0;return "vgp"+(h>>>0).toString(36)}
+  var KEY=hs(location.hash||"x"),TK={};try{TK=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){TK={}}
+  function tsave(){try{localStorage.setItem(KEY,JSON.stringify(TK))}catch(e){}}
+  function wlink(txt){var w=String(ag.w||"").replace(/\D/g,"");if(!w)return null;var a=el("a",undefined,"wa");a.href="https://wa.me/"+w+"?text="+encodeURIComponent(txt);a.target="_blank";a.rel="noopener";return a}
+  function tick(ul,id,text){var li=el("li",undefined,"tk"),lb=el("label"),cb=el("input");cb.type="checkbox";cb.checked=!!TK[id];cb.addEventListener("change",function(){if(cb.checked)TK[id]=1;else delete TK[id];tsave()});lb.appendChild(cb);lb.appendChild(el("span"," "+text));li.appendChild(lb);ul.appendChild(li)}
+  function today(){var d=new Date();return Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())}
+  function dayn(v){var m=/^(\d{4})-(\d{2})-(\d{2})$/.exec(v||"");return m?Math.round((Date.UTC(+m[1],m[2]-1,+m[3])-today())/864e5):null}
+  if(D.a){var c2=el("section",undefined,"card");c2.appendChild(el("h2",T("Your appointment","Votre rendez-vous")));c2.appendChild(el("p",fdate(D.a)||""));
+    var dd=dayn(D.a);if(dd!==null)c2.appendChild(el("p",dd>1?T("In "+dd+" days","Dans "+dd+" jours"):dd===1?T("Tomorrow","Demain"):dd===0?T("Today","Aujourd’hui"):T("The date has passed","La date est passée"),"pill"));
+    if(Array.isArray(D.ap)){if(D.ap[1])c2.appendChild(el("p",T("Arrive at ","Arrivez à ")+String(D.ap[1]).slice(0,40),"m"));if(D.ap[0])c2.appendChild(el("p",String(D.ap[0]).slice(0,200),"m"))}
+    c2.appendChild(el("p",T("Bring:","À apporter :"),"m"));var bl=el("ul","","tkl");
+    [[T("Your passport","Votre passeport")],[T("The appointment confirmation","La confirmation du rendez-vous")],[T("The originals of your documents","Les originaux de vos documents")],[T("One set of copies","Un jeu de copies")],[T("Passport photos, if asked","Photos d’identité, si demandées")],[T("The visa fee receipt","Le reçu des frais de visa")]].forEach(function(x,i){tick(bl,"b"+i,x[0])});
+    c2.appendChild(bl);c2.appendChild(el("p",T("Always follow your appointment confirmation if it says something different.","Suivez toujours votre confirmation de rendez-vous si elle dit autre chose."),"m"));app.appendChild(c2)}
   var dn=D.dn||[0,0],c3=el("section",undefined,"card");c3.appendChild(el("h2",T("Your documents","Vos documents")));
   c3.appendChild(el("p",dn[0]+" / "+dn[1]+T(" received"," reçus"),"m"));
   var bar=el("div",undefined,"bar"),sp=el("span");sp.style.width=(dn[1]?Math.round(dn[0]/dn[1]*100):0)+"%";bar.appendChild(sp);c3.appendChild(bar);
   var ms=Array.isArray(D.m)?D.m.slice(0,30):[];
-  if(ms.length){c3.appendChild(el("p",T("We still need:","Il nous manque encore :")));var ul=el("ul");ms.forEach(function(x){ul.appendChild(el("li",pick(x)))});c3.appendChild(ul)}
+  if(ms.length){c3.appendChild(el("p",T("We still need. Tick what you have ready:","Il nous manque encore. Cochez ce que vous avez prêt :")));var ul=el("ul","","tkl");ms.forEach(function(x,i){tick(ul,"d"+i,pick(x))});c3.appendChild(ul);
+    var bd=el("button",T("Tell my agent what is ready","Dire à mon agent ce qui est prêt"));bd.type="button";bd.addEventListener("click",function(){var rd=ms.filter(function(x,i){return TK["d"+i]}).map(function(x){return "- "+pick(x)});var a=wlink(T("Hello, I have these documents ready:\n","Bonjour, j’ai ces documents prêts :\n")+(rd.length?rd.join("\n"):T("(none yet)","(aucun pour l’instant)")));if(a)window.open(a.href,"_blank","noopener");else alert(T("No agent number on this page.","Aucun numéro d’agent sur cette page."))});c3.appendChild(bd)}
   else if(dn[1])c3.appendChild(el("p",T("Nothing is missing. Thank you.","Rien ne manque. Merci.")));
   app.appendChild(c3);
-  if(D.b>0){var c4=el("section",undefined,"card");c4.appendChild(el("h2",T("Balance to pay","Solde à payer")));c4.appendChild(el("p",money(D.b,String(D.bc||"XAF").slice(0,5))));app.appendChild(c4)}
+  if(D.pf>0||D.pp>0||D.b>0){var c4=el("section",undefined,"card"),cu=String(D.bc||"XAF").slice(0,5);c4.appendChild(el("h2",T("Your payments","Vos paiements")));
+    if(D.pf>0){c4.appendChild(el("p",T("Agreed fee: ","Frais convenus : ")+money(D.pf,cu)));c4.appendChild(el("p",T("Paid: ","Payé : ")+money(D.pp||0,cu)));var b2=el("div",undefined,"bar"),s2=el("span");s2.style.width=Math.min(100,Math.round((D.pp||0)/D.pf*100))+"%";b2.appendChild(s2);c4.appendChild(b2)}
+    if(D.b>0)c4.appendChild(el("p",T("Balance to pay: ","Solde à payer : ")+money(D.b,cu),"pill"));
+    if(Array.isArray(D.pn)&&D.pn[1]>0){var nd=dayn(D.pn[0]);c4.appendChild(el("p",T("Next instalment: ","Prochaine échéance : ")+money(D.pn[1],cu)+T(" on "," le ")+fdate(D.pn[0])+(nd!==null&&nd<0?T(" (late)"," (en retard)"):""),"m"))}
+    if(Array.isArray(D.py)&&D.py[1]){c4.appendChild(el("p",T("Where to pay: ","Où payer : ")+(D.py[0]?String(D.py[0]).slice(0,30)+" ":"")+String(D.py[1]).slice(0,40)+(D.py[2]?" ("+String(D.py[2]).slice(0,40)+")":""),"m"))}
+    if(Array.isArray(D.rc)&&D.rc.length){c4.appendChild(el("p",T("Your last receipts:","Vos derniers reçus :"),"m"));var rl=el("ul");D.rc.forEach(function(x){rl.appendChild(el("li",String(x[0]).slice(0,30)+" · "+(fdate(x[1]).split(",").slice(-2).join(",").trim())+" · "+money(+x[2]||0,String(x[3]||cu).slice(0,5))))});c4.appendChild(rl)}
+    if(D.b>0){var pa=el("input");pa.type="text";pa.setAttribute("inputmode","decimal");pa.placeholder=T("Amount you paid","Montant payé");var pr=el("input");pr.type="text";pr.maxLength=40;pr.placeholder=T("Transaction reference","Référence de la transaction");c4.appendChild(pa);c4.appendChild(pr);
+      var bp=el("button",T("I have paid","J’ai payé"));bp.type="button";bp.addEventListener("click",function(){var a=wlink(T("Hello, I have paid "+(pa.value.trim()||"…")+" "+cu+". Transaction reference: "+(pr.value.trim()||"…")+". Please confirm.","Bonjour, j’ai payé "+(pa.value.trim()||"…")+" "+cu+". Référence de la transaction : "+(pr.value.trim()||"…")+". Merci de confirmer."));if(a)window.open(a.href,"_blank","noopener");else alert(T("No agent number on this page.","Aucun numéro d’agent sur cette page."))});c4.appendChild(bp);
+      c4.appendChild(el("p",T("Your agent checks the payment before sending a receipt.","Votre agent vérifie le paiement avant d’envoyer un reçu."),"m"))}
+    app.appendChild(c4)}
+  if(Array.isArray(D.vz)&&D.vz[1]){var cv=el("section",undefined,"card");cv.appendChild(el("h2",T("Your visa","Votre visa")));var ZE={single:["Single entry","Une entrée"],double:["Two entries","Deux entrées"],multiple:["Multiple entries","Entrées multiples"]};
+    cv.appendChild(el("p",(D.vz[0]?T("Valid from ","Valable du ")+fdate(D.vz[0])+" ":"")+T("until ","jusqu’au ")+fdate(D.vz[1])));if(ZE[D.vz[2]])cv.appendChild(el("p",pick(ZE[D.vz[2]]),"m"));if(D.vz[3])cv.appendChild(el("p",T("Longest stay: "+D.vz[3]+" days","Séjour maximum : "+D.vz[3]+" jours"),"m"));
+    cv.appendChild(el("p",T("Always check the dates on the visa itself and never stay longer than allowed.","Vérifiez toujours les dates sur le visa lui-même et ne dépassez jamais la durée autorisée."),"m"));app.appendChild(cv)}
+  if(Array.isArray(D.rd)){var c8=el("section",undefined,"card");c8.appendChild(el("h2",T("Your refund","Votre remboursement")));c8.appendChild(el("p",money(+D.rd[0]||0,String(D.bc||"XAF").slice(0,5)),"pill"));c8.appendChild(el("p",D.rd[1]==="paid"?T("Paid on ","Payé le ")+fdate(D.rd[2]):T("We will pay it to you soon.","Nous vous le verserons bientôt."),"m"));app.appendChild(c8)}
+  if(D.r==="approved"){var c5=el("section",undefined,"card");c5.appendChild(el("h2",T("Before you travel","Avant de voyager")));var u5=el("ul","","tkl");
+    [T("Check your name, dates and number of entries on the visa","Vérifiez votre nom, les dates et le nombre d’entrées sur le visa"),T("Check that your passport stays valid for the whole trip","Vérifiez que votre passeport reste valide pendant tout le voyage"),T("Keep your return ticket and accommodation details","Gardez votre billet retour et les détails de votre hébergement"),T("Keep your insurance and bank proof with you","Gardez votre assurance et vos preuves bancaires avec vous"),T("Read the entry rules of the country you fly to","Lisez les règles d’entrée du pays où vous allez")].forEach(function(x,i){tick(u5,"r"+i,x)});
+    c5.appendChild(u5);c5.appendChild(el("p",T("Rules change, so check the embassy’s own information.","Les règles changent : consultez les informations de l’ambassade."),"m"));app.appendChild(c5)}
+  if(D.r==="refused"&&Array.isArray(D.rf)&&D.rf.length){var c6=el("section",undefined,"card");c6.appendChild(el("h2",T("After the refusal","Après le refus")));D.rf.forEach(function(x){c6.appendChild(el("p",pick([x[0],x[1]]),"b"));c6.appendChild(el("p",pick([x[2],x[3]]),"m"))});if(D.rt)c6.appendChild(el("p",T("Target date to apply again: ","Date visée pour redéposer : ")+fdate(D.rt)));app.appendChild(c6)}
+  if(D.pt&&D.k!=="passport"&&D.k!=="closed"){var c7=el("section",undefined,"card");c7.appendChild(el("h2",T("Practise your interview","Entraînez-vous à l’entretien")));c7.appendChild(el("p",T("A few minutes on your phone. Nothing is saved.","Quelques minutes sur votre téléphone. Rien n’est enregistré."),"m"));
+    var pl={v:1,t:String(D.pt).slice(0,10),lg:L,n:D.n||"",tl:D.ty||"",ag:{b:ag.b||"",w:ag.w||""}},pb=btoa(unescape(encodeURIComponent(JSON.stringify(pl)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+    var pa2=el("a",T("Start practice","Commencer"),"btn2");pa2.href="practice.html#p="+pb;c7.appendChild(pa2);app.appendChild(c7)}
   var bt=el("div",undefined,"btns"),w=String(ag.w||"").replace(/\D/g,"");
   if(w){var a=el("a",T("Message us on WhatsApp","Écrivez-nous sur WhatsApp"));a.href="https://wa.me/"+w;a.rel="noopener";bt.appendChild(a)}
   if(/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(ag.e||"")){var e=el("a",T("Send an email","Envoyer un e-mail"));e.href="mailto:"+ag.e;bt.appendChild(e)}
