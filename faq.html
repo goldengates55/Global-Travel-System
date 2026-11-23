@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#4a1388">
+<title>Common questions</title>
+<link rel="icon" href="icon-192.png">
+<style>
+:root{--paper:#ece3fa;--ink:#10042a;--mute:#3f3260;--line:#9d88cc;--stamp:#4a1388;--card:#fff;--shadow:0 1px 2px rgba(16,4,42,.06),0 8px 24px -10px rgba(16,4,42,.18)}
+@media (prefers-color-scheme:dark){:root{--paper:#150336;--ink:#fff;--mute:#d6c9f0;--line:#7a55c2;--stamp:#ffd21e;--card:#2e0f68;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:600px;margin:0 auto;padding:18px 16px 48px}header{display:flex;align-items:center;gap:10px;margin-bottom:16px}header b{flex:1;font-size:1.15rem}
+button,.btn{font:600 1rem system-ui,sans-serif;border-radius:14px;padding:13px 16px;border:1px solid var(--stamp);background:var(--card);color:var(--stamp);cursor:pointer;text-decoration:none;display:inline-block}
+.btn.pri{background:var(--stamp);color:var(--paper);margin-top:14px}#lang{border-radius:999px;padding:8px 14px;font-size:.9rem;border-color:var(--line);color:var(--ink)}
+h1{font-size:1.55rem;line-height:1.2;margin:0 0 6px;color:var(--stamp)}.m{color:var(--mute);font-size:.92rem}
+details{background:var(--card);border:1px solid var(--line);border-radius:16px;margin:0 0 10px;box-shadow:var(--shadow)}
+summary{cursor:pointer;padding:14px 16px;font-weight:700;list-style:none}summary::-webkit-details-marker{display:none}
+summary::after{content:"+";float:right;color:var(--stamp);font-size:1.3rem;line-height:1}details[open] summary::after{content:"\2212"}
+details p{margin:0;padding:0 16px 16px}h2{font-size:1.05rem;margin:18px 0 8px}
+</style>
+</head>
+<body>
+<main>
+<header><b id="biz">Common questions</b><button id="lang" type="button">Français</button></header>
+<div id="app"></div>
+</main>
+<script>
+(function(){
+var D={v:1,lg:"en",ag:{},x:[]},L="en";
+try{var h=location.hash.replace(/^#p=/,"").replace(/-/g,"+").replace(/_/g,"/");if(h){while(h.length%4)h+="=";var o=JSON.parse(decodeURIComponent(escape(atob(h))));if(o&&o.v===1&&typeof o==="object")D=o}}catch(e){}
+if(D.lg==="fr")L="fr";
+var Q=[
+[["How long does a visa take?","Combien de temps prend un visa ?"],["It depends on the embassy, the type of visa and the time of year. Your agent will tell you the usual range and let you know as soon as there is news. Apply early and avoid fixing a travel date before the decision.","Cela dépend de l’ambassade, du type de visa et de la période de l’année. Votre agent vous donnera la durée habituelle et vous préviendra dès qu’il y a du nouveau. Déposez tôt et évitez de fixer une date de voyage avant la décision."]],
+[["Which documents do I need?","Quels documents me faut-il ?"],["Each embassy has its own rules. Your client page shows the documents we still need from you. If a document is hard to get, tell us early so we can find another solution.","Chaque ambassade a ses propres règles. Votre page client montre les documents qu’il nous manque encore. Si un document est difficile à obtenir, dites-le-nous tôt pour trouver une autre solution."]],
+[["Can you guarantee my visa?","Pouvez-vous garantir mon visa ?"],["No. Only the embassy decides, and no honest agent can promise approval. What we do is prepare a complete, clear and truthful file so that you have the best chance.","Non. Seule l’ambassade décide, et aucun agent honnête ne peut promettre un accord. Nous préparons un dossier complet, clair et sincère pour vous donner les meilleures chances."]],
+[["Why are visas refused?","Pourquoi des visas sont-ils refusés ?"],["Common reasons are missing or inconsistent documents, not enough proof of funds or of ties to your country, and an unclear purpose of travel. Giving false information is the worst thing you can do, so always tell us the truth.","Les raisons fréquentes sont des documents manquants ou incohérents, des preuves de fonds ou d’attaches insuffisantes et un motif de voyage peu clair. Donner de fausses informations est la pire chose à faire : dites-nous toujours la vérité."]],
+[["Should I buy tickets or book a hotel before the decision?","Dois-je acheter un billet ou réserver un hôtel avant la décision ?"],["Ask us first. Prefer bookings that you can change or cancel, and do not pay for non-refundable tickets before the visa is approved unless you accept the risk.","Demandez-nous d’abord. Préférez des réservations modifiables ou annulables, et ne payez pas de billets non remboursables avant l’accord du visa, sauf si vous acceptez le risque."]],
+[["What if my visa is refused?","Et si mon visa est refusé ?"],["A refusal is not the end. We read the reasons with you, fix what can be fixed and plan a new application when you are ready. Embassy fees are usually not refunded, so please check the embassy’s own rule.","Un refus n’est pas la fin. Nous lisons les motifs avec vous, corrigeons ce qui peut l’être et préparons une nouvelle demande quand vous êtes prêt. Les frais d’ambassade ne sont généralement pas remboursés : vérifiez la règle de l’ambassade."]],
+[["What do I bring to the appointment?","Que dois-je apporter au rendez-vous ?"],["Your passport, the appointment confirmation, the originals of your documents, one set of copies, passport photos if asked and the fee receipt. If your confirmation says something different, follow the confirmation.","Votre passeport, la confirmation du rendez-vous, les originaux de vos documents, un jeu de copies, des photos d’identité si demandées et le reçu des frais. Si votre confirmation dit autre chose, suivez la confirmation."]],
+[["How do I know you received my payment?","Comment savoir que vous avez reçu mon paiement ?"],["We check every payment and then send you a receipt. Keep your transaction reference and send it to us after you pay.","Nous vérifions chaque paiement puis vous envoyons un reçu. Gardez votre référence de transaction et envoyez-la-nous après le paiement."]],
+[["What happens to my personal data?","Que devient mes données personnelles ?"],["We keep your details only to handle your file. You can ask us at any time for a copy of your data, to correct it or to delete it.","Nous gardons vos informations uniquement pour traiter votre dossier. Vous pouvez à tout moment nous demander une copie de vos données, leur correction ou leur suppression."]]
+];
+Q[8][0][1]="Que deviennent mes données personnelles ?";
+function el(t,x,c){var e=document.createElement(t);if(x!==undefined)e.textContent=x;if(c)e.className=c;return e}
+function T(a,b){return L==="fr"?b:a}
+function add(app,q,a){var d=el("details"),s=el("summary",q);d.appendChild(s);d.appendChild(el("p",a));app.appendChild(d)}
+function render(){
+  document.documentElement.lang=L;document.getElementById("lang").textContent=L==="fr"?"English":"Français";
+  var ag=D.ag||{};document.getElementById("biz").textContent=String(ag.b||"Global Visa").slice(0,80);document.title=T("Common questions","Questions fréquentes");
+  var app=document.getElementById("app");app.innerHTML="";
+  app.appendChild(el("h1",T("Common questions","Questions fréquentes")));app.appendChild(el("p",T("Honest answers to what clients ask us most. Rules differ by embassy, so we always check the official source for your case.","Des réponses honnêtes aux questions les plus posées. Les règles diffèrent selon les ambassades : nous vérifions toujours la source officielle pour votre cas."),"m"));
+  var xo=D.x&&typeof D.x==="object"&&!Array.isArray(D.x)?D.x:{},x=(xo[L]||xo[L==="fr"?"en":"fr"]||[]).slice(0,6);
+  if(x.length){app.appendChild(el("h2",T("From your agent","De votre agent")));x.forEach(function(r){if(Array.isArray(r)&&r[0]&&r[1])add(app,String(r[0]).slice(0,200),String(r[1]).slice(0,600))});app.appendChild(el("h2",T("General","Général")))}
+  Q.forEach(function(r){add(app,r[0][L==="fr"?1:0],r[1][L==="fr"?1:0])});
+  var w=String(ag.w||"").replace(/\D/g,"");
+  if(w){var a=el("a",T("Ask my agent on WhatsApp","Poser ma question à mon agent sur WhatsApp"),"btn pri");a.href="https://wa.me/"+w;a.target="_blank";a.rel="noopener";app.appendChild(a)}
+}
+document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";render()});
+render();
+})();
+</script>
+</body>
+</html>

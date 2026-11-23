@@ -20,8 +20,8 @@ if(pre&&window.IDBFactory){var o=IDBFactory.prototype.open,d=IDBFactory.prototyp
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="icon-192.png">
-<meta name="theme-color" content="#eef2f1" media="(prefers-color-scheme: light)">
-<meta name="theme-color" content="#08171a" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ece3fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#150336" media="(prefers-color-scheme: dark)">
 <link rel="icon" href="icon-192.png">
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="Global Visa: a free app with a visa checklist, passport check, cost estimator, timeline planner and guides for visa applications from Cameroon. English and French. Works offline.">
@@ -162,11 +162,11 @@ select{width:100%;padding:9px;font:inherit;background:var(--paper);color:var(--i
 #msg{font-size:.9rem;color:var(--ok)}
 @media (prefers-reduced-motion:reduce){.bar i{transition:none}html{scroll-behavior:auto}}
 
-:root{--paper:#eef2f1;--ink:#0f2429;--mute:#51666b;--line:#d3dfdc;--stamp:#0a6f66;--ok:#1a7f3c;--card:#ffffff;--bad:#c4421f;--accent:#e0572f;--shadow:0 1px 2px rgba(15,36,41,.06),0 8px 24px -10px rgba(15,36,41,.18);
+:root{--paper:#ece3fa;--ink:#10042a;--mute:#3f3260;--line:#9d88cc;--stamp:#4a1388;--ok:#1a7f3c;--card:#ffffff;--bad:#c4421f;--accent:#f2b705;--shadow:0 1px 2px rgba(16,4,42,.06),0 8px 24px -10px rgba(16,4,42,.18);
 --display:"Bricolage Grotesque","Arial Narrow",system-ui,sans-serif;--body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-@media (prefers-color-scheme:dark){:root{--paper:#08171a;--ink:#e6f2f0;--mute:#93aeb0;--line:#1f3b40;--stamp:#5ad6c3;--ok:#5fdc8b;--card:#0f2428;--bad:#ff8f66;--accent:#ff8a5c;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -10px rgba(0,0,0,.6);color-scheme:dark}}
-:root[data-theme="light"]{--paper:#eef2f1;--ink:#0f2429;--mute:#51666b;--line:#d3dfdc;--stamp:#0a6f66;--ok:#1a7f3c;--card:#ffffff;--bad:#c4421f;--accent:#e0572f;--shadow:0 1px 2px rgba(15,36,41,.06),0 8px 24px -10px rgba(15,36,41,.18);color-scheme:light}
-:root[data-theme="dark"]{--paper:#08171a;--ink:#e6f2f0;--mute:#93aeb0;--line:#1f3b40;--stamp:#5ad6c3;--ok:#5fdc8b;--card:#0f2428;--bad:#ff8f66;--accent:#ff8a5c;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -10px rgba(0,0,0,.6);color-scheme:dark}
+@media (prefers-color-scheme:dark){:root{--paper:#150336;--ink:#ffffff;--mute:#d6c9f0;--line:#7a55c2;--stamp:#ffd21e;--ok:#5fdc8b;--card:#2e0f68;--bad:#ff8f66;--accent:#c68bff;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -10px rgba(0,0,0,.6);color-scheme:dark}}
+:root[data-theme="light"]{--paper:#ece3fa;--ink:#10042a;--mute:#3f3260;--line:#9d88cc;--stamp:#4a1388;--ok:#1a7f3c;--card:#ffffff;--bad:#c4421f;--accent:#f2b705;--shadow:0 1px 2px rgba(16,4,42,.06),0 8px 24px -10px rgba(16,4,42,.18);color-scheme:light}
+:root[data-theme="dark"]{--paper:#150336;--ink:#ffffff;--mute:#d6c9f0;--line:#7a55c2;--stamp:#ffd21e;--ok:#5fdc8b;--card:#2e0f68;--bad:#ff8f66;--accent:#c68bff;--shadow:0 1px 2px rgba(0,0,0,.3),0 10px 28px -10px rgba(0,0,0,.6);color-scheme:dark}
 :root[data-size="large"]{zoom:1.15}
 :root[data-size="xl"]{zoom:1.3}
 html{scroll-behavior:auto}
@@ -342,7 +342,19 @@ details.dcard>summary::-webkit-details-marker{display:none}
 details.dcard>summary::after{content:"\25BE";color:var(--mute)}
 details.dcard[open]>summary{margin-bottom:12px}
 details.dcard[open]>summary::after{content:"\25B4"}
-.dtabs{position:sticky;top:0;z-index:3;background:var(--paper,#fff);padding:6px 0;margin:8px 0}.dtabs button.on{background:var(--stamp,#0a6f66);color:#fff}
+/* more purple: bar, tabs, headings */
+:root{--head:#4a1388;--bar:#4a1388}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--head:#e6d4ff}}
+:root[data-theme="dark"]{--head:#e6d4ff}
+#top{background:var(--bar);border-bottom:0;-webkit-backdrop-filter:none;backdrop-filter:none}
+#top .t{color:#fff}
+#top .t::before{background:#ffd21e;color:#150336;box-shadow:none}
+#tabs{background:var(--bar);border-top:0}
+#tabs button{color:#d6c9f0}
+#tabs button[aria-current="page"]{color:#ffd21e}
+h1,h2,h3,h4,details.dcard>summary{color:var(--head)}
+.act{color:var(--head)}
+.dtabs{position:sticky;top:0;z-index:3;background:var(--paper,#fff);padding:6px 0;margin:8px 0}.dtabs button.on{background:var(--stamp,#4a1388);color:var(--paper,#fff)}
 .drow{display:grid;grid-template-columns:minmax(84px,34%) 1fr auto;gap:10px;align-items:center;margin:9px 0;font-size:.92rem}
 .dl{color:var(--ink);overflow-wrap:anywhere}.dv{min-width:3ch;text-align:right;font-variant-numeric:tabular-nums}
 .dt{height:14px;border-radius:7px;background:color-mix(in srgb,var(--line) 75%,transparent);overflow:hidden;display:flex;gap:2px}
@@ -1915,6 +1927,13 @@ function cvcalc(){
 
 /* ---------- what's new: a banner for updates; add a line to NEWS and raise the service worker VERSION ---------- */
 var NEWS=[
+ {id:"2026-11-23c",en:"New: a kind support message after a visa refusal, and a Weekly summary page about your clients (no money figures).",fr:"Nouveau : un message de soutien après un refus de visa, et une page Bilan de la semaine sur vos clients (sans montants)."},
+ {id:"2026-11-23b",en:"New: a Common questions page for clients (it shows your own answers first) and a welcome message with the five steps.",fr:"Nouveau : une page de questions fréquentes pour les clients (avec vos propres réponses) et un message de bienvenue avec les cinq étapes.",go:"clients"},
+ {id:"2026-11-23a",en:"New: personal notes and preferred contact for each client, progress-update reminders, a Past clients list with friendly hello and visa-renewal messages.",fr:"Nouveau : notes personnelles et contact préféré pour chaque client, rappels de points sur le dossier, liste des anciens clients avec messages de bonjour et de renouvellement de visa.",go:"clients"},
+ {id:"2026-11-22d",en:"More purple: a purple top bar and bottom menu, and purple headings.",fr:"Plus de violet : barre du haut et menu du bas violets, titres violets.",go:"clients"},
+ {id:"2026-11-22c",en:"Stronger contrast: darker text, clearer borders and buttons, in light and dark mode.",fr:"Contraste renforcé : texte plus foncé, bordures et boutons plus nets, en mode clair et sombre.",go:"clients"},
+ {id:"2026-11-22b",en:"New look: deep purple and gold, in light and dark mode.",fr:"Nouveau look : violet profond et or, en mode clair et sombre.",go:"clients"},
+ {id:"2026-11-22a",en:"New: client relationships. A My day list, enquiry follow-up, reply tracking, birthday and friendly messages, a client feedback form, referral messages and a departures board.",fr:"Nouveau : relations avec les clients. Une liste Ma journée, le suivi des demandes, le suivi des réponses, des messages d’anniversaire et chaleureux, un formulaire d’avis, des messages de recommandation et un tableau des départs.",go:"clients"},
  {id:"2026-11-21i",en:"New: a client’s page now has Client, Agency and All tabs, so the card you need is easier to reach.",fr:"Nouveau : la page d’un client a des onglets Client, Agence et Tout, pour retrouver plus vite la carte voulue.",go:"clients"},
  {id:"2026-11-21h",en:"New: a Group tour sheet for the group leader, and Visa validity with return check-in (warnings, reminders, and the dates on the client portal).",fr:"Nouveau : une feuille de voyage du groupe pour le responsable, et la validité du visa avec suivi du retour (avertissements, rappels et dates sur le portail du client).",go:"clients"},
  {id:"2026-11-21g",en:"New: Package quote. Build a trip price from flight, hotel, transfer and insurance lines, set your margin, print a quote without your costs, and create the bookings when the client agrees.",fr:"Nouveau : Devis de forfait. Composez le prix d’un voyage (vol, hôtel, transfert, assurance), fixez votre marge, imprimez un devis sans vos coûts et créez les réservations quand le client accepte.",go:"clients"},
@@ -2045,6 +2064,10 @@ var MAN=[
   ["ul",[["When you add or edit a client, choose How did the client find you? and, for a recommendation, write who referred them. Only write a name if that person agrees.","Quand vous ajoutez ou modifiez un client, choisissez Comment le client vous a-t-il trouvé ? et, pour une recommandation, écrivez qui l’a envoyé. N’écrivez un nom que si cette personne est d’accord."],["In Clients, tap Where clients come from to see which source brings the most clients, how many paid and how many visas were granted. People who send you several clients appear in a separate list, so you can thank them.","Dans Clients, touchez D’où viennent les clients pour voir quelle source apporte le plus de clients, combien ont payé et combien de visas ont été accordés. Les personnes qui vous envoient plusieurs clients apparaissent dans une liste à part, pour que vous puissiez les remercier."],["Tap Team results to compare team members using the Handled by field: clients, granted and refused, money collected, money still owed and clients that need attention. Fill in Handled by on every client for a fair comparison.","Touchez Résultats de l’équipe pour comparer les membres de l’équipe grâce au champ Pris en charge par : clients, accordés et refusés, argent encaissé, argent encore dû et clients à traiter. Remplissez Pris en charge par pour chaque client afin que la comparaison soit juste."]]]]] ,
  [["Immigration clients","Clients en immigration"],[
   ["ul",[["In Routes, Immigration to Canada: main pathways explains the rural programs (permanent from 1 January 2027, as reported), the Francophone pilots, Express Entry with its French-language category, the Quebec programs, the Atlantic program and the provincial nominee programs. It lists the steps, requirements and sources.","Dans Procédures, Immigration au Canada : principales voies explique les programmes ruraux (permanents à partir du 1er janvier 2027, selon la presse), les projets pilotes francophones, Entrée express avec sa catégorie en langue française, les programmes du Québec, le programme de l’Atlantique et les programmes des candidats des provinces. Il présente les étapes, les conditions et les sources."],["On the Checklist page, choose Purpose Immigration (permanent residence) and Destination Canada to see the documents for a permanent residence file. You can print it or save it as a PDF like any other checklist.","Sur la page Liste de contrôle, choisissez Objectif Immigration (résidence permanente) et Destination Canada pour voir les documents d’un dossier de résidence permanente. Vous pouvez l’imprimer ou l’enregistrer en PDF comme les autres listes."],["For an immigration client, choose Visa type Immigration (permanent residence) and Destination Canada. The checklist then asks for the job offer, the community recommendation, the language test, education, work experience, funds, and police and medical documents.","Pour un client en immigration, choisissez le Type de visa Immigration (résidence permanente) et la Destination Canada. La liste de contrôle demande alors l’offre d’emploi, la recommandation de la communauté, le test de langue, les études, l’expérience de travail, les fonds, et les documents de police et médicaux."],["Never promise a job offer or an approval, and never sell job offers or recommendations.","Ne promettez jamais une offre d’emploi ni une approbation, et ne vendez jamais d’offres d’emploi ni de recommandations."]]]]],
+ [["Refusal support and weekly summary", "Soutien après un refus et bilan de la semaine"], [["ul", [["Support after a refusal (client page, Relationship): when the result is Refused, the message is kind and calm, lists the reasons you recorded in the refusal card, adds up to 3 practical tips and, if you set a reapply date, mentions it without promising anything. My day reminds you for 7 days to call the client first and then send it.", "Soutien après un refus (page du client, Relation avec le client) : quand le résultat est Refusé, le message est bienveillant et calme, liste les raisons notées dans la fiche de refus, ajoute jusqu’à 3 conseils pratiques et, si vous avez fixé une date de nouvelle demande, la mentionne sans rien promettre. Ma journée vous rappelle pendant 7 jours d’appeler d’abord le client puis de l’envoyer."], ["Weekly summary (Studio): new clients, visas approved and refused, clients you wrote to or who replied, clients still waiting, complaints opened and resolved, then the next 7 days (appointments, departures, birthdays, past clients to greet). No money. Share it on WhatsApp or copy it for your team.", "Bilan de la semaine (Studio) : nouveaux clients, visas accordés et refusés, clients à qui vous avez écrit ou qui ont répondu, clients en attente, réclamations ouvertes et résolues, puis les 7 prochains jours (rendez-vous, départs, anniversaires, anciens clients à saluer). Aucun montant. Partagez-le sur WhatsApp ou copiez-le pour votre équipe."]]]]],
+ [["Common questions page and welcome message", "Page de questions fréquentes et message de bienvenue"], [["ul", [["Clients can open a Common questions page on their phone, in English or French, with 9 general and honest answers (visa time, documents, no guarantee, refusals, bookings, payments, data). If you changed your answers in Studio, Common questions, the first 6 of your own answers in each language are shown first under From your agent. Send the page with Common questions link in a client’s Relationship card; the client portal also has a Common questions button.", "Les clients peuvent ouvrir sur leur téléphone une page Questions fréquentes, en français ou en anglais, avec 9 réponses générales et honnêtes (délais, documents, pas de garantie, refus, réservations, paiements, données). Si vous avez modifié vos réponses dans Studio, Questions fréquentes, les 6 premières de vos réponses dans chaque langue s’affichent d’abord sous De votre agent. Envoyez la page avec Lien des questions fréquentes dans la carte Relation avec le client ; le portail du client a aussi un bouton Questions fréquentes."], ["Welcome message (client page, Relationship): a calm first message with the five main steps, the documents still needed to start, the note that timing depends on the embassy, and the client’s portal link. New clients that have not been written to show Send a welcome message in My day.", "Message de bienvenue (page du client, Relation avec le client) : un premier message rassurant avec les cinq grandes étapes, les documents encore nécessaires pour commencer, la note que les délais dépendent de l’ambassade et le lien du portail du client. Les nouveaux clients à qui vous n’avez pas encore écrit affichent Envoyer un message de bienvenue dans Ma journée."], ["The general answers never promise approval or a fixed time. If you want exact timings for your agency, write them in your own answers.", "Les réponses générales ne promettent jamais un accord ni un délai fixe. Si vous voulez donner des délais précis pour votre agence, écrivez-les dans vos propres réponses."]]]]],
+ [["Keeping in touch", "Garder le contact"], [["ul", [["Personal notes and preferred contact (client page, Relationship): write a few personal facts (family, interests, how they like to be spoken to), the way they prefer to be contacted (WhatsApp, call, SMS, voice notes) and the best time of day. They show at the top of the client page and in My day, with a Call button when the client prefers calls.", "Notes personnelles et contact préféré (page du client, Relation avec le client) : écrivez quelques détails personnels (famille, intérêts, façon de lui parler), le moyen de contact préféré (WhatsApp, appel, SMS, notes vocales) et le meilleur moment de la journée. Ils s’affichent en haut de la page du client et dans Ma journée, avec un bouton Appeler quand le client préfère les appels."], ["Progress updates: if a client’s case is in progress and you have not written for 7 days, the client shows No update sent for N days and My day offers a Progress update message (the current stage and a calm note that no news is not bad news). Sending it on WhatsApp resets the count.", "Points sur le dossier : si le dossier d’un client est en cours et que vous n’avez pas écrit depuis 7 jours, le client affiche Aucun point envoyé depuis N jours et Ma journée propose un message Point sur le dossier (l’étape actuelle et une note rassurante : pas de nouvelle n’est pas une mauvaise nouvelle). L’envoyer sur WhatsApp remet le compteur à zéro."], ["Past clients (Studio, Past clients): clients whose stage is Passport collected or Closed. The app suggests a friendly hello 6 months after the case ended, or 60 days before the visa ends if you recorded the visa dates. Choose Send hello on WhatsApp, Ask again in 6 months, or Do not contact again. Clients who withdrew consent never appear.", "Anciens clients (Studio, Anciens clients) : clients dont l’étape est Passeport récupéré ou Clôturé. L’application suggère un petit bonjour 6 mois après la fin du dossier, ou 60 jours avant la fin du visa si vous avez noté les dates. Choisissez Envoyer un bonjour sur WhatsApp, Redemander dans 6 mois ou Ne plus contacter. Les clients qui ont retiré leur consentement n’apparaissent jamais."], ["Visa renewal reminder: when a past client’s visa ends within 60 days, My day suggests asking if they want to renew or apply again.", "Rappel de renouvellement : quand le visa d’un ancien client se termine dans les 60 jours, Ma journée suggère de lui demander s’il veut le renouveler ou refaire une demande."]]]]],
+ [["Client relationships", "Relations avec les clients"], [["ul", [["My day (Studio, My day) is your daily list: appointments today or tomorrow, quotes to follow up, clients who have not replied, planned contacts, birthdays, return check-ins, instalments due and complaints to answer. Each line opens the client or sends the right friendly message on WhatsApp.", "Ma journée (Studio, Ma journée) est votre liste du jour : rendez-vous aujourd’hui ou demain, devis à relancer, clients sans réponse, contacts prévus, anniversaires, suivis de retour, échéances et réclamations à traiter. Chaque ligne ouvre le client ou envoie le bon message amical sur WhatsApp."], ["Enquiry and follow-up (client page, Client tab): set the stage (asked, quote sent, thinking about it, accepted, lost). When you choose Quote sent, the app sets a follow-up date 2 days later and reminds you. For a lost enquiry, note why. Studio, Enquiries shows all stages and the reasons for lost ones.", "Demande et suivi (page du client, onglet Client) : indiquez le stade (demande reçue, devis envoyé, réfléchit, accepté, perdu). Quand vous choisissez Devis envoyé, l’application fixe une relance 2 jours plus tard et vous la rappelle. Pour une demande perdue, notez pourquoi. Studio, Demandes montre tous les stades et les raisons des pertes."], ["Relationship (client page): the app notes when you last wrote to the client (every WhatsApp button you tap counts). Tap Client replied today when they answer. If there is no reply after 3 days, the client appears as quiet. You can also set a next contact date with a note, and a birthday.", "Relation avec le client (page du client) : l’application note quand vous avez écrit pour la dernière fois (chaque bouton WhatsApp touché compte). Touchez Le client a répondu aujourd’hui quand il répond. Sans réponse après 3 jours, le client apparaît comme silencieux. Vous pouvez aussi fixer une date de prochain contact avec une note, et un anniversaire."], ["Friendly messages: gentle check-in, birthday wishes, congratulations on the visa, before you travel, safe arrival, ask for feedback, and thank you with a referral message. They are written in the client’s language.", "Messages chaleureux : prise de nouvelles, vœux d’anniversaire, félicitations pour le visa, avant votre départ, bonne arrivée, demande d’avis, et remerciement avec recommandation. Ils sont écrits dans la langue du client."], ["Feedback form: the client opens a page on their phone, gives a rating from 1 to 5 and two short comments, and sends them to you on WhatsApp. They can say if you may share the comment as a review. Nothing is stored on the page.", "Formulaire d’avis : le client ouvre une page sur son téléphone, donne une note de 1 à 5 et deux courts commentaires, et vous les envoie sur WhatsApp. Il peut dire si vous pouvez publier le commentaire comme avis. Rien n’est enregistré sur la page."], ["Departures (Studio, Departures) lists clients travelling in the next 45 days, with what is still missing (documents, balance, passport validity, visa dates) and a pre-departure message.", "Départs (Studio, Départs) liste les clients qui voyagent dans les 45 prochains jours, avec ce qui manque encore (documents, solde, validité du passeport, dates du visa) et un message avant départ."]]]]],
  [["Client page: Client and Agency tabs", "Page du client : onglets Client et Agence"], [["ul", [["A client’s page has three buttons under the name and fee: Client, Agency and All. Client shows what you do for the client: documents, scans, history, visa result, messages, language and next steps, package quote, visa validity, appointment preparation and group. Agency shows the business side: payment plan, receipts and invoices, bookings and costs, commission, privacy and consent, complaints, cancellation and refund, tags, and Edit or Delete. All shows everything, as before.", "La page d’un client a trois boutons sous le nom et les frais : Client, Agence et Tout. Client montre ce que vous faites pour le client : documents, scans, historique, résultat du visa, messages, langue et prochaines étapes, devis de forfait, validité du visa, préparation du rendez-vous et groupe. Agence montre le côté gestion : plan de paiement, reçus et factures, réservations et coûts, commission, vie privée et consentement, réclamations, annulation et remboursement, étiquettes, et Modifier ou Supprimer. Tout montre tout, comme avant."], ["The number next to a tab is how many things need attention on that side. The app remembers the tab you used last. The stage selector stays above the tabs.", "Le nombre à côté d’un onglet indique combien de points demandent votre attention de ce côté. L’application se souvient du dernier onglet utilisé. Le sélecteur d’étape reste au-dessus des onglets."]]]]],
  [["Group tour sheet", "Feuille de voyage du groupe"], [["ul", [["Open a group (Studio, Families and groups) and fill in Group tour sheet: departure date, meeting point and time, group leader and phone, and a note. Tap Tour sheet (PDF) to print one page for the leader with every member’s phone, passport expiry, visa end date and bookings. Cancelled bookings are left out.", "Ouvrez un groupe (Studio, Familles et groupes) et remplissez Feuille de voyage du groupe : date de départ, lieu et heure de rendez-vous, responsable du groupe et téléphone, et une note. Touchez Feuille de voyage (PDF) pour imprimer une page destinée au responsable avec, pour chaque membre, le téléphone, l’expiration du passeport, la fin du visa et les réservations. Les réservations annulées sont exclues."], ["Renaming the group keeps its tour details.", "Renommer le groupe conserve ses détails de voyage."]]]]],
  [["Visa validity and return check-in", "Validité du visa et suivi du retour"], [["ul", [["In a client’s page, Visa validity and return: type the visa dates as printed on the visa (valid from, valid until, entries, longest stay) and the planned travel and return dates. The app warns if the travel date is outside the visa, the return is after the visa ends, or the stay is longer than allowed.", "Dans la page d’un client, Validité du visa et retour : saisissez les dates du visa telles qu’imprimées (valable du, jusqu’au, entrées, séjour maximum) et les dates prévues de voyage et de retour. L’application avertit si la date de voyage est hors du visa, si le retour est après la fin du visa ou si le séjour dépasse la durée autorisée."], ["The client shows Visa ends in N days (30 days before the end) and Return check-in due once the return date has passed. Send the visa dates or the return check-in on WhatsApp, then tap Mark return check-in done. Studio, Visa validity lists everyone by end date.", "Le client affiche Le visa se termine dans N jours (30 jours avant la fin) et Suivi du retour à faire une fois la date de retour passée. Envoyez les dates du visa ou le suivi du retour sur WhatsApp, puis touchez Marquer le suivi du retour fait. Studio, Validité des visas liste tout le monde par date de fin."], ["The client’s portal page shows the visa dates. Rules differ by country: these dates are only what you typed from the visa, so always check the visa itself.", "La page portail du client montre les dates du visa. Les règles diffèrent selon les pays : ces dates sont seulement celles que vous avez saisies depuis le visa, vérifiez toujours le visa lui-même."]]]]],
@@ -3738,6 +3761,11 @@ function crmRender(){
   if(CV.mode==="cmp")return crmCmp(box);
   if(CV.mode==="profit")return crmProfit(box);
   if(CV.mode==="visas")return crmVisas(box);
+  if(CV.mode==="day")return crmDay(box);
+  if(CV.mode==="past")return crmPast(box);
+  if(CV.mode==="week")return crmWeek(box);
+  if(CV.mode==="enq")return crmEnq(box);
+  if(CV.mode==="dep")return crmDep(box);
   if(CV.mode==="tour")return crmTour(box);
   if(CV.mode==="refs")return crmRefs(box);
   if(CV.mode==="rtrack")return crmRtrack(box);
@@ -3773,6 +3801,7 @@ function cattn(c){
   try{cmpAlerts(c,r)}catch(e){}
   if(c.rfd&&c.rfd.st==="pending")r.push(T("Refund to pay","Remboursement à payer"));
   try{visaAlerts(c,r)}catch(e){}
+  try{relAlerts(c,r)}catch(e){}
   return r;
 }
 function crmFill(){
@@ -4050,6 +4079,7 @@ function statusLink(c){
     py:AG.pn?[AG.pm?pmName(AG.pm):"",String(AG.pn).slice(0,40),String(AG.pa||"").slice(0,40)]:"",
     rc:(c.pays||[]).filter(function(x){return x.type!=="invoice"}).slice(-4).map(function(x){return [x.no,x.date,x.amt,x.cur]}),
     rf:c.res==="refused"?rfGet(c).r.slice(0,6).map(function(k){for(var i=0;i<RFR.length;i++)if(RFR[i][0]===k)return [RFR[i][1],RFR[i][2],String(RFR[i][3]||"").slice(0,200),String(RFR[i][4]||"").slice(0,200)];return null}).filter(Boolean):"",
+    fq:faqPayloadX(),
     rt:c.res==="refused"?rfGet(c).t:"",
     rd:c.rfd?[c.rfd.amt,c.rfd.st,c.rfd.pd||""]:"",
     vz:c.visa&&c.visa.t?[c.visa.f||"",c.visa.t,c.visa.e||"",c.visa.s||0]:""};
@@ -4108,7 +4138,7 @@ function crmStudio(box){
   if(!ks.length)c.appendChild(mk("p","m",T("No receipts or expenses this month yet.","Aucun reçu ni dépense ce mois-ci.")));
   ks.forEach(function(k){var r=Math.round((rec[k]||0)*100)/100,e=Math.round((sp[k]||0)*100)/100;c.appendChild(mk("p","m",T("Received ","Reçu ")+cmoney(r,k)+" − "+T("spent ","dépensé ")+cmoney(e,k)+" = "+T("profit ","bénéfice ")+cmoney(Math.round((r-e)*100)/100,k)))});
   c.appendChild(mk("p","m "+(Object.keys(st.owed).length?"late":""),T("Still owed by clients: ","Encore dû par les clients : ")+gmoney(st.owed)));
-  tiles(c,[[T("Who owes me","Qui me doit"),go("owed")],[T("Payments check","Contrôle des paiements"),go("recon")],[T("Late payers","Retards de paiement"),go("late")],[T("Bookings and suppliers","Réservations et fournisseurs"),go("bk")],[T("Price sheet terms","Conditions du devis"),go("pol")],[T("Profit by client","Bénéfice par client"),go("profit")],[T("Visa validity","Validité des visas"),go("visas")],[T("Expenses","Dépenses"),go("exp")],[T("Receipt photos","Photos des reçus"),go("gal")],[T("Accountant pack","Dossier comptable"),go("acct")],[T("Agency report","Rapport de l’agence"),go("daily")],[T("Income report","Rapport des revenus"),go("report")],[T("Commissions","Commissions"),go("comm")],[T("Year summary","Bilan de l’année"),go("year")]]);
+  tiles(c,[[T("Who owes me","Qui me doit"),go("owed")],[T("Payments check","Contrôle des paiements"),go("recon")],[T("Late payers","Retards de paiement"),go("late")],[T("Bookings and suppliers","Réservations et fournisseurs"),go("bk")],[T("Price sheet terms","Conditions du devis"),go("pol")],[T("Profit by client","Bénéfice par client"),go("profit")],[T("My day","Ma journée"),go("day")],[T("Past clients","Anciens clients"),go("past")],[T("Weekly summary","Bilan de la semaine"),go("week")],[T("Enquiries","Demandes"),go("enq")],[T("Departures","Départs"),go("dep")],[T("Visa validity","Validité des visas"),go("visas")],[T("Expenses","Dépenses"),go("exp")],[T("Receipt photos","Photos des reçus"),go("gal")],[T("Accountant pack","Dossier comptable"),go("acct")],[T("Agency report","Rapport de l’agence"),go("daily")],[T("Income report","Rapport des revenus"),go("report")],[T("Commissions","Commissions"),go("comm")],[T("Year summary","Bilan de l’année"),go("year")]]);
   /* marketing */
   var d=card(T("Marketing and repeat business","Marketing et clients fidèles"));
   var sc={};CL.forEach(function(x){var k=x.src||"";sc[k]=(sc[k]||0)+1});
@@ -4383,7 +4413,7 @@ function crmCalendar(box){
   for(i=0;i<off;i++)g.appendChild(mk("div"));
   for(i=1;i<=days;i++)(function(d){
     var dk=key+"-"+("0"+d).slice(-2),n=(ev[dk]||[]).length,b=mk("button","",String(d));b.type="button";
-    b.style.cssText="padding:8px 0;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;position:relative;cursor:pointer"+(dk===today?";border-color:var(--stamp);font-weight:700":"")+(dk===sel?";background:var(--stamp);color:#fff":"");
+    b.style.cssText="padding:8px 0;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;position:relative;cursor:pointer"+(dk===today?";border-color:var(--stamp);font-weight:700":"")+(dk===sel?";background:var(--stamp);color:var(--paper)":"");
     if(n){var dot=mk("span","",String(n));dot.style.cssText="display:block;font-size:.65rem;line-height:1;margin-top:2px";b.appendChild(dot)}
     b.addEventListener("click",function(){CV.cd=dk;crmRender()});g.appendChild(b);
   })(i);
@@ -4550,7 +4580,7 @@ function pname(n){var v=pnames()[n];return (typeof v==="string"&&v.trim())?v.tri
 function profBadge(){
   var P=window.VG_PROFILE||"1",top=document.querySelector("#top .in"),old=document.getElementById("profbadge");if(old)old.remove();
   if(P==="1"||!top)return;
-  var b=document.createElement("span");b.id="profbadge";b.textContent=pname(P);b.style.cssText="font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--stamp);color:#fff;margin-left:8px;white-space:nowrap;max-width:40vw;overflow:hidden;text-overflow:ellipsis";
+  var b=document.createElement("span");b.id="profbadge";b.textContent=pname(P);b.style.cssText="font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:99px;background:var(--stamp);color:var(--paper);margin-left:8px;white-space:nowrap;max-width:40vw;overflow:hidden;text-overflow:ellipsis";
   var t=top.querySelector(".t");if(t&&t.nextSibling)top.insertBefore(b,t.nextSibling);else top.appendChild(b);
 }
 profBadge();
@@ -5365,11 +5395,222 @@ var crmDetail0=crmDetail;
 crmDetail=function(box){var r=crmDetail0(box);collapseCards(box);return r};
 
 /* ---------- payment schedule PDF, interview day pack, move to a new phone ---------- */
+/* ---------- common questions link and welcome message ---------- */
+function faqPayloadX(){var o=faqAll(),r={};["en","fr"].forEach(function(k){if(o[k])r[k]=o[k].slice(0,6).map(function(x){return [x.q.slice(0,100),x.a.slice(0,280)]})});return r}
+function faqLink(lg){
+  var o={v:1,lg:lg==="fr"?"fr":"en",ag:{b:AG.biz||AG.name||"",w:AG.wa||""},x:faqPayloadX()};
+  return new URL("faq.html",location.href).href+"#p="+btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+}
+
+/* ---------- keeping in touch: preferences, progress updates, past clients ---------- */
+var PCM=[["whatsapp","WhatsApp","WhatsApp"],["call","Phone call","Appel"],["sms","SMS","SMS"],["voice","Voice notes","Notes vocales"]];
+var PCT=[["any","Any time","À tout moment"],["morning","Mornings","Le matin"],["afternoon","Afternoons","L’après-midi"],["evening","Evenings","Le soir"]];
+function pcClean(x){if(!x||typeof x!=="object")return "";var m=PCM.some(function(z){return z[0]===x.m})?x.m:"",t=PCT.some(function(z){return z[0]===x.t})?x.t:"";return (m||t)?{m:m,t:t}:""}
+function pcText(c){var x=c.pc;if(!x)return "";var a=[];if(x.m)a.push(lab(PCM,x.m));if(x.t&&x.t!=="any")a.push(lab(PCT,x.t).toLowerCase());return a.length?T("Prefers ","Préfère ")+a.join(", "):""}
+var UPD_DAYS=7;
+function updDue(c){
+  if(c.status==="closed"||c.status==="new"||c.status==="passport")return 0;
+  var last=c.rel&&c.rel.lc?c.rel.lc:dkey(new Date(c.created||c.updated||Date.now()));
+  var d=-dleft(last);return d>=UPD_DAYS?d:0;
+}
+function pastDone(c){return c.status==="closed"||c.status==="passport"}
+function pastReach(c){
+  if(c.ra==="x")return "";if(dok(c.ra))return c.ra;
+  if(c.visa&&c.visa.t){var d=new Date(c.visa.t+"T00:00:00");d.setDate(d.getDate()-60);return dkey(d)}
+  var t=0;(c.hist||[]).forEach(function(h){if(h&&h.s===c.status&&h.t>t)t=h.t});if(!t)t=c.updated||c.created||Date.now();
+  var d2=new Date(t);d2.setDate(d2.getDate()+180);return dkey(d2);
+}
+function pastWhy(c){return c.visa&&c.visa.t&&pastReach(c)===(function(){var d=new Date(c.visa.t+"T00:00:00");d.setDate(d.getDate()-60);return dkey(d)})()?T("their visa ends on "+cdate(c.visa.t),"leur visa se termine le "+cdate(c.visa.t)):T("it has been a while","cela fait un moment")}
+function pastDue(c){if(!pastDone(c)||consWd(c))return false;var r=pastReach(c);if(!r||r>dkey(new Date()))return false;return !(c.rel&&c.rel.lc&&c.rel.lc>=r)}
+function crmPast(box){
+  box.appendChild(cbtn("← "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  box.appendChild(mk("h3","",T("Past clients","Anciens clients")));
+  box.appendChild(mk("p","m",T("Clients whose case is finished. A friendly hello after a while brings repeat clients and referrals. The date is 6 months after the case ended, or 60 days before the visa ends if you recorded it. Clients who withdrew consent are left out.","Clients dont le dossier est terminé. Un petit bonjour après un moment fait revenir les clients et amène des recommandations. La date est 6 mois après la fin du dossier, ou 60 jours avant la fin du visa si vous l’avez notée. Les clients qui ont retiré leur consentement sont exclus.")));
+  var l=CL.filter(function(c){return !isMerged(c)&&pastDone(c)&&!consWd(c)&&(!staffOn()||staffSee(c))&&c.ra!=="x"}).sort(function(a,b){return (pastReach(a)||"9")<(pastReach(b)||"9")?-1:1}),t=dkey(new Date());
+  if(!l.length){box.appendChild(mk("p","m",T("No past clients yet. A case moves here when its stage is Passport collected or Closed.","Aucun ancien client. Un dossier arrive ici quand son étape est Passeport récupéré ou Clôturé.")));return}
+  l.forEach(function(c){var r=pastReach(c),due=pastDue(c),d=mk("div","dcard");
+    d.appendChild(mk("p","",(due?"⚠ ":"")+c.name+" · "+T("say hello on ","dire bonjour le ")+cdate(r)));d.appendChild(mk("p","m",T("Reason: ","Raison : ")+pastWhy(c)+(pcText(c)?" · "+pcText(c):"")));
+    var w=mk("div","row");w.appendChild(cbtn(T("Open client","Ouvrir le client"),function(){CV.id=c.id;CV.mode="detail";crmRender()},"act"));
+    if(c.phone){var a=mk("a","act",T("Send hello on WhatsApp","Envoyer un bonjour sur WhatsApp"));a.target="_blank";a.rel="noopener";a.href=waLink(c,c.visa&&c.visa.t&&dleft(c.visa.t)<=90&&dleft(c.visa.t)>=0?"c:visaend":"c:again");a.addEventListener("click",function(){var rr=relClean(c.rel)||{lc:"",lr:"",nx:"",n:""};rr.lc=dkey(new Date());c.rel=rr;c.ra=dayplus(180);csave()});w.appendChild(a)}
+    w.appendChild(cbtn(T("Ask again in 6 months","Redemander dans 6 mois"),function(){c.ra=dayplus(180);c.updated=Date.now();csave();crmRender()},"act"));
+    w.appendChild(cbtn(T("Do not contact again","Ne plus contacter"),function(){if(!confirm(T("Leave this client out of the past clients list?","Retirer ce client de la liste des anciens clients ?")))return;c.ra="x";c.updated=Date.now();csave();crmRender()},"act danger"));
+    d.appendChild(w);box.appendChild(d)});
+}
+
+/* ---------- relationships: enquiries, replies, greetings, today, departures ---------- */
+/* ---------- refusal support and weekly summary ---------- */
+function weekRows(){
+  var t=dkey(new Date()),o={nw:[],ap:[],rf:[],ct:[],rp:[],qu:[],ca:[],ar:[],ap7:[],bd:[],dp:[],pd:[]};
+  function inLast(d){return d&&dleft(d)<=0&&dleft(d)>-7}
+  function inNext(d){return d&&dleft(d)>=0&&dleft(d)<=7}
+  CL.filter(function(c){return !isMerged(c)&&!consWd(c)&&(!staffOn()||staffSee(c))}).forEach(function(c){
+    if(c.created&&inLast(dkey(new Date(c.created))))o.nw.push(c);
+    if(c.res==="approved"&&inLast(c.resd))o.ap.push(c);
+    if(c.res==="refused"&&inLast(c.resd))o.rf.push(c);
+    if(c.rel&&inLast(c.rel.lc))o.ct.push(c);
+    if(c.rel&&inLast(c.rel.lr))o.rp.push(c);
+    if(c.status!=="closed"&&quiet(c))o.qu.push(c);
+    if(c.status!=="closed"&&inNext(c.appt))o.ap7.push(c);
+    if(c.bd&&(function(){var y=new Date().getFullYear(),d=y+c.bd.slice(4);return inNext(d)})())o.bd.push(c);
+    var dd=depDate(c);if(inNext(dd))o.dp.push(c);
+    if(pastDone(c)&&pastDue(c))o.pd.push(c);
+  });
+  cmpAll().forEach(function(x){if(inLast(x.d))o.ca.push(x);if(x.st==="done"&&inLast(x.rd))o.ar.push(x)});
+  return o;
+}
+function weekText(o){
+  var ag=AG.biz||AG.name||"",ln=[T("Weekly summary","Bilan de la semaine")+(ag?" · "+ag:"")+" · "+cdate(dkey(new Date()))];
+  function nm(a){return a.map(function(c){return c.name}).slice(0,6).join(", ")+(a.length>6?"…":"")}
+  function add(en,fr,a){if(a.length)ln.push(T(en,fr)+": "+a.length+" ("+nm(a)+")")}
+  add("New clients","Nouveaux clients",o.nw);add("Visas approved","Visas accordés",o.ap);add("Visas refused","Visas refusés",o.rf);
+  add("Clients we wrote to","Clients à qui nous avons écrit",o.ct);add("Clients who replied","Clients qui ont répondu",o.rp);
+  add("Waiting for a reply","En attente de réponse",o.qu);add("Appointments next 7 days","Rendez-vous des 7 prochains jours",o.ap7);
+  add("Departures next 7 days","Départs des 7 prochains jours",o.dp);add("Birthdays next 7 days","Anniversaires des 7 prochains jours",o.bd);
+  add("Past clients to greet","Anciens clients à saluer",o.pd);
+  if(o.ca.length||o.ar.length)ln.push(T("Complaints: "+o.ca.length+" opened, "+o.ar.length+" resolved","Réclamations : "+o.ca.length+" ouvertes, "+o.ar.length+" résolues"));
+  return ln.join("\n");
+}
+function crmWeek(box){
+  box.appendChild(cbtn("← "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  box.appendChild(mk("h3","",T("Weekly summary","Bilan de la semaine")));
+  box.appendChild(mk("p","m",T("A look at the people side of the last 7 days and the next 7. No money figures. Clients who withdrew consent are left out.","Un regard sur les relations des 7 derniers jours et des 7 prochains. Aucun montant. Les clients qui ont retiré leur consentement sont exclus.")));
+  var o=weekRows();
+  function card(title,a,open){var d=mk("div","dcard");d.appendChild(mk("p","",title+" · "+a.length));
+    if(a.length)d.appendChild(mk("p","m",a.slice(0,12).map(function(c){return c.name}).join(", ")+(a.length>12?"…":"")));
+    if(a.length&&open){var r=mk("div","row");a.slice(0,3).forEach(function(c){r.appendChild(cbtn(c.name,function(){CV.id=c.id;CV.mode="detail";crmRender()},"act"))});d.appendChild(r)}
+    box.appendChild(d)}
+  box.appendChild(mk("h4","",T("Last 7 days","7 derniers jours")));
+  card(T("New clients","Nouveaux clients"),o.nw,1);card(T("Visas approved","Visas accordés"),o.ap,1);card(T("Visas refused (call them, then send support)","Visas refusés (appelez, puis envoyez un soutien)"),o.rf,1);
+  card(T("Clients we wrote to","Clients à qui nous avons écrit"),o.ct);card(T("Clients who replied","Clients qui ont répondu"),o.rp);card(T("Waiting for a reply","En attente de réponse"),o.qu,1);
+  var cd=mk("div","dcard");cd.appendChild(mk("p","",T("Complaints: "+o.ca.length+" opened, "+o.ar.length+" resolved","Réclamations : "+o.ca.length+" ouvertes, "+o.ar.length+" résolues")));box.appendChild(cd);
+  box.appendChild(mk("h4","",T("Next 7 days","7 prochains jours")));
+  card(T("Appointments","Rendez-vous"),o.ap7,1);card(T("Departures","Départs"),o.dp,1);card(T("Birthdays","Anniversaires"),o.bd,1);card(T("Past clients to greet","Anciens clients à saluer"),o.pd,1);
+  var r=mk("div","row"),a=mk("a","act",T("Share on WhatsApp","Partager sur WhatsApp"));a.target="_blank";a.rel="noopener";a.addEventListener("click",function(){a.href="https://wa.me/?text="+encodeURIComponent(weekText(weekRows()))});r.appendChild(a);
+  r.appendChild(cbtn(T("Copy text","Copier le texte"),function(){try{navigator.clipboard.writeText(weekText(weekRows()))}catch(e){}},"act"));box.appendChild(r);
+}
+
+var ENQS=[["asked","Asked","Demande reçue"],["quoted","Quote sent","Devis envoyé"],["deciding","Thinking about it","Réfléchit"],["won","Accepted","Accepté"],["lost","Lost","Perdu"]];
+var ENQW=[["price","Price","Prix"],["other_agency","Chose another agency","A choisi une autre agence"],["no_reply","No reply","Pas de réponse"],["not_ready","Not ready to travel","Pas prêt à voyager"],["other","Other","Autre"]];
+function dayplus(n){var d=new Date();d.setDate(d.getDate()+n);return dkey(d)}
+function enqClean(x){if(!x||typeof x!=="object")return "";if(!ENQS.some(function(z){return z[0]===x.s}))return "";return {s:x.s,qd:dok(x.qd)?x.qd:"",fu:dok(x.fu)?x.fu:"",why:ENQW.some(function(z){return z[0]===x.why})?x.why:""}}
+function relClean(x){if(!x||typeof x!=="object")return "";var r={lc:dok(x.lc)?x.lc:"",lr:dok(x.lr)?x.lr:"",nx:dok(x.nx)?x.nx:"",n:typeof x.n==="string"?x.n.trim().slice(0,120):""};return (r.lc||r.lr||r.nx||r.n)?r:""}
+function quiet(c){var r=c.rel;if(!r||!r.lc||c.status==="closed")return 0;if(r.lr&&r.lr>=r.lc)return 0;var d=-dleft(r.lc);return d>=3?d:0}
+function relAlerts(c,r){
+  var e=c.enq;if(e&&(e.s==="asked"||e.s==="quoted"||e.s==="deciding")&&e.fu&&dleft(e.fu)<=0)r.push(T("Follow up the quote","Relancer le devis"));
+  var q=quiet(c);if(q)r.push(T("No reply for "+q+" days","Sans réponse depuis "+q+" jours"));
+  else{var ud=updDue(c);if(ud)r.push(T("No update sent for "+ud+" days","Aucun point envoyé depuis "+ud+" jours"))}
+  if(c.rel&&c.rel.nx&&dleft(c.rel.nx)<=0)r.push(T("Contact planned for today or overdue","Contact prévu aujourd’hui ou en retard"));
+}
+document.addEventListener("click",function(e){try{var a=e.target.closest&&e.target.closest("a");if(!a||!/^https:\/\/wa\.me\//.test(a.href||""))return;if(CV.mode!=="detail"||!CV.id)return;var c=findC(CV.id);if(!c)return;var r=relClean(c.rel)||{lc:"",lr:"",nx:"",n:""};r.lc=dkey(new Date());c.rel=r;csave()}catch(x){}},true);
+function agLink(){var w=String(AG.wa||"").replace(/\D/g,"");return w?"https://wa.me/"+w:""}
+function fbForm(c){var o={v:1,lg:pl(c),n:(c.name||"").split(" ")[0],ag:{b:AG.biz||AG.name||"",w:AG.wa||""}};return new URL("feedback.html",location.href).href+"#p="+btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"")}
+function enqUI(box,c){
+  var d=mk("div","dcard");d.appendChild(mk("h4","",T("Enquiry and follow-up","Demande et suivi")));box.appendChild(d);
+  var e=c.enq||{s:"",qd:"",fu:"",why:""};
+  d.appendChild(mk("p","m",T("For a new enquiry: note where it stands so no quote is forgotten.","Pour une nouvelle demande : notez où elle en est pour ne jamais oublier un devis.")));
+  var sl=mk("label","",T("Stage","Stade")),ss=mk("select");opt(ss,[["",T("Not set","Non défini"),T("Not set","Non défini")]].concat(ENQS),e.s||"");sl.appendChild(ss);d.appendChild(sl);
+  ss.addEventListener("change",function(){var n=ss.value;if(!n){delete c.enq}else{e.s=n;if(n==="quoted"&&!e.qd)e.qd=dkey(new Date());if((n==="quoted"||n==="deciding")&&!e.fu)e.fu=dayplus(2);if(n==="won"||n==="lost")e.fu="";c.enq=enqClean(e)}c.updated=Date.now();csave();crmRender()});
+  if(e.s==="lost"){var wl2=mk("label","",T("Why was it lost?","Pourquoi perdu ?")),ws=mk("select");opt(ws,[["",T("Not stated","Non précisé"),T("Not stated","Non précisé")]].concat(ENQW),e.why||"");ws.addEventListener("change",function(){e.why=ws.value;c.enq=enqClean(e);c.updated=Date.now();csave()});wl2.appendChild(ws);d.appendChild(wl2)}
+  if(e.s&&e.s!=="won"&&e.s!=="lost"){var fl=mk("label","",T("Follow up on","Relancer le")),fi=mk("input");fi.type="date";fi.value=e.fu||"";fi.addEventListener("change",function(){e.fu=fi.value;c.enq=enqClean(e);c.updated=Date.now();csave()});fl.appendChild(fi);d.appendChild(fl);
+    var r=mk("div","row");if(c.phone){var a=mk("a","act",T("Send follow-up on WhatsApp","Envoyer la relance sur WhatsApp"));a.target="_blank";a.rel="noopener";a.href=waLink(c,"c:follow");r.appendChild(a)}
+    r.appendChild(cbtn(T("Followed up: remind me in 3 days","Relancé : me rappeler dans 3 jours"),function(){e.fu=dayplus(3);c.enq=enqClean(e);c.updated=Date.now();csave();crmRender()},"act"));d.appendChild(r)}
+  if(e.s==="won"&&c.status==="new")d.appendChild(cbtn(T("Move to Collecting documents","Passer à Collecte des documents"),function(){c.status="docs";c.hist=c.hist||[];c.hist.push({t:Date.now(),s:"docs"});c.updated=Date.now();csave();crmRender()},"act"));
+}
+function relUI(box,c){
+  var d=mk("div","dcard");d.appendChild(mk("h4","",T("Relationship","Relation avec le client")));box.appendChild(d);
+  var r=relClean(c.rel)||{lc:"",lr:"",nx:"",n:""};
+  d.appendChild(mk("p","m",(r.lc?T("We last wrote on ","Dernier message de notre part le ")+cdate(r.lc)+". ":T("No message sent yet. ","Aucun message envoyé. "))+(r.lr?T("The client last replied on ","Le client a répondu le ")+cdate(r.lr)+".":"")));
+  var q=quiet(c);if(q)d.appendChild(mk("p","m late","⚠ "+T("No reply for "+q+" days. A short, friendly nudge often works.","Sans réponse depuis "+q+" jours. Une courte relance amicale marche souvent.")));
+  function sv(){c.rel=relClean(r);if(!c.rel)delete c.rel;c.updated=Date.now();csave()}
+  var b=mk("div","row");b.appendChild(cbtn(T("Client replied today","Le client a répondu aujourd’hui"),function(){r.lr=dkey(new Date());sv();crmRender()},"act"));b.appendChild(cbtn(T("I messaged today","J’ai écrit aujourd’hui"),function(){r.lc=dkey(new Date());sv();crmRender()},"act"));d.appendChild(b);
+  var nl=mk("label","",T("Next contact on","Prochain contact le")),ni=mk("input");ni.type="date";ni.value=r.nx||"";ni.addEventListener("change",function(){r.nx=ni.value;sv()});nl.appendChild(ni);d.appendChild(nl);
+  var tl=mk("label","",T("Reminder note (optional)","Note de rappel (facultatif)")),ti=mk("input");ti.type="text";ti.maxLength=120;ti.value=r.n||"";ti.addEventListener("input",function(){r.n=ti.value;sv()});tl.appendChild(ti);d.appendChild(tl);
+  var pnl=mk("label","",T("Personal notes (family, interests, how they like to be spoken to)","Notes personnelles (famille, intérêts, façon de lui parler)")),pni=mk("textarea");pni.maxLength=300;pni.rows=3;pni.value=c.pn||"";pni.addEventListener("input",function(){if(pni.value.trim())c.pn=pni.value.trim().slice(0,300);else delete c.pn;c.updated=Date.now();csave()});pnl.appendChild(pni);d.appendChild(pnl);
+  var pcx=c.pc||{m:"",t:""};function pcs(){var x=pcClean(pcx);if(x)c.pc=x;else delete c.pc;c.updated=Date.now();csave()}
+  var pml=mk("label","",T("Preferred way to be contacted","Moyen de contact préféré")),pms=mk("select");opt(pms,[["",T("Not stated","Non précisé"),T("Not stated","Non précisé")]].concat(PCM),pcx.m||"");pms.addEventListener("change",function(){pcx.m=pms.value;pcs()});pml.appendChild(pms);d.appendChild(pml);
+  var ptl=mk("label","",T("Best time of day","Meilleur moment de la journée")),pts=mk("select");opt(pts,[["",T("Not stated","Non précisé"),T("Not stated","Non précisé")]].concat(PCT),pcx.t||"");pts.addEventListener("change",function(){pcx.t=pts.value;pcs()});ptl.appendChild(pts);d.appendChild(ptl);
+  var bl=mk("label","",T("Birthday (optional)","Anniversaire (facultatif)")),bi=mk("input");bi.type="date";bi.value=c.bd||"";bi.addEventListener("change",function(){if(dok(bi.value))c.bd=bi.value;else delete c.bd;c.updated=Date.now();csave()});bl.appendChild(bi);d.appendChild(bl);
+  if(c.phone){d.appendChild(mk("p","m",T("Friendly messages (opens WhatsApp):","Messages chaleureux (ouvre WhatsApp) :")));var g=mk("div","row tiles");
+    [["c:welcome",T("Welcome message","Message de bienvenue"),null],["c:faq",T("Common questions link","Lien des questions fréquentes"),null],["c:update",T("Progress update","Point sur le dossier"),null],["c:nudge",T("Gentle check-in","Prise de nouvelles"),null],["c:bday",T("Birthday wishes","Vœux d’anniversaire"),null],["c:approved",T("Congratulations on the visa","Félicitations pour le visa"),null],["c:refused",T("Support after a refusal","Soutien après un refus"),null],["c:predep",T("Before you travel","Avant votre départ"),null],["c:safe",T("Safe arrival","Bonne arrivée"),null],["c:feedback",T("Ask for feedback","Demander un avis"),null],["c:refer",T("Thank you and referral","Merci et recommandation"),null]].forEach(function(x){var a=mk("a","act",x[1]);a.target="_blank";a.rel="noopener";a.href=waLink(c,x[0]);g.appendChild(a)});d.appendChild(g)}
+}
+/* today */
+function dayItems(){
+  var out=[],t=dkey(new Date());
+  CL.filter(function(c){return !isMerged(c)&&c.status!=="closed"}).forEach(function(c){
+    if(staffOn()&&!staffSee(c))return;
+    function add(txt,k){out.push({c:c,t:txt,k:k||""})}
+    if(c.appt){var da=dleft(c.appt);if(da===0)add(T("Appointment today","Rendez-vous aujourd’hui"),"c:apptcard");else if(da===1)add(T("Appointment tomorrow","Rendez-vous demain"),"c:apptcard")}
+    var e=c.enq;if(e&&(e.s==="asked"||e.s==="quoted"||e.s==="deciding")&&e.fu&&e.fu<=t)add(T("Follow up the quote","Relancer le devis"),"c:follow");
+    var q=quiet(c);if(q)add(T("No reply for "+q+" days","Sans réponse depuis "+q+" jours"),"c:nudge");
+    if(c.rel&&c.rel.nx&&c.rel.nx<=t)add(T("Planned contact","Contact prévu")+(c.rel.n?": "+c.rel.n:""),"c:nudge");
+    if(c.bd&&c.bd.slice(5)===t.slice(5))add(T("Birthday today","Anniversaire aujourd’hui"),"c:bday");
+    if(c.visa&&c.visa.rt&&c.visa.rt<t&&!c.visa.ck)add(T("Return check-in due","Suivi du retour à faire"),"c:ret");
+    if(c.res==="approved"&&c.resd&&c.resd===t)add(T("Visa approved today: congratulate","Visa accordé aujourd’hui : félicitez"),"c:approved");
+    if((c.status==="new"||c.status==="docs")&&!(c.rel&&c.rel.lc)&&dleft(dkey(new Date(c.created||c.updated||Date.now())))>=-3)add(T("New client: send a welcome message","Nouveau client : envoyez un message de bienvenue"),"c:welcome");
+    var ud=updDue(c);if(ud&&!q)add(T("Send a progress update ("+ud+" days)","Envoyer un point sur le dossier ("+ud+" jours)"),"c:update");
+    var pn=pnext(c);if(pn&&pn.d<=t)add(T("Instalment due","Échéance à régler"),"c:payrem");
+    cmpAll().forEach(function(x){if(x.cid===c.id&&x.st==="open"&&x.du&&x.du<=t)add(T("Complaint: answer due","Réclamation : réponse due"))});
+  });
+  CL.filter(function(c){return !isMerged(c)&&!consWd(c)&&c.res==="refused"&&(!staffOn()||staffSee(c))}).forEach(function(c){
+    if(c.resd&&dleft(c.resd)<=0&&dleft(c.resd)>=-7&&!(c.rel&&c.rel.lc&&c.rel.lc>=c.resd))out.push({c:c,t:T("Visa refused: call the client first, then send the support message","Visa refusé : appelez d’abord le client, puis envoyez le message de soutien"),k:"c:refused"});
+  });
+  CL.filter(function(c){return !isMerged(c)&&pastDone(c)&&!consWd(c)&&(!staffOn()||staffSee(c))}).forEach(function(c){
+    if(c.visa&&c.visa.t&&dleft(c.visa.t)>=0&&dleft(c.visa.t)<=60&&!(c.rel&&c.rel.lc&&dleft(c.rel.lc)>-30)){out.push({c:c,t:T("Visa ends in "+dleft(c.visa.t)+" days: ask about renewing","Le visa se termine dans "+dleft(c.visa.t)+" jours : proposez le renouvellement"),k:"c:visaend"});return}
+    if(pastDue(c))out.push({c:c,t:T("Past client: time to say hello","Ancien client : temps de dire bonjour"),k:"c:again"});
+  });
+  return out;
+}
+function crmDay(box){
+  box.appendChild(cbtn("← "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  box.appendChild(mk("h3","",T("My day","Ma journée")));
+  var l=dayItems();
+  box.appendChild(mk("p","m",l.length?T(l.length+" things to do. A short personal message often matters more than a long one.",l.length+" choses à faire. Un court message personnel compte souvent plus qu’un long.") :T("Nothing is due today. A good moment to check in with a quiet client.","Rien n’est dû aujourd’hui. Bon moment pour prendre des nouvelles d’un client silencieux.")));
+  l.forEach(function(x){var d=mk("div","dcard");d.appendChild(mk("p","",x.c.name+" · "+x.t));if(pcText(x.c))d.appendChild(mk("p","m",pcText(x.c)));var r=mk("div","row");
+    if(x.c.pc&&x.c.pc.m==="call"&&x.c.phone){var ca=mk("a","act",T("Call","Appeler"));ca.href="tel:"+String(x.c.phone).replace(/[^\d+]/g,"");r.appendChild(ca)}
+    r.appendChild(cbtn(T("Open client","Ouvrir le client"),function(){CV.id=x.c.id;CV.mode="detail";crmRender()},"act"));
+    if(x.k&&x.c.phone){var a=mk("a","act",T("Send on WhatsApp","Envoyer sur WhatsApp"));a.target="_blank";a.rel="noopener";a.href=waLink(x.c,x.k);a.addEventListener("click",function(){var rr=relClean(x.c.rel)||{lc:"",lr:"",nx:"",n:""};rr.lc=dkey(new Date());x.c.rel=rr;csave()});r.appendChild(a)}
+    d.appendChild(r);box.appendChild(d)});
+}
+/* enquiries board */
+function crmEnq(box){
+  box.appendChild(cbtn("← "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  box.appendChild(mk("h3","",T("Enquiries","Demandes")));
+  var cs=CL.filter(function(c){return !isMerged(c)&&c.enq&&(!staffOn()||staffSee(c))}),t=dkey(new Date());
+  if(!cs.length){box.appendChild(mk("p","m",T("No enquiry stage set yet. Open a client and choose a stage in Enquiry and follow-up.","Aucun stade de demande défini. Ouvrez un client et choisissez un stade dans Demande et suivi.")));return}
+  ENQS.forEach(function(st){var l=cs.filter(function(c){return c.enq.s===st[0]});if(!l.length)return;
+    box.appendChild(mk("h4","",lab(ENQS,st[0])+" ("+l.length+")"));
+    l.sort(function(a,b){return (a.enq.fu||"9")<(b.enq.fu||"9")?-1:1}).forEach(function(c){var due=c.enq.fu&&c.enq.fu<=t;
+      box.appendChild(cbtn((due?"⚠ ":"")+c.name+(c.enq.fu&&st[0]!=="won"&&st[0]!=="lost"?" · "+T("follow up ","relance ")+cdate(c.enq.fu):"")+(c.enq.why?" · "+lab(ENQW,c.enq.why):""),function(){CV.id=c.id;CV.mode="detail";crmRender()},"act"))})});
+  var w=cs.filter(function(c){return c.enq.s==="won"}).length,lo=cs.filter(function(c){return c.enq.s==="lost"}).length;
+  if(w+lo)box.appendChild(mk("p","m",T("Accepted "+w+", lost "+lo+".","Acceptés "+w+", perdus "+lo+".")));
+  var ws={};cs.forEach(function(c){if(c.enq.s==="lost"&&c.enq.why)ws[c.enq.why]=(ws[c.enq.why]||0)+1});
+  var wk=Object.keys(ws);if(wk.length)box.appendChild(mk("p","m",T("Why lost: ","Raisons des pertes : ")+wk.map(function(k){return lab(ENQW,k)+" "+ws[k]}).join(", ")));
+}
+/* departures board */
+function depDate(c){if(c.visa&&c.visa.tr)return c.visa.tr;var m="";bkAll().forEach(function(b){if(b.cid===c.id&&b.kind==="flight"&&b.st!=="cancelled"&&b.sd&&(!m||b.sd<m))m=b.sd});return m}
+function crmDep(box){
+  box.appendChild(cbtn("← "+T("Studio","Studio"),function(){CV.mode="studio";crmRender()}));
+  box.appendChild(mk("h3","",T("Departures","Départs")));
+  var l=CL.filter(function(c){return !isMerged(c)&&(!staffOn()||staffSee(c))}).map(function(c){return {c:c,d:depDate(c)}}).filter(function(x){return x.d&&dleft(x.d)>=-2&&dleft(x.d)<=45}).sort(function(a,b){return a.d<b.d?-1:1});
+  box.appendChild(mk("p","m",T("Clients travelling in the next 45 days. The date comes from the planned travel date on the visa card, or the first flight booking.","Clients qui voyagent dans les 45 prochains jours. La date vient de la date de voyage prévue sur la carte du visa, ou du premier vol réservé.")));
+  if(!l.length){box.appendChild(mk("p","m",T("Nobody has a travel date in this period.","Personne n’a de date de voyage sur cette période.")));return}
+  l.forEach(function(x){var c=x.c,fl=[],miss=cdocs(c).filter(function(r){return !(c.docs&&c.docs[r.n])}).length;
+    if(miss)fl.push(T(miss+" document(s) missing",miss+" document(s) manquant(s)"));
+    if(cbal(c)>0)fl.push(T("balance due","solde dû"));
+    if(c.pexp&&c.pexp<dkey(new Date(new Date(x.d).getTime()+183*864e5)))fl.push(T("passport expires within 6 months of travel","passeport expire dans les 6 mois du voyage"));
+    if(!c.visa||!c.visa.t)fl.push(T("visa dates not recorded","dates du visa non saisies"));
+    var d=mk("div","dcard");d.appendChild(mk("p","",c.name+" · "+cdate(x.d)+" ("+(dleft(x.d)>1?T("in "+dleft(x.d)+" days","dans "+dleft(x.d)+" jours"):dleft(x.d)===1?T("tomorrow","demain"):dleft(x.d)===0?T("today","aujourd’hui"):T("departed","parti"))+")"));
+    d.appendChild(mk("p","m"+(fl.length?" late":""),fl.length?"⚠ "+fl.join(" · "):"✓ "+T("Ready to go","Prêt à partir")));
+    var r=mk("div","row");r.appendChild(cbtn(T("Open client","Ouvrir le client"),function(){CV.id=c.id;CV.mode="detail";crmRender()},"act"));
+    if(c.phone){var a=mk("a","act",T("Send pre-departure message","Envoyer le message avant départ"));a.target="_blank";a.rel="noopener";a.href=waLink(c,"c:predep");r.appendChild(a)}
+    d.appendChild(r);box.appendChild(d)});
+}
+
 /* ---------- client page: Client / Agency tabs ---------- */
 var DSIDE={
  h3:[["Payment plan","Plan de paiement","a"],["Receipts and invoices","Reçus et factures","a"],["Documents","Documents","c"],["Scans","Scans","c"],["History","Historique","c"],["Visa result","Résultat du visa","c"],["Send a message","Envoyer un message","c"]],
  card:[["Voice notes","Notes vocales","a"],["Commission (referrer or staff)","Commission (apporteur ou employé)","a"],["Client rating","Note du client","a"],["Bookings","Réservations","a"],["Privacy and consent","Vie privée et consentement","a"],["Complaints","Réclamations","a"],["Cancellation and refund","Annulation et remboursement","a"],["Tags","Étiquettes","a"],
-  ["Translations and certified copies","Traductions et copies certifiées","c"],["Documents we hold","Documents que nous gardons","c"],["Embassy booking","Réservation à l’ambassade","c"],["Before the appointment","Avant le rendez-vous","c"],["Documents that must be recent","Documents qui doivent être récents","c"],["Family or group","Famille ou groupe","c"],["Language and next steps","Langue et prochaines étapes","c"],["Package quote","Devis de forfait","c"],["Visa validity and return","Validité du visa et retour","c"],["Timeline","Historique","c"]]
+  ["Translations and certified copies","Traductions et copies certifiées","c"],["Documents we hold","Documents que nous gardons","c"],["Embassy booking","Réservation à l’ambassade","c"],["Before the appointment","Avant le rendez-vous","c"],["Documents that must be recent","Documents qui doivent être récents","c"],["Family or group","Famille ou groupe","c"],["Language and next steps","Langue et prochaines étapes","c"],["Package quote","Devis de forfait","c"],["Enquiry and follow-up","Demande et suivi","c"],["Relationship","Relation avec le client","c"],["Visa validity and return","Validité du visa et retour","c"],["Timeline","Historique","c"]]
 };
 function dsideOf(list,t){for(var i=0;i<list.length;i++)if(list[i][0]===t||list[i][1]===t)return list[i][2];return ""}
 function dtabGet(){var v="client";try{v=localStorage.getItem("vg-dtab")||CV.dtab||"client"}catch(e){v=CV.dtab||"client"}return v==="agency"||v==="all"?v:"client"}
@@ -5380,6 +5621,7 @@ function sideTabs(box,c){
   if(hi<0)return;
   var bar=document.createElement("div");bar.className="row dtabs";
   box.insertBefore(bar,kids[hi]);
+  if(c.pn||pcText(c)){var np=mk("p","m",(c.pn?T("Note: ","Note : ")+c.pn:"")+(c.pn&&pcText(c)?" · ":"")+pcText(c));box.insertBefore(np,bar)}
   /* move the stage control to the top */
   var sl=null;for(i=hi;i<kids.length;i++){if(kids[i].tagName==="LABEL"&&kids[i].querySelector('option[value="docs"]')){sl=i;break}}
   if(sl!==null){box.insertBefore(kids[sl],bar);if(kids[sl+1]&&kids[sl+1].classList.contains("row"))box.insertBefore(kids[sl+1],bar);kids[sl]=null;kids[sl+1]=null}
@@ -5732,7 +5974,7 @@ function dcPdf(c,lang){
   function kv(a,b){if(b!==""&&b!==undefined&&b!==null)ln(a+" : "+b)}
   ln(fr?"Voici les données personnelles que "+(AG.biz||AG.name||"notre agence")+" conserve à votre sujet, au "+cdate(dkey(new Date()))+". Les notes internes de l’agence figurent aussi ici. Les coûts fournisseurs ne sont pas inclus.":"These are the personal data that "+(AG.biz||AG.name||"our agency")+" keeps about you, on "+cdate(dkey(new Date()))+". The agency’s own notes are included. Supplier costs are not included.");
   h(fr?"Identité et contact":"Identity and contact");kv(fr?"Nom":"Name",c.name);kv(fr?"Téléphone":"Phone",c.phone);kv(fr?"Langue":"Language",c.lang?c.lang.toUpperCase():"");
-  h(fr?"Demande":"Application");kv(fr?"Destination":"Destination",lab(CDEST,c.dest));kv("Type",lab(CTYPE,c.type));kv(fr?"Étape":"Stage",lab(STS,c.status));kv(fr?"Rendez-vous":"Appointment",c.appt?cdate(c.appt):"");kv(fr?"Pris en charge par":"Handled by",c.by);kv(fr?"Référence":"Reference",c.ref);kv(fr?"Groupe":"Group",c.grp);kv(fr?"Passeport expire le":"Passport expires",c.pexp?cdate(c.pexp):"");kv(fr?"Dernier relevé bancaire":"Latest bank statement",c.bstmt?cdate(c.bstmt):"");kv(fr?"Notes":"Notes",c.notes);
+  h(fr?"Demande":"Application");kv(fr?"Destination":"Destination",lab(CDEST,c.dest));kv("Type",lab(CTYPE,c.type));kv(fr?"Étape":"Stage",lab(STS,c.status));kv(fr?"Rendez-vous":"Appointment",c.appt?cdate(c.appt):"");kv(fr?"Pris en charge par":"Handled by",c.by);kv(fr?"Référence":"Reference",c.ref);kv(fr?"Groupe":"Group",c.grp);kv(fr?"Passeport expire le":"Passport expires",c.pexp?cdate(c.pexp):"");kv(fr?"Dernier relevé bancaire":"Latest bank statement",c.bstmt?cdate(c.bstmt):"");kv(fr?"Notes":"Notes",c.notes);kv(fr?"Notes personnelles":"Personal notes",c.pn);kv(fr?"Contact préféré":"Preferred contact",pcText(c));
   var dn=Object.keys(c.docs||{}).filter(function(k){return c.docs[k]});if(dn.length){h(fr?"Documents reçus":"Documents received");ln(dn.join(", "))}
   if((c.hist||[]).length){h(fr?"Historique des étapes":"Stage history");c.hist.forEach(function(x){ln("- "+cdate(dkey(new Date(x.t)))+" : "+lab(STS,x.s))})}
   if(c.fee||c.paid||(c.pays||[]).length){h(fr?"Paiements":"Payments");kv(fr?"Frais convenus":"Agreed fee",cmoney(c.fee||0,c.cur));kv(fr?"Reçu":"Received",cmoney(c.paid||0,c.cur));(c.pays||[]).forEach(function(x){ln("- "+x.no+" · "+cdate(x.date)+" · "+cmoney(x.amt,x.cur)+(x.method?" · "+lab(PAYM,x.method):"")+(x.desc?" · "+x.desc:""))})}
@@ -6827,6 +7069,25 @@ function cmsg(c,key){
   else if(key==="c:pkg"){var pk=c.pkg,pt=pk?pkgTot(pk):{price:0};lines=[fr?"Bonjour "+first+", voici le prix de votre forfait voyage :":"Hello "+first+", here is the price of your travel package:"].concat(pk?pk.lines.map(function(l){return "- "+lab(BKK,l.k)+(l.t?" ("+l.t+")":"")+" : "+cmoney(l.price,pk.cur)}):[]);lines.push((fr?"Total : ":"Total: ")+cmoney(pt.price,pk?pk.cur:c.cur)+(pk&&pk.vd?(fr?" — valable jusqu’au ":" — valid until ")+cdate(pk.vd):""))}
   else if(key==="c:vexp"){var vz=c.visa||{};lines=[fr?"Bonjour "+first+", les dates de votre visa "+dest+" :":"Hello "+first+", the dates of your "+dest+" visa:",(vz.f?(fr?"Valable du ":"Valid from ")+cdate(vz.f)+" ":"")+(vz.t?(fr?"jusqu’au ":"until ")+cdate(vz.t):"")];if(vz.s)lines.push((fr?"Séjour maximum : ":"Longest stay: ")+vz.s+(fr?" jours.":" days."));lines.push(fr?"Voyagez pendant la validité et ne dépassez jamais la durée de séjour autorisée. Vérifiez les dates sur le visa lui-même.":"Travel while the visa is valid and never stay longer than allowed. Check the dates on the visa itself.")}
   else if(key==="c:ret"){var vr=c.visa||{};lines=[fr?"Bonjour "+first+", nous espérons que votre voyage s’est bien passé !":"Hello "+first+", we hope your trip went well!",fr?"Pouvez-vous nous confirmer que vous êtes bien rentré"+(vr.rt?" (retour prévu le "+cdate(vr.rt)+")":"")+" ? Si vous avez besoin de prolonger ou de refaire une demande, écrivez-nous bien avant la fin de votre visa.":"Could you confirm that you are back"+(vr.rt?" (return planned for "+cdate(vr.rt)+")":"")+"? If you need to extend or apply again, write to us well before your visa ends."]}
+  else if(key==="c:follow"){var ag0=AG.biz||AG.name||"";lines=[fr?"Bonjour "+first+", c’est "+(ag0||"votre agence")+". Avez-vous eu le temps de regarder notre proposition pour votre visa "+dest+" ?":"Hello "+first+", it is "+(ag0||"your agency")+". Did you have time to look at our proposal for your "+dest+" visa?",fr?"Si vous avez des questions, écrivez-moi simplement ici. Je serai heureux d’aider.":"If you have any questions, just reply here. I am happy to help."]}
+  else if(key==="c:welcome"){var ag2=AG.biz||AG.name||"";var ms2=cdocs(c).filter(function(r){return !(c.docs&&c.docs[r.n])}).slice(0,8).map(function(r){var i=RULES.indexOf(r);return "- "+(fr&&FRR[i]?FRR[i][0]:r.n)});
+    lines=[fr?"Bonjour "+first+", bienvenue chez "+(ag2||"nous")+" ! Merci de votre confiance pour votre visa "+dest+".":"Hello "+first+", welcome to "+(ag2||"our agency")+"! Thank you for trusting us with your "+dest+" visa.",fr?"Voici les grandes étapes :":"Here are the main steps:",fr?"1. Nous vérifions vos documents":"1. We check your documents",fr?"2. Nous préparons votre dossier":"2. We prepare your file",fr?"3. Rendez-vous à l’ambassade ou au centre de visa":"3. Appointment at the embassy or visa centre",fr?"4. L’ambassade décide":"4. The embassy decides",fr?"5. Vous récupérez votre passeport":"5. You collect your passport"].concat(ms2.length?[fr?"Pour commencer, il nous faut :":"To start, we need:"].concat(ms2):[]).concat([fr?"Les délais dépendent de l’ambassade : nous vous tenons informé régulièrement.":"Timing depends on the embassy: we will keep you updated regularly.",fr?"Suivez votre dossier ici :":"Follow your file here:",statusLink(c)])}
+  else if(key==="c:faq"){lines=[fr?"Bonjour "+first+", voici les réponses aux questions que l’on nous pose le plus souvent :":"Hello "+first+", here are the answers to the questions we are asked most often:",faqLink(pl(c))]}
+  else if(key==="c:update"){lines=[fr?"Bonjour "+first+", un petit point sur votre dossier de visa "+dest+" : il est actuellement à l’étape « "+lab(STS,c.status)+" ».":"Hello "+first+", a short update on your "+dest+" visa file: it is currently at the stage “"+lab(STS,c.status)+"”.",fr?"Pas de nouvelle ne veut pas dire mauvaise nouvelle : nous vous écrivons dès que quelque chose change. Écrivez-nous si vous avez une question.":"No news is not bad news: we will write to you as soon as something changes. Message us if you have any question."]}
+  else if(key==="c:again"){var ag1=AG.biz||AG.name||"";lines=[fr?"Bonjour "+first+", c’est "+(ag1||"votre agence")+" ! Cela fait un moment depuis votre visa "+dest+". Comment allez-vous ?":"Hello "+first+", it is "+(ag1||"your agency")+"! It has been a while since your "+dest+" visa. How are you?",fr?"Si vous préparez un nouveau voyage ou un renouvellement, nous serons heureux de vous aider. Répondez simplement ici.":"If you are planning another trip or a renewal, we would be happy to help. Just reply here."]}
+  else if(key==="c:visaend"){var vz2=c.visa||{};lines=[fr?"Bonjour "+first+", votre visa "+dest+" se termine"+(vz2.t?" le "+cdate(vz2.t):"")+".":"Hello "+first+", your "+dest+" visa ends"+(vz2.t?" on "+cdate(vz2.t):"")+".",fr?"Si vous voulez le renouveler ou refaire une demande, mieux vaut commencer tôt. Voulez-vous que nous regardions vos options ensemble ?":"If you want to renew or apply again, it is best to start early. Would you like us to look at your options together?"]}
+  else if(key==="c:nudge"){lines=[fr?"Bonjour "+first+", je prends simplement de vos nouvelles pour votre dossier de visa "+dest+".":"Hello "+first+", I am just checking in about your "+dest+" visa file.",fr?"Y a-t-il quelque chose qui vous bloque ou une question ? Répondez ici quand vous pouvez.":"Is anything holding you up, or do you have a question? Reply here whenever you can."]}
+  else if(key==="c:bday"){lines=[fr?"Joyeux anniversaire "+first+" ! Nous vous souhaitons une belle année, la santé et de beaux voyages.":"Happy birthday "+first+"! We wish you a wonderful year, good health and great journeys."]}
+  else if(key==="c:refused"){var rg=rfGet(c),rl=rg.r.map(function(k){var a=RFR.filter(function(z){return z[0]===k})[0];return a?"- "+(fr?a[2]:a[1]):""}).filter(Boolean),tp=rg.r.slice(0,3).map(function(k){var a=RFR.filter(function(z){return z[0]===k})[0];return a?"- "+(fr?a[4]:a[3]):""}).filter(Boolean);
+    lines=[fr?"Bonjour "+first+", nous sommes désolés pour la décision sur votre visa "+dest+". Une réponse négative n’est pas la fin du chemin, et nous restons à vos côtés.":"Hello "+first+", we are sorry about the decision on your "+dest+" visa. A refusal is not the end of the road, and we are here with you."];
+    if(rl.length)lines.push((fr?"Raisons notées :":"Reasons noted:")+"\n"+rl.join("\n"));
+    if(tp.length)lines.push((fr?"Pour une nouvelle demande :":"For a new application:")+"\n"+tp.join("\n"));
+    lines.push(rg.t?(fr?"Si vous le souhaitez, nous pourrions viser une nouvelle demande vers le "+cdate(rg.t)+". Rien n’est garanti, mais un dossier corrigé est plus solide.":"If you wish, we could aim for a new application around "+cdate(rg.t)+". Nothing is guaranteed, but a corrected file is stronger."):(fr?"Quand vous serez prêt, nous regarderons ensemble ce qu’il faut corriger avant de redemander. Prenez votre temps.":"When you are ready, we will look together at what to fix before applying again. Take your time."))}
+  else if(key==="c:approved"){lines=[fr?"Félicitations "+first+" ! Votre visa "+dest+" est accordé. Nous sommes très heureux pour vous.":"Congratulations "+first+"! Your "+dest+" visa has been approved. We are very happy for you.",fr?"Vérifiez bien les dates et les informations sur le visa, et écrivez-nous si quelque chose vous semble faux.":"Please check the dates and details on the visa, and write to us if anything looks wrong."]}
+  else if(key==="c:predep"){lines=[fr?"Bonjour "+first+", bientôt le départ ! Petite liste avant de partir :":"Hello "+first+", your trip is coming up! A short list before you go:",fr?"- Passeport et visa (vérifiez les dates)":"- Passport and visa (check the dates)",fr?"- Billet aller-retour et réservation d’hôtel":"- Return ticket and hotel booking",fr?"- Assurance voyage et preuves bancaires":"- Travel insurance and bank proof",fr?"- Moyen de paiement et téléphone chargé":"- A way to pay and a charged phone",fr?"Lisez aussi les règles d’entrée du pays visité. Bon voyage !":"Also read the entry rules of the country you visit. Have a good trip!"]}
+  else if(key==="c:safe"){lines=[fr?"Bonjour "+first+", nous espérons que vous êtes bien arrivé. Dites-nous simplement si tout va bien !":"Hello "+first+", we hope you arrived safely. Just let us know that all is well!"]}
+  else if(key==="c:feedback"){lines=[fr?"Bonjour "+first+", merci de nous avoir fait confiance. Pouvez-vous nous dire en une minute comment s’est passé notre service ? Votre avis nous aide à progresser :":"Hello "+first+", thank you for trusting us. Could you tell us in one minute how our service was? Your honest feedback helps us improve:",fbForm(c)]}
+  else if(key==="c:refer"){var al=agLink();lines=[fr?"Bonjour "+first+", merci encore ! Si un ami ou un proche a besoin d’aide pour un visa, vous pouvez lui transmettre ce message ou lui dire de mentionner votre nom.":"Hello "+first+", thank you again! If a friend or relative needs help with a visa, you can pass them this message or tell them to mention your name."];if(al)lines.push(al+"?text="+encodeURIComponent((fr?"Bonjour, ":"Hello, ")+(c.name||first)+(fr?" m’a recommandé votre agence.":" recommended your agency to me.")))}
   else if(key==="c:practice"){lines=[fr?"Bonjour "+first+", entraînez-vous à l’entretien de visa sur votre téléphone avec ce lien. Cela prend quelques minutes et rien n’est enregistré :":"Hello "+first+", practise your visa interview on your phone with this link. It takes a few minutes and nothing is saved:",practiceLink(c)]}
   else if(key==="c:next"){var nxt=nxText(c.status,fr?"fr":"en");lines=[(fr?"Bonjour "+first+", voici la suite pour votre dossier de visa "+dest+" :":"Hello "+first+", here is what happens next for your "+dest+" visa file:"),nxt||(fr?"Nous vous tiendrons informé.":"We will keep you informed.")]}
   else if(key==="c:apptcard"){lines=[fr?"Bonjour "+first+", les détails de votre rendez-vous de visa "+dest+" :":"Hello "+first+", the details of your "+dest+" visa appointment:",(c.appt?cdate(c.appt):"")];lines.push(fr?"À apporter : votre passeport, la confirmation du rendez-vous, les originaux de vos documents et un jeu de copies. Arrivez en avance.":"Bring: your passport, the appointment confirmation, the originals of your documents and one set of copies. Arrive early.")}
@@ -7171,7 +7432,7 @@ function crmDetail(box){
   lk.appendChild(cbtn(T("Copy client portal link","Copier le lien du portail client"),function(){var u=statusLink(c);if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(u).then(function(){alert(T("Link copied.","Lien copié."))},function(){prompt("",u)});else prompt("",u)}));
   if(c.phone){var sl=mk("a","act",T("Send status link on WhatsApp","Envoyer le lien de suivi sur WhatsApp"));sl.target="_blank";sl.rel="noopener";sl.href=waLink(c,"c:link");lk.appendChild(sl)}
   if(c.res==="refused")lk.appendChild(cbtn(T("Refusal and reapply plan","Plan après refus"),function(){CV.mode="refusal";crmRender();window.scrollTo(0,0)}));
-  box.appendChild(sr2);box.appendChild(lk);voiceUI(box,c);commUI(box,c);satUI(box,c);trUI(box,c);heldUI(box,c);slotUI(box,c);remUI(box,c);daUI(box,c);grpUI(box,c);bkUI(box,c);langUI(box,c);privUI(box,c);cmpUI(box,c);rfdUI(box,c);pkgUI(box,c);visaUI(box,c);tagUI(box,c);tlUI(box,c);
+  box.appendChild(sr2);box.appendChild(lk);voiceUI(box,c);commUI(box,c);satUI(box,c);trUI(box,c);heldUI(box,c);slotUI(box,c);remUI(box,c);daUI(box,c);grpUI(box,c);bkUI(box,c);langUI(box,c);privUI(box,c);cmpUI(box,c);rfdUI(box,c);pkgUI(box,c);visaUI(box,c);enqUI(box,c);relUI(box,c);tagUI(box,c);tlUI(box,c);
   box.appendChild(mk("h3","",T("Send a message","Envoyer un message")));
   var ml=mk("label","",T("Message","Message")),ms=mk("select");
   Array.prototype.forEach.call(document.querySelectorAll("#mtype option"),function(o){var op=mk("option","",o.textContent);op.value=o.value;ms.appendChild(op)});
@@ -7230,7 +7491,7 @@ function crmClean(c){
   function str(v,n){return typeof v==="string"?v.slice(0,n):""}
   function inList(list,v,d){for(var i=0;i<list.length;i++)if(list[i][0]===v)return v;return d}
   if(!c||typeof c!=="object"||typeof c.name!=="string"||!c.name.trim())return null;
-  return {id:str(c.id,40)||(Date.now().toString(36)+Math.random().toString(36).slice(2,6)),name:str(c.name,80).trim(),phone:str(c.phone,30),dest:inList(CDEST,c.dest,"other"),type:inList(CTYPE,c.type,"tourist"),status:inList(STS,c.status,"new"),appt:/^\d{4}-\d{2}-\d{2}$/.test(c.appt||"")?c.appt:"",notes:str(c.notes,500),by:str(c.by,40),follow:/^\d{4}-\d{2}-\d{2}$/.test(c.follow||"")?c.follow:"",cur:inList(CCUR,c.cur,"XAF"),fee:cnum(c.fee),paid:cnum(c.paid),hist:(Array.isArray(c.hist)?c.hist:[]).filter(function(h){return h&&isFinite(+h.t)&&inList(STS,h.s,null)}).slice(-30).map(function(h){return {t:+h.t,s:h.s}}),res:inList(RES,c.res,""),resd:/^\d{4}-\d{2}-\d{2}$/.test(c.resd||"")?c.resd:"",reapply:/^\d{4}-\d{2}-\d{2}$/.test(c.reapply||"")?c.reapply:"",src:inList(SRC,c.src,""),ref:str(c.ref,60).trim(),grp:str(c.grp,40).trim(),lang:(c.lang==="fr"||c.lang==="en")?c.lang:"",cons:consClean(c.cons),rfd:rfdClean(c.rfd),pkg:pkgClean(c.pkg),visa:visaClean(c.visa),pexp:/^\d{4}-\d{2}-\d{2}$/.test(c.pexp||"")?c.pexp:"",bstmt:/^\d{4}-\d{2}-\d{2}$/.test(c.bstmt||"")?c.bstmt:"",plan:(Array.isArray(c.plan)?c.plan:[]).filter(function(x){return x&&/^\d{4}-\d{2}-\d{2}$/.test(x.d||"")&&cnum(x.a)>0}).slice(0,12).map(function(x){return {d:x.d,a:cnum(x.a),ok:x.ok?1:0}}),why:(function(){var o={};if(c.why&&typeof c.why==="object")WHY.forEach(function(w){if(c.why[w[0]])o[w[0]]=1});return o})(),pays:(Array.isArray(c.pays)?c.pays:[]).filter(function(d){return d&&typeof d.no==="string"&&cnum(d.amt)}).slice(-40).map(function(d){return {type:d.type==="invoice"?"invoice":"receipt",no:str(d.no,30),date:/^\d{4}-\d{2}-\d{2}$/.test(d.date||"")?d.date:dkey(new Date()),amt:cnum(d.amt),cur:inList(CCUR,d.cur,"XAF"),method:inList(PAYM,d.method,""),tx:str(d.tx,40),desc:str(d.desc,160),snap:[cnum(d.snap&&d.snap[0]),cnum(d.snap&&d.snap[1])],tax:Math.min(100,cnum(d.tax)),ag:(d.ag&&typeof d.ag==="object")?(function(a){var o={};["biz","name","ad","wa","em","tid","reg","ft","pm","pn","pa"].forEach(function(k){o[k]=str(a[k],160)});return o})(d.ag):undefined}}),docs:(function(){var o={};if(c.docs&&typeof c.docs==="object")Object.keys(c.docs).slice(0,80).forEach(function(k){if(c.docs[k]&&k.length<=200)o[k]=1});return o})(),created:+c.created||Date.now(),updated:+c.updated||Date.now()};
+  return {id:str(c.id,40)||(Date.now().toString(36)+Math.random().toString(36).slice(2,6)),name:str(c.name,80).trim(),phone:str(c.phone,30),dest:inList(CDEST,c.dest,"other"),type:inList(CTYPE,c.type,"tourist"),status:inList(STS,c.status,"new"),appt:/^\d{4}-\d{2}-\d{2}$/.test(c.appt||"")?c.appt:"",notes:str(c.notes,500),by:str(c.by,40),follow:/^\d{4}-\d{2}-\d{2}$/.test(c.follow||"")?c.follow:"",cur:inList(CCUR,c.cur,"XAF"),fee:cnum(c.fee),paid:cnum(c.paid),hist:(Array.isArray(c.hist)?c.hist:[]).filter(function(h){return h&&isFinite(+h.t)&&inList(STS,h.s,null)}).slice(-30).map(function(h){return {t:+h.t,s:h.s}}),res:inList(RES,c.res,""),resd:/^\d{4}-\d{2}-\d{2}$/.test(c.resd||"")?c.resd:"",reapply:/^\d{4}-\d{2}-\d{2}$/.test(c.reapply||"")?c.reapply:"",src:inList(SRC,c.src,""),ref:str(c.ref,60).trim(),grp:str(c.grp,40).trim(),lang:(c.lang==="fr"||c.lang==="en")?c.lang:"",cons:consClean(c.cons),rfd:rfdClean(c.rfd),pkg:pkgClean(c.pkg),visa:visaClean(c.visa),enq:enqClean(c.enq),rel:relClean(c.rel),pn:typeof c.pn==="string"?c.pn.trim().slice(0,300):"",pc:pcClean(c.pc),ra:(dok(c.ra)||c.ra==="x")?c.ra:"",bd:dok(c.bd)?c.bd:"",pexp:/^\d{4}-\d{2}-\d{2}$/.test(c.pexp||"")?c.pexp:"",bstmt:/^\d{4}-\d{2}-\d{2}$/.test(c.bstmt||"")?c.bstmt:"",plan:(Array.isArray(c.plan)?c.plan:[]).filter(function(x){return x&&/^\d{4}-\d{2}-\d{2}$/.test(x.d||"")&&cnum(x.a)>0}).slice(0,12).map(function(x){return {d:x.d,a:cnum(x.a),ok:x.ok?1:0}}),why:(function(){var o={};if(c.why&&typeof c.why==="object")WHY.forEach(function(w){if(c.why[w[0]])o[w[0]]=1});return o})(),pays:(Array.isArray(c.pays)?c.pays:[]).filter(function(d){return d&&typeof d.no==="string"&&cnum(d.amt)}).slice(-40).map(function(d){return {type:d.type==="invoice"?"invoice":"receipt",no:str(d.no,30),date:/^\d{4}-\d{2}-\d{2}$/.test(d.date||"")?d.date:dkey(new Date()),amt:cnum(d.amt),cur:inList(CCUR,d.cur,"XAF"),method:inList(PAYM,d.method,""),tx:str(d.tx,40),desc:str(d.desc,160),snap:[cnum(d.snap&&d.snap[0]),cnum(d.snap&&d.snap[1])],tax:Math.min(100,cnum(d.tax)),ag:(d.ag&&typeof d.ag==="object")?(function(a){var o={};["biz","name","ad","wa","em","tid","reg","ft","pm","pn","pa"].forEach(function(k){o[k]=str(a[k],160)});return o})(d.ag):undefined}}),docs:(function(){var o={};if(c.docs&&typeof c.docs==="object")Object.keys(c.docs).slice(0,80).forEach(function(k){if(c.docs[k]&&k.length<=200)o[k]=1});return o})(),created:+c.created||Date.now(),updated:+c.updated||Date.now()};
 }
 function crmApply(o){
   if(!o||o.app!=="visa-guide-clients"||!Array.isArray(o.clients))throw new Error("bad");

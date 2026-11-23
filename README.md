@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-63`; it is now `visaguide-62`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-70`; it is now `visaguide-69`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -295,3 +295,8 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 - **Package quote** (`c.pkg`, `pkgClean`, `pkgUI`, `pkgPdf`, message `c:pkg`; accepting creates bookings via `bkClean`).
 - **Group tour sheet** (`vg-gt`, `gtUI`, `gtPdf`), **Visa validity** (`c.visa`, `visaClean`, `visaWarn`, `visaAlerts`, `visaUI`, `crmVisas`; messages `c:vexp`, `c:ret`; portal payload `vz`).
 - **Client page tabs** (`sideTabs`, `DSIDE` lists which card is Client or Agency; key `vg-dtab`: client, agency or all). Tests set `vg-dtab` to `all` so every card is visible.
+- **Relationships**: `c.enq`, `c.rel`, `c.bd`; `todayItems`, `crmToday`, `crmEnq`, `crmDep`; wa.me clicks in a client page set `rel.lc`; `feedback.html` (link built by `fbLink`).
+- **Colours**: deep purple `#4a1388` and gold `#ffd21e` (high contrast: text 9:1 or better) (set in the `:root` blocks of each page; the dark theme uses gold as the main colour).
+- **Keeping in touch**: `c.pn`, `c.pc` (`pcClean`), `c.ra`; `updDue` (7 days), `pastDone/pastReach/pastDue`, `crmPast`; messages `c:update`, `c:again`, `c:visaend`.
+- **Common questions**: `faq.html` (9 general answers + up to 5 custom from `vg-faq`, payload `#p=`), `crmFaq`, `faqLink`; message `c:welcome`, `c:faq`; the portal link carries `fq`.
+- **Refusal support and weekly summary**: message `c:refused` (uses `rfGet`/`RFR`), My day item for 7 days after a refusal; `weekRows/weekText/crmWeek` (mode `week`).

@@ -13,8 +13,8 @@
     "minimal-ui"
   ],
   "orientation": "portrait",
-  "background_color": "#08171a",
-  "theme_color": "#08171a",
+  "background_color": "#150336",
+  "theme_color": "#150336",
   "categories": [
     "travel",
     "productivity"
