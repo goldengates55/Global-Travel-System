@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#4a1388">
+<title>News</title>
+<link rel="icon" href="icon-192.png">
+<style>
+:root{--paper:#ece3fa;--ink:#10042a;--mute:#3f3260;--line:#9d88cc;--stamp:#4a1388;--card:#fff;--shadow:0 1px 2px rgba(16,4,42,.06),0 8px 24px -10px rgba(16,4,42,.18)}
+@media (prefers-color-scheme:dark){:root{--paper:#150336;--ink:#ffffff;--mute:#d6c9f0;--line:#7a55c2;--stamp:#ffd21e;--card:#2e0f68;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:560px;margin:0 auto;padding:18px 16px 48px}header{display:flex;align-items:center;gap:10px;margin-bottom:16px}header b{flex:1;font-size:1.15rem}
+button{font:600 1rem system-ui,sans-serif;border-radius:14px;padding:13px 16px;border:1px solid var(--stamp);background:var(--card);color:var(--stamp);cursor:pointer}
+button.pri{background:var(--stamp);color:var(--paper);width:100%;margin-top:12px}#lang{border-radius:999px;padding:8px 14px;font-size:.9rem;border-color:var(--line);color:var(--ink)}
+h1{font-size:1.5rem;line-height:1.2;margin:0 0 8px}.m{color:var(--mute);font-size:.92rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.rate{display:flex;gap:8px;margin:12px 0}.rate button{flex:1;padding:14px 0;font-size:1.15rem}.rate button.on{background:var(--stamp);color:var(--paper)}
+textarea{width:100%;min-height:76px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;margin:6px 0 12px}
+label.ck{display:flex;gap:10px;align-items:flex-start}label.ck input{width:20px;height:20px;margin-top:3px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:14px 16px;font-size:1.02rem}.opt.on{background:var(--stamp);color:var(--paper)}
+.post{margin:0 0 12px}.post h2{font-size:1.1rem;margin:0 0 4px}.post .d{color:var(--mute);font-size:.82rem;margin:0 0 6px}.post p{margin:0 0 10px;white-space:pre-wrap}
+button.sec{margin-top:6px;padding:9px 14px;font-size:.9rem}
+</style>
+</head>
+<body>
+<main>
+<header><b id="biz">Your feedback</b><button id="lang" type="button">Français</button></header>
+<div id="app"></div>
+</main>
+<script>
+(function(){
+var D=null,L="en";
+try{var h=location.hash.replace(/^#p=/,"").replace(/-/g,"+").replace(/_/g,"/");while(h.length%4)h+="=";D=JSON.parse(decodeURIComponent(escape(atob(h))));if(!D||D.v!==1||typeof D!=="object")D=null}catch(e){D=null}
+if(D&&D.lg==="fr")L="fr";
+function el(t,x,c){var e=document.createElement(t);if(x!==undefined)e.textContent=x;if(c)e.className=c;return e}
+function T(a,b){return L==="fr"?b:a}
+function wa(t){var ag=(D&&D.ag)||{},w=String(ag.w||"").replace(/\D/g,"");if(!w){alert(T("No agent number on this page.","Aucun numéro d’agent sur cette page."));return}window.open("https://wa.me/"+w+"?text="+encodeURIComponent(t),"_blank","noopener")}
+function bad(app){app.appendChild(el("h1",T("This link is not valid","Ce lien n’est pas valide")));app.appendChild(el("p",T("Please ask your agent to send it again.","Demandez à votre agent de le renvoyer."),"m"))}
+function render(){
+  var app=document.getElementById("app");app.innerHTML="";document.documentElement.lang=L;document.getElementById("lang").textContent=L==="fr"?"English":"Français";
+  if(!D||!Array.isArray(D.x)){bad(app);return}
+  var ag=D.ag||{};document.getElementById("biz").textContent=String(ag.b||"Global Visa").slice(0,80);document.title=T("News","Actualités");
+  app.appendChild(el("h1",T("News from us","Nos actualités")));
+  if(!D.x.length)app.appendChild(el("p",T("Nothing new right now. Message us any time.","Rien de nouveau pour le moment. Écrivez-nous quand vous voulez."),"m"));
+  D.x.slice(0,5).forEach(function(r){if(!Array.isArray(r))return;var c=el("section",undefined,"card post");c.appendChild(el("h2",String(r[1]||"").slice(0,80)));c.appendChild(el("p",String(r[0]||"").slice(0,10),"d"));c.appendChild(el("p",String(r[2]||"").slice(0,320)));
+    var b=el("button",T("Ask about this on WhatsApp","Poser une question sur WhatsApp"),"sec");b.type="button";b.addEventListener("click",function(){wa(T("Hello, I have a question about your news: ","Bonjour, j’ai une question sur votre actualité : ")+String(r[1]||"").slice(0,80))});c.appendChild(b);app.appendChild(c)});
+  var g=el("button",T("Message us on WhatsApp","Écrivez-nous sur WhatsApp"),"pri");g.type="button";g.addEventListener("click",function(){wa(T("Hello, I would like some help.","Bonjour, j’aimerais de l’aide."))});app.appendChild(g);
+}
+document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";render()});
+render();
+})();
+</script>
+</body>
+</html>

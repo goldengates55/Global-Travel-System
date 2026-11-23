@@ -31,6 +31,10 @@ ul{margin:6px 0 0;padding-left:20px}
 .pill{display:inline-block;border-radius:99px;padding:4px 12px;font-weight:700;font-size:.9rem;background:var(--stamp);color:var(--paper)}
 .tkl{list-style:none;padding:0}.tk label{display:flex;gap:10px;align-items:flex-start;padding:6px 0}.tk input{width:20px;height:20px;flex:none;margin-top:2px}input[type=text]{width:100%;margin:6px 0;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);color:var(--ink);font:inherit}.card button,.btn2{font:600 1rem system-ui,sans-serif;border-radius:14px;padding:12px 16px;border:1px solid var(--stamp);background:var(--card);color:var(--stamp);cursor:pointer;display:inline-block;margin-top:8px;text-decoration:none}.b{font-weight:700;margin:10px 0 2px}
 .btns{display:flex;gap:10px;flex-wrap:wrap}
+.qa textarea{width:100%;min-height:70px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;margin:6px 0}
+.qa input[type=date]{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;margin:6px 0}
+.qa button{font:600 .95rem system-ui,sans-serif;border-radius:14px;padding:11px 14px;border:1px solid var(--stamp);background:var(--card);color:var(--stamp);cursor:pointer;margin:4px 6px 4px 0}
+.qa button.on{background:var(--stamp);color:var(--paper)}.qa h3{font-size:1rem;margin:16px 0 4px}.qa hr{border:0;border-top:1px solid var(--line);margin:14px 0}
 .btns a{flex:1;text-align:center;text-decoration:none;font-weight:700;padding:12px 14px;border-radius:14px;border:1px solid var(--stamp);color:var(--stamp);min-width:140px}
 </style>
 </head>
@@ -111,6 +115,21 @@ function render(){
   if(D.pt&&D.k!=="passport"&&D.k!=="closed"){var c7=el("section",undefined,"card");c7.appendChild(el("h2",T("Practise your interview","Entraînez-vous à l’entretien")));c7.appendChild(el("p",T("A few minutes on your phone. Nothing is saved.","Quelques minutes sur votre téléphone. Rien n’est enregistré."),"m"));
     var pl={v:1,t:String(D.pt).slice(0,10),lg:L,n:D.n||"",tl:D.ty||"",ag:{b:ag.b||"",w:ag.w||""}},pb=btoa(unescape(encodeURIComponent(JSON.stringify(pl)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
     var pa2=el("a",T("Start practice","Commencer"),"btn2");pa2.href="practice.html#p="+pb;c7.appendChild(pa2);app.appendChild(c7)}
+  var w0=String(ag.w||"").replace(/\D/g,"");
+  if(w0){var qc=el("section",undefined,"card qa");qc.appendChild(el("h2",T("Talk to us","Parlez-nous")));qc.appendChild(el("p",T("Choose what you need. WhatsApp opens with your message ready, and you press send.","Choisissez ce dont vous avez besoin. WhatsApp s’ouvre avec votre message prêt, et vous envoyez.") ,"m"));
+    var who=D.n?String(D.n).slice(0,40):"";
+    function send(t){window.open("https://wa.me/"+w0+"?text="+encodeURIComponent(t+(who?"\n— "+who:"")),"_blank","noopener")}
+    qc.appendChild(el("h3",T("Ask a question","Poser une question")));var qt=el("textarea");qt.maxLength=400;qc.appendChild(qt);
+    var qb=el("button",T("Send my question","Envoyer ma question"));qb.type="button";qb.addEventListener("click",function(){if(!qt.value.trim()){alert(T("Please write your question first.","Écrivez d’abord votre question."));return}send(T("Question about my visa file: ","Question sur mon dossier de visa : ")+qt.value.trim())});qc.appendChild(qb);
+    qc.appendChild(el("hr"));qc.appendChild(el("h3",T("Ask us to call you","Demandez-nous de vous appeler")));
+    [[T("Morning","Matin"),T("in the morning","le matin")],[T("Afternoon","Après-midi"),T("in the afternoon","l’après-midi")],[T("Evening","Soir"),T("in the evening","le soir")]].forEach(function(x){var b=el("button",x[0]);b.type="button";b.addEventListener("click",function(){send(T("Please call me back ","Pouvez-vous me rappeler ")+x[1]+".")});qc.appendChild(b)});
+    if(D.a){qc.appendChild(el("hr"));qc.appendChild(el("h3",T("I need another appointment date","J’ai besoin d’une autre date de rendez-vous")));var di=el("input");di.type="date";qc.appendChild(di);
+      var db=el("button",T("Send my request","Envoyer ma demande"));db.type="button";db.addEventListener("click",function(){if(!di.value){alert(T("Please choose a date first.","Choisissez d’abord une date."));return}send(T("I would like to change my appointment of ","Je souhaite changer mon rendez-vous du ")+D.a+T(". My preferred new date: ",". Ma nouvelle date souhaitée : ")+di.value+".")});qc.appendChild(db)}
+    qc.appendChild(el("hr"));qc.appendChild(el("h3",T("Tell us how we did","Dites-nous comment nous avons fait")));
+    var fa2=el("a",T("Give feedback","Donner mon avis"),"btn2"),fp={v:1,lg:L,n:D.n||"",ag:{b:ag.b||"",w:ag.w||""}};fa2.href="feedback.html#p="+btoa(unescape(encodeURIComponent(JSON.stringify(fp)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");qc.appendChild(fa2);
+    qc.appendChild(el("hr"));qc.appendChild(el("h3",T("Know someone who needs help?","Vous connaissez quelqu’un qui a besoin d’aide ?")));
+    var rb=el("button",T("Recommend us to a friend","Nous recommander à un ami"));rb.type="button";rb.addEventListener("click",function(){var t=T("I used "+(ag.b||"this agency")+" for my visa and they helped me well. You can message them here: ","J’ai fait appel à "+(ag.b||"cette agence")+" pour mon visa et ils m’ont bien aidé. Vous pouvez leur écrire ici : ")+"https://wa.me/"+w0;if(navigator.share){navigator.share({text:t}).catch(function(){})}else{window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank","noopener")}});qc.appendChild(rb);
+    app.appendChild(qc)}
   var bt=el("div",undefined,"btns"),w=String(ag.w||"").replace(/\D/g,"");
   if(w){var a=el("a",T("Message us on WhatsApp","Écrivez-nous sur WhatsApp"));a.href="https://wa.me/"+w;a.rel="noopener";bt.appendChild(a)}
   if(/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(ag.e||"")){var e=el("a",T("Send an email","Envoyer un e-mail"));e.href="mailto:"+ag.e;bt.appendChild(e)}

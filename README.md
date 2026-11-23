@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-70`; it is now `visaguide-69`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-75`; it is now `visaguide-74`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -300,3 +300,8 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 - **Keeping in touch**: `c.pn`, `c.pc` (`pcClean`), `c.ra`; `updDue` (7 days), `pastDone/pastReach/pastDue`, `crmPast`; messages `c:update`, `c:again`, `c:visaend`.
 - **Common questions**: `faq.html` (9 general answers + up to 5 custom from `vg-faq`, payload `#p=`), `crmFaq`, `faqLink`; message `c:welcome`, `c:faq`; the portal link carries `fq`.
 - **Refusal support and weekly summary**: message `c:refused` (uses `rfGet`/`RFR`), My day item for 7 days after a refusal; `weekRows/weekText/crmWeek` (mode `week`).
+- **Hand-over, testimonials, group message**: `c.ho` (`hoClean`), `c.ts` (`tsClean`), `hoUI/hoText`, `crmTst`, `crmTagMsg` (modes `tst`, `tmsg`, message `c:grpmsg` uses `CV.gmsg`).
+- **Polls and news page**: `poll.html`, `news.html` (payload `#p=`), `vg-poll`, `vg-post`, `crmPoll`, `crmPost`, `pollLink`, `postLink`; messages `c:poll`, `c:news`; both in the backup (`poll`, `post`).
+- **Share as picture**: `shareCard(title,body,foot,name)` draws a 1080px PNG and hands it to `saveFile`; used by News posts and Testimonials.
+- **Greetings, congratulations, thank referrers**: `HOL` list, "All clients" in the group message page, `congratsCard`, `referredBy`, message `c:thanksref` and a My day item.
+- **Talk to us** card in `status.html` (question, call back, appointment change, feedback, recommend). Needs `ag.w`.
