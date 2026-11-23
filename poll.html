@@ -29,11 +29,13 @@ button.sec{margin-top:6px;padding:9px 14px;font-size:.9rem}
 <header><b id="biz">Your feedback</b><button id="lang" type="button">Français</button></header>
 <div id="app"></div>
 </main>
+<script src="live.js"></script>
 <script>
 (function(){
 var D=null,L="en";
 try{var h=location.hash.replace(/^#p=/,"").replace(/-/g,"+").replace(/_/g,"/");while(h.length%4)h+="=";D=JSON.parse(decodeURIComponent(escape(atob(h))));if(!D||D.v!==1||typeof D!=="object")D=null}catch(e){D=null}
 if(D&&D.lg==="fr")L="fr";
+var LVC=D?LV.cfg(D):null,RES=null,PID=D?String(D.id||"").toLowerCase().replace(/[^a-z0-9]/g,"").slice(0,20):"";
 function el(t,x,c){var e=document.createElement(t);if(x!==undefined)e.textContent=x;if(c)e.className=c;return e}
 function T(a,b){return L==="fr"?b:a}
 function wa(t){var ag=(D&&D.ag)||{},w=String(ag.w||"").replace(/\D/g,"");if(!w){alert(T("No agent number on this page.","Aucun numéro d’agent sur cette page."));return}window.open("https://wa.me/"+w+"?text="+encodeURIComponent(t),"_blank","noopener")}
@@ -50,12 +52,17 @@ function render(){
   var s=el("button",done!==null?T("Send my answer again","Renvoyer ma réponse"):T("Send my answer on WhatsApp","Envoyer ma réponse sur WhatsApp"),"pri");s.type="button";
   s.addEventListener("click",function(){var i=SEL>=0?SEL:(done!==null?+done:-1);if(i<0){alert(T("Please choose an answer first.","Choisissez d’abord une réponse."));return}
     try{localStorage.setItem(KEY,String(i))}catch(e){}
-    wa(T("Poll: ","Sondage : ")+String(D.q).slice(0,140)+"\n"+T("My answer: ","Ma réponse : ")+String(D.o[i]).slice(0,60)+"\n(#"+String(D.id||"").slice(0,20)+")");render()});
+    var msg=T("Poll: ","Sondage : ")+String(D.q).slice(0,140)+"\n"+T("My answer: ","Ma réponse : ")+String(D.o[i]).slice(0,60)+"\n(#"+String(D.id||"").slice(0,20)+")";
+    if(LVC&&PID){LV.add(LVC,"votes",PID+"_"+LV.dev(),{p:PID,o:i,t:Date.now()}).then(function(ok){if(!ok)wa(msg);render();LV.get(LVC,"polls").then(function(a){if(Array.isArray(a)){RES=a.filter(function(x){return x.id===D.id})[0]||null;render()}})});return}
+    wa(msg);render()});
   c.appendChild(s);app.appendChild(c);
   if(done!==null)app.appendChild(el("p",T("Thank you for answering.","Merci d’avoir répondu."),"m"));
+  if(done!==null&&RES&&Array.isArray(RES.o)){var tot=RES.o.reduce(function(a,x){return a+(+x.n||0)},0),rc=el("section",undefined,"card");rc.appendChild(el("p",T("Results so far","Résultats pour l’instant")));
+    RES.o.slice(0,5).forEach(function(x){var w=tot?Math.round(100*(+x.n||0)/tot):0;rc.appendChild(el("p",String(x.t).slice(0,60)+" · "+w+"%","m"));var b=el("div");b.style.cssText="height:8px;border-radius:6px;background:var(--stamp);width:"+w+"%;min-width:2px;margin:0 0 6px";rc.appendChild(b)});app.appendChild(rc)}
 }
 document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";render()});
 render();
+if(LVC)LV.get(LVC,"polls").then(function(a){if(Array.isArray(a)){RES=a.filter(function(x){return x.id===D.id})[0]||null;render()}});
 })();
 </script>
 </body>

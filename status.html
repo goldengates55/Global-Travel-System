@@ -44,6 +44,7 @@ ul{margin:6px 0 0;padding-left:20px}
 <div id="app"></div>
 <p class="m" id="foot"></p>
 </main>
+<script src="live.js"></script>
 <script>
 (function(){
 var ST=[["new","New","Nouveau"],["docs","Collecting documents","Collecte des documents"],["ready","Ready to submit","Prêt à déposer"],["appt","Appointment booked","Rendez-vous pris"],["sent","Submitted","Déposé"],["decision","Decision received","Décision reçue"],["passport","Passport ready","Passeport prêt"]];
@@ -118,13 +119,17 @@ function render(){
   var w0=String(ag.w||"").replace(/\D/g,"");
   if(w0){var qc=el("section",undefined,"card qa");qc.appendChild(el("h2",T("Talk to us","Parlez-nous")));qc.appendChild(el("p",T("Choose what you need. WhatsApp opens with your message ready, and you press send.","Choisissez ce dont vous avez besoin. WhatsApp s’ouvre avec votre message prêt, et vous envoyez.") ,"m"));
     var who=D.n?String(D.n).slice(0,40):"";
-    function send(t){window.open("https://wa.me/"+w0+"?text="+encodeURIComponent(t+(who?"\n— "+who:"")),"_blank","noopener")}
+    var LVC=LV.cfg(D),ph=null;
+    function send(t,k){if(LVC){var v=ph.value.trim();if(!v){alert(T("Please type your phone number so we can reply.","Saisissez votre numéro pour que nous puissions répondre."));return}
+      LV.add(LVC,"requests","r"+LV.rnd(14),{k:k||"q",n:who,ph:v.slice(0,30),m:t.slice(0,400),t:Date.now(),s:"new"}).then(function(ok){if(ok){alert(T("Sent. Your agent will reply to you.","Envoyé. Votre agent vous répondra."))}else{window.open("https://wa.me/"+w0+"?text="+encodeURIComponent(t+(who?"\n— "+who:"")),"_blank","noopener")}});return}
+      window.open("https://wa.me/"+w0+"?text="+encodeURIComponent(t+(who?"\n— "+who:"")),"_blank","noopener")}
+    if(LVC){ph=el("input");ph.type="text";ph.maxLength=30;ph.placeholder=T("Your phone number","Votre numéro de téléphone");ph.style.cssText="width:100%;margin:6px 0;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit";qc.appendChild(ph);qc.appendChild(el("p",T("Your message and number are sent to your agent and kept until they answer.","Votre message et votre numéro sont envoyés à votre agent et conservés jusqu’à sa réponse."),"m"))}
     qc.appendChild(el("h3",T("Ask a question","Poser une question")));var qt=el("textarea");qt.maxLength=400;qc.appendChild(qt);
-    var qb=el("button",T("Send my question","Envoyer ma question"));qb.type="button";qb.addEventListener("click",function(){if(!qt.value.trim()){alert(T("Please write your question first.","Écrivez d’abord votre question."));return}send(T("Question about my visa file: ","Question sur mon dossier de visa : ")+qt.value.trim())});qc.appendChild(qb);
+    var qb=el("button",T("Send my question","Envoyer ma question"));qb.type="button";qb.addEventListener("click",function(){if(!qt.value.trim()){alert(T("Please write your question first.","Écrivez d’abord votre question."));return}send(T("Question about my visa file: ","Question sur mon dossier de visa : ")+qt.value.trim(),"q")});qc.appendChild(qb);
     qc.appendChild(el("hr"));qc.appendChild(el("h3",T("Ask us to call you","Demandez-nous de vous appeler")));
-    [[T("Morning","Matin"),T("in the morning","le matin")],[T("Afternoon","Après-midi"),T("in the afternoon","l’après-midi")],[T("Evening","Soir"),T("in the evening","le soir")]].forEach(function(x){var b=el("button",x[0]);b.type="button";b.addEventListener("click",function(){send(T("Please call me back ","Pouvez-vous me rappeler ")+x[1]+".")});qc.appendChild(b)});
+    [[T("Morning","Matin"),T("in the morning","le matin")],[T("Afternoon","Après-midi"),T("in the afternoon","l’après-midi")],[T("Evening","Soir"),T("in the evening","le soir")]].forEach(function(x){var b=el("button",x[0]);b.type="button";b.addEventListener("click",function(){send(T("Please call me back ","Pouvez-vous me rappeler ")+x[1]+".","c")});qc.appendChild(b)});
     if(D.a){qc.appendChild(el("hr"));qc.appendChild(el("h3",T("I need another appointment date","J’ai besoin d’une autre date de rendez-vous")));var di=el("input");di.type="date";qc.appendChild(di);
-      var db=el("button",T("Send my request","Envoyer ma demande"));db.type="button";db.addEventListener("click",function(){if(!di.value){alert(T("Please choose a date first.","Choisissez d’abord une date."));return}send(T("I would like to change my appointment of ","Je souhaite changer mon rendez-vous du ")+D.a+T(". My preferred new date: ",". Ma nouvelle date souhaitée : ")+di.value+".")});qc.appendChild(db)}
+      var db=el("button",T("Send my request","Envoyer ma demande"));db.type="button";db.addEventListener("click",function(){if(!di.value){alert(T("Please choose a date first.","Choisissez d’abord une date."));return}send(T("I would like to change my appointment of ","Je souhaite changer mon rendez-vous du ")+D.a+T(". My preferred new date: ",". Ma nouvelle date souhaitée : ")+di.value+".","a")});qc.appendChild(db)}
     qc.appendChild(el("hr"));qc.appendChild(el("h3",T("Tell us how we did","Dites-nous comment nous avons fait")));
     var fa2=el("a",T("Give feedback","Donner mon avis"),"btn2"),fp={v:1,lg:L,n:D.n||"",ag:{b:ag.b||"",w:ag.w||""}};fa2.href="feedback.html#p="+btoa(unescape(encodeURIComponent(JSON.stringify(fp)))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");qc.appendChild(fa2);
     qc.appendChild(el("hr"));qc.appendChild(el("h3",T("Know someone who needs help?","Vous connaissez quelqu’un qui a besoin d’aide ?")));

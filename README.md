@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-75`; it is now `visaguide-74`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-76`; it is now `visaguide-75`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -305,3 +305,10 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 - **Share as picture**: `shareCard(title,body,foot,name)` draws a 1080px PNG and hands it to `saveFile`; used by News posts and Testimonials.
 - **Greetings, congratulations, thank referrers**: `HOL` list, "All clients" in the group message page, `congratsCard`, `referredBy`, message `c:thanksref` and a My day item.
 - **Talk to us** card in `status.html` (question, call back, appointment change, feedback, recommend). Needs `ag.w`.
+- **Live page (Firebase)**: `live.js` (client pages, Firestore REST, create-only), `liveCfg/lvCall/lvList/lvPublish/liveSync/crmLive` and `LV_RULES` (the full rules, also shown in the app). Collections under `pages/{uid}`: `pub/polls`, `pub/posts` (public read, agent write), `votes`, `likes`, `comments`, `requests` (clients create only; agent reads). Links carry `lv:{k,p,u}` only when `vg-live` is on. Needs the cloud sign-in (`vg-cloud`).
+
+### Live page: Firebase setup
+1. Use the same Firebase project as Cloud backup (Authentication Email/Password and Firestore on).
+2. Replace the Firestore rules with the rules in Studio > Live page > Copy the rules (they include the backup rules) and Publish.
+3. Sign in under Studio > Cloud backup, then open Studio > Live page and switch it on. Send clients new links.
+4. Set a billing budget alert in Google Cloud. Anyone with a link can add small records; the rules limit size and fields but cannot rate-limit.

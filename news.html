@@ -29,11 +29,14 @@ button.sec{margin-top:6px;padding:9px 14px;font-size:.9rem}
 <header><b id="biz">Your feedback</b><button id="lang" type="button">Français</button></header>
 <div id="app"></div>
 </main>
+<script src="live.js"></script>
 <script>
 (function(){
 var D=null,L="en";
 try{var h=location.hash.replace(/^#p=/,"").replace(/-/g,"+").replace(/_/g,"/");while(h.length%4)h+="=";D=JSON.parse(decodeURIComponent(escape(atob(h))));if(!D||D.v!==1||typeof D!=="object")D=null}catch(e){D=null}
 if(D&&D.lg==="fr")L="fr";
+var LVC=D?LV.cfg(D):null,LIVE=null;
+function pid(x){return String(x||"").toLowerCase().replace(/[^a-z0-9]/g,"").slice(0,20)}
 function el(t,x,c){var e=document.createElement(t);if(x!==undefined)e.textContent=x;if(c)e.className=c;return e}
 function T(a,b){return L==="fr"?b:a}
 function wa(t){var ag=(D&&D.ag)||{},w=String(ag.w||"").replace(/\D/g,"");if(!w){alert(T("No agent number on this page.","Aucun numéro d’agent sur cette page."));return}window.open("https://wa.me/"+w+"?text="+encodeURIComponent(t),"_blank","noopener")}
@@ -44,12 +47,23 @@ function render(){
   var ag=D.ag||{};document.getElementById("biz").textContent=String(ag.b||"Global Visa").slice(0,80);document.title=T("News","Actualités");
   app.appendChild(el("h1",T("News from us","Nos actualités")));
   if(!D.x.length)app.appendChild(el("p",T("Nothing new right now. Message us any time.","Rien de nouveau pour le moment. Écrivez-nous quand vous voulez."),"m"));
-  D.x.slice(0,5).forEach(function(r){if(!Array.isArray(r))return;var c=el("section",undefined,"card post");c.appendChild(el("h2",String(r[1]||"").slice(0,80)));c.appendChild(el("p",String(r[0]||"").slice(0,10),"d"));c.appendChild(el("p",String(r[2]||"").slice(0,320)));
-    var b=el("button",T("Ask about this on WhatsApp","Poser une question sur WhatsApp"),"sec");b.type="button";b.addEventListener("click",function(){wa(T("Hello, I have a question about your news: ","Bonjour, j’ai une question sur votre actualité : ")+String(r[1]||"").slice(0,80))});c.appendChild(b);app.appendChild(c)});
+  var items=LIVE&&LVC?LIVE.map(function(o){return [o.d,o.t,o.b,o]}):D.x;
+  items.slice(0,LIVE?10:5).forEach(function(r){if(!Array.isArray(r))return;var c=el("section",undefined,"card post");c.appendChild(el("h2",String(r[1]||"").slice(0,80)));c.appendChild(el("p",String(r[0]||"").slice(0,10),"d"));c.appendChild(el("p",String(r[2]||"").slice(0,320)));
+    var b=el("button",T("Ask about this on WhatsApp","Poser une question sur WhatsApp"),"sec");b.type="button";b.addEventListener("click",function(){wa(T("Hello, I have a question about your news: ","Bonjour, j’ai une question sur votre actualité : ")+String(r[1]||"").slice(0,80))});c.appendChild(b);
+    var o=r[3];if(LVC&&o&&o.id){var id=pid(o.id),lk=false;try{lk=localStorage.getItem("vgl-"+id)==="1"}catch(e){}
+      var hb=el("button",(lk?"♥ ":"♡ ")+((+o.l||0)+(lk?1:0)),"sec");hb.type="button";hb.setAttribute("aria-label",T("Like","J’aime"));hb.addEventListener("click",function(){var nl=!lk;try{localStorage.setItem("vgl-"+id,nl?"1":"0")}catch(e){}if(nl)LV.add(LVC,"likes",id+"_"+LV.dev(),{p:id,t:Date.now()});else LV.del(LVC,"likes",id+"_"+LV.dev());o.l=(+o.l||0)+(nl?0:-1);lk=nl;render()});c.appendChild(hb);
+      (Array.isArray(o.c)?o.c:[]).slice(0,20).forEach(function(k){if(Array.isArray(k)){var q=el("p",undefined,"m");q.textContent=String(k[0]||"").slice(0,30)+": "+String(k[1]||"").slice(0,300);c.appendChild(q)}});
+      var nm=el("input");nm.type="text";nm.maxLength=30;nm.placeholder=T("Your first name","Votre prénom");nm.style.cssText="width:100%;margin:6px 0;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit";
+      var tx=el("textarea");tx.maxLength=300;tx.placeholder=T("Write a comment","Écrire un commentaire");var cs=el("button",T("Send comment","Envoyer"),"sec");cs.type="button";var nt=el("p",T("Comments are public after your agent approves them. Write only your first name and no personal details.","Les commentaires sont publics après approbation par votre agent. N’écrivez que votre prénom et aucun détail personnel."),"m");
+      cs.addEventListener("click",function(){if(!tx.value.trim()||!nm.value.trim()){alert(T("Please write your first name and a comment.","Écrivez votre prénom et un commentaire."));return}
+        LV.add(LVC,"comments","c"+LV.rnd(14),{p:id,n:nm.value.trim().slice(0,30),m:tx.value.trim().slice(0,300),t:Date.now(),s:"new"}).then(function(ok){alert(ok?T("Thank you. Your comment will appear after approval.","Merci. Votre commentaire apparaîtra après approbation."):T("Could not send. Please try again.","Envoi impossible. Réessayez."));if(ok){tx.value=""}})});
+      c.appendChild(nm);c.appendChild(tx);c.appendChild(cs);c.appendChild(nt)}
+    app.appendChild(c)});
   var g=el("button",T("Message us on WhatsApp","Écrivez-nous sur WhatsApp"),"pri");g.type="button";g.addEventListener("click",function(){wa(T("Hello, I would like some help.","Bonjour, j’aimerais de l’aide."))});app.appendChild(g);
 }
 document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";render()});
 render();
+if(LVC)LV.get(LVC,"posts").then(function(a){if(Array.isArray(a)){LIVE=a.filter(function(o){return o&&typeof o==="object"});render()}});
 })();
 </script>
 </body>
