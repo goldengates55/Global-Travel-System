@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-76`; it is now `visaguide-75`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-77`; it is now `visaguide-76`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -312,3 +312,4 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 2. Replace the Firestore rules with the rules in Studio > Live page > Copy the rules (they include the backup rules) and Publish.
 3. Sign in under Studio > Cloud backup, then open Studio > Live page and switch it on. Send clients new links.
 4. Set a billing budget alert in Google Cloud. Anyone with a link can add small records; the rules limit size and fields but cannot rate-limit.
+- **Shared cloud is active**: `CLOUD_SHARED` holds the project `global-visa-software` (Web API key and Project ID, both public by design). Tests that need the own-project form set `CV.own` or clear `CLOUD_SHARED`.

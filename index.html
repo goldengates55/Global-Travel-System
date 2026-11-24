@@ -6878,7 +6878,7 @@ function crmRecon(box){
 }
 
 /* ---------- cloud backup (your own Firebase project, encrypted on the phone before it is sent) ---------- */
-var CLOUD_SHARED={k:"",p:""};
+var CLOUD_SHARED={k:"AIzaSyB8DMFiWc8fIiNb2JdE9c4-Gq2xwiyzMUk",p:"global-visa-software"};
 function cloudShared(){return !!(CLOUD_SHARED.k&&CLOUD_SHARED.p)}
 function cloudSignUp(key,proj,email,pw){
   return cloudFetch((cloudHost()||"https://identitytoolkit.googleapis.com")+"/v1/accounts:signUp?key="+encodeURIComponent(key),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({email:email,password:pw,returnSecureToken:true})}).then(function(j){
