@@ -135,6 +135,18 @@ function render(){
     qc.appendChild(el("hr"));qc.appendChild(el("h3",T("Know someone who needs help?","Vous connaissez quelqu’un qui a besoin d’aide ?")));
     var rb=el("button",T("Recommend us to a friend","Nous recommander à un ami"));rb.type="button";rb.addEventListener("click",function(){var t=T("I used "+(ag.b||"this agency")+" for my visa and they helped me well. You can message them here: ","J’ai fait appel à "+(ag.b||"cette agence")+" pour mon visa et ils m’ont bien aidé. Vous pouvez leur écrire ici : ")+"https://wa.me/"+w0;if(navigator.share){navigator.share({text:t}).catch(function(){})}else{window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank","noopener")}});qc.appendChild(rb);
     app.appendChild(qc)}
+  var LV0=LV.cfg(D),TH=typeof D.th==="string"&&/^[a-z0-9]{16,40}$/.test(D.th)?D.th:"";
+  if(LV0&&TH){var cc=el("section",undefined,"card qa");cc.appendChild(el("h2",T("Messages with your agent","Messages avec votre agent")));
+    var lst=el("div");cc.appendChild(lst);
+    var ci=el("textarea");ci.maxLength=500;ci.placeholder=T("Write a message","Écrivez un message");cc.appendChild(ci);
+    var cs=el("button",T("Send","Envoyer"));cs.type="button";cc.appendChild(cs);
+    cc.appendChild(el("p",T("Your agent may take a while to answer. Open this page again later to see the reply. Please do not send passwords or card numbers.","Votre agent peut mettre du temps à répondre. Rouvrez cette page plus tard pour voir la réponse. N’envoyez ni mot de passe ni numéro de carte."),"m"));
+    function load(){LV.list(LV0,"threads/"+TH+"/msgs").then(function(a){a.sort(function(x,y){return (x.f.t||0)-(y.f.t||0)});lst.innerHTML="";
+      if(!a.length)lst.appendChild(el("p",T("No messages yet.","Aucun message pour le moment."),"m"));
+      a.slice(-40).forEach(function(m){var p2=el("p");p2.style.cssText="margin:8px 0;padding:8px 12px;border-radius:12px;background:"+(m.f.f==="a"?"var(--paper)":"var(--stamp)")+";color:"+(m.f.f==="a"?"var(--ink)":"var(--paper)")+";white-space:pre-wrap";p2.textContent=(m.f.f==="a"?T("Agent: ","Agent : "):T("You: ","Vous : "))+String(m.f.m||"").slice(0,500);lst.appendChild(p2)})})}
+    cs.addEventListener("click",function(){var v=ci.value.trim();if(!v)return;cs.disabled=true;var now=Date.now();
+      LV.addAt(LV0,"threads/"+TH+"/msgs","m"+LV.rnd(14),{f:"c",m:v.slice(0,500),t:now,n:String(D.n||"").slice(0,40)}).then(function(ok){cs.disabled=false;if(ok){LV.add(LV0,"inbox",TH+"_"+now.toString(36),{th:TH,t:now});ci.value="";load()}else alert(T("Could not send. Please try again.","Envoi impossible. Réessayez."))})});
+    load();setInterval(function(){if(!document.hidden)load()},15000);app.appendChild(cc)}
   var bt=el("div",undefined,"btns"),w=String(ag.w||"").replace(/\D/g,"");
   if(w){var a=el("a",T("Message us on WhatsApp","Écrivez-nous sur WhatsApp"));a.href="https://wa.me/"+w;a.rel="noopener";bt.appendChild(a)}
   if(/^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/.test(ag.e||"")){var e=el("a",T("Send an email","Envoyer un e-mail"));e.href="mailto:"+ag.e;bt.appendChild(e)}

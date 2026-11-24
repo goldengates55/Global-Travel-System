@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-77`; it is now `visaguide-76`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-79`; it is now `visaguide-78`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -313,3 +313,5 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 3. Sign in under Studio > Cloud backup, then open Studio > Live page and switch it on. Send clients new links.
 4. Set a billing budget alert in Google Cloud. Anyone with a link can add small records; the rules limit size and fields but cannot rate-limit.
 - **Shared cloud is active**: `CLOUD_SHARED` holds the project `global-visa-software` (Web API key and Project ID, both public by design). Tests that need the own-project form set `CV.own` or clear `CLOUD_SHARED`.
+- The create-account notice now says the Live page data is stored readable. `cloud-terms-draft.md` (delivered separately) has a section for it.
+- **Chat and team notes**: `c.th` (thread id, `thEnsure`), `threads/{th}/msgs` (capability by the unguessable id; client can add, agent can add as `a`), `inbox` (unread pings), `team` (agent account only); `crmChat`, `crmMsgs`, `crmTeam`, `lvDelThread`, message `c:chat`. Rules must be re-published from Studio > Live page. Deleting a client or account removes threads.
