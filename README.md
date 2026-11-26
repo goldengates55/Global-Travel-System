@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-87`; it is now `visaguide-86`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-92`; it is now `visaguide-91`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -323,3 +323,9 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 - **My message templates**: `vg-tpl` (`{id,n,en,fr}`, max 20), `crmTpl` (Studio), `tplFill/tplBody`, message key `c:t:<id>` handled in `cmsg`, added to the client Send a message list. In the backup as `tpl`. Local only; no cloud.
 - **Automatic deletion**: `vg-ret` (`on`, `d` days 30/60/90/180, `at`, `n`), off by default. `retRun(force)` deletes chat msgs and files (per client thread), `enquiries`, `requests`, `inbox` older than the cutoff and past `bookings`; runs 9 s after load (max every 12 h) and from Studio > Automatic deletion. No server: only runs when the app is opened. Does not touch local clients, backups, polls, news or comments.
 - **Staff onboarding**: `vg-onb` (`steps` optional override of `ONBD`, `people[{id,n,start,done}]`), `crmOnb` (Studio), in the backup as `onb`. Local only; it does not grant access.
+- **Away message**: `vg-away` (`d` days 0-6, `s`/`e` times, `en`/`fr`), `crmAway`, message key `c:away` (`awText`). Local; sent by the agent by hand.
+- **Satisfaction over time**: `vg-satd` (rating date per client id, set in `satUI` via `satDate`), `crmSat`/`satMonths`. Older ratings have no date.
+- **Public reviews page**: `reviews.html` reads `pub/reviews` (public read, owner write; `doc == 'reviews'` in rules). `revUI` in Testimonials publishes first name, destination and the words of clients with `ts.ok` and no withdrawn consent; manual re-publish; wiped with the Live page data.
+- **Privacy check**: `privItems` (local settings: `LK`, Live page, `retCfg`, consent records, cloud sign-in) and `crmPriv` with an on-demand online count (`lvFileMeta`, `lvMsgs`, `lvList`). Read-only.
+- **Day close-out** (`closeData`, from `tlEvents`, follow-ups, appointments), **Contacts book** (`vg-cbook`, max 150, in backup as `cbook`), **Monthly review** (`mrevData`; decisions by `c.resd`, closures by `hist`, ratings by `satMonths`). All local.
+- **Clients page**: `crmActions` renders favourite buttons (`vg-fav`, max 8) and collapsible `<details>` groups (open state in `vg-grpo`, `"all"` opens every group). **Check a backup file** (`crmBkChk`, read-only), **Waiting for the client** (`crmWait`). The earlier duplicate Day close-out was removed because it replaced the existing `crmClose` (Closing the day).
