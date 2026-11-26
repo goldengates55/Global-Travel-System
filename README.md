@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-79`; it is now `visaguide-78`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-87`; it is now `visaguide-86`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -315,3 +315,11 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 - **Shared cloud is active**: `CLOUD_SHARED` holds the project `global-visa-software` (Web API key and Project ID, both public by design). Tests that need the own-project form set `CV.own` or clear `CLOUD_SHARED`.
 - The create-account notice now says the Live page data is stored readable. `cloud-terms-draft.md` (delivered separately) has a section for it.
 - **Chat and team notes**: `c.th` (thread id, `thEnsure`), `threads/{th}/msgs` (capability by the unguessable id; client can add, agent can add as `a`), `inbox` (unread pings), `team` (agent account only); `crmChat`, `crmMsgs`, `crmTeam`, `lvDelThread`, message `c:chat`. Rules must be re-published from Studio > Live page. Deleting a client or account removes threads.
+- **Staff accounts**: `pages/{owner}/staff/{staffUid}` (owner adds), `roster/{th}` (first name and assignee, owner publishes), `staffOf()` (`vg-staffof`), `lvCall(...,uid)` addresses the agency from a staff phone; `crmStaffAcc`, `crmSInbox`, `crmSChat`, `rosterPut`; client field `as`. Rules use `isOwner/isStaff` and `exists()`; re-publish them from Studio > Live page. Staff never get the client list, payments or documents.
+- **Self-updating link**: `statusObj(c)` is the payload; `statusPublish()` writes `pub/s<th>` (hash in `vg-lvh` to skip unchanged), called from `statusSoon()` (4 s after `csave`) and at load. `status.html` fetches it when `D.th` and `D.lv` exist and replaces its snapshot. Consent withdrawal, client delete and account delete remove the doc. Rules updated (`pub/s...`).
+- **Online enquiry form**: `intakeLink()` adds `lv=` (base64url `{k,p,u}`) when the Live page is on; `intake.html` loads `live.js` and writes one create-only doc to `pages/{uid}/enquiries` (falls back to WhatsApp when offline or without `lv`). `liveSync` lists `enquiries`; `crmLive` shows them with Add as client (`enqDraft`) and Done. Rules updated; re-publish from Studio > Live page.
+- **Self-booking**: `vg-slots` (free times, "YYYY-MM-DD HH:MM"), `crmBook`, `slotsPublish` writes the free slot ids (booked ones removed) to `pub/slots`. `book.html` reads them and creates `bookings/{slotId}` (create-only, so the second person gets 409/403 and is told to pick another time). Rules updated; re-publish from Studio > Live page.
+- **Client documents**: `status.html` (chat card) shrinks a photo to a JPEG data URL (< 600k chars) and creates `threads/{th}/files/{id}` (`k,n,d,t`; create-only for clients, read/delete by the owner only, not staff). `crmFiles` in the client chat lists metadata with a field mask, loads one photo on demand, saves it to the phone and deletes it. `lvDelThread` also removes files. No Firebase Storage is used (it needs a paid plan). Rules updated; re-publish from Studio > Live page.
+- **My message templates**: `vg-tpl` (`{id,n,en,fr}`, max 20), `crmTpl` (Studio), `tplFill/tplBody`, message key `c:t:<id>` handled in `cmsg`, added to the client Send a message list. In the backup as `tpl`. Local only; no cloud.
+- **Automatic deletion**: `vg-ret` (`on`, `d` days 30/60/90/180, `at`, `n`), off by default. `retRun(force)` deletes chat msgs and files (per client thread), `enquiries`, `requests`, `inbox` older than the cutoff and past `bookings`; runs 9 s after load (max every 12 h) and from Studio > Automatic deletion. No server: only runs when the app is opened. Does not touch local clients, backups, polls, news or comments.
+- **Staff onboarding**: `vg-onb` (`steps` optional override of `ONBD`, `people[{id,n,start,done}]`), `crmOnb` (Studio), in the backup as `onb`. Local only; it does not grant access.

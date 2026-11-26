@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#4a1388">
+<title>Book a time</title>
+<link rel="icon" href="icon-192.png">
+<style>
+:root{--paper:#ece3fa;--ink:#10042a;--mute:#3f3260;--line:#9d88cc;--stamp:#4a1388;--card:#fff;--shadow:0 1px 2px rgba(16,4,42,.06),0 8px 24px -10px rgba(16,4,42,.18)}
+@media (prefers-color-scheme:dark){:root{--paper:#150336;--ink:#ffffff;--mute:#d6c9f0;--line:#7a55c2;--stamp:#ffd21e;--card:#2e0f68;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:560px;margin:0 auto;padding:18px 16px 48px}header{display:flex;align-items:center;gap:10px;margin-bottom:16px}header b{flex:1;font-size:1.15rem}
+button{font:600 1rem system-ui,sans-serif;border-radius:14px;padding:13px 16px;border:1px solid var(--stamp);background:var(--card);color:var(--stamp);cursor:pointer}
+button.pri{background:var(--stamp);color:var(--paper);width:100%;margin-top:12px}#lang{border-radius:999px;padding:8px 14px;font-size:.9rem;border-color:var(--line);color:var(--ink)}
+h1{font-size:1.5rem;line-height:1.2;margin:0 0 8px}.m{color:var(--mute);font-size:.92rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.rate{display:flex;gap:8px;margin:12px 0}.rate button{flex:1;padding:14px 0;font-size:1.15rem}.rate button.on{background:var(--stamp);color:var(--paper)}
+textarea{width:100%;min-height:76px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;margin:6px 0 12px}
+label.ck{display:flex;gap:10px;align-items:flex-start}label.ck input{width:20px;height:20px;margin-top:3px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:14px 16px;font-size:1.02rem}.opt.on{background:var(--stamp);color:var(--paper)}
+.post{margin:0 0 12px}.post h2{font-size:1.1rem;margin:0 0 4px}.post .d{color:var(--mute);font-size:.82rem;margin:0 0 6px}.post p{margin:0 0 10px;white-space:pre-wrap}
+button.sec{margin-top:6px;padding:9px 14px;font-size:.9rem}
+.day,.tm{display:inline-block;margin:4px 6px 4px 0;padding:10px 14px;font-size:.98rem}.on{background:var(--stamp);color:var(--paper)}
+label.f{display:grid;gap:6px;font-weight:600;margin:10px 0}input.t{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px}
+.err{color:#c4421f;font-weight:600;min-height:1.2em}
+</style>
+</head>
+<body>
+<main>
+<header><b id="biz">Your feedback</b><button id="lang" type="button">Français</button></header>
+<div id="app"></div>
+</main>
+<script src="live.js"></script>
+<script>
+(function(){
+var D=null,L="en";
+try{var h=location.hash.replace(/^#b=/,"").replace(/-/g,"+").replace(/_/g,"/");while(h.length%4)h+="=";D=JSON.parse(decodeURIComponent(escape(atob(h))));if(!D||D.v!==1||typeof D!=="object")D=null}catch(e){D=null}
+if(D&&D.lg==="fr")L="fr";
+var LVC=D?LV.cfg(D):null,SL=null,DAY="",TM="",ERR="",MSG="",BUSY=false,MINE=null;
+try{MINE=JSON.parse(localStorage.getItem("vgbook")||"null")}catch(e){}
+function el(t,x,c){var e=document.createElement(t);if(x!==undefined)e.textContent=x;if(c)e.className=c;return e}
+function T(a,b){return L==="fr"?b:a}
+function wa(t){var ag=(D&&D.ag)||{},w=String(ag.w||"").replace(/\D/g,"");if(!w)return;window.open("https://wa.me/"+w+"?text="+encodeURIComponent(t),"_blank")}
+function parse(id){var m=/^(\d{4})(\d{2})(\d{2})-(\d{2})(\d{2})$/.exec(id);return m?{d:m[1]+"-"+m[2]+"-"+m[3],t:m[4]+":"+m[5]}:null}
+function dfmt(d){var a=d.split("-"),x=new Date(+a[0],a[1]-1,+a[2]);return x.toLocaleDateString(L==="fr"?"fr-FR":"en-GB",{weekday:"short",day:"numeric",month:"short"})}
+function render(){
+  var app=document.getElementById("app");app.innerHTML="";document.documentElement.lang=L;document.getElementById("lang").textContent=L==="fr"?"English":"Français";
+  if(!D||!LVC){app.appendChild(el("h1",T("This link is not valid","Ce lien n’est pas valide")));app.appendChild(el("p",T("Please ask your agent to send it again.","Demandez à votre agent de le renvoyer."),"m"));return}
+  var ag=D.ag||{};document.getElementById("biz").textContent=String(ag.b||"Global Visa").slice(0,80);document.title=T("Book a time","Réserver un créneau");
+  app.appendChild(el("h1",T("Book a time","Réserver un créneau")));
+  if(MINE&&MINE.s){var c0=el("section",undefined,"card");c0.appendChild(el("p",T("You booked: ","Vous avez réservé : ")+dfmt(MINE.s.d)+" "+MINE.s.t));c0.appendChild(el("p",T("Your agent will confirm with you.","Votre agent vous confirmera."),"m"));app.appendChild(c0);
+    var nb=el("button",T("Book another time","Réserver un autre créneau"),"sec");nb.type="button";nb.addEventListener("click",function(){MINE=null;try{localStorage.removeItem("vgbook")}catch(e){}render()});app.appendChild(nb);return}
+  if(SL===null){app.appendChild(el("p",T("Loading free times…","Chargement des heures libres…"),"m"));return}
+  var days={};SL.forEach(function(id){var p=parse(id);if(p){(days[p.d]=days[p.d]||[]).push(p.t)}});
+  var keys=Object.keys(days).sort();
+  if(!keys.length){app.appendChild(el("p",T("There are no free times right now. Please contact us.","Il n’y a pas d’heure libre pour le moment. Contactez-nous."),"m"));if(ag.w){var w0=el("button",T("Contact us on WhatsApp","Nous contacter sur WhatsApp"),"pri");w0.type="button";w0.addEventListener("click",function(){wa(T("Hello, I would like to book an appointment.","Bonjour, je voudrais prendre rendez-vous."))});app.appendChild(w0)}return}
+  var c=el("section",undefined,"card");
+  c.appendChild(el("p",T("Choose a day","Choisissez un jour"),"m"));
+  keys.forEach(function(d){var b=el("button",dfmt(d),"day"+(DAY===d?" on":""));b.type="button";b.addEventListener("click",function(){DAY=d;TM="";ERR="";render()});c.appendChild(b)});
+  if(DAY&&days[DAY]){c.appendChild(el("p",T("Choose a time","Choisissez une heure"),"m"));days[DAY].sort().forEach(function(t){var b=el("button",t,"tm"+(TM===t?" on":""));b.type="button";b.addEventListener("click",function(){TM=t;ERR="";render()});c.appendChild(b)})}
+  if(DAY&&TM){
+    var l1=el("label",undefined,"f");l1.appendChild(el("span",T("Your name","Votre nom")));var n=el("input",undefined,"t");n.type="text";n.maxLength=80;n.autocomplete="name";n.value=window.__n||"";l1.appendChild(n);c.appendChild(l1);
+    var l2=el("label",undefined,"f");l2.appendChild(el("span",T("Your WhatsApp number","Votre numéro WhatsApp")));var p=el("input",undefined,"t");p.type="tel";p.maxLength=30;p.autocomplete="tel";p.value=window.__p||"";l2.appendChild(p);c.appendChild(l2);
+    var l3=el("label",undefined,"f");l3.appendChild(el("span",T("Note (optional)","Note (facultatif)")));var nt=el("input",undefined,"t");nt.type="text";nt.maxLength=200;l3.appendChild(nt);c.appendChild(l3);
+    c.appendChild(el("p",T("Do not enter passport or card numbers. Your name and number are stored online for your agent.","N’indiquez ni passeport ni carte. Votre nom et votre numéro sont enregistrés en ligne pour votre agent."),"m"));
+    c.appendChild(el("div",ERR,"err")).setAttribute("role","alert");
+    var go=el("button",BUSY?T("Booking…","Réservation…"):T("Book this time","Réserver cette heure"),"pri");go.type="button";go.disabled=BUSY;
+    go.addEventListener("click",function(){
+      window.__n=n.value;window.__p=p.value;
+      if(!n.value.trim()){ERR=T("Please enter your name.","Veuillez entrer votre nom.");render();return}
+      if(p.value.replace(/\D/g,"").length<7){ERR=T("Please enter a valid WhatsApp number.","Veuillez entrer un numéro WhatsApp valide.");render();return}
+      BUSY=true;ERR="";var id=DAY.replace(/-/g,"")+"-"+TM.replace(":","");
+      LV.book(LVC,"bookings",id,{n:n.value.trim().slice(0,80),ph:p.value.trim().slice(0,30),nt:nt.value.trim().slice(0,200),at:Date.now()}).then(function(r){
+        BUSY=false;
+        if(r==="ok"){MINE={s:{d:DAY,t:TM}};try{localStorage.setItem("vgbook",JSON.stringify(MINE))}catch(e){}render();return}
+        if(r==="taken"){ERR=T("That time was just taken. Please choose another time.","Cette heure vient d’être prise. Choisissez une autre heure.");SL=SL.filter(function(x){return x!==id});TM=""}
+        else ERR=T("Could not book. Check your connection and try again, or contact us on WhatsApp.","Réservation impossible. Vérifiez votre connexion et réessayez, ou contactez-nous sur WhatsApp.");
+        render()});render()});
+    c.appendChild(go)}
+  app.appendChild(c);
+}
+document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";render()});
+render();
+if(LVC)LV.get(LVC,"slots").then(function(a){SL=Array.isArray(a)?a.filter(function(x){return typeof x==="string"}):[];render()});
+})();
+</script>
+</body>
+</html>

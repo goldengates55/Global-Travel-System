@@ -135,6 +135,7 @@ function render(){
     qc.appendChild(el("hr"));qc.appendChild(el("h3",T("Know someone who needs help?","Vous connaissez quelqu’un qui a besoin d’aide ?")));
     var rb=el("button",T("Recommend us to a friend","Nous recommander à un ami"));rb.type="button";rb.addEventListener("click",function(){var t=T("I used "+(ag.b||"this agency")+" for my visa and they helped me well. You can message them here: ","J’ai fait appel à "+(ag.b||"cette agence")+" pour mon visa et ils m’ont bien aidé. Vous pouvez leur écrire ici : ")+"https://wa.me/"+w0;if(navigator.share){navigator.share({text:t}).catch(function(){})}else{window.open("https://wa.me/?text="+encodeURIComponent(t),"_blank","noopener")}});qc.appendChild(rb);
     app.appendChild(qc)}
+  if(D.pu)app.appendChild(el("p",T("Last updated: ","Dernière mise à jour : ")+new Date(+D.pu).toLocaleString(L==="fr"?"fr-FR":"en-GB"),"m"));
   var LV0=LV.cfg(D),TH=typeof D.th==="string"&&/^[a-z0-9]{16,40}$/.test(D.th)?D.th:"";
   if(LV0&&TH){var cc=el("section",undefined,"card qa");cc.appendChild(el("h2",T("Messages with your agent","Messages avec votre agent")));
     var lst=el("div");cc.appendChild(lst);
@@ -143,9 +144,28 @@ function render(){
     cc.appendChild(el("p",T("Your agent may take a while to answer. Open this page again later to see the reply. Please do not send passwords or card numbers.","Votre agent peut mettre du temps à répondre. Rouvrez cette page plus tard pour voir la réponse. N’envoyez ni mot de passe ni numéro de carte."),"m"));
     function load(){LV.list(LV0,"threads/"+TH+"/msgs").then(function(a){a.sort(function(x,y){return (x.f.t||0)-(y.f.t||0)});lst.innerHTML="";
       if(!a.length)lst.appendChild(el("p",T("No messages yet.","Aucun message pour le moment."),"m"));
-      a.slice(-40).forEach(function(m){var p2=el("p");p2.style.cssText="margin:8px 0;padding:8px 12px;border-radius:12px;background:"+(m.f.f==="a"?"var(--paper)":"var(--stamp)")+";color:"+(m.f.f==="a"?"var(--ink)":"var(--paper)")+";white-space:pre-wrap";p2.textContent=(m.f.f==="a"?T("Agent: ","Agent : "):T("You: ","Vous : "))+String(m.f.m||"").slice(0,500);lst.appendChild(p2)})})}
+      a.slice(-40).forEach(function(m){var p2=el("p");p2.style.cssText="margin:8px 0;padding:8px 12px;border-radius:12px;background:"+(m.f.f==="a"?"var(--paper)":"var(--stamp)")+";color:"+(m.f.f==="a"?"var(--ink)":"var(--paper)")+";white-space:pre-wrap";p2.textContent=(m.f.f==="a"?T("Agent","Agent")+(m.f.w?" ("+String(m.f.w).slice(0,30)+")":"")+(L==="fr"?" : ":": "):T("You: ","Vous : "))+String(m.f.m||"").slice(0,500);lst.appendChild(p2)})})}
     cs.addEventListener("click",function(){var v=ci.value.trim();if(!v)return;cs.disabled=true;var now=Date.now();
       LV.addAt(LV0,"threads/"+TH+"/msgs","m"+LV.rnd(14),{f:"c",m:v.slice(0,500),t:now,n:String(D.n||"").slice(0,40)}).then(function(ok){cs.disabled=false;if(ok){LV.add(LV0,"inbox",TH+"_"+now.toString(36),{th:TH,t:now});ci.value="";load()}else alert(T("Could not send. Please try again.","Envoi impossible. Réessayez."))})});
+    (function(){
+      var dh=el("h2",T("Send a document","Envoyer un document"));dh.style.marginTop="18px";cc.appendChild(dh);
+      var DK=[["passport","Passport photo page","Page photo du passeport"],["photo","Passport-size photo","Photo d’identité"],["bank","Bank statement","Relevé bancaire"],["letter","Invitation or letter","Invitation ou lettre"],["other","Other document","Autre document"]];
+      var ds=el("select");ds.style.cssText="width:100%;padding:10px;margin:6px 0;border-radius:12px";DK.forEach(function(x){var o=el("option",L==="fr"?x[2]:x[1]);o.value=x[0];ds.appendChild(o)});cc.appendChild(ds);
+      var fi=el("input");fi.type="file";fi.accept="image/*";fi.style.cssText="width:100%;margin:6px 0";cc.appendChild(fi);
+      var db=el("button",T("Send this document","Envoyer ce document"));db.type="button";cc.appendChild(db);
+      var dm=el("p",undefined,"m");dm.setAttribute("role","status");cc.appendChild(dm);
+      cc.appendChild(el("p",T("Send only what your agent asked for. Photos only. Your photo is stored online until your agent saves it, then removed. Only your agent can see it.","Envoyez seulement ce que votre agent a demandé. Photos uniquement. Votre photo est conservée en ligne jusqu’à ce que votre agent l’enregistre, puis elle est retirée. Seul votre agent peut la voir."),"m"));
+      function shrink(file){return new Promise(function(res,rej){var u=URL.createObjectURL(file),im=new Image();im.onload=function(){URL.revokeObjectURL(u);var mx=1600,sc=Math.min(1,mx/Math.max(im.width,im.height)),out="";
+        for(var t=0;t<6;t++){var cv=document.createElement("canvas");cv.width=Math.max(1,Math.round(im.width*sc));cv.height=Math.max(1,Math.round(im.height*sc));var cx=cv.getContext("2d");cx.fillStyle="#fff";cx.fillRect(0,0,cv.width,cv.height);cx.drawImage(im,0,0,cv.width,cv.height);
+          for(var q=.72;q>=.3;q-=.14){out=cv.toDataURL("image/jpeg",q);if(out.length<600000){res(out);return}}sc*=.7}rej(new Error("big"))};im.onerror=function(){rej(new Error("img"))};im.src=u})}
+      db.addEventListener("click",function(){var f=fi.files&&fi.files[0];if(!f){dm.textContent=T("Choose a photo first.","Choisissez d’abord une photo.");return}
+        db.disabled=true;dm.textContent=T("Sending…","Envoi…");var now=Date.now();
+        shrink(f).then(function(u){return LV.addAt(LV0,"threads/"+TH+"/files","f"+LV.rnd(14),{k:ds.value,n:String(f.name||"").slice(0,40),d:u,t:now})}).then(function(ok){
+          db.disabled=false;if(!ok){dm.textContent=T("Could not send. Please try again.","Envoi impossible. Réessayez.");return}
+          var kl=DK.filter(function(x){return x[0]===ds.value})[0];
+          LV.addAt(LV0,"threads/"+TH+"/msgs","m"+LV.rnd(14),{f:"c",m:"📎 "+T("Document sent: ","Document envoyé : ")+(L==="fr"?kl[2]:kl[1]),t:now,n:String(D.n||"").slice(0,40)}).then(function(){LV.add(LV0,"inbox",TH+"_"+now.toString(36),{th:TH,t:now});load()});
+          fi.value="";dm.textContent=T("Sent. Thank you.","Envoyé. Merci.")}).catch(function(){db.disabled=false;dm.textContent=T("This photo could not be used. Try another photo.","Cette photo n’a pas pu être utilisée. Essayez une autre photo.")})});
+    })();
     load();setInterval(function(){if(!document.hidden)load()},15000);app.appendChild(cc)}
   var bt=el("div",undefined,"btns"),w=String(ag.w||"").replace(/\D/g,"");
   if(w){var a=el("a",T("Message us on WhatsApp","Écrivez-nous sur WhatsApp"));a.href="https://wa.me/"+w;a.rel="noopener";bt.appendChild(a)}
@@ -155,6 +175,7 @@ function render(){
 }
 document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";render()});
 render();
+if(D&&typeof D.th==="string"&&/^[a-z0-9]{16,40}$/.test(D.th)&&LV.cfg(D)){var L0=LV.cfg(D),T0=D.th;LV.get(L0,"s"+T0).then(function(o){if(o&&o.v===1&&typeof o==="object"){o.lv=L0;o.th=T0;D=o;render()}})}
 })();
 </script>
 </body>

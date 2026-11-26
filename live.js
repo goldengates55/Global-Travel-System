@@ -11,5 +11,6 @@ var LV=(function(){
   function del(l,col,id){return fetch(base(l)+"/"+col+"/"+encodeURIComponent(id)+"?key="+encodeURIComponent(l.k),{method:"DELETE"}).then(function(r){return r.ok||r.status===404}).catch(function(){return false})}
   function list(l,path){return fetch(base(l)+"/"+path+"?pageSize=100&key="+encodeURIComponent(l.k)).then(function(r){return r.ok?r.json():{}}).then(function(j){return (j.documents||[]).map(function(d){var f={};Object.keys(d.fields||{}).forEach(function(k){var v=d.fields[k];f[k]=v.stringValue!==undefined?v.stringValue:(v.integerValue!==undefined?+v.integerValue:"")});return {id:String(d.name||"").split("/").pop(),f:f}})}).catch(function(){return []})}
   function addAt(l,path,id,o){return add(l,path,id,o)}
-  return {cfg:cfg,dev:dev,rnd:rnd,get:get,add:add,del:del,list:list,addAt:addAt};
+  function book(l,col,id,o){return fetch(base(l)+"/"+col+"?documentId="+encodeURIComponent(id)+"&key="+encodeURIComponent(l.k),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(enc(o))}).then(function(r){return r.ok?"ok":(r.status===409||r.status===403?"taken":"err")}).catch(function(){return "err"})}
+  return {book:book,cfg:cfg,dev:dev,rnd:rnd,get:get,add:add,del:del,list:list,addAt:addAt};
 })();
