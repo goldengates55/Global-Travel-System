@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-92`; it is now `visaguide-91`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-96`; it is now `visaguide-95`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -329,3 +329,7 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 - **Privacy check**: `privItems` (local settings: `LK`, Live page, `retCfg`, consent records, cloud sign-in) and `crmPriv` with an on-demand online count (`lvFileMeta`, `lvMsgs`, `lvList`). Read-only.
 - **Day close-out** (`closeData`, from `tlEvents`, follow-ups, appointments), **Contacts book** (`vg-cbook`, max 150, in backup as `cbook`), **Monthly review** (`mrevData`; decisions by `c.resd`, closures by `hist`, ratings by `satMonths`). All local.
 - **Clients page**: `crmActions` renders favourite buttons (`vg-fav`, max 8) and collapsible `<details>` groups (open state in `vg-grpo`, `"all"` opens every group). **Check a backup file** (`crmBkChk`, read-only), **Waiting for the client** (`crmWait`). The earlier duplicate Day close-out was removed because it replaced the existing `crmClose` (Closing the day).
+- **Destination notes**: `vg-dnotes` (per destination: photo `p`, time `t`, mistakes `m`, each `en`/`fr` ≤ 200 chars, plus `u` date), `crmDNotes`, `dnFor(c)` adds `dn` to `statusObj`; `status.html` shows a Good to know card. Local; travels with the client link (and the self-updating status doc when the Live page is on). In the backup as `dnotes`.
+- **Retry later**: `live.js` `LV.send` (post; on network error or 429/5xx keep the record in `localStorage["vgq"]`, max 6, dropped after 7 days) and `LV.flush` (on load, on `online`, every 30 s). Used by `intake.html` (enquiries), `status.html` (requests, chat messages, documents, inbox pings). Not used for bookings, votes, likes or comments.
+- **Agency page**: `vg-agpage` (`te/tf` tagline, `se/sf` services, `ad`, `h/r/b` flags), `crmAgPage`, `apDoc/apPublish` write `pub/agency` (rules: `doc == 'agency'`); `agency.html#a=` reads it (+ `pub/reviews` when `r`). Booking button uses `bookLink()`. Manual re-publish; wiped with the Live page data.
+- **PIN on the status link**: `pinSeal/pinUI/pinOn` in index.html; client fields `pe` (PBKDF2 150k + AES-GCM of `{th,lv}`) and `pin`; `statusLink` returns a `v:3` link (`lg`, `ag`, `e`) when on. `status.html` `gate()` derives the key, decrypts, then loads `pub/s<th>`; delay doubles after each wrong try. Needs Live page + https. Light barrier only. Manual EN/FR added.

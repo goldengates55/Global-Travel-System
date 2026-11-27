@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#4a1388">
+<title>Our agency</title>
+<link rel="icon" href="icon-192.png">
+<style>
+:root{--paper:#ece3fa;--ink:#10042a;--mute:#3f3260;--line:#9d88cc;--stamp:#4a1388;--card:#fff;--shadow:0 1px 2px rgba(16,4,42,.06),0 8px 24px -10px rgba(16,4,42,.18)}
+@media (prefers-color-scheme:dark){:root{--paper:#150336;--ink:#ffffff;--mute:#d6c9f0;--line:#7a55c2;--stamp:#ffd21e;--card:#2e0f68;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:560px;margin:0 auto;padding:18px 16px 48px}header{display:flex;align-items:center;gap:10px;margin-bottom:16px}header b{flex:1;font-size:1.15rem}
+button{font:600 1rem system-ui,sans-serif;border-radius:14px;padding:13px 16px;border:1px solid var(--stamp);background:var(--card);color:var(--stamp);cursor:pointer}
+button.pri{background:var(--stamp);color:var(--paper);width:100%;margin-top:12px}#lang{border-radius:999px;padding:8px 14px;font-size:.9rem;border-color:var(--line);color:var(--ink)}
+h1{font-size:1.5rem;line-height:1.2;margin:0 0 8px}.m{color:var(--mute);font-size:.92rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:18px;box-shadow:var(--shadow)}
+.rate{display:flex;gap:8px;margin:12px 0}.rate button{flex:1;padding:14px 0;font-size:1.15rem}.rate button.on{background:var(--stamp);color:var(--paper)}
+textarea{width:100%;min-height:76px;padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit;margin:6px 0 12px}
+label.ck{display:flex;gap:10px;align-items:flex-start}label.ck input{width:20px;height:20px;margin-top:3px}
+.opt{display:block;width:100%;text-align:left;margin:8px 0;padding:14px 16px;font-size:1.02rem}.opt.on{background:var(--stamp);color:var(--paper)}
+.post{margin:0 0 12px}.post h2{font-size:1.1rem;margin:0 0 4px}.post .d{color:var(--mute);font-size:.82rem;margin:0 0 6px}.post p{margin:0 0 10px;white-space:pre-wrap}
+button.sec{margin-top:6px;padding:9px 14px;font-size:.9rem}
+.day,.tm{display:inline-block;margin:4px 6px 4px 0;padding:10px 14px;font-size:.98rem}.on{background:var(--stamp);color:var(--paper)}
+label.f{display:grid;gap:6px;font-weight:600;margin:10px 0}input.t{font:inherit;color:var(--ink);background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px}
+.err{color:#c4421f;font-weight:600;min-height:1.2em}
+</style>
+</head>
+<body>
+<main>
+<header><b id="biz">Your feedback</b><button id="lang" type="button">Français</button></header>
+<div id="app"></div>
+</main>
+<script src="live.js"></script>
+<script>
+(function(){
+var D=null,L="en";
+try{var h=location.hash.replace(/^#a=/,"").replace(/-/g,"+").replace(/_/g,"/");while(h.length%4)h+="=";D=JSON.parse(decodeURIComponent(escape(atob(h))));if(!D||D.v!==1||typeof D!=="object")D=null}catch(e){D=null}
+if(D&&D.lg==="fr")L="fr";
+var LVC=D?LV.cfg(D):null,AP=null,RV=[];
+var DAYS={"1":["Mon","Lun"],"2":["Tue","Mar"],"3":["Wed","Mer"],"4":["Thu","Jeu"],"5":["Fri","Ven"],"6":["Sat","Sam"],"0":["Sun","Dim"]};
+var DEST={schengen:["Schengen area","Espace Schengen"],uk:["United Kingdom","Royaume-Uni"],usa:["United States","États-Unis"],canada:["Canada","Canada"],australia:["Australia","Australie"],other:["",""]};
+function el(t,x,c){var e=document.createElement(t);if(x!==undefined)e.textContent=x;if(c)e.className=c;return e}
+function T(a,b){return L==="fr"?b:a}
+function two(a){return Array.isArray(a)?(L==="fr"?(a[1]||a[0]):(a[0]||a[1]))||"":String(a||"")}
+function render(){
+  var app=document.getElementById("app");app.innerHTML="";document.documentElement.lang=L;document.getElementById("lang").textContent=L==="fr"?"English":"Français";
+  if(!D||!LVC){app.appendChild(el("h1",T("This link is not valid","Ce lien n’est pas valide")));return}
+  var ag=D.ag||{},name=String(ag.b||"Global Visa").slice(0,80);document.getElementById("biz").textContent=name;document.title=name;
+  app.appendChild(el("h1",name));
+  if(AP===null){app.appendChild(el("p",T("Loading…","Chargement…"),"m"));return}
+  var tg=two(AP.t);if(tg)app.appendChild(el("p",String(tg).slice(0,120)));
+  var sv=AP.s&&AP.s.length?(L==="fr"?(AP.s[1]&&AP.s[1].length?AP.s[1]:AP.s[0]):(AP.s[0]&&AP.s[0].length?AP.s[0]:AP.s[1])):[];
+  if(sv&&sv.length){var c1=el("section",undefined,"card");c1.style.marginBottom="12px";c1.appendChild(el("h2",T("What we do","Nos services")));var ul=el("ul");sv.slice(0,8).forEach(function(x){ul.appendChild(el("li",String(x).slice(0,80)))});c1.appendChild(ul);app.appendChild(c1)}
+  if(AP.h&&Array.isArray(AP.h.d)&&AP.h.d.length){var c2=el("section",undefined,"card");c2.style.marginBottom="12px";c2.appendChild(el("h2",T("Opening hours","Horaires")));var dn=AP.h.d.map(function(d){return DAYS[d]?DAYS[d][L==="fr"?1:0]:""}).filter(Boolean).join(", ");c2.appendChild(el("p",dn+" · "+String(AP.h.s||"").slice(0,5)+"–"+String(AP.h.e||"").slice(0,5)));app.appendChild(c2)}
+  if(AP.ad){var c3=el("section",undefined,"card");c3.style.marginBottom="12px";c3.appendChild(el("h2",T("Where to find us","Où nous trouver")));c3.appendChild(el("p",String(AP.ad).slice(0,120)));app.appendChild(c3)}
+  var w=String(ag.w||"").replace(/\D/g,"");
+  if(w){var b=el("button",T("Message us on WhatsApp","Écrivez-nous sur WhatsApp"),"pri");b.type="button";b.addEventListener("click",function(){window.open("https://wa.me/"+w,"_blank")});app.appendChild(b)}
+  if(AP.bk&&/^https?:\/\//.test(String(AP.bk))){var bb=el("button",T("Book a time","Réserver un créneau"),"sec");bb.type="button";bb.style.marginTop="8px";bb.addEventListener("click",function(){location.href=String(AP.bk)});app.appendChild(bb)}
+  if(AP.r&&RV.length){app.appendChild(el("h2",T("What our clients say","Ce que disent nos clients")));RV.slice(0,6).forEach(function(r){var c=el("section",undefined,"card");c.style.marginBottom="12px";c.appendChild(el("p","“"+String(r.t||"").slice(0,300)+"”"));var d=DEST[r.d]||DEST.other;c.appendChild(el("p","— "+String(r.n||"").slice(0,40)+(d[0]?", "+(L==="fr"?d[1]:d[0])+" visa":""),"m"));app.appendChild(c)})}
+  if(AP.u){app.appendChild(el("p",T("Page updated: ","Page mise à jour : ")+String(AP.u).slice(0,10),"m"))}
+}
+document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";render()});
+render();
+if(LVC)LV.get(LVC,"agency").then(function(a){AP=a&&typeof a==="object"?a:{};render();if(AP.r)LV.get(LVC,"reviews").then(function(r){RV=Array.isArray(r)?r.filter(function(x){return x&&typeof x.t==="string"}):[];render()})});
+})();
+</script>
+</body>
+</html>

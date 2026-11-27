@@ -77,14 +77,14 @@ var S={
   n:"Full name",p:"WhatsApp number",hp:"With country code, for example +237 6XX XX XX XX",d:"Where do you want to travel?",t:"Why are you travelling?",tr:"Planned travel date (optional)",nt:"Anything else we should know? (optional)",
   send:"Send my details",e1:"Please enter your full name.",e2:"Please enter a valid WhatsApp number.",
   priv:"This page does not send anything to a server. Your details go only to your agent, through WhatsApp.",
-  dh:"Your details are ready",dp:"Send this message to your agent. If WhatsApp did not open, tap Share or Copy.",share:"Send on WhatsApp",copy:"Copy details",copied:"Copied",ok1:"Your details were sent",ok2:"Your agent received them online and will contact you. You can also send them on WhatsApp if you like.",priv2:"Your details are sent to your agent’s online inbox. Anyone at the agency who handles your file can read them.",sending:"Sending…",
+  dh:"Your details are ready",dp:"Send this message to your agent. If WhatsApp did not open, tap Share or Copy.",share:"Send on WhatsApp",copy:"Copy details",copied:"Copied",q1:"Saved on your phone",q2:"The connection is down. Your details will be sent as soon as it returns. Keep this page or this browser, and you can also send them on WhatsApp now.",ok1:"Your details were sent",ok2:"Your agent received them online and will contact you. You can also send them on WhatsApp if you like.",priv2:"Your details are sent to your agent’s online inbox. Anyone at the agency who handles your file can read them.",sending:"Sending…",
   hd:"Global Visa client details",ln:"Name",lp:"WhatsApp",ld:"Destination",lt:"Visa type",ltr:"Travel date",lnt:"Notes",other:"Français"},
  fr:{title:"Détails de votre demande de visa",h:"Parlez-nous de votre demande de visa",intro:"Remplissez ce court formulaire. Il ouvre WhatsApp avec vos informations prêtes à envoyer à",introNo:"Remplissez ce court formulaire. Vous obtiendrez un message à envoyer à votre agent visa.",
   warn:"N’indiquez ni numéro de passeport, ni numéro de carte, ni code PIN. Votre agent vous demandera les documents séparément.",
   n:"Nom complet",p:"Numéro WhatsApp",hp:"Avec l’indicatif du pays, par exemple +237 6XX XX XX XX",d:"Où voulez-vous voyager ?",t:"Pourquoi voyagez-vous ?",tr:"Date de voyage prévue (facultatif)",nt:"Autre chose à savoir ? (facultatif)",
   send:"Envoyer mes informations",e1:"Veuillez entrer votre nom complet.",e2:"Veuillez entrer un numéro WhatsApp valide.",
   priv:"Cette page n’envoie rien à un serveur. Vos informations vont uniquement à votre agent, par WhatsApp.",
-  dh:"Vos informations sont prêtes",dp:"Envoyez ce message à votre agent. Si WhatsApp ne s’est pas ouvert, touchez Partager ou Copier.",share:"Envoyer sur WhatsApp",copy:"Copier",copied:"Copié",ok1:"Vos informations ont été envoyées",ok2:"Votre agent les a reçues en ligne et vous contactera. Vous pouvez aussi les envoyer par WhatsApp si vous le souhaitez.",priv2:"Vos informations sont envoyées dans la boîte en ligne de votre agent. Les personnes de l’agence qui traitent votre dossier peuvent les lire.",sending:"Envoi…",
+  dh:"Vos informations sont prêtes",dp:"Envoyez ce message à votre agent. Si WhatsApp ne s’est pas ouvert, touchez Partager ou Copier.",share:"Envoyer sur WhatsApp",copy:"Copier",copied:"Copié",q1:"Enregistré sur votre téléphone",q2:"La connexion est coupée. Vos informations seront envoyées dès son retour. Gardez cette page ou ce navigateur, et vous pouvez aussi les envoyer sur WhatsApp maintenant.",ok1:"Vos informations ont été envoyées",ok2:"Votre agent les a reçues en ligne et vous contactera. Vous pouvez aussi les envoyer par WhatsApp si vous le souhaitez.",priv2:"Vos informations sont envoyées dans la boîte en ligne de votre agent. Les personnes de l’agence qui traitent votre dossier peuvent les lire.",sending:"Envoi…",
   hd:"Informations client Global Visa",ln:"Nom",lp:"WhatsApp",ld:"Destination",lt:"Type de visa",ltr:"Date de voyage",lnt:"Notes",other:"English"}
 };
 var L=(Q.get("l")||(navigator.language||"en")).slice(0,2)==="fr"?"fr":"en";
@@ -116,12 +116,13 @@ $("f").addEventListener("submit",function(e){
   lines.push("","GVI1:"+enc(o));
   text=lines.join("\n");
   function show(online){
-  if(online){$("dh").textContent=s.ok1;$("dp").textContent=s.ok2;$("msg").style.display="none";$("copy").style.display="none";if(!to)$("share").style.display="none"}
+  if(online==="q"){$("dh").textContent=s.q1;$("dp").textContent=s.q2}
+  if(online===true){$("dh").textContent=s.ok1;$("dp").textContent=s.ok2;$("msg").style.display="none";$("copy").style.display="none";if(!to)$("share").style.display="none"}
   $("msg").textContent=text;$("f").style.display="none";$("intro").style.display="none";$("h").style.display="none";$("done").style.display="block";window.scrollTo(0,0);
-  if(!online&&to)window.open("https://wa.me/"+to+"?text="+encodeURIComponent(text),"_blank");
+  if(online!==true&&online!=="q"&&to)window.open("https://wa.me/"+to+"?text="+encodeURIComponent(text),"_blank");
   }
   if(LVC){var sb=$("send");sb.disabled=true;sb.textContent=s.sending;
-    LV.add(LVC,"enquiries",LV.rnd(20),{n:o.n,ph:o.p,d:o.d,t:o.t,tr:o.tr,nt:o.nt,at:Date.now()}).then(function(ok){sb.disabled=false;sb.textContent=s.send;show(!!ok)});
+    LV.send(LVC,"enquiries",LV.rnd(20),{n:o.n,ph:o.p,d:o.d,t:o.t,tr:o.tr,nt:o.nt,at:Date.now()}).then(function(r){sb.disabled=false;sb.textContent=s.send;show(r==="ok"?true:r==="queued"?"q":false)});
   }else show(false);
 });
 $("share").addEventListener("click",function(){

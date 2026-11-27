@@ -49,7 +49,7 @@ ul{margin:6px 0 0;padding-left:20px}
 (function(){
 var ST=[["new","New","Nouveau"],["docs","Collecting documents","Collecte des documents"],["ready","Ready to submit","Prêt à déposer"],["appt","Appointment booked","Rendez-vous pris"],["sent","Submitted","Déposé"],["decision","Decision received","Décision reçue"],["passport","Passport ready","Passeport prêt"]];
 var D=null,L="en";
-try{var h=location.hash.replace(/^#s=/,"").replace(/-/g,"+").replace(/_/g,"/");while(h.length%4)h+="=";D=JSON.parse(decodeURIComponent(escape(atob(h))));if(!D||D.v!==1||typeof D!=="object")D=null}catch(e){D=null}
+try{var h=location.hash.replace(/^#s=/,"").replace(/-/g,"+").replace(/_/g,"/");while(h.length%4)h+="=";D=JSON.parse(decodeURIComponent(escape(atob(h))));if(!D||(D.v!==1&&D.v!==3)||typeof D!=="object")D=null}catch(e){D=null}
 if(D&&D.lg==="fr")L="fr";
 function el(t,x,c){var e=document.createElement(t);if(x!==undefined)e.textContent=x;if(c)e.className=c;return e}
 function T(a,b){return L==="fr"?b:a}
@@ -71,6 +71,9 @@ function render(){
   else if(D.r==="refused")c1.appendChild(el("p",T("Decision: refused. Your agent will explain the next steps.","Décision : refusé. Votre agent vous expliquera la suite."),"m"));
   app.appendChild(c1);
   if(D.nx&&pick(D.nx)){var cn=el("section",undefined,"card");cn.appendChild(el("h2",T("What happens next","Et ensuite")));cn.appendChild(el("p",pick(D.nx).slice(0,400)));app.appendChild(cn)}
+  if(D.dnt&&typeof D.dnt==="object"){var dl=[["p",T("Photo rules","Règles pour la photo")],["t",T("Typical processing time","Délai de traitement habituel")],["m",T("Common mistakes","Erreurs fréquentes")]].filter(function(f){return D.dnt[f[0]]&&pick(D.dnt[f[0]])});
+    if(dl.length){var cd=el("section",undefined,"card");cd.appendChild(el("h2",T("Good to know","À savoir")));dl.forEach(function(f){cd.appendChild(el("p",f[1]+": "+String(pick(D.dnt[f[0]])).slice(0,200)))});
+      if(D.dnt.u)cd.appendChild(el("p",T("Last checked by your agent: ","Dernière vérification par votre agent : ")+fdate(D.dnt.u),"m"));cd.appendChild(el("p",T("Rules can change. Always follow the official embassy or visa centre instructions.","Les règles peuvent changer. Suivez toujours les instructions officielles de l’ambassade ou du centre de visas."),"m"));app.appendChild(cd)}}
   function hs(x){var h=0;for(var i=0;i<x.length;i++)h=(h*31+x.charCodeAt(i))|0;return "vgp"+(h>>>0).toString(36)}
   var KEY=hs(location.hash||"x"),TK={};try{TK=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){TK={}}
   function tsave(){try{localStorage.setItem(KEY,JSON.stringify(TK))}catch(e){}}
@@ -121,7 +124,7 @@ function render(){
     var who=D.n?String(D.n).slice(0,40):"";
     var LVC=LV.cfg(D),ph=null;
     function send(t,k){if(LVC){var v=ph.value.trim();if(!v){alert(T("Please type your phone number so we can reply.","Saisissez votre numéro pour que nous puissions répondre."));return}
-      LV.add(LVC,"requests","r"+LV.rnd(14),{k:k||"q",n:who,ph:v.slice(0,30),m:t.slice(0,400),t:Date.now(),s:"new"}).then(function(ok){if(ok){alert(T("Sent. Your agent will reply to you.","Envoyé. Votre agent vous répondra."))}else{window.open("https://wa.me/"+w0+"?text="+encodeURIComponent(t+(who?"\n— "+who:"")),"_blank","noopener")}});return}
+      LV.send(LVC,"requests","r"+LV.rnd(14),{k:k||"q",n:who,ph:v.slice(0,30),m:t.slice(0,400),t:Date.now(),s:"new"}).then(function(ok){if(ok==="ok"){alert(T("Sent. Your agent will reply to you.","Envoyé. Votre agent vous répondra."))}else if(ok==="queued"){alert(T("Saved on your phone. It will be sent when your connection returns.","Enregistré sur votre téléphone. Il sera envoyé au retour de la connexion."))}else{window.open("https://wa.me/"+w0+"?text="+encodeURIComponent(t+(who?"\n— "+who:"")),"_blank","noopener")}});return}
       window.open("https://wa.me/"+w0+"?text="+encodeURIComponent(t+(who?"\n— "+who:"")),"_blank","noopener")}
     if(LVC){ph=el("input");ph.type="text";ph.maxLength=30;ph.placeholder=T("Your phone number","Votre numéro de téléphone");ph.style.cssText="width:100%;margin:6px 0;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit";qc.appendChild(ph);qc.appendChild(el("p",T("Your message and number are sent to your agent and kept until they answer.","Votre message et votre numéro sont envoyés à votre agent et conservés jusqu’à sa réponse."),"m"))}
     qc.appendChild(el("h3",T("Ask a question","Poser une question")));var qt=el("textarea");qt.maxLength=400;qc.appendChild(qt);
@@ -146,7 +149,7 @@ function render(){
       if(!a.length)lst.appendChild(el("p",T("No messages yet.","Aucun message pour le moment."),"m"));
       a.slice(-40).forEach(function(m){var p2=el("p");p2.style.cssText="margin:8px 0;padding:8px 12px;border-radius:12px;background:"+(m.f.f==="a"?"var(--paper)":"var(--stamp)")+";color:"+(m.f.f==="a"?"var(--ink)":"var(--paper)")+";white-space:pre-wrap";p2.textContent=(m.f.f==="a"?T("Agent","Agent")+(m.f.w?" ("+String(m.f.w).slice(0,30)+")":"")+(L==="fr"?" : ":": "):T("You: ","Vous : "))+String(m.f.m||"").slice(0,500);lst.appendChild(p2)})})}
     cs.addEventListener("click",function(){var v=ci.value.trim();if(!v)return;cs.disabled=true;var now=Date.now();
-      LV.addAt(LV0,"threads/"+TH+"/msgs","m"+LV.rnd(14),{f:"c",m:v.slice(0,500),t:now,n:String(D.n||"").slice(0,40)}).then(function(ok){cs.disabled=false;if(ok){LV.add(LV0,"inbox",TH+"_"+now.toString(36),{th:TH,t:now});ci.value="";load()}else alert(T("Could not send. Please try again.","Envoi impossible. Réessayez."))})});
+      LV.send(LV0,"threads/"+TH+"/msgs","m"+LV.rnd(14),{f:"c",m:v.slice(0,500),t:now,n:String(D.n||"").slice(0,40)}).then(function(ok){cs.disabled=false;if(ok==="ok"||ok==="queued"){LV.send(LV0,"inbox",TH+"_"+now.toString(36),{th:TH,t:now});ci.value="";if(ok==="queued")alert(T("Saved on your phone. It will be sent when your connection returns.","Enregistré sur votre téléphone. Il sera envoyé au retour de la connexion."));else load()}else alert(T("Could not send. Please try again.","Envoi impossible. Réessayez."))})});
     (function(){
       var dh=el("h2",T("Send a document","Envoyer un document"));dh.style.marginTop="18px";cc.appendChild(dh);
       var DK=[["passport","Passport photo page","Page photo du passeport"],["photo","Passport-size photo","Photo d’identité"],["bank","Bank statement","Relevé bancaire"],["letter","Invitation or letter","Invitation ou lettre"],["other","Other document","Autre document"]];
@@ -160,11 +163,11 @@ function render(){
           for(var q=.72;q>=.3;q-=.14){out=cv.toDataURL("image/jpeg",q);if(out.length<600000){res(out);return}}sc*=.7}rej(new Error("big"))};im.onerror=function(){rej(new Error("img"))};im.src=u})}
       db.addEventListener("click",function(){var f=fi.files&&fi.files[0];if(!f){dm.textContent=T("Choose a photo first.","Choisissez d’abord une photo.");return}
         db.disabled=true;dm.textContent=T("Sending…","Envoi…");var now=Date.now();
-        shrink(f).then(function(u){return LV.addAt(LV0,"threads/"+TH+"/files","f"+LV.rnd(14),{k:ds.value,n:String(f.name||"").slice(0,40),d:u,t:now})}).then(function(ok){
-          db.disabled=false;if(!ok){dm.textContent=T("Could not send. Please try again.","Envoi impossible. Réessayez.");return}
+        shrink(f).then(function(u){return LV.send(LV0,"threads/"+TH+"/files","f"+LV.rnd(14),{k:ds.value,n:String(f.name||"").slice(0,40),d:u,t:now})}).then(function(ok){
+          db.disabled=false;if(ok!=="ok"&&ok!=="queued"){dm.textContent=T("Could not send. Please try again.","Envoi impossible. Réessayez.");return}
           var kl=DK.filter(function(x){return x[0]===ds.value})[0];
-          LV.addAt(LV0,"threads/"+TH+"/msgs","m"+LV.rnd(14),{f:"c",m:"📎 "+T("Document sent: ","Document envoyé : ")+(L==="fr"?kl[2]:kl[1]),t:now,n:String(D.n||"").slice(0,40)}).then(function(){LV.add(LV0,"inbox",TH+"_"+now.toString(36),{th:TH,t:now});load()});
-          fi.value="";dm.textContent=T("Sent. Thank you.","Envoyé. Merci.")}).catch(function(){db.disabled=false;dm.textContent=T("This photo could not be used. Try another photo.","Cette photo n’a pas pu être utilisée. Essayez une autre photo.")})});
+          LV.send(LV0,"threads/"+TH+"/msgs","m"+LV.rnd(14),{f:"c",m:"📎 "+T("Document sent: ","Document envoyé : ")+(L==="fr"?kl[2]:kl[1]),t:now,n:String(D.n||"").slice(0,40)}).then(function(){LV.send(LV0,"inbox",TH+"_"+now.toString(36),{th:TH,t:now});load()});
+          fi.value="";dm.textContent=ok==="queued"?T("Saved on your phone. It will be sent when your connection returns. Keep this browser.","Enregistré sur votre téléphone. Il sera envoyé au retour de la connexion. Gardez ce navigateur."):T("Sent. Thank you.","Envoyé. Merci.")}).catch(function(){db.disabled=false;dm.textContent=T("This photo could not be used. Try another photo.","Cette photo n’a pas pu être utilisée. Essayez une autre photo.")})});
     })();
     load();setInterval(function(){if(!document.hidden)load()},15000);app.appendChild(cc)}
   var bt=el("div",undefined,"btns"),w=String(ag.w||"").replace(/\D/g,"");
@@ -173,9 +176,29 @@ function render(){
   if(bt.children.length)app.appendChild(bt);
   document.getElementById("foot").textContent=T("Updated on ","Mis à jour le ")+(D.u||"")+T(". This page is a snapshot. Ask your agent for a new link to see changes.",". Cette page est un instantané. Demandez un nouveau lien à votre agent pour voir les changements.");
 }
-document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";render()});
+function u8(s){var b=atob(s),a=new Uint8Array(b.length);for(var i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return a}
+function gate(){
+  var app=document.getElementById("app");app.textContent="";document.documentElement.lang=L;document.getElementById("lang").textContent=L==="fr"?"English":"Français";
+  var P=D,card=el("section",undefined,"card");card.appendChild(el("h2",T("Enter your PIN","Entrez votre PIN")));
+  var ab=(P.ag&&P.ag.b)||"";if(ab)card.appendChild(el("p",ab));
+  card.appendChild(el("p",T("Your agent sent you a PIN in a separate message.","Votre agent vous a envoyé un PIN dans un message séparé."),"m"));
+  var i=el("input");i.type="text";i.inputMode="numeric";i.maxLength=8;i.autocomplete="off";i.setAttribute("aria-label","PIN");card.appendChild(i);
+  var b=el("button",T("Open","Ouvrir"));b.type="button";card.appendChild(b);var ms=el("p","","m");ms.setAttribute("role","status");card.appendChild(ms);app.appendChild(card);
+  var fails=0,wait=0;
+  function load(o){ms.textContent=T("Loading…","Chargement…");
+    LV.get(LV.cfg({lv:o.lv}),"s"+o.th).then(function(x){if(x&&x.v===1&&typeof x==="object"){x.lv=o.lv;x.th=o.th;D=x;render()}else ms.textContent=T("Your agent has not published your page yet. Try again later.","Votre agent n’a pas encore publié votre page. Réessayez plus tard.")},function(){ms.textContent=T("Could not load. Check your connection and try again.","Chargement impossible. Vérifiez votre connexion et réessayez.")})}
+  try{var sv=sessionStorage.getItem("vgp"+String(P.e&&P.e.c).slice(0,24));if(sv){var o0=JSON.parse(sv);if(o0&&o0.th&&LV.cfg({lv:o0.lv})){load(o0);return}}}catch(e){}
+  function go(){if(wait>Date.now()){return}var v=i.value.replace(/\s/g,"");if(!/^\d{4,8}$/.test(v)){ms.textContent=T("Enter the 4 to 8 digits of your PIN.","Saisissez les 4 à 8 chiffres de votre PIN.");return}
+    if(!(window.crypto&&crypto.subtle)){ms.textContent=T("This browser cannot open the page. Use a recent browser.","Ce navigateur ne peut pas ouvrir la page. Utilisez un navigateur récent.");return}
+    b.disabled=true;ms.textContent="…";var e=P.e;
+    crypto.subtle.importKey("raw",new TextEncoder().encode(v),"PBKDF2",false,["deriveKey"]).then(function(k){return crypto.subtle.deriveKey({name:"PBKDF2",salt:u8(e.s),iterations:150000,hash:"SHA-256"},k,{name:"AES-GCM",length:256},false,["decrypt"])}).then(function(k){return crypto.subtle.decrypt({name:"AES-GCM",iv:u8(e.i)},k,u8(e.c))}).then(function(pt){
+      var o=JSON.parse(new TextDecoder().decode(pt));try{sessionStorage.setItem("vgp"+String(e.c).slice(0,24),JSON.stringify(o))}catch(x){}b.disabled=false;load(o)},function(){
+      fails++;var s=Math.min(30,Math.pow(2,fails));wait=Date.now()+s*1000;b.disabled=true;ms.textContent=T("Wrong PIN. Try again in "+s+" seconds.","PIN incorrect. Réessayez dans "+s+" secondes.");setTimeout(function(){b.disabled=false;ms.textContent=""},s*1000)})}
+  b.addEventListener("click",go);i.addEventListener("keydown",function(ev){if(ev.key==="Enter")go()})}
+document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";if(D&&D.v===3)gate();else render()});
+if(D&&D.v===3&&D.e&&typeof D.e==="object")gate();else{
 render();
-if(D&&typeof D.th==="string"&&/^[a-z0-9]{16,40}$/.test(D.th)&&LV.cfg(D)){var L0=LV.cfg(D),T0=D.th;LV.get(L0,"s"+T0).then(function(o){if(o&&o.v===1&&typeof o==="object"){o.lv=L0;o.th=T0;D=o;render()}})}
+if(D&&typeof D.th==="string"&&/^[a-z0-9]{16,40}$/.test(D.th)&&LV.cfg(D)){var L0=LV.cfg(D),T0=D.th;LV.get(L0,"s"+T0).then(function(o){if(o&&o.v===1&&typeof o==="object"){o.lv=L0;o.th=T0;D=o;render()}})}}
 })();
 </script>
 </body>
