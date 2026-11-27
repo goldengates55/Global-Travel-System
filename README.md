@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-96`; it is now `visaguide-95`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-102`; it is now `visaguide-101`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -333,3 +333,9 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 - **Retry later**: `live.js` `LV.send` (post; on network error or 429/5xx keep the record in `localStorage["vgq"]`, max 6, dropped after 7 days) and `LV.flush` (on load, on `online`, every 30 s). Used by `intake.html` (enquiries), `status.html` (requests, chat messages, documents, inbox pings). Not used for bookings, votes, likes or comments.
 - **Agency page**: `vg-agpage` (`te/tf` tagline, `se/sf` services, `ad`, `h/r/b` flags), `crmAgPage`, `apDoc/apPublish` write `pub/agency` (rules: `doc == 'agency'`); `agency.html#a=` reads it (+ `pub/reviews` when `r`). Booking button uses `bookLink()`. Manual re-publish; wiped with the Live page data.
 - **PIN on the status link**: `pinSeal/pinUI/pinOn` in index.html; client fields `pe` (PBKDF2 150k + AES-GCM of `{th,lv}`) and `pin`; `statusLink` returns a `v:3` link (`lg`, `ag`, `e`) when on. `status.html` `gate()` derives the key, decrypts, then loads `pub/s<th>`; delay doubles after each wrong try. Needs Live page + https. Light barrier only. Manual EN/FR added.
+- **Snooze and pinned note**: client fields `snz` (snooze date), `pnt` (pinned note); `pntUI/snzSet`; `ctoday` skips snoozed clients unless an appointment is today or tomorrow. Manual EN/FR added.
+- **Ready to submit? check**: `rdyItems/rdyUI` (read-only checks from docs, `pexp`, `bstmt`, `appt`, phone, `cons`, balance); button sets stage to ready via `chist`. Manual EN/FR added.
+- **Welcome sheet (PDF)**: `welcomePdf(c)` via `pdfKit`, language `pl(c)`, uses `AG`, `awGet()` hours, `cdocs`. Button in the client's document row. Manual EN/FR added.
+- **Client buttons on status page**: in `status.html` (inside the Live+thread block) `sig()` posts a chat message (`f:'c'`, symbol prefix) + inbox ping; cards: appointment (countdown, ✅/⚠, day checklist), documents ready ticks (`D.m`), quick messages. Local state `vgs<th>`. No new rules; `window.__sig` also used by I have paid. Manual EN/FR added.
+- **Missed appointment / lost passport / link expiry / map**: client fields `ns` (missed list), `lx` (link end date), `ml` (map https link); `nsUI/lpUI/lkUI`; status link payload carries `x` (also in v3 PIN links) and status.html `showExp()` when past; `ml` shown on the Live appointment card. Missed appointments feed `ctoday` (key `c:t:miss`, 14 days). Manual EN/FR added.
+- **Client details form**: new rule `threads/{tid}/details/{did}` (create: keys k,d,t; owner-only read/delete). Status page card posts JSON in `d` (+ chat ping); `crmDet` in the chat view shows it; save sets `c.idd` (+`c.pexp`) and deletes from cloud; `iddUI` in the client; `lvDelThread` also removes details. Re-publish rules.

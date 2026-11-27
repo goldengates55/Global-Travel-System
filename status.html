@@ -102,7 +102,7 @@ function render(){
     if(Array.isArray(D.py)&&D.py[1]){c4.appendChild(el("p",T("Where to pay: ","Où payer : ")+(D.py[0]?String(D.py[0]).slice(0,30)+" ":"")+String(D.py[1]).slice(0,40)+(D.py[2]?" ("+String(D.py[2]).slice(0,40)+")":""),"m"))}
     if(Array.isArray(D.rc)&&D.rc.length){c4.appendChild(el("p",T("Your last receipts:","Vos derniers reçus :"),"m"));var rl=el("ul");D.rc.forEach(function(x){rl.appendChild(el("li",String(x[0]).slice(0,30)+" · "+(fdate(x[1]).split(",").slice(-2).join(",").trim())+" · "+money(+x[2]||0,String(x[3]||cu).slice(0,5))))});c4.appendChild(rl)}
     if(D.b>0){var pa=el("input");pa.type="text";pa.setAttribute("inputmode","decimal");pa.placeholder=T("Amount you paid","Montant payé");var pr=el("input");pr.type="text";pr.maxLength=40;pr.placeholder=T("Transaction reference","Référence de la transaction");c4.appendChild(pa);c4.appendChild(pr);
-      var bp=el("button",T("I have paid","J’ai payé"));bp.type="button";bp.addEventListener("click",function(){var a=wlink(T("Hello, I have paid "+(pa.value.trim()||"…")+" "+cu+". Transaction reference: "+(pr.value.trim()||"…")+". Please confirm.","Bonjour, j’ai payé "+(pa.value.trim()||"…")+" "+cu+". Référence de la transaction : "+(pr.value.trim()||"…")+". Merci de confirmer."));if(a)window.open(a.href,"_blank","noopener");else alert(T("No agent number on this page.","Aucun numéro d’agent sur cette page."))});c4.appendChild(bp);
+      var bp=el("button",T("I have paid","J’ai payé"));bp.type="button";bp.addEventListener("click",function(){var a=wlink(T("Hello, I have paid "+(pa.value.trim()||"…")+" "+cu+". Transaction reference: "+(pr.value.trim()||"…")+". Please confirm.","Bonjour, j’ai payé "+(pa.value.trim()||"…")+" "+cu+". Référence de la transaction : "+(pr.value.trim()||"…")+". Merci de confirmer."));if(window.__sig)window.__sig("💳 "+T("I have paid ","J’ai payé ")+(pa.value.trim()||"…")+" "+cu+". "+T("Reference: ","Référence : ")+(pr.value.trim()||"…")+". "+T("Please confirm.","Merci de confirmer."),function(){});if(a)window.open(a.href,"_blank","noopener");else if(!window.__sig)alert(T("No agent number on this page.","Aucun numéro d’agent sur cette page."))});c4.appendChild(bp);
       c4.appendChild(el("p",T("Your agent checks the payment before sending a receipt.","Votre agent vérifie le paiement avant d’envoyer un reçu."),"m"))}
     app.appendChild(c4)}
   {var cq=el("section",undefined,"card");cq.appendChild(el("h2",T("Common questions","Questions fréquentes")));cq.appendChild(el("p",T("Honest answers about timing, documents, refusals and payments.","Des réponses honnêtes sur les délais, les documents, les refus et les paiements."),"m"));
@@ -140,7 +140,58 @@ function render(){
     app.appendChild(qc)}
   if(D.pu)app.appendChild(el("p",T("Last updated: ","Dernière mise à jour : ")+new Date(+D.pu).toLocaleString(L==="fr"?"fr-FR":"en-GB"),"m"));
   var LV0=LV.cfg(D),TH=typeof D.th==="string"&&/^[a-z0-9]{16,40}$/.test(D.th)?D.th:"";
-  if(LV0&&TH){var cc=el("section",undefined,"card qa");cc.appendChild(el("h2",T("Messages with your agent","Messages avec votre agent")));
+  if(LV0&&TH){
+    function sig(txt,done){var now=Date.now();LV.send(LV0,"threads/"+TH+"/msgs","m"+LV.rnd(14),{f:"c",m:txt.slice(0,500),t:now,n:String(D.n||"").slice(0,40)}).then(function(ok){if(ok==="ok"||ok==="queued")LV.send(LV0,"inbox",TH+"_"+now.toString(36),{th:TH,t:now});done(ok)})}
+    window.__sig=sig;
+    var SK="vgs"+TH,SS={};try{SS=JSON.parse(localStorage.getItem(SK)||"{}")||{}}catch(e){SS={}}
+    function sv(){try{localStorage.setItem(SK,JSON.stringify(SS))}catch(e){}}
+    function say(el0,ok){el0.textContent=ok==="ok"?T("Sent. Thank you.","Envoyé. Merci."):ok==="queued"?T("Saved on your phone. It will be sent when your connection returns. Keep this browser.","Enregistré sur votre téléphone. Il sera envoyé au retour de la connexion. Gardez ce navigateur."):T("Could not send. Please try again.","Envoi impossible. Réessayez.")}
+    var dd=dayn(D.a||"");
+    if(dd!==null&&dd>=0&&dd<=60&&D.k!=="sent"&&D.k!=="decision"&&D.k!=="passport"&&D.k!=="closed"){
+      var ca=el("section",undefined,"card");ca.appendChild(el("h2",T("Your appointment","Votre rendez-vous")));
+      ca.appendChild(el("p",dd===0?T("Today","Aujourd’hui"):dd===1?T("Tomorrow","Demain"):T("In "+dd+" days","Dans "+dd+" jours"),"pill"));ca.appendChild(el("p",fdate(D.a),"m"));if(typeof D.ml==="string"&&/^https:\/\/[^\s<>"]{4,190}$/.test(D.ml)){var mp=el("a",T("Open the map","Ouvrir le plan"),"btn2");mp.href=D.ml;mp.target="_blank";mp.rel="noopener noreferrer";ca.appendChild(mp)}
+      var am=el("p",undefined,"m");am.setAttribute("role","status");
+      var b1=el("button",T("I will be there","Je serai là"));b1.type="button";var b2=el("button",T("I need to change it","Je dois le changer"));b2.type="button";
+      function shown(){am.textContent=SS.ap&&SS.ap[0]===D.a?(SS.ap[1]==="ok"?T("You told your agent you will be there.","Vous avez dit à votre agent que vous serez là."):T("You asked your agent to change it.","Vous avez demandé à votre agent de le changer.")):""}
+      b1.addEventListener("click",function(){b1.disabled=true;sig("✅ "+T("I will be at my appointment on ","Je serai présent à mon rendez-vous du ")+D.a+".",function(ok){b1.disabled=false;if(ok==="ok"||ok==="queued"){SS.ap=[D.a,"ok"];sv();shown()}else say(am,ok)})});
+      b2.addEventListener("click",function(){b2.disabled=true;sig("⚠ "+T("I cannot make my appointment on ","Je ne peux pas venir à mon rendez-vous du ")+D.a+T(". Please contact me.",". Merci de me contacter."),function(ok){b2.disabled=false;if(ok==="ok"||ok==="queued"){SS.ap=[D.a,"no"];sv();shown()}else say(am,ok)})});
+      ca.appendChild(b1);ca.appendChild(b2);ca.appendChild(am);shown();
+      ca.appendChild(el("h3",T("On the day","Le jour même")));SS.day=SS.day||{};
+      [[T("Passport","Passeport")],[T("Appointment confirmation","Confirmation du rendez-vous")],[T("Originals and one copy of each document","Originaux et une copie de chaque document")],[T("Passport photos and fee receipt","Photos d’identité et reçu des frais")],[T("Leave early: arrive 30 minutes before","Partez tôt : arrivez 30 minutes avant")]].forEach(function(x,i){
+        var lb=el("label");lb.style.cssText="display:flex;gap:10px;align-items:center;margin:8px 0";var ck=el("input");ck.type="checkbox";ck.checked=!!(SS.day[D.a]&&SS.day[D.a][i]);
+        ck.addEventListener("change",function(){SS.day[D.a]=SS.day[D.a]||{};SS.day[D.a][i]=ck.checked?1:0;sv()});lb.appendChild(ck);lb.appendChild(document.createTextNode(x[0]));ca.appendChild(lb)});
+      app.appendChild(ca)}
+    if(Array.isArray(D.m)&&D.m.length&&D.k!=="sent"&&D.k!=="decision"&&D.k!=="passport"&&D.k!=="closed"){
+      var cd=el("section",undefined,"card");cd.appendChild(el("h2",T("Documents still needed","Documents encore nécessaires")));
+      cd.appendChild(el("p",T("Tick what you already have ready. This tells your agent what to expect. It does not replace sending the document.","Cochez ce que vous avez déjà prêt. Cela indique à votre agent ce qu’il doit attendre. Cela ne remplace pas l’envoi du document."),"m"));
+      SS.rd=SS.rd||{};var cks=[];
+      D.m.slice(0,15).forEach(function(x,i){var nm=pick([x[0],x[1]]).slice(0,90),lb=el("label");lb.style.cssText="display:flex;gap:10px;align-items:center;margin:8px 0";var ck=el("input");ck.type="checkbox";ck.checked=!!SS.rd[x[0]];
+        ck.addEventListener("change",function(){SS.rd[x[0]]=ck.checked?1:0;sv()});lb.appendChild(ck);lb.appendChild(document.createTextNode(nm));cd.appendChild(lb);cks.push([ck,String(x[0]).slice(0,40)])});
+      var bd=el("button",T("Tell my agent","Prévenir mon agent"));bd.type="button";var dm2=el("p",undefined,"m");dm2.setAttribute("role","status");
+      bd.addEventListener("click",function(){var ok=cks.filter(function(z){return z[0].checked}).map(function(z){return z[1]});if(!ok.length){dm2.textContent=T("Tick at least one document.","Cochez au moins un document.");return}
+        bd.disabled=true;sig("☑ "+T("Ready on my side: ","Prêt de mon côté : ")+ok.join("; "),function(r){bd.disabled=false;say(dm2,r)})});
+      cd.appendChild(bd);cd.appendChild(dm2);app.appendChild(cd)}
+
+    if(D.k!=="closed"&&D.k!=="passport"){
+      var cf=el("section",undefined,"card");cf.appendChild(el("h2",T("Your details (optional)","Vos informations (facultatif)")));
+      cf.appendChild(el("p",T("Fill this in only if your agent asked you to. It saves your agent from typing. Your details are stored online until your agent saves them, then removed. Only your agent can read them. Do not enter passwords or card numbers.","Remplissez ceci seulement si votre agent vous l’a demandé. Cela évite à votre agent de tout retaper. Vos informations restent en ligne jusqu’à ce que votre agent les enregistre, puis elles sont retirées. Seul votre agent peut les lire. N’entrez ni mot de passe ni numéro de carte."),"m"));
+      var IK=[["fn","Full name as in the passport","Nom complet comme sur le passeport","text"],["dob","Date of birth","Date de naissance","date"],["pob","Place of birth","Lieu de naissance","text"],["nat","Nationality","Nationalité","text"],["pn","Passport number","Numéro de passeport","text"],["pi","Passport issue date","Date de délivrance du passeport","date"],["pe","Passport expiry date","Date d’expiration du passeport","date"],["ad","Home address","Adresse du domicile","text"],["jb","Job and employer or school","Profession et employeur ou école","text"],["tf","Travel from","Voyage du","date"],["tt","Travel to","Voyage au","date"],["ec","Emergency contact (name and phone)","Personne à prévenir (nom et téléphone)","text"]],fi2={};
+      IK.forEach(function(k){var lb=el("label");lb.style.cssText="display:block;margin:8px 0";lb.appendChild(document.createTextNode(L==="fr"?k[2]:k[1]));var i=el("input");i.type=k[3];i.maxLength=k[3]==="date"?10:150;i.style.cssText="display:block;width:100%;margin-top:4px;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit";if(k[0]==="pn")i.autocomplete="off";lb.appendChild(i);cf.appendChild(lb);fi2[k[0]]=i});
+      var lg2=el("label");lg2.style.cssText="display:flex;gap:10px;align-items:center;margin:10px 0";var ag2=el("input");ag2.type="checkbox";lg2.appendChild(ag2);lg2.appendChild(document.createTextNode(T("I agree that my agent receives these details to prepare my visa file.","J’accepte que mon agent reçoive ces informations pour préparer mon dossier de visa.")));cf.appendChild(lg2);
+      var sb=el("button",T("Send my details","Envoyer mes informations"));sb.type="button";var sm=el("p",undefined,"m");sm.setAttribute("role","status");
+      sb.addEventListener("click",function(){var o={},n=0;IK.forEach(function(k){var v=fi2[k[0]].value.trim();if(v){o[k[0]]=v.slice(0,150);n++}});
+        if(!n){sm.textContent=T("Fill in at least one field.","Remplissez au moins un champ.");return}if(!ag2.checked){sm.textContent=T("Please tick that you agree.","Cochez que vous êtes d’accord.");return}
+        sb.disabled=true;var now=Date.now();LV.send(LV0,"threads/"+TH+"/details","d"+LV.rnd(14),{k:"details",d:JSON.stringify(o),t:now}).then(function(ok){sb.disabled=false;
+          if(ok!=="ok"&&ok!=="queued"){sm.textContent=T("Could not send. Please try again.","Envoi impossible. Réessayez.");return}
+          sig("📝 "+T("I sent my details.","J’ai envoyé mes informations."),function(){});IK.forEach(function(k){fi2[k[0]].value=""});ag2.checked=false;
+          sm.textContent=ok==="queued"?T("Saved on your phone. It will be sent when your connection returns. Keep this browser.","Enregistré sur votre téléphone. Il sera envoyé au retour de la connexion. Gardez ce navigateur."):T("Sent. Thank you.","Envoyé. Merci.")})});
+      cf.appendChild(sb);cf.appendChild(sm);app.appendChild(cf)}
+    var cqk=el("section",undefined,"card");cqk.appendChild(el("h2",T("Quick messages","Messages rapides")));cqk.appendChild(el("p",T("One tap sends a short message to your agent.","Un seul geste envoie un court message à votre agent."),"m"));
+    var qm=el("p",undefined,"m");qm.setAttribute("role","status");
+    [["📎",T("I have sent my documents","J’ai envoyé mes documents")],["📞",T("Please call me","Merci de m’appeler")],["⏱",T("I am running late","Je suis en retard")],["❓",T("I have a question","J’ai une question")]].forEach(function(x){
+      var b=el("button",x[0]+" "+x[1]);b.type="button";b.addEventListener("click",function(){b.disabled=true;sig(x[0]+" "+x[1],function(r){b.disabled=false;say(qm,r)})});cqk.appendChild(b)});
+    cqk.appendChild(qm);app.appendChild(cqk);
+    var cc=el("section",undefined,"card qa");cc.appendChild(el("h2",T("Messages with your agent","Messages avec votre agent")));
     var lst=el("div");cc.appendChild(lst);
     var ci=el("textarea");ci.maxLength=500;ci.placeholder=T("Write a message","Écrivez un message");cc.appendChild(ci);
     var cs=el("button",T("Send","Envoyer"));cs.type="button";cc.appendChild(cs);
@@ -195,8 +246,12 @@ function gate(){
       var o=JSON.parse(new TextDecoder().decode(pt));try{sessionStorage.setItem("vgp"+String(e.c).slice(0,24),JSON.stringify(o))}catch(x){}b.disabled=false;load(o)},function(){
       fails++;var s=Math.min(30,Math.pow(2,fails));wait=Date.now()+s*1000;b.disabled=true;ms.textContent=T("Wrong PIN. Try again in "+s+" seconds.","PIN incorrect. Réessayez dans "+s+" secondes.");setTimeout(function(){b.disabled=false;ms.textContent=""},s*1000)})}
   b.addEventListener("click",go);i.addEventListener("keydown",function(ev){if(ev.key==="Enter")go()})}
-document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";if(D&&D.v===3)gate();else render()});
-if(D&&D.v===3&&D.e&&typeof D.e==="object")gate();else{
+var EXP=false;(function(){var n=new Date(),k=n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0");if(D&&typeof D.x==="string"&&/^\d{4}-\d{2}-\d{2}$/.test(D.x)&&D.x<k)EXP=true})();
+function showExp(){var app=document.getElementById("app");app.textContent="";document.documentElement.lang=L;document.getElementById("lang").textContent=L==="fr"?"English":"Français";
+  var c=el("section",undefined,"card");c.appendChild(el("h2",T("This link has expired","Ce lien a expiré")));c.appendChild(el("p",T("For your privacy, this page is no longer open. Please contact your agent if you need an update.","Pour protéger votre vie privée, cette page n’est plus ouverte. Contactez votre agent si vous avez besoin d’une mise à jour.")));
+  var w=String((D.ag&&D.ag.w)||"").replace(/\D/g,"");if(w){var a=el("a",T("Message us on WhatsApp","Écrivez-nous sur WhatsApp"),"btn2");a.href="https://wa.me/"+w;a.rel="noopener";c.appendChild(a)}app.appendChild(c)}
+document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";if(EXP)showExp();else if(D&&D.v===3)gate();else render()});
+if(EXP)showExp();else if(D&&D.v===3&&D.e&&typeof D.e==="object")gate();else{
 render();
 if(D&&typeof D.th==="string"&&/^[a-z0-9]{16,40}$/.test(D.th)&&LV.cfg(D)){var L0=LV.cfg(D),T0=D.th;LV.get(L0,"s"+T0).then(function(o){if(o&&o.v===1&&typeof o==="object"){o.lv=L0;o.th=T0;D=o;render()}})}}
 })();
