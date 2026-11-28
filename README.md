@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-102`; it is now `visaguide-101`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-105`; it is now `visaguide-104`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -339,3 +339,6 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 - **Client buttons on status page**: in `status.html` (inside the Live+thread block) `sig()` posts a chat message (`f:'c'`, symbol prefix) + inbox ping; cards: appointment (countdown, ✅/⚠, day checklist), documents ready ticks (`D.m`), quick messages. Local state `vgs<th>`. No new rules; `window.__sig` also used by I have paid. Manual EN/FR added.
 - **Missed appointment / lost passport / link expiry / map**: client fields `ns` (missed list), `lx` (link end date), `ml` (map https link); `nsUI/lpUI/lkUI`; status link payload carries `x` (also in v3 PIN links) and status.html `showExp()` when past; `ml` shown on the Live appointment card. Missed appointments feed `ctoday` (key `c:t:miss`, 14 days). Manual EN/FR added.
 - **Client details form**: new rule `threads/{tid}/details/{did}` (create: keys k,d,t; owner-only read/delete). Status page card posts JSON in `d` (+ chat ping); `crmDet` in the chat view shows it; save sets `c.idd` (+`c.pexp`) and deletes from cloud; `iddUI` in the client; `lvDelThread` also removes details. Re-publish rules.
+- **Ask the client / notice**: client fields `ask`, `qq`, `cq`; status object keys `ak`, `qq`, `cq`, `nt`; Studio mode `notice` (`vg-notice`, in backup as `ntc`), notice also in `apDoc` (`nt`). Status page cards are in the Live block (use `sig`); banner in `render()`. Answers arrive as chat messages (🔘 🖊). No new rules.
+- **Public Q&A and info sessions**: rules `questions/{id}` (q,t) and `rsvps/{id}` (e,n,p,t) create-only, owner read/delete; `pub/qa` and `pub/events` published by `pubPublish2`; Studio modes `pqa`/`pev` (`crmQA`, `crmEv`); local `vg-pqa`, `vg-pev` (in backup as `pqa`,`pev`); agency page flag `q`; agency.html renders sessions with RSVP form and Q&A with ask form. Re-publish rules.
+- **Referrals**: local `vg-rfl` {ag,out,inn} (backup key `rfl`), `rfoUI` in the client, Studio mode `rfl` (`crmRfl`). Nothing is sent by the app; WhatsApp message only. No rules.

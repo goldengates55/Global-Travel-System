@@ -38,7 +38,7 @@ label.f{display:grid;gap:6px;font-weight:600;margin:10px 0}input.t{font:inherit;
 var D=null,L="en";
 try{var h=location.hash.replace(/^#a=/,"").replace(/-/g,"+").replace(/_/g,"/");while(h.length%4)h+="=";D=JSON.parse(decodeURIComponent(escape(atob(h))));if(!D||D.v!==1||typeof D!=="object")D=null}catch(e){D=null}
 if(D&&D.lg==="fr")L="fr";
-var LVC=D?LV.cfg(D):null,AP=null,RV=[];
+var LVC=D?LV.cfg(D):null,AP=null,RV=[],QA=[],EV=[];
 var DAYS={"1":["Mon","Lun"],"2":["Tue","Mar"],"3":["Wed","Mer"],"4":["Thu","Jeu"],"5":["Fri","Ven"],"6":["Sat","Sam"],"0":["Sun","Dim"]};
 var DEST={schengen:["Schengen area","Espace Schengen"],uk:["United Kingdom","Royaume-Uni"],usa:["United States","États-Unis"],canada:["Canada","Canada"],australia:["Australia","Australie"],other:["",""]};
 function el(t,x,c){var e=document.createElement(t);if(x!==undefined)e.textContent=x;if(c)e.className=c;return e}
@@ -50,6 +50,7 @@ function render(){
   var ag=D.ag||{},name=String(ag.b||"Global Visa").slice(0,80);document.getElementById("biz").textContent=name;document.title=name;
   app.appendChild(el("h1",name));
   if(AP===null){app.appendChild(el("p",T("Loading…","Chargement…"),"m"));return}
+  if(Array.isArray(AP.nt)){var nt=two(AP.nt);if(nt){var nb=el("section",undefined,"card");nb.style.cssText="border-left:6px solid var(--accent,#c0392b);margin-bottom:12px";nb.appendChild(el("h2",T("Notice","Avis")));nb.appendChild(el("p",String(nt).slice(0,200)));app.appendChild(nb)}}
   var tg=two(AP.t);if(tg)app.appendChild(el("p",String(tg).slice(0,120)));
   var sv=AP.s&&AP.s.length?(L==="fr"?(AP.s[1]&&AP.s[1].length?AP.s[1]:AP.s[0]):(AP.s[0]&&AP.s[0].length?AP.s[0]:AP.s[1])):[];
   if(sv&&sv.length){var c1=el("section",undefined,"card");c1.style.marginBottom="12px";c1.appendChild(el("h2",T("What we do","Nos services")));var ul=el("ul");sv.slice(0,8).forEach(function(x){ul.appendChild(el("li",String(x).slice(0,80)))});c1.appendChild(ul);app.appendChild(c1)}
@@ -58,12 +59,34 @@ function render(){
   var w=String(ag.w||"").replace(/\D/g,"");
   if(w){var b=el("button",T("Message us on WhatsApp","Écrivez-nous sur WhatsApp"),"pri");b.type="button";b.addEventListener("click",function(){window.open("https://wa.me/"+w,"_blank")});app.appendChild(b)}
   if(AP.bk&&/^https?:\/\//.test(String(AP.bk))){var bb=el("button",T("Book a time","Réserver un créneau"),"sec");bb.type="button";bb.style.marginTop="8px";bb.addEventListener("click",function(){location.href=String(AP.bk)});app.appendChild(bb)}
+
+  var today=new Date(),tk=today.getFullYear()+"-"+String(today.getMonth()+1).padStart(2,"0")+"-"+String(today.getDate()).padStart(2,"0");
+  var evs=EV.filter(function(x){return x&&typeof x==="object"&&/^\d{4}-\d{2}-\d{2}$/.test(String(x.d||""))&&String(x.d)>=tk}).slice(0,6);
+  if(evs.length){app.appendChild(el("h2",T("Free info sessions","Séances d’information gratuites")));evs.forEach(function(x){
+    var c=el("section",undefined,"card");c.style.marginBottom="12px";c.appendChild(el("h3",String(L==="fr"?(x.tf||x.te):(x.te||x.tf)||"").slice(0,100)));c.appendChild(el("p",String(x.d).slice(0,10)+(x.h?" · "+String(x.h).slice(0,10):""),"m"));if(x.w)c.appendChild(el("p",String(x.w).slice(0,120)));
+    var sb=el("button",T("I will come","Je viens"),"sec");sb.type="button";var fm=el("div");fm.style.display="none";
+    var ni=el("input");ni.type="text";ni.maxLength=60;ni.placeholder=T("Your name","Votre nom");ni.autocomplete="name";var pi=el("input");pi.type="tel";pi.maxLength=30;pi.placeholder=T("Your WhatsApp number","Votre numéro WhatsApp");pi.autocomplete="tel";
+    [ni,pi].forEach(function(i){i.style.cssText="display:block;width:100%;margin:8px 0;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit"});
+    var lb=el("label");lb.style.cssText="display:flex;gap:10px;align-items:center;margin:8px 0";var ck=el("input");ck.type="checkbox";lb.appendChild(ck);lb.appendChild(document.createTextNode(T("I agree that the agency uses my name and number to confirm my place.","J’accepte que l’agence utilise mon nom et mon numéro pour confirmer ma place.")));
+    var go=el("button",T("Send","Envoyer"),"pri");go.type="button";var ms=el("p",undefined,"m");ms.setAttribute("role","status");
+    sb.addEventListener("click",function(){fm.style.display=fm.style.display==="none"?"":"none"});
+    go.addEventListener("click",function(){var n=ni.value.trim(),p=pi.value.trim();if(!n){ms.textContent=T("Type your name.","Saisissez votre nom.");return}if(p.replace(/\D/g,"").length<6){ms.textContent=T("Type your WhatsApp number.","Saisissez votre numéro WhatsApp.");return}if(!ck.checked){ms.textContent=T("Please tick that you agree.","Cochez que vous êtes d’accord.");return}
+      go.disabled=true;LV.send(LVC,"rsvps","r"+LV.rnd(14),{e:String(x.id).slice(0,40),n:n.slice(0,60),p:p.slice(0,30),t:Date.now()}).then(function(r){go.disabled=false;ms.textContent=r==="ok"?T("Thank you. The agency will confirm by WhatsApp.","Merci. L’agence confirmera par WhatsApp."):r==="queued"?T("Saved on your phone. It will be sent when your connection returns.","Enregistré sur votre téléphone. Il sera envoyé au retour de la connexion."):T("Could not send. Please try again.","Envoi impossible. Réessayez.");if(r==="ok"){ni.value="";pi.value="";ck.checked=false}})});
+    fm.appendChild(ni);fm.appendChild(pi);fm.appendChild(lb);fm.appendChild(go);fm.appendChild(ms);c.appendChild(sb);c.appendChild(fm);app.appendChild(c)})}
+  var qa=QA.filter(function(x){return x&&x.q&&x.a}).slice(0,20);
+  if(qa.length||AP.q){app.appendChild(el("h2",T("Questions and answers","Questions et réponses")));
+    qa.forEach(function(x){var c=el("section",undefined,"card");c.style.marginBottom="12px";c.appendChild(el("p",String(x.q).slice(0,300)));c.appendChild(el("p",String(x.a).slice(0,800),"m"));app.appendChild(c)});
+    if(AP.q){var c=el("section",undefined,"card");c.style.marginBottom="12px";c.appendChild(el("h3",T("Ask us a question","Posez-nous une question")));c.appendChild(el("p",T("Do not write your name, passport number or other personal details. We may answer here for everyone.","N’écrivez pas votre nom, numéro de passeport ni d’autres informations personnelles. Nous pouvons répondre ici pour tout le monde."),"m"));
+      var ta=el("textarea");ta.rows=3;ta.maxLength=300;ta.style.cssText="display:block;width:100%;margin:8px 0;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit";c.appendChild(ta);
+      var sb2=el("button",T("Send my question","Envoyer ma question"),"pri");sb2.type="button";var m2=el("p",undefined,"m");m2.setAttribute("role","status");
+      sb2.addEventListener("click",function(){var q=ta.value.trim();if(q.length<5){m2.textContent=T("Write your question (at least 5 letters).","Écrivez votre question (au moins 5 lettres).");return}sb2.disabled=true;LV.send(LVC,"questions","q"+LV.rnd(14),{q:q.slice(0,300),t:Date.now()}).then(function(r){sb2.disabled=false;m2.textContent=r==="ok"?T("Thank you. If we answer, it will appear on this page.","Merci. Si nous répondons, la réponse apparaîtra sur cette page."):r==="queued"?T("Saved on your phone. It will be sent when your connection returns.","Enregistré sur votre téléphone. Il sera envoyé au retour de la connexion."):T("Could not send. Please try again.","Envoi impossible. Réessayez.");if(r==="ok")ta.value=""})});
+      c.appendChild(sb2);c.appendChild(m2);app.appendChild(c)}}
   if(AP.r&&RV.length){app.appendChild(el("h2",T("What our clients say","Ce que disent nos clients")));RV.slice(0,6).forEach(function(r){var c=el("section",undefined,"card");c.style.marginBottom="12px";c.appendChild(el("p","“"+String(r.t||"").slice(0,300)+"”"));var d=DEST[r.d]||DEST.other;c.appendChild(el("p","— "+String(r.n||"").slice(0,40)+(d[0]?", "+(L==="fr"?d[1]:d[0])+" visa":""),"m"));app.appendChild(c)})}
   if(AP.u){app.appendChild(el("p",T("Page updated: ","Page mise à jour : ")+String(AP.u).slice(0,10),"m"))}
 }
 document.getElementById("lang").addEventListener("click",function(){L=L==="fr"?"en":"fr";render()});
 render();
-if(LVC)LV.get(LVC,"agency").then(function(a){AP=a&&typeof a==="object"?a:{};render();if(AP.r)LV.get(LVC,"reviews").then(function(r){RV=Array.isArray(r)?r.filter(function(x){return x&&typeof x.t==="string"}):[];render()})});
+if(LVC)LV.get(LVC,"agency").then(function(a){AP=a&&typeof a==="object"?a:{};render();LV.get(LVC,"qa").then(function(q){QA=Array.isArray(q)?q:[];render()}).catch(function(){});LV.get(LVC,"events").then(function(q){EV=Array.isArray(q)?q:[];render()}).catch(function(){});if(AP.r)LV.get(LVC,"reviews").then(function(r){RV=Array.isArray(r)?r.filter(function(x){return x&&typeof x.t==="string"}):[];render()})});
 })();
 </script>
 </body>

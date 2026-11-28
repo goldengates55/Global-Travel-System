@@ -62,6 +62,7 @@ function render(){
   if(!D){app.appendChild(el("h1",T("This link is not valid","Ce lien n’est pas valide")));app.appendChild(el("p",T("Please ask your agent to send you the link again.","Demandez à votre agent de vous renvoyer le lien."),"m"));return}
   var ag=D.ag||{};document.getElementById("biz").textContent=String(ag.b||"Global Visa").slice(0,80);document.title=T("Your visa file","Votre dossier de visa");
   app.appendChild(el("h1",T("Hello ","Bonjour ")+String(D.n||"").slice(0,60)));
+  if(Array.isArray(D.nt)){var nt=pick([D.nt[0]||"",D.nt[1]||""]);if(nt){var nb=el("section",undefined,"card");nb.style.cssText="border-left:6px solid var(--accent,#c0392b);margin-bottom:12px";nb.appendChild(el("h2",T("Notice","Avis")));nb.appendChild(el("p",String(nt).slice(0,200)));app.appendChild(nb)}}
   app.appendChild(el("p",pick(D.dst)+" · "+pick(D.ty),"m"));
   var c1=el("section",undefined,"card");c1.appendChild(el("h2",T("Where your file stands","Où en est votre dossier")));
   var ol=el("ol"),idx=-1;ST.forEach(function(s,i){if(s[0]===D.k)idx=i});if(D.k==="closed")idx=ST.length;
@@ -146,6 +147,20 @@ function render(){
     var SK="vgs"+TH,SS={};try{SS=JSON.parse(localStorage.getItem(SK)||"{}")||{}}catch(e){SS={}}
     function sv(){try{localStorage.setItem(SK,JSON.stringify(SS))}catch(e){}}
     function say(el0,ok){el0.textContent=ok==="ok"?T("Sent. Thank you.","Envoyé. Merci."):ok==="queued"?T("Saved on your phone. It will be sent when your connection returns. Keep this browser.","Enregistré sur votre téléphone. Il sera envoyé au retour de la connexion. Gardez ce navigateur."):T("Could not send. Please try again.","Envoi impossible. Réessayez.")}
+
+    if(Array.isArray(D.ak)&&D.ak[0]){var ck2=el("section",undefined,"card");ck2.style.cssText="border-left:6px solid var(--accent,#c0392b)";ck2.appendChild(el("h2",T("Your agent asked for","Votre agent demande")));ck2.appendChild(el("p",String(D.ak[0]).slice(0,60)));if(D.ak[1])ck2.appendChild(el("p",String(D.ak[1]).slice(0,120),"m"));
+      var gb=el("button",T("Send it now","L’envoyer maintenant"));gb.type="button";gb.addEventListener("click",function(){var t=document.querySelector(".qa");if(t&&t.scrollIntoView)t.scrollIntoView({behavior:"smooth",block:"start"})});ck2.appendChild(gb);app.appendChild(ck2)}
+    if(D.qq&&typeof D.qq==="object"&&D.qq.t&&Array.isArray(D.qq.o)&&D.qq.o.length>1){var cq=el("section",undefined,"card");cq.appendChild(el("h2",T("A question from your agent","Une question de votre agent")));cq.appendChild(el("p",String(D.qq.t).slice(0,120)));
+      SS.qa=SS.qa||{};var qm2=el("p",undefined,"m");qm2.setAttribute("role","status");function qshow(){qm2.textContent=SS.qa[D.qq.i]?T("You answered: ","Vous avez répondu : ")+SS.qa[D.qq.i]:""}
+      D.qq.o.slice(0,3).forEach(function(o){var b=el("button",String(o).slice(0,30));b.type="button";b.addEventListener("click",function(){b.disabled=true;sig("🔘 "+String(D.qq.t).slice(0,120)+" → "+String(o).slice(0,30),function(ok){b.disabled=false;if(ok==="ok"||ok==="queued"){SS.qa[D.qq.i]=String(o).slice(0,30);sv();qshow()}else say(qm2,ok)})});cq.appendChild(b)});cq.appendChild(qm2);qshow();app.appendChild(cq)}
+    if(D.cq===1){var cc3=el("section",undefined,"card");cc3.appendChild(el("h2",T("Your consent","Votre consentement")));var agn=String((D.ag&&D.ag.b)||T("your agent","votre agent")).slice(0,80);
+      cc3.appendChild(el("p",T("I agree that "+agn+" keeps my details and contacts me about my visa file.","J’accepte que "+agn+" conserve mes informations et me contacte au sujet de mon dossier de visa.")));
+      var ni=el("input");ni.type="text";ni.maxLength=80;ni.placeholder=T("Type your full name","Saisissez votre nom complet");ni.style.cssText="display:block;width:100%;margin:8px 0;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--paper);color:var(--ink);font:inherit";cc3.appendChild(ni);
+      var lc=el("label");lc.style.cssText="display:flex;gap:10px;align-items:center;margin:8px 0";var ck3=el("input");ck3.type="checkbox";lc.appendChild(ck3);lc.appendChild(document.createTextNode(T("I agree","J’accepte")));cc3.appendChild(lc);
+      var bc=el("button",T("Send my consent","Envoyer mon consentement"));bc.type="button";var cm3=el("p",undefined,"m");cm3.setAttribute("role","status");SS.cs=SS.cs||0;if(SS.cs)cm3.textContent=T("You sent your consent. Thank you.","Vous avez envoyé votre consentement. Merci.");
+      bc.addEventListener("click",function(){var nm=ni.value.trim();if(nm.length<3){cm3.textContent=T("Type your full name.","Saisissez votre nom complet.");return}if(!ck3.checked){cm3.textContent=T("Please tick that you agree.","Cochez que vous êtes d’accord.");return}
+        bc.disabled=true;sig("🖊 "+T("Consent: I, "+nm.slice(0,80)+", agree that my agent keeps my details and contacts me about my visa file.","Consentement : moi, "+nm.slice(0,80)+", j’accepte que mon agent conserve mes informations et me contacte au sujet de mon dossier de visa."),function(ok){bc.disabled=false;if(ok==="ok"||ok==="queued"){SS.cs=1;sv();cm3.textContent=T("Sent. Thank you.","Envoyé. Merci.")}else say(cm3,ok)})});
+      cc3.appendChild(bc);cc3.appendChild(cm3);app.appendChild(cc3)}
     var dd=dayn(D.a||"");
     if(dd!==null&&dd>=0&&dd<=60&&D.k!=="sent"&&D.k!=="decision"&&D.k!=="passport"&&D.k!=="closed"){
       var ca=el("section",undefined,"card");ca.appendChild(el("h2",T("Your appointment","Votre rendez-vous")));
