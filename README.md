@@ -25,7 +25,7 @@ The service worker only works on the published `https` address, not when `index.
 
 ## Updating
 
-Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-105`; it is now `visaguide-104`). Phones then pick up the update.
+Every time you upload a new `index.html`, change `VERSION` in `sw.js` (for example `visaguide-106`; it is now `visaguide-105`). Phones then pick up the update.
 
 ## What is inside the app
 
@@ -342,3 +342,4 @@ Notes: each backup is split in parts of about 600 KB (Firestore limit is 1 MB pe
 - **Ask the client / notice**: client fields `ask`, `qq`, `cq`; status object keys `ak`, `qq`, `cq`, `nt`; Studio mode `notice` (`vg-notice`, in backup as `ntc`), notice also in `apDoc` (`nt`). Status page cards are in the Live block (use `sig`); banner in `render()`. Answers arrive as chat messages (🔘 🖊). No new rules.
 - **Public Q&A and info sessions**: rules `questions/{id}` (q,t) and `rsvps/{id}` (e,n,p,t) create-only, owner read/delete; `pub/qa` and `pub/events` published by `pubPublish2`; Studio modes `pqa`/`pev` (`crmQA`, `crmEv`); local `vg-pqa`, `vg-pev` (in backup as `pqa`,`pev`); agency page flag `q`; agency.html renders sessions with RSVP form and Q&A with ask form. Re-publish rules.
 - **Referrals**: local `vg-rfl` {ag,out,inn} (backup key `rfl`), `rfoUI` in the client, Studio mode `rfl` (`crmRfl`). Nothing is sent by the app; WhatsApp message only. No rules.
+- **Daily Corner**: `daily.js` (`DY.tips` 38, `DY.myths` 25, `DY.card`, `DY.install`), shown on agency.html (flag `d`, own tips `yo`) and status.html (Today for you + tip + myth). Day index from the local date, no storage but the myth answer `vgmy<day>`. General guidance only.

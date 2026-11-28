@@ -33,6 +33,7 @@ label.f{display:grid;gap:6px;font-weight:600;margin:10px 0}input.t{font:inherit;
 <div id="app"></div>
 </main>
 <script src="live.js"></script>
+<script src="daily.js"></script>
 <script>
 (function(){
 var D=null,L="en";
@@ -52,6 +53,7 @@ function render(){
   if(AP===null){app.appendChild(el("p",T("Loading…","Chargement…"),"m"));return}
   if(Array.isArray(AP.nt)){var nt=two(AP.nt);if(nt){var nb=el("section",undefined,"card");nb.style.cssText="border-left:6px solid var(--accent,#c0392b);margin-bottom:12px";nb.appendChild(el("h2",T("Notice","Avis")));nb.appendChild(el("p",String(nt).slice(0,200)));app.appendChild(nb)}}
   var tg=two(AP.t);if(tg)app.appendChild(el("p",String(tg).slice(0,120)));
+  if(window.DY&&AP.d!==0){var ins=DY.install(L);if(ins)app.appendChild(ins);var own=Array.isArray(AP.yo)?AP.yo.filter(function(x){return Array.isArray(x)}).map(function(x){return [String(x[0]||"").slice(0,160),String(x[1]||"").slice(0,160)]}):[];DY.card(L,"all",own,location.href).forEach(function(n){app.appendChild(n)})}
   var sv=AP.s&&AP.s.length?(L==="fr"?(AP.s[1]&&AP.s[1].length?AP.s[1]:AP.s[0]):(AP.s[0]&&AP.s[0].length?AP.s[0]:AP.s[1])):[];
   if(sv&&sv.length){var c1=el("section",undefined,"card");c1.style.marginBottom="12px";c1.appendChild(el("h2",T("What we do","Nos services")));var ul=el("ul");sv.slice(0,8).forEach(function(x){ul.appendChild(el("li",String(x).slice(0,80)))});c1.appendChild(ul);app.appendChild(c1)}
   if(AP.h&&Array.isArray(AP.h.d)&&AP.h.d.length){var c2=el("section",undefined,"card");c2.style.marginBottom="12px";c2.appendChild(el("h2",T("Opening hours","Horaires")));var dn=AP.h.d.map(function(d){return DAYS[d]?DAYS[d][L==="fr"?1:0]:""}).filter(Boolean).join(", ");c2.appendChild(el("p",dn+" · "+String(AP.h.s||"").slice(0,5)+"–"+String(AP.h.e||"").slice(0,5)));app.appendChild(c2)}
